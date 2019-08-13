@@ -1,28 +1,28 @@
-#Final Project Architecture
-##App Overview
+# Final Project Architecture
+## App Overview
 
 ---
-##App Features
+## App Features
 
 ---
-##Domain Security
+## Domain Security
 
 ---
-##Domain Rules
+## Domain Rules
 
 ---
-##Logging
+## Logging
 
 ---
-##Services / Comunication
+## Services / Comunication
 
 ---
-##Data Models
+## Data Models
 
 ---
-##Feature Components
+## Feature Components
 
 ---
-##Shared functionality
+## Shared functionality
 
 ---
