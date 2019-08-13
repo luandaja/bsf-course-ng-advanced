@@ -1,6 +1,6 @@
 class: middle, center
 
-# Final Project Architecture
+# Application Architecture Planning
 
 - Luis Antoni del Aguila Jacobo
 - Claudia Alejandra Montalvo Yarnold
