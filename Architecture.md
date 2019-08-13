@@ -1,3 +1,5 @@
+class: middle, center
+
 # Final Project Architecture
 
 - Luis Antoni del Aguila Jacobo
@@ -113,16 +115,6 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 ## Feature Components
 
 ```
-├── Lib
-├───── Perfil
-├──────── Editar Perfil
-├──────── Ver perfil
-├───── Product Group
-├──────── Search Bar
-├──────── ProductDetail
-├──────── ProducListGrid
-├──────── ProductListCard
-
 ├── App - User
 ├───── Carrito Group
 ├──────── Carrito
