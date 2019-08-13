@@ -19,7 +19,7 @@
 
 ## App Features
 
-### App cliente
+### App comprador
 
 - Registro en la applicación (email, fb, Instagram)
 - Visualizar productos
@@ -30,6 +30,20 @@
 - Comprar el producto mediante visa
   - Confirmación de compra
 - Visualizar y editar su perfil
+
+---
+
+## App Features
+
+### App vendedor
+
+- App vendedor
+- Registro en la applicación
+- Mantenimiento(CRUD) de productos
+- Visualizar reportes de Conversiones y conexiones activas
+- Visualizar y editar su perfil
+- Visualizar la ventas activas (por entregar)
+- Actualizar el estado de las ventas
 
 ---
 
