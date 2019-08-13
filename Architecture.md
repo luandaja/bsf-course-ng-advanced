@@ -85,9 +85,36 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 ```
 ├── Lib
 ├── App - Comprador
-├───── Carrito de compra
+├───── Product Group
+├──────── Search Bar
+├──────── ProducListGrid
+├──────── ProductListCard
+├──────── ProductDetail
+├───── Carrito Group
+├──────── Carrito
+├──────── Pasarela Pago
+├──────── ConfirmacionCompra
 ├───── Perfil
+├──────── Editar Perfil
+├──────── Ver perfil
+
 └── App - Vendedor
+├───── Product Group
+├──────── ProductEdit
+├──────── ProductManager(List/delete/edit)
+├──────── Search Bar
+├──────── ProducListGrid
+├──────── ProductListCard
+├──────── ProductDetail
+├───── Ventas
+├──────── ViewActiveConnections
+├──────── ViewConversiones
+├───── Reportes
+├──────── ViewActiveConnections
+├──────── ViewConversiones
+├───── Perfil
+├──────── Editar Perfil
+├──────── Ver perfil
 ```
 
 ---
