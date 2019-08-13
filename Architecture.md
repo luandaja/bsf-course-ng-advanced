@@ -107,13 +107,13 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 ├──────── ProducListGrid
 ├──────── ProductListCard
 
-├── App - Comprador
+├── App - User
 ├───── Carrito Group
 ├──────── Carrito
 ├──────── Pasarela Pago
 ├──────── ConfirmacionCompra
 
-└── App - Vendedor
+└── App - CMS
 ├───── Product Group
 ├──────── ProductEdit
 ├──────── ProductManager(List/delete/edit)
