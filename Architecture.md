@@ -52,7 +52,7 @@ Dividido en dos aplicativos
 - App vendedor
 - Registro en la applicación
 - Mantenimiento(CRUD) de productos
-- Visualizar reportes de Conversiones y conexiones activas
+- Visualizar reportes de Conversiones y conexiones activas en tiempo real
 - Visualizar y editar su perfil
 - Visualizar la ventas activas (por entregar)
 - Actualizar el estado de las ventas
