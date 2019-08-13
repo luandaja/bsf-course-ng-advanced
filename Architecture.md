@@ -120,6 +120,11 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 ├──────── Carrito
 ├──────── Pasarela Pago
 ├──────── ConfirmacionCompra
+```
+
+--
+
+```
 
 └── App - CMS
 ├───── Product Group
