@@ -7,6 +7,8 @@
 
 ## App Overview
 
+### Requerimientos para el primer MVP
+
 - Cliente puede ver/comprar productos que el vendedor oferta
 - Vendedor puede ofertar productos
 - Venderdor puede visualizer reportes
@@ -14,6 +16,12 @@
 - Cualquier cliente puede registrarse
 - Ambos pueden ver/actualizar su perfil
 - Ambos pueden visualizar su app en Móviles y Desktop
+
+---
+
+## App Features
+
+Dividido en dos aplicativos
 
 ---
 
