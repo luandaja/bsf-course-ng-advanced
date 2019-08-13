@@ -129,4 +129,12 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 
 ## Shared functionality
 
-ToDo
+├── Lib
+├───── Perfil
+├──────── Editar Perfil
+├──────── Ver perfil
+├───── Product Group
+├──────── Search Bar
+├──────── ProductDetail
+├──────── ProducListGrid
+├──────── ProductListCard
