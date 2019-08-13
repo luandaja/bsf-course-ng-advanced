@@ -19,6 +19,8 @@
 
 ---
 
+class: middle, center
+
 ## App Features
 
 Dividido en dos aplicativos
@@ -84,6 +86,12 @@ Dividido en dos aplicativos
 
 Para medir el rendimiento de los aplicativos se empleará Microsoft Insight (o Firebase Performance)[^2].
 
+Entre las principales características, se medirá:
+
+- first paint vs first contentful paint
+- first input delay
+- DOM-related events
+
 [^2] : A elección del cliente
 
 ---
@@ -137,6 +145,7 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 
 ## Shared functionality
 
+```
 ├── Lib
 ├───── Perfil
 ├──────── Editar Perfil
@@ -146,3 +155,4 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 ├──────── ProductDetail
 ├──────── ProducListGrid
 ├──────── ProductListCard
+```
