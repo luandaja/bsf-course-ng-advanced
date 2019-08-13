@@ -27,7 +27,7 @@ add content here
 - La aplicación de comprador aceptará el rol de: Comprador
 
 
-[^1]: Se empleará BaaS de Firebase Auth
+[^1] : Se empleará BaaS de Firebase Auth
 
 ---
 
@@ -47,7 +47,7 @@ add content here
 
 Para medir el rendimiento de los aplicativos se empleará Microsoft Insight (o Firebase Performance)[^2].
 
-[^2]: A elección del cliente
+[^2] : A elección del cliente
 
 ---
 
@@ -55,7 +55,7 @@ Para medir el rendimiento de los aplicativos se empleará Microsoft Insight (o F
 
 La comunicación entre el backend y el frontend se realizará mediente Web Sockets y Open Id Connect[^3].
 
-[^3]: Se empleará BaaS de Firestore para el almacenamiento de data, Firebase Auth para la gestión de usuarios, Firebase Storage para el amacenamiento de recursos
+[^3] : Se empleará BaaS de Firestore para el almacenamiento de data, Firebase Auth para la gestión de usuarios, Firebase Storage para el amacenamiento de recursos
 
 ---
 
