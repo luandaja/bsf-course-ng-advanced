@@ -7,25 +7,40 @@
 
 ## App Overview
 
-add content here
+- Cliente puede ver/comprar productos que el vendedor oferta
+- Vendedor puede ofertar productos
+- Venderdor puede visualizer reportes
+- Cualquier vendedor puede registrarse
+- Cualquier cliente puede registrarse
+- Ambos pueden ver/actualizar su perfil
+- Ambos pueden visualizar su app en Móviles y Desktop
 
 ---
 
 ## App Features
 
-add content here
+### App cliente
+
+- Registro en la applicación (email, fb, Instagram)
+- Visualizar productos
+  - Vista de grilla
+  - Vista de Lista
+  - Vista detalle
+- Filtrar productos por nombre o categoría
+- Comprar el producto mediante visa
+  - Confirmación de compra
+- Visualizar y editar su perfil
 
 ---
 
 ## Domain Security
 
-- La autenticación se realizará mediante registro por email o API de Facebook, Instagram*
+- La autenticación se realizará mediante registro por email o API de Facebook, Instagram\*
 - La comunicación con el backend estará asegurado mendiante Open Id Connect (protocolo OAuth 2.0)[^1]
 - La aplicación de vendedor aceptará los roles de:
   - Admin
   - Vendedor
 - La aplicación de comprador aceptará el rol de: Comprador
-
 
 [^1] : Se empleará BaaS de Firebase Auth
 
@@ -68,15 +83,15 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 ## Feature Components
 
 ```
-├── Lib 
-├── App - Vendedor
-└── App - Comprador
+├── Lib
+├── App - Comprador
+├───── Carrito de compra
+├───── Perfil
+└── App - Vendedor
 ```
 
 ---
 
 ## Shared functionality
 
-
-
----
+ToDo
