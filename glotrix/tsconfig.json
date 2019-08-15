@@ -24,6 +24,12 @@
       ],
       "core/*": [
         "dist/core/*"
+      ],
+      "@lib/core": [
+        "dist/lib/core"
+      ],
+      "@lib/core/*": [
+        "dist/lib/core/*"
       ]
     }
   },
