@@ -88,6 +88,8 @@ Dividido en dos aplicativos
 
 Para medir el rendimiento de los aplicativos se empleará Microsoft Insight (o Firebase Performance)[^2].
 
+Se creará
+
 Entre las principales características, se medirá:
 
 - first paint vs first contentful paint
