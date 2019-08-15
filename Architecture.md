@@ -1,4 +1,6 @@
-# Final Project Architecture
+class: middle, center
+
+# Application Architecture Planning
 
 - Luis Antoni del Aguila Jacobo
 - Claudia Alejandra Montalvo Yarnold
@@ -7,6 +9,8 @@
 
 ## App Overview
 
+### Requerimientos para el primer MVP
+
 - Cliente puede ver/comprar productos que el vendedor oferta
 - Vendedor puede ofertar productos
 - Venderdor puede visualizer reportes
@@ -14,6 +18,14 @@
 - Cualquier cliente puede registrarse
 - Ambos pueden ver/actualizar su perfil
 - Ambos pueden visualizar su app en Móviles y Desktop
+
+---
+
+class: middle, center
+
+## App Features
+
+Dividido en dos aplicativos
 
 ---
 
@@ -40,7 +52,7 @@
 - App vendedor
 - Registro en la applicación
 - Mantenimiento(CRUD) de productos
-- Visualizar reportes de Conversiones y conexiones activas
+- Visualizar reportes de Conversiones y conexiones activas en tiempo real
 - Visualizar y editar su perfil
 - Visualizar la ventas activas (por entregar)
 - Actualizar el estado de las ventas
@@ -76,6 +88,12 @@
 
 Para medir el rendimiento de los aplicativos se empleará Microsoft Insight (o Firebase Performance)[^2].
 
+Entre las principales características, se medirá:
+
+- first paint vs first contentful paint
+- first input delay
+- DOM-related events
+
 [^2] : A elección del cliente
 
 ---
@@ -97,21 +115,16 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 ## Feature Components
 
 ```
-├── Lib
-├───── Perfil
-├──────── Editar Perfil
-├──────── Ver perfil
-├───── Product Group
-├──────── Search Bar
-├──────── ProductDetail
-├──────── ProducListGrid
-├──────── ProductListCard
-
 ├── App - User
 ├───── Carrito Group
 ├──────── Carrito
 ├──────── Pasarela Pago
 ├──────── ConfirmacionCompra
+```
+
+--
+
+```
 
 └── App - CMS
 ├───── Product Group
@@ -129,6 +142,7 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 
 ## Shared functionality
 
+```
 ├── Lib
 ├───── Perfil
 ├──────── Editar Perfil
@@ -138,3 +152,4 @@ La capa encargada de la comunicación con el backend realizará el mapeo de las 
 ├──────── ProductDetail
 ├──────── ProducListGrid
 ├──────── ProductListCard
+```
