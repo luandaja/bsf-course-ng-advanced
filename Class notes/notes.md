@@ -26,3 +26,7 @@ Shared components
 Clase 34
 MonoRepo (1 repo y todo en carpeas hasta el primer mvp x ejemplo y lo pasas a repos indeendientes)
 Tarea: Standard de Programacion (enviar por correo) Puede ser basado en la guia de estilos de angular
+Notas finales: 
+*nunca olvodar los requirements
+*servicios de logeo en front (para que mande a la nube o algo)
+*los third party deerian incluirse como feature components
