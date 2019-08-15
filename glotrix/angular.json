@@ -10,7 +10,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-packagr:build",
           "options": {
             "tsConfig": "projects/lib/core/tsconfig.lib.json",
             "project": "projects/lib/core/ng-package.json"
@@ -98,18 +98,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "apps/cms:build"
+            "browserTarget": "cms:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "apps/cms:build:production"
+              "browserTarget": "cms:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "apps/cms:build"
+            "browserTarget": "cms:build"
           }
         },
         "test": {
@@ -142,11 +142,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "projects/apps/cms/e2e/protractor.conf.js",
-            "devServerTarget": "apps/cms:serve"
+            "devServerTarget": "cms:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "apps/cms:serve:production"
+              "devServerTarget": "cms:serve:production"
             }
           }
         }
@@ -214,18 +214,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "apps/store:build"
+            "browserTarget": "store:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "apps/store:build:production"
+              "browserTarget": "store:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "apps/store:build"
+            "browserTarget": "store:build"
           }
         },
         "test": {
@@ -258,11 +258,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "projects/apps/store/e2e/protractor.conf.js",
-            "devServerTarget": "apps/store:serve"
+            "devServerTarget": "store:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "apps/store:serve:production"
+              "devServerTarget": "store:serve:production"
             }
           }
         }

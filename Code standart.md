@@ -2,6 +2,146 @@
 
 Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs citadas en este documento:
 
+```json
+{
+  "rules": {
+    "array-type": [true, "array-simple"],
+    "arrow-return-shorthand": true,
+    "ban": [
+      true,
+      { "name": ["it", "skip"] },
+      { "name": ["it", "only"] },
+      { "name": ["it", "async", "skip"] },
+      { "name": ["it", "async", "only"] },
+      { "name": ["describe", "skip"] },
+      { "name": ["describe", "only"] },
+      { "name": "parseInt", "message": "tsstyle#type-coercion" },
+      { "name": "parseFloat", "message": "tsstyle#type-coercion" },
+      { "name": "Array", "message": "tsstyle#array-constructor" },
+      {
+        "name": ["*", "innerText"],
+        "message": "Use .textContent instead. tsstyle#browser-oddities"
+      }
+    ],
+    "ban-ts-ignore": true,
+    "ban-types": [
+      true,
+      ["Object", "Use {} instead."],
+      ["String", "Use 'string' instead."],
+      ["Number", "Use 'number' instead."],
+      ["Boolean", "Use 'boolean' instead."]
+    ],
+    "class-name": true,
+    "curly": [true, "ignore-same-line"],
+    "deprecation": true,
+    "forin": true,
+    "interface-name": [true, "never-prefix"],
+    "interface-over-type-literal": true,
+    "jsdoc-format": true,
+    "label-position": true,
+    "member-access": [true, "no-public"],
+    "new-parens": true,
+    "no-angle-bracket-type-assertion": true,
+    "no-any": true,
+    "no-arg": true,
+    "no-conditional-assignment": true,
+    "no-construct": true,
+    "no-debugger": true,
+    "no-default-export": true,
+    "no-duplicate-variable": true,
+    "no-inferrable-types": true,
+    "no-namespace": [true, "allow-declarations"],
+    "no-reference": true,
+    "no-string-throw": true,
+    "no-return-await": true,
+    "no-unsafe-finally": true,
+    "no-unused-expression": true,
+    "no-var-keyword": true,
+    "object-literal-shorthand": true,
+    "only-arrow-functions": [
+      true,
+      "allow-declarations",
+      "allow-named-functions"
+    ],
+    "prefer-const": true,
+    "radix": true,
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
+    "switch-default": true,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "ignore"
+        },
+        "esSpecCompliant": true
+      }
+    ],
+    "triple-equals": [true, "allow-null-check"],
+    "use-isnan": true,
+    "variable-name": [
+      true,
+      "check-format",
+      "ban-keywords",
+      "allow-leading-underscore",
+      "allow-trailing-underscore"
+    ]
+  },
+  "array-type": false,
+  "arrow-parens": false,
+  "deprecation": {
+    "severity": "warning"
+  },
+  "import-blacklist": [true, "rxjs/Rx"],
+  "interface-name": false,
+  "max-classes-per-file": false,
+  "max-line-length": [true, 140],
+  "member-access": false,
+  "member-ordering": [
+    true,
+    {
+      "order": [
+        "static-field",
+        "instance-field",
+        "static-method",
+        "instance-method"
+      ]
+    }
+  ],
+  "no-consecutive-blank-lines": false,
+  "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
+  "no-empty": false,
+  "no-inferrable-types": [true, "ignore-params"],
+  "no-non-null-assertion": true,
+  "no-redundant-jsdoc": true,
+  "no-switch-case-fall-through": true,
+  "no-use-before-declare": true,
+  "no-var-requires": false,
+  "object-literal-key-quotes": [true, "as-needed"],
+  "object-literal-sort-keys": false,
+  "ordered-imports": false,
+  "quotemark": [true, "single"],
+  "trailing-comma": false,
+  "component-class-suffix": true,
+  "contextual-lifecycle": true,
+  "directive-class-suffix": true,
+  "no-conflicting-lifecycle": true,
+  "no-host-metadata-property": true,
+  "no-input-rename": true,
+  "no-inputs-metadata-property": true,
+  "no-output-native": true,
+  "no-output-on-prefix": true,
+  "no-output-rename": true,
+  "no-outputs-metadata-property": true,
+  "template-banana-in-box": true,
+  "template-no-negated-async": true,
+  "use-lifecycle-interface": true,
+  "use-pipe-transform-interface": true
+}
+```
+
 ## Reglas
 
 - **Usar 2 espacios** como sangría.
@@ -10,7 +150,7 @@ Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs ci
 
   ```js
   function hello(name) {
-    console.log("hi", name);
+    console.log("hi", name)
   }
   ```
 
@@ -19,8 +159,8 @@ Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs ci
   eslint: [`quotes`](http://eslint.org/docs/rules/quotes)
 
   ```js
-  console.log("hello there"); // comillas simples
-  $("<div class='box'>"); // escapado de texto
+  console.log("hello there") // comillas simples
+  $("<div class='box'>") // escapado de texto
   ```
 
 - **No dejar variables sin usar.**
@@ -29,7 +169,7 @@ Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs ci
 
   ```js
   function myFunction() {
-    var result = something(); // ✗ evitar
+    var result = something() // ✗ evitar
   }
   ```
 
@@ -75,14 +215,14 @@ Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs ci
 
   ```js
   // ✓ ok
-  var x = 2;
-  var message = "hello, " + name + "!";
+  var x = 2
+  var message = "hello, " + name + "!"
   ```
 
   ```js
   // ✗ evitar
-  var x = 2;
-  var message = "hello, " + name + "!";
+  var x = 2
+  var message = "hello, " + name + "!"
   ```
 
 - **Comas deben tener un espacio** despues de ellas.
@@ -129,19 +269,19 @@ Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs ci
 
   ```js
   // ✓ ok
-  if (options.quiet !== true) console.log("done");
+  if (options.quiet !== true) console.log("done")
   ```
 
   ```js
   // ✓ ok
   if (options.quiet !== true) {
-    console.log("done");
+    console.log("done")
   }
   ```
 
   ```js
   // ✗ evitar
-  if (options.quiet !== true) console.log("done");
+  if (options.quiet !== true) console.log("done")
   ```
 
 - **Siempre gestionar** el parámetro `err` en las funciones.
@@ -151,16 +291,16 @@ Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs ci
   ```js
   // ✓ ok
   run(function(err) {
-    if (err) throw err;
-    window.alert("done");
-  });
+    if (err) throw err
+    window.alert("done")
+  })
   ```
 
   ```js
   // ✗ evitar
   run(function(err) {
-    window.alert("done");
-  });
+    window.alert("done")
+  })
   ```
 
 - **En las variables globales usar el sufijo** `window.`.<br>
@@ -169,7 +309,7 @@ Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs ci
   eslint: [`no-undef`](http://eslint.org/docs/rules/no-undef)
 
   ```js
-  window.alert("hi"); // ✓ ok
+  window.alert("hi") // ✓ ok
   ```
 
 - **Múltiples líneas en blanco no está permitido.**
@@ -178,13 +318,13 @@ Vamos a usar Google typescript Standard. Éste sigue las reglas de StandartJs ci
 
   ```js
   // ✓ ok
-  var value = "hello world";
-  console.log(value);
+  var value = "hello world"
+  console.log(value)
   ```
 
   ```js
   // ✗ evitar
-  var value = "hello world";
+  var value = "hello world"
   ```
 
 console.log(value)
@@ -216,16 +356,16 @@ var location = env.development ?
 
   ```js
   // ✓ ok
-  var silent = true;
-  var verbose = true;
+  var silent = true
+  var verbose = true
 
   // ✗ evitar
   var silent = true,
-    verbose = true;
+    verbose = true
 
   // ✗ evitar
   var silent = true,
-    verbose = true;
+    verbose = true
   ```
 
 - **Envolver asignaciones condicionales** con paréntesis adicionales. Esto hace claro que la intención de la expresión es una asignación y no un error de igualdad (`===`).
@@ -250,10 +390,10 @@ var location = env.development ?
 
   ```js
   function foo() {
-    return true;
+    return true
   } // ✗ evitar
   function foo() {
-    return true;
+    return true
   } // ✓ ok
   ```
 
@@ -265,8 +405,8 @@ var location = env.development ?
   function my_function() {} // ✗ avoid
   function myFunction() {} // ✓ ok
 
-  var my_var = "hello"; // ✗ avoid
-  var myVar = "hello"; // ✓ ok
+  var my_var = "hello" // ✗ avoid
+  var myVar = "hello" // ✓ ok
   ```
 
 - **Comas adicionales no esta permitido.**
@@ -276,7 +416,7 @@ var location = env.development ?
   ```js
   var obj = {
     message: "hello" // ✗ avoid
-  };
+  }
   ```
 
 - **Comas deben colocarse al final de la linea actual.**
@@ -287,12 +427,12 @@ var location = env.development ?
   var obj = {
     foo: "foo",
     bar: "bar" // ✗ avoid
-  };
+  }
 
   var obj = {
     foo: "foo",
     bar: "bar" // ✓ ok
-  };
+  }
   ```
 
 - **El Puto debe ir en la misma linea que la propiedad.**
@@ -300,9 +440,9 @@ var location = env.development ?
   eslint: [`dot-location`](http://eslint.org/docs/rules/dot-location)
 
   ```js
-  console.log("hello"); // ✗ avoid
+  console.log("hello") // ✗ avoid
 
-  console.log("hello"); // ✓ ok
+  console.log("hello") // ✓ ok
   ```
 
 - **Archivos deben terminar con una nueva linea.**
@@ -314,8 +454,8 @@ var location = env.development ?
   eslint: [`func-call-spacing`](http://eslint.org/docs/rules/func-call-spacing)
 
   ```js
-  console.log("hello"); // ✗ avoid
-  console.log("hello"); // ✓ ok
+  console.log("hello") // ✗ avoid
+  console.log("hello") // ✓ ok
   ```
 
 - **Agregar espacio entre dos puntos (colon) y pares clave valor.**
@@ -323,10 +463,10 @@ var location = env.development ?
   eslint: [`key-spacing`](http://eslint.org/docs/rules/key-spacing)
 
   ```js
-  var obj = { key: "value" }; // ✗ avoid
-  var obj = { key: "value" }; // ✗ avoid
-  var obj = { key: "value" }; // ✗ avoid
-  var obj = { key: "value" }; // ✓ ok
+  var obj = { key: "value" } // ✗ avoid
+  var obj = { key: "value" } // ✗ avoid
+  var obj = { key: "value" } // ✗ avoid
+  var obj = { key: "value" } // ✓ ok
   ```
 
 - **Nombres de Constructor deben empezar con letra Mayúscula.**
@@ -335,10 +475,10 @@ var location = env.development ?
 
   ```js
   function animal() {}
-  var dog = new animal(); // ✗ avoid
+  var dog = new animal() // ✗ avoid
 
   function Animal() {}
-  var dog = new Animal(); // ✓ ok
+  var dog = new Animal() // ✓ ok
   ```
 
 - **Constructor sin argumentos debe ser invocado con paréntesis.**
@@ -347,8 +487,8 @@ var location = env.development ?
 
   ```js
   function Animal() {}
-  var dog = new Animal(); // ✗ avoid
-  var dog = new Animal(); // ✓ ok
+  var dog = new Animal() // ✗ avoid
+  var dog = new Animal() // ✓ ok
   ```
 
 - **Objetos deben contener un getter cuando se ha definido un setter.**
@@ -359,19 +499,19 @@ var location = env.development ?
   var person = {
     set name(value) {
       // ✗ avoid
-      this._name = value;
+      this._name = value
     }
-  };
+  }
 
   var person = {
     set name(value) {
-      this._name = value;
+      this._name = value
     },
     get name() {
       // ✓ ok
-      return this._name;
+      return this._name
     }
-  };
+  }
   ```
 
 - **Constructores de clases derivadas deben llamar `super`.**
@@ -381,13 +521,13 @@ var location = env.development ?
   ```js
   class Dog {
     constructor() {
-      super(); // ✗ avoid
+      super() // ✗ avoid
     }
   }
 
   class Dog extends Mammal {
     constructor() {
-      super(); // ✓ ok
+      super() // ✓ ok
     }
   }
   ```
@@ -397,8 +537,8 @@ var location = env.development ?
   eslint: [`no-array-constructor`](http://eslint.org/docs/rules/no-array-constructor)
 
   ```js
-  var nums = new Array(1, 2, 3); // ✗ avoid
-  var nums = [1, 2, 3]; // ✓ ok
+  var nums = new Array(1, 2, 3) // ✗ avoid
+  var nums = [1, 2, 3] // ✓ ok
   ```
 
 - **Evitar usar arguments.calle y arguments.caller.**
@@ -407,15 +547,15 @@ var location = env.development ?
 
   ```js
   function foo(n) {
-    if (n <= 0) return;
+    if (n <= 0) return
 
-    arguments.callee(n - 1); // ✗ avoid
+    arguments.callee(n - 1) // ✗ avoid
   }
 
   function foo(n) {
-    if (n <= 0) return;
+    if (n <= 0) return
 
-    foo(n - 1);
+    foo(n - 1)
   }
   ```
 
@@ -425,7 +565,7 @@ var location = env.development ?
 
   ```js
   class Dog {}
-  Dog = "Fido"; // ✗ avoid
+  Dog = "Fido" // ✗ avoid
   ```
 
 - **Evitar modifidicar variables declaracas usando `const`.**
@@ -433,8 +573,8 @@ var location = env.development ?
   eslint: [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign)
 
   ```js
-  const score = 100;
-  score = 125; // ✗ avoid
+  const score = 100
+  score = 125 // ✗ avoid
   ```
 
 - **Evitar usar expresiones constantes en condicionales (a excepcion de búcles).**
@@ -463,8 +603,8 @@ var location = env.development ?
   eslint: [`no-control-regex`](http://eslint.org/docs/rules/no-control-regex)
 
   ```js
-  var pattern = /\x1f/; // ✗ avoid
-  var pattern = /\x20/; // ✓ ok
+  var pattern = /\x1f/ // ✗ avoid
+  var pattern = /\x20/ // ✓ ok
   ```
 
 - **Evitar sentencias `debugger`.**
@@ -473,8 +613,8 @@ var location = env.development ?
 
   ```js
   function sum(a, b) {
-    debugger; // ✗ avoid
-    return a + b;
+    debugger // ✗ avoid
+    return a + b
   }
   ```
 
@@ -483,8 +623,8 @@ var location = env.development ?
   eslint: [`no-delete-var`](http://eslint.org/docs/rules/no-delete-var)
 
   ```js
-  var name;
-  delete name; // ✗ avoid
+  var name
+  delete name // ✗ avoid
   ```
 
 - **Evitar argumentos duplicados en definicion de funciones.**
@@ -522,7 +662,7 @@ var location = env.development ?
   var user = {
     name: "Jane Doe",
     name: "John Doe" // ✗ avoid
-  };
+  }
   ```
 
 - **Evitar dublicados de etiqueta `case` en sentencias `switch`.**
@@ -542,10 +682,10 @@ var location = env.development ?
   eslint: [`no-duplicate-imports`](http://eslint.org/docs/rules/no-duplicate-imports)
 
   ```js
-  import { myFunc1 } from "module";
-  import { myFunc2 } from "module"; // ✗ avoid
+  import { myFunc1 } from "module"
+  import { myFunc2 } from "module" // ✗ avoid
 
-  import { myFunc1, myFunc2 } from "module"; // ✓ ok
+  import { myFunc1, myFunc2 } from "module" // ✓ ok
   ```
 
 - **Evitar classes de carácteres vacia en expresiones regulares.**
@@ -553,8 +693,8 @@ var location = env.development ?
   eslint: [`no-empty-character-class`](http://eslint.org/docs/rules/no-empty-character-class)
 
   ```js
-  const myRegex = /^abc[]/; // ✗ avoid
-  const myRegex = /^abc[a-z]/; // ✓ ok
+  const myRegex = /^abc[]/ // ✗ avoid
+  const myRegex = /^abc[a-z]/ // ✓ ok
   ```
 
 - **Evitar pratones de destructuración vacios.**
@@ -564,10 +704,10 @@ var location = env.development ?
   ```js
   const {
     a: {}
-  } = foo; // ✗ avoid
+  } = foo // ✗ avoid
   const {
     a: { b }
-  } = foo; // ✓ ok
+  } = foo // ✓ ok
   ```
 
 - **Evitar uso de `eval()`.**
@@ -575,8 +715,8 @@ var location = env.development ?
   eslint: [`no-eval`](http://eslint.org/docs/rules/no-eval)
 
   ```js
-  eval("var result = user." + propName); // ✗ avoid
-  var result = user[propName]; // ✓ ok
+  eval("var result = user." + propName) // ✗ avoid
+  var result = user[propName] // ✓ ok
   ```
 
 - **Evitar reasignar excepciones en clausas `catch`.**
@@ -587,13 +727,13 @@ var location = env.development ?
   try {
     // ...
   } catch (e) {
-    e = "new value"; // ✗ avoid
+    e = "new value" // ✗ avoid
   }
 
   try {
     // ...
   } catch (e) {
-    const newVal = "new value"; // ✓ ok
+    const newVal = "new value" // ✓ ok
   }
   ```
 
@@ -602,7 +742,7 @@ var location = env.development ?
   eslint: [`no-extend-native`](http://eslint.org/docs/rules/no-extend-native)
 
   ```js
-  Object.prototype.age = 21; // ✗ avoid
+  Object.prototype.age = 21 // ✗ avoid
   ```
 
 - **Evitar uso innecesario de bind en funciones.**
@@ -611,12 +751,12 @@ var location = env.development ?
 
   ```js
   const name = function() {
-    getName();
-  }.bind(user); // ✗ avoid
+    getName()
+  }.bind(user) // ✗ avoid
 
   const name = function() {
-    this.getName();
-  }.bind(user); // ✓ ok
+    this.getName()
+  }.bind(user) // ✓ ok
   ```
 
 - **Evitar hacer cast a booleanos.**
@@ -624,13 +764,13 @@ var location = env.development ?
   eslint: [`no-extra-boolean-cast`](http://eslint.org/docs/rules/no-extra-boolean-cast)
 
   ```js
-  const result = true;
+  const result = true
   if (!!result) {
     // ✗ avoid
     // ...
   }
 
-  const result = true;
+  const result = true
   if (result) {
     // ✓ ok
     // ...
@@ -642,8 +782,8 @@ var location = env.development ?
   eslint: [`no-extra-parens`](http://eslint.org/docs/rules/no-extra-parens)
 
   ```js
-  const myFunc = function() {}; // ✗ avoid
-  const myFunc = function() {}; // ✓ ok
+  const myFunc = function() {} // ✗ avoid
+  const myFunc = function() {} // ✓ ok
   ```
 
 - **Usar `break` para evitar pasar de largo `fallthrough` en casos `switch`.**
@@ -653,25 +793,25 @@ var location = env.development ?
   ```js
   switch (filter) {
     case 1:
-      doSomething(); // ✗ avoid
+      doSomething() // ✗ avoid
     case 2:
-      doSomethingElse();
+      doSomethingElse()
   }
 
   switch (filter) {
     case 1:
-      doSomething();
-      break; // ✓ ok
+      doSomething()
+      break // ✓ ok
     case 2:
-      doSomethingElse();
+      doSomethingElse()
   }
 
   switch (filter) {
     case 1:
-      doSomething();
+      doSomething()
     // fallthrough  // ✓ ok
     case 2:
-      doSomethingElse();
+      doSomethingElse()
   }
   ```
 
@@ -680,8 +820,8 @@ var location = env.development ?
   eslint: [`no-floating-decimal`](http://eslint.org/docs/rules/no-floating-decimal)
 
   ```js
-  const discount = 0.5; // ✗ avoid
-  const discount = 0.5; // ✓ ok
+  const discount = 0.5 // ✗ avoid
+  const discount = 0.5 // ✓ ok
   ```
 
 - **Evitar reasignación de declaraciones de funciones.**
@@ -690,7 +830,7 @@ var location = env.development ?
 
   ```js
   function myFunc() {}
-  myFunc = myOtherFunc; // ✗ avoid
+  myFunc = myOtherFunc // ✗ avoid
   ```
 
 - **Evitar reasignación de variables globales de solo-lectura.**
@@ -698,7 +838,7 @@ var location = env.development ?
   eslint: [`no-global-assign`](http://eslint.org/docs/rules/no-global-assign)
 
   ```js
-  window = {}; // ✗ avoid
+  window = {} // ✗ avoid
   ```
 
 - **Evitar usar eval() implícito.**
@@ -706,10 +846,10 @@ var location = env.development ?
   eslint: [`no-implied-eval`](http://eslint.org/docs/rules/no-implied-eval)
 
   ```js
-  setTimeout("alert('Hello world')"); // ✗ avoid
+  setTimeout("alert('Hello world')") // ✗ avoid
   setTimeout(function() {
-    alert("Hello world");
-  }); // ✓ ok
+    alert("Hello world")
+  }) // ✓ ok
   ```
 
 - **Evitar declaracion de funciones en bloques anidados.**
@@ -727,8 +867,8 @@ var location = env.development ?
   eslint: [`no-invalid-regexp`](http://eslint.org/docs/rules/no-invalid-regexp)
 
   ```js
-  RegExp("[a-z"); // ✗ avoid
-  RegExp("[a-z]"); // ✓ ok
+  RegExp("[a-z") // ✗ avoid
+  RegExp("[a-z]") // ✓ ok
   ```
 
 - **Evitar espacios en blanco irregulares.**
@@ -744,7 +884,7 @@ var location = env.development ?
   eslint: [`no-iterator`](http://eslint.org/docs/rules/no-iterator)
 
   ```js
-  Foo.prototype.__iterator__ = function() {}; // ✗ avoid
+  Foo.prototype.__iterator__ = function() {} // ✗ avoid
   ```
 
 - **Evitar etiquetas que comparten el nombre de una variable en scope.**
@@ -752,13 +892,13 @@ var location = env.development ?
   eslint: [`no-label-var`](http://eslint.org/docs/rules/no-label-var)
 
   ```js
-  var score = 100;
+  var score = 100
   function game() {
     score: while (true) {
       // ✗ avoid
-      score -= 10;
-      if (score > 0) continue score;
-      break;
+      score -= 10
+      if (score > 0) continue score
+      break
     }
   }
   ```
@@ -769,7 +909,7 @@ var location = env.development ?
 
   ```js
   label: while (true) {
-    break label; // ✗ avoid
+    break label // ✗ avoid
   }
   ```
 
@@ -781,12 +921,12 @@ var location = env.development ?
   function myFunc() {
     {
       // ✗ avoid
-      myOtherFunc();
+      myOtherFunc()
     }
   }
 
   function myFunc() {
-    myOtherFunc(); // ✓ ok
+    myOtherFunc() // ✓ ok
   }
   ```
 
@@ -799,8 +939,8 @@ var location = env.development ?
   eslint: [`no-multi-spaces`](http://eslint.org/docs/rules/no-multi-spaces)
 
   ```js
-  const id = 1234; // ✗ avoid
-  const id = 1234; // ✓ ok
+  const id = 1234 // ✗ avoid
+  const id = 1234 // ✓ ok
   ```
 
 - **Evitar cadenas de texto multi-linea**
@@ -810,7 +950,7 @@ var location = env.development ?
   ```js
   const message =
     "Hello \
-                   world"; // ✗ avoid
+                   world" // ✗ avoid
   ```
 
 - **Evitar usar `new` sin asignar a el objecto a una variable**
@@ -818,8 +958,8 @@ var location = env.development ?
   eslint: [`no-new`](http://eslint.org/docs/rules/no-new)
 
   ```js
-  new Character(); // ✗ avoid
-  const character = new Character(); // ✓ ok
+  new Character() // ✗ avoid
+  const character = new Character() // ✓ ok
   ```
 
 - **Evitar uso de constructor `Function`.**
@@ -827,7 +967,7 @@ var location = env.development ?
   eslint: [`no-new-func`](http://eslint.org/docs/rules/no-new-func)
 
   ```js
-  var sum = new Function("a", "b", "return a + b"); // ✗ avoid
+  var sum = new Function("a", "b", "return a + b") // ✗ avoid
   ```
 
 - **Evitar uso de constructor `Object`**
@@ -835,7 +975,7 @@ var location = env.development ?
   eslint: [`no-new-object`](http://eslint.org/docs/rules/no-new-object)
 
   ```js
-  let config = new Object(); // ✗ avoid
+  let config = new Object() // ✗ avoid
   ```
 
 - **Evitar uso de `new require`.**
@@ -843,7 +983,7 @@ var location = env.development ?
   eslint: [`no-new-require`](http://eslint.org/docs/rules/no-new-require)
 
   ```js
-  const myModule = new require("my-module"); // ✗ avoid
+  const myModule = new require("my-module") // ✗ avoid
   ```
 
 - **Evitar uso de constructor `Symbol`.**
@@ -851,7 +991,7 @@ var location = env.development ?
   eslint: [`no-new-symbol`](http://eslint.org/docs/rules/no-new-symbol)
 
   ```js
-  const foo = new Symbol("foo"); // ✗ avoid
+  const foo = new Symbol("foo") // ✗ avoid
   ```
 
 - **Evitar envolturas de instancias primitivas.**
@@ -859,7 +999,7 @@ var location = env.development ?
   eslint: [`no-new-wrappers`](http://eslint.org/docs/rules/no-new-wrappers)
 
   ```js
-  const message = new String("hello"); // ✗ avoid
+  const message = new String("hello") // ✗ avoid
   ```
 
 - **Evitar llamar propiedades de objetos globles como funciones.**
@@ -867,7 +1007,7 @@ var location = env.development ?
   eslint: [`no-obj-calls`](http://eslint.org/docs/rules/no-obj-calls)
 
   ```js
-  const math = Math(); // ✗ avoid
+  const math = Math() // ✗ avoid
   ```
 
 - **Evitar uso de octal literal.**
@@ -875,8 +1015,8 @@ var location = env.development ?
   eslint: [`no-octal`](http://eslint.org/docs/rules/no-octal)
 
   ```js
-  const num = 042; // ✗ avoid
-  const num = "042"; // ✓ ok
+  const num = 042 // ✗ avoid
+  const num = "042" // ✓ ok
   ```
 
 - **Evitar escapado de secuencia octal en cadena de texto literal.**
@@ -884,7 +1024,7 @@ var location = env.development ?
   eslint: [`no-octal-escape`](http://eslint.org/docs/rules/no-octal-escape)
 
   ```js
-  const copyright = "Copyright \251"; // ✗ avoid
+  const copyright = "Copyright \251" // ✗ avoid
   ```
 
 - **Evitar concatenacion de cadena de texto para `__dirname` y `__filename`.**
@@ -892,8 +1032,8 @@ var location = env.development ?
   eslint: [`no-path-concat`](http://eslint.org/docs/rules/no-path-concat)
 
   ```js
-  const pathToFile = __dirname + "/app.js"; // ✗ avoid
-  const pathToFile = path.join(__dirname, "app.js"); // ✓ ok
+  const pathToFile = __dirname + "/app.js" // ✗ avoid
+  const pathToFile = path.join(__dirname, "app.js") // ✓ ok
   ```
 
 - **Evitar uso de `__proto__`.** Use `getPrototypeOf` en su lugar.
@@ -901,8 +1041,8 @@ var location = env.development ?
   eslint: [`no-proto`](http://eslint.org/docs/rules/no-proto)
 
   ```js
-  const foo = obj.__proto__; // ✗ avoid
-  const foo = Object.getPrototypeOf(obj); // ✓ ok
+  const foo = obj.__proto__ // ✗ avoid
+  const foo = Object.getPrototypeOf(obj) // ✓ ok
   ```
 
 - **Evitar re-reclaración de variables.**
@@ -910,11 +1050,11 @@ var location = env.development ?
   eslint: [`no-redeclare`](http://eslint.org/docs/rules/no-redeclare)
 
   ```js
-  let name = "John";
-  let name = "Jane"; // ✗ avoid
+  let name = "John"
+  let name = "Jane" // ✗ avoid
 
-  let name = "John";
-  name = "Jane"; // ✓ ok
+  let name = "John"
+  name = "Jane" // ✓ ok
   ```
 
 - **Evitar multiples espacios en expresiones regulares.**
@@ -922,10 +1062,10 @@ var location = env.development ?
   eslint: [`no-regex-spaces`](http://eslint.org/docs/rules/no-regex-spaces)
 
   ```js
-  const regexp = /test   value/; // ✗ avoid
+  const regexp = /test   value/ // ✗ avoid
 
-  const regexp = /test {3}value/; // ✓ ok
-  const regexp = /test value/; // ✓ ok
+  const regexp = /test {3}value/ // ✓ ok
+  const regexp = /test value/ // ✓ ok
   ```
 
 - **Asignación de variables en el retorno de funciones debe estar rodeado de paréntesis.**
@@ -934,11 +1074,11 @@ var location = env.development ?
 
   ```js
   function sum(a, b) {
-    return (result = a + b); // ✗ avoid
+    return (result = a + b) // ✗ avoid
   }
 
   function sum(a, b) {
-    return (result = a + b); // ✓ ok
+    return (result = a + b) // ✓ ok
   }
   ```
 
@@ -947,7 +1087,7 @@ var location = env.development ?
   eslint: [`no-self-assign`](http://eslint.org/docs/rules/no-self-assign)
 
   ```js
-  name = name; // ✗ avoid
+  name = name // ✗ avoid
   ```
 
 - **Evitar comparar una variable consigo mismo.**
@@ -973,7 +1113,7 @@ var location = env.development ?
   eslint: [`no-shadow-restricted-names`](http://eslint.org/docs/rules/no-shadow-restricted-names)
 
   ```js
-  let undefined = "value"; // ✗ avoid
+  let undefined = "value" // ✗ avoid
   ```
 
 - **Array dispersos no estan permitidos.**
@@ -981,7 +1121,7 @@ var location = env.development ?
   eslint: [`no-sparse-arrays`](http://eslint.org/docs/rules/no-sparse-arrays)
 
   ```js
-  let fruits = ["apple", , "orange"]; // ✗ avoid
+  let fruits = ["apple", , "orange"] // ✗ avoid
   ```
 
 - **No se deben usar Tabulaciones.**
@@ -993,8 +1133,8 @@ var location = env.development ?
   eslint: [`no-template-curly-in-string`](http://eslint.org/docs/rules/no-template-curly-in-string)
 
   ```js
-  const message = "Hello ${name}"; // ✗ avoid
-  const message = `Hello ${name}`; // ✓ ok
+  const message = "Hello ${name}" // ✗ avoid
+  const message = `Hello ${name}` // ✓ ok
   ```
 
 - **`super()` debe ser llamado inmediatamente antes de usar `this`.**
@@ -1004,8 +1144,8 @@ var location = env.development ?
   ```js
   class Dog extends Animal {
     constructor() {
-      this.legs = 4; // ✗ avoid
-      super();
+      this.legs = 4 // ✗ avoid
+      super()
     }
   }
   ```
@@ -1015,8 +1155,8 @@ var location = env.development ?
   eslint: [`no-throw-literal`](http://eslint.org/docs/rules/no-throw-literal)
 
   ```js
-  throw "error"; // ✗ avoid
-  throw new Error("error"); // ✓ ok
+  throw "error" // ✗ avoid
+  throw new Error("error") // ✓ ok
   ```
 
 - **Espacios en blanco despues del final linea no estan permitidos .**
@@ -1028,10 +1168,10 @@ var location = env.development ?
   eslint: [`no-undef-init`](http://eslint.org/docs/rules/no-undef-init)
 
   ```js
-  let name = undefined; // ✗ avoid
+  let name = undefined // ✗ avoid
 
-  let name;
-  name = "value"; // ✓ ok
+  let name
+  name = "value" // ✓ ok
   ```
 
 - **Búcles no modificados no estan permitidos.**
@@ -1048,8 +1188,8 @@ var location = env.development ?
   eslint: [`no-unneeded-ternary`](http://eslint.org/docs/rules/no-unneeded-ternary)
 
   ```js
-  let score = val ? val : 0; // ✗ avoid
-  let score = val || 0; // ✓ ok
+  let score = val ? val : 0 // ✗ avoid
+  let score = val || 0 // ✓ ok
   ```
 
 - **Evitar dejar código inalcanzable despues de sentencias `return`, `throw`, `continue`, y `break` .**
@@ -1058,8 +1198,8 @@ var location = env.development ?
 
   ```js
   function doSomething() {
-    return true;
-    console.log("never called"); // ✗ avoid
+    return true
+    console.log("never called") // ✗ avoid
   }
   ```
 
@@ -1073,7 +1213,7 @@ var location = env.development ?
   } catch (e) {
     // ...
   } finally {
-    return 42; // ✗ avoid
+    return 42 // ✗ avoid
   }
   ```
 
@@ -1091,7 +1231,7 @@ var location = env.development ?
   eslint: [`no-useless-call`](http://eslint.org/docs/rules/no-useless-call)
 
   ```js
-  sum.call(null, 1, 2, 3); // ✗ avoid
+  sum.call(null, 1, 2, 3) // ✗ avoid
   ```
 
 - **Evitar usar constructores innecesarios.**
@@ -1099,8 +1239,8 @@ var location = env.development ?
   eslint: [`no-useless-computed-key`](http://eslint.org/docs/rules/no-useless-computed-key)
 
   ```js
-  const user = { ["name"]: "John Doe" }; // ✗ avoid
-  const user = { name: "John Doe" }; // ✓ ok
+  const user = { ["name"]: "John Doe" } // ✗ avoid
+  const user = { name: "John Doe" } // ✓ ok
   ```
 
 - **Evitar uso inncesario de escapado de text.**
@@ -1108,7 +1248,7 @@ var location = env.development ?
   eslint: [`no-useless-escape`](http://eslint.org/docs/rules/no-useless-escape)
 
   ```js
-  let message = "Hello"; // ✗ avoid
+  let message = "Hello" // ✗ avoid
   ```
 
 - **Renombrar import, export o destructuración con el mismo nombre no esta permitido**
@@ -1116,8 +1256,8 @@ var location = env.development ?
   eslint: [`no-useless-rename`](http://eslint.org/docs/rules/no-useless-rename)
 
   ```js
-  import { config } from "./config"; // ✗ avoid
-  import { config } from "./config"; // ✓ ok
+  import { config } from "./config" // ✗ avoid
+  import { config } from "./config" // ✓ ok
   ```
 
 - **Evitar espacios en blanco antes de una propiedad.**
@@ -1125,8 +1265,8 @@ var location = env.development ?
   eslint: [`no-whitespace-before-property`](http://eslint.org/docs/rules/no-whitespace-before-property)
 
   ```js
-  user.name; // ✗ avoid
-  user.name; // ✓ ok
+  user.name // ✗ avoid
+  user.name // ✓ ok
   ```
 
 - **Evitar uso de sentencia `with`.**
@@ -1146,15 +1286,15 @@ var location = env.development ?
     name: "Jane Doe",
     age: 30,
     username: "jdoe86" // ✗ avoid
-  };
+  }
 
-  const user = { name: "Jane Doe", age: 30, username: "jdoe86" }; // ✓ ok
+  const user = { name: "Jane Doe", age: 30, username: "jdoe86" } // ✓ ok
 
   const user = {
     name: "Jane Doe",
     age: 30,
     username: "jdoe86"
-  }; // ✓ ok
+  } // ✓ ok
   ```
 
 - **Evitar espacios de relleno entre bloques.**
@@ -1164,11 +1304,11 @@ var location = env.development ?
   ```js
   if (user) {
     // ✗ avoid
-    const name = getName();
+    const name = getName()
   }
 
   if (user) {
-    const name = getName(); // ✓ ok
+    const name = getName() // ✓ ok
   }
   ```
 
@@ -1177,8 +1317,8 @@ var location = env.development ?
   eslint: [`rest-spread-spacing`](http://eslint.org/docs/rules/rest-spread-spacing)
 
   ```js
-  fn(...args); // ✗ avoid
-  fn(...args); // ✓ ok
+  fn(...args) // ✗ avoid
+  fn(...args) // ✓ ok
   ```
 
 - **Punto y coma (semicolon) debe tener un espacio en blanco despues y no antes.**
@@ -1204,8 +1344,8 @@ var location = env.development ?
   eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens)
 
   ```js
-  getName(name); // ✗ avoid
-  getName(name); // ✓ ok
+  getName(name) // ✗ avoid
+  getName(name) // ✓ ok
   ```
 
 - **Operador unario debe tener espacio en blanco despues.**
@@ -1213,8 +1353,8 @@ var location = env.development ?
   eslint: [`space-unary-ops`](http://eslint.org/docs/rules/space-unary-ops)
 
   ```js
-  typeof !admin; // ✗ avoid
-  typeof !admin; // ✓ ok
+  typeof !admin // ✗ avoid
+  typeof !admin // ✓ ok
   ```
 
 - **Usar espacios dentro de comentarios.**
@@ -1234,8 +1374,8 @@ eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
 eslint: [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing)
 
 ```js
-const message = `Hello, ${name}`; // ✗ avoid
-const message = `Hello, ${name}`; // ✓ ok
+const message = `Hello, ${name}` // ✗ avoid
+const message = `Hello, ${name}` // ✓ ok
 ```
 
 - **Usar `isNaN()` cuando se desea chequear `NaN`.**
@@ -1254,8 +1394,8 @@ const message = `Hello, ${name}`; // ✓ ok
   eslint: [`valid-typeof`](http://eslint.org/docs/rules/valid-typeof)
 
   ```js
-  typeof name === "undefimed"; // ✗ avoid
-  typeof name === "undefined"; // ✓ ok
+  typeof name === "undefimed" // ✗ avoid
+  typeof name === "undefined" // ✓ ok
   ```
 
 - **Expressiones Funciones inmediatamente invocadas (IIFEs) deben ser envueltas en paréntesis.**
@@ -1263,10 +1403,10 @@ const message = `Hello, ${name}`; // ✓ ok
   eslint: [`wrap-iife`](http://eslint.org/docs/rules/wrap-iife)
 
   ```js
-  const getName = (function() {})(); // ✗ avoid
+  const getName = (function() {})() // ✗ avoid
 
-  const getName = (function() {})(); // ✓ ok
-  const getName = (function() {})(); // ✓ ok
+  const getName = (function() {})() // ✓ ok
+  const getName = (function() {})() // ✓ ok
   ```
 
 - **El `*` en expresiones `yield*` deben tener un espacio en blanco antes y despues.**
@@ -1274,8 +1414,8 @@ const message = `Hello, ${name}`; // ✓ ok
   eslint: [`yield-star-spacing`](http://eslint.org/docs/rules/yield-star-spacing)
 
   ```js
-  yield * increment(); // ✗ avoid
-  yield * increment(); // ✓ ok
+  yield * increment() // ✗ avoid
+  yield * increment() // ✓ ok
   ```
 
 - **Evitar condiciones Yoda.**
@@ -1296,8 +1436,8 @@ const message = `Hello, ${name}`; // ✓ ok
   eslint: [`semi`](http://eslint.org/docs/rules/semi)
 
   ```js
-  window.alert("hi"); // ✗ ok
-  window.alert("hi"); // ✓ evitar
+  window.alert("hi") // ✗ ok
+  window.alert("hi") // ✓ evitar
   ```
 
 ## Lectura de ayuda con referencia hacia los puntos y comas
@@ -1336,15 +1476,15 @@ El tercero es bien entendido, es generalmente despreciado. `if (x)\ny()` es equi
 El cuarto es generalmente el caso inducido “Oh no, necesitas puntos y comas”. Pero pasa que es bastante simple darle el prefijo a esas linas con puntos y comas, si no quieres que sean la continuacion de la linea previa. Por ejemplo, en vez de esto:
 
 ```js
-foo();
-[1, 2, 3].forEach(bar);
+foo()
+;[1, 2, 3].forEach(bar)
 ```
 
 podrias hacer esto:
 
 ```js
-foo();
-[1, 2, 3].forEach(bar);
+foo()
+;[1, 2, 3].forEach(bar)
 ```
 
 La ventaja es que los prefijos son fáciles de notar, una vez te acostumbras a ver líneas que no empiecen con `(` o `[` sin puntos y comas.
