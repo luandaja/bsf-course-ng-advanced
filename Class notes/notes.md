@@ -114,6 +114,34 @@ Es mas facil pasar monolito a monorepo que a micro fonrt end
 MultiRepo
 Cuando quiero que todo sea totalmente desacoplado
 Cuando el CI me cuesta ya mucho en MonoRepo
-Cuando no se que tan grande va a ser mi compañia me conviene tenerlo desacoplado
+Cuando no se que tan grande va a ser mi compañia me conviene tenerlo 
+
+---------
+##Clase 5
+Angular Advanced Unit Testing
+Piramide Varilla (Piramide de Unit Test para Front)
+
+		     e2e(Protractor)
+(jasmine)Integration/snapshot (Jesx+Enzyme)
+	(jasmine)	Unit Test    
+
+Cuanto mas escalabale es se van agregando mas test conforme va creciendo pero como minimo siempre los unit test.
+
+Cuando hago unit test?
+Los unit test deberiamos de hacerlos siempre.
+Pruebas de conceptop no llevan unit test.
+Si el cliente no quiere tampoco van.
+
+Si primero escribes el codigo y luego el unit test, lo mas probable es que termines refactorizando, si no algo esta mal.
+Si primero haces el test lo mas probable es que tu codigo quede limpio desde el inicio porque el codigo se hace pensando en testing.
+
+Cuando hago test de integracion?
+Se hace para validar el comportamiento entre componentes, especialmente la comunicacion. Por ejemplo un manager que administra otros componentes.
+Si a nuestra aplicacion solo queremos hacerle test a la parte mas critica (unit test).
+Si el cliente no quiere tampoco van.
+
+Que testear? que formas de testear un componente hay? deberia testear un pipe?
+la documentacion de angular tiene info de como testear todo revisar.
+
 
 
