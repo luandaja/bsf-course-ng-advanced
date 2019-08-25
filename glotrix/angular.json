@@ -234,6 +234,37 @@
           }
         }
       }
+    },
+    "glotrix-ui": {
+      "projectType": "library",
+      "root": "libs/glotrix-ui",
+      "sourceRoot": "libs/glotrix-ui/src",
+      "prefix": "glotrix",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/glotrix-ui/tsconfig.lib.json",
+              "libs/glotrix-ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/glotrix-ui/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/glotrix-ui/src/test.ts",
+            "tsConfig": "libs/glotrix-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/glotrix-ui/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -19,6 +19,9 @@
     },
     "store-e2e": {
       "tags": []
+    },
+    "glotrix-ui": {
+      "tags": []
     }
   }
 }
