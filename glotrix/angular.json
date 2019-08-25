@@ -80,25 +80,27 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "jestConfig": "apps/cms/jest.config.js",
+            "main": "apps/cms/src/test.ts",
             "tsConfig": "apps/cms/tsconfig.spec.json",
-            "setupFile": "apps/cms/src/test-setup.ts"
+            "karmaConfig": "apps/cms/karma.conf.js",
+            "polyfills": "apps/cms/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
           }
         }
       }
     },
     "cms-e2e": {
       "root": "apps/cms-e2e",
-      "sourceRoot": "apps/cms-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
-          "builder": "@nrwl/cypress:cypress",
+          "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "cypressConfig": "apps/cms-e2e/cypress.json",
-            "tsConfig": "apps/cms-e2e/tsconfig.e2e.json",
+            "protractorConfig": "apps/cms-e2e/protractor.conf.js",
             "devServerTarget": "cms:serve"
           },
           "configurations": {
@@ -110,7 +112,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/cms-e2e/tsconfig.e2e.json"],
+            "tsConfig": "apps/cms-e2e/tsconfig.e2e.json",
             "exclude": ["**/node_modules/**", "!apps/cms-e2e/**"]
           }
         }
@@ -195,25 +197,27 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "jestConfig": "apps/store/jest.config.js",
+            "main": "apps/store/src/test.ts",
             "tsConfig": "apps/store/tsconfig.spec.json",
-            "setupFile": "apps/store/src/test-setup.ts"
+            "karmaConfig": "apps/store/karma.conf.js",
+            "polyfills": "apps/store/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
           }
         }
       }
     },
     "store-e2e": {
       "root": "apps/store-e2e",
-      "sourceRoot": "apps/store-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
-          "builder": "@nrwl/cypress:cypress",
+          "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "cypressConfig": "apps/store-e2e/cypress.json",
-            "tsConfig": "apps/store-e2e/tsconfig.e2e.json",
+            "protractorConfig": "apps/store-e2e/protractor.conf.js",
             "devServerTarget": "store:serve"
           },
           "configurations": {
@@ -225,7 +229,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/store-e2e/tsconfig.e2e.json"],
+            "tsConfig": "apps/store-e2e/tsconfig.e2e.json",
             "exclude": ["**/node_modules/**", "!apps/store-e2e/**"]
           }
         }
@@ -237,11 +241,11 @@
   },
   "schematics": {
     "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+      "unitTestRunner": "karma",
+      "e2eTestRunner": "protractor"
     },
     "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
+      "unitTestRunner": "karma"
     }
   },
   "defaultProject": "cms"

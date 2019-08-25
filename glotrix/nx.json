@@ -8,16 +8,16 @@
     "nx.json": "*"
   },
   "projects": {
-    "cms-e2e": {
-      "tags": []
-    },
     "cms": {
       "tags": []
     },
-    "store-e2e": {
+    "cms-e2e": {
       "tags": []
     },
     "store": {
+      "tags": []
+    },
+    "store-e2e": {
       "tags": []
     }
   }
