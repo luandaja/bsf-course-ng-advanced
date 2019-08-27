@@ -1,0 +1,30 @@
+{
+  "npmScope": "glotrix",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "cms-e2e": {
+      "tags": []
+    },
+    "cms": {
+      "tags": []
+    },
+    "store-e2e": {
+      "tags": []
+    },
+    "store": {
+      "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "ui": {
+      "tags": []
+    }
+  }
+}
