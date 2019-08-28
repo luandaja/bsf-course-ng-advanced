@@ -143,5 +143,89 @@ Si el cliente no quiere tampoco van.
 Que testear? que formas de testear un componente hay? deberia testear un pipe?
 la documentacion de angular tiene info de como testear todo revisar.
 
+---------
+##Clase 6
+Jes y Jasmine son lenguajes similares para unit test
+Jesx tiene la ventaja de q es mas flexible con javascript puro que jasmine
+
+Component class testing (Isolamos el componente y hacemos el test)
+Se usa para logica, validaciones, formatos, cualquier cosa q tenga en la clase del componente.
+Component DOM testing ()
+Se usa en los component container
+
+Los componentes son de 2 tipos: Presentacional y Containers (para Angular,Reacct y ViewJs)
+Presentacionales:
+Se les llama tambien Dumb Component. 
+En el ejemplo de la clase anterior el Article component es Dumb
+Usualmente tienen Input/Output, no le interesa de donde viene la data, la recibe y la pinta
+Usa class component testing
+las librerias de componentes entran aca
+No_Error_Schema...Se usa para no renderizar el componente para que puedas hacer component class testing
+Containers:
+Se les llama también Smart Components o Application Level Components
+Se le llama Smart porque simepre saben de donde viene la data
+ En el ejemplo de la clase anterior el Lista (que tiene el foreach de cada Article) component es Smart
+ Son los que jalan la data, se comunican con algun servicio/state management...lo que sea pero traen la data
+ Usa DOM testing 
+ Links:
+ https://www.dotnetcurry.com/angularjs/1463/unit-testing-angular-components
+ https://angular.io/guide/testing#testing
+ https://logrocket.com/blog/angular-unit-testing/
+ https://github.com/krishna-acondy/ng-simple-unit-tests
+
+
+Plugin the git para añadir reglas al PR (ejecutar comandos)
+
+Code Standards:
+BEM Conventions para CSS es una buena recomandación. El único problema es hacer una intro para la gente dle proyecto que no lo conoce pero tras que se acostumbre no hay problema.
+Testrunners: Karma esta bien
+Las Constantes globales van en mayusucla y con sub guiones
+Constantes inmutables van en lower camel case
+
+State Management:
+
+
+---------
+##Clase 7
+State Management (Centralizan todo a un store)
+
+Si no lo necesitas no lo uses!
+Es para comunicar componentes.
+
+Fb crea el patron Redux, la arquitectura Flux se basa en ese patron y Mob es una libreria que usa Flux y Redux.
+
+State Management cumple:
+- Un solo origne de datos (Single source of trurth)
+- Predictable
+- Inmutable
+- Track state changes
+No se recomienda usar por ejemplo forms con state management (no es informacion inmutable, genera memory leaks y slow render)
+State Management Options:
+-Service: puedes agregar un singleton general o uno independiente por modulo
+
+-NgRx(si no sabes nada y usas este aqui aprendes, es la mas usada)
+	Perimite pode rimplementar el patron redux en angular
+ Ventajas: Al ser una de las mas antiguas tiene mayor comunidad, es decir, respuestas a los problemas. Si o s aprendes con esta liberia, tienes un buen manejo de estados, controla todo lo que tengas en tu applicacion. tiene buen performance
+ Desventajas: Surgen side affects como the Race Condition(la request q tarda mas va a chancar la data que esta pintada) y boilerplate. Necesitas aprender mucho los conceptos de rudex para entenderlo. Te da consistencia
+-Ngrx-data
+ Es una version simplificada de la anterior. Sigue activa. No recomendable si es que necesitas q sea escalable
+-Observable Store
+HAces tu implementacion propia, no usa libreria. Trabaja bien cuando no tienes muchos modulos
+-Akita
+-Ngxs (una de las mejores solo que tiene pros y contras)(genera poco codigo)
+-Mobx
+
+Redux Pattern:
+Forma en la que se trabaja el front end para poder manejar un control de estados.
+1.Single source of truth called the store
+2.State is read only and only changed by dispatching actions
+3.Changes are made using pure functions (in base of one input one outpt) called reducers
+
+Se le llama anti pattron por que:
+al centralizar toda la data en un store se esta rompiendo el single responsability.
+Sus peligros son: mantenimiento al store
+---------
+
+
 
 
