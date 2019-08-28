@@ -22,7 +22,10 @@
             "tsConfig": "apps/cms/tsconfig.app.json",
             "aot": false,
             "assets": ["apps/cms/src/favicon.ico", "apps/cms/src/assets"],
-            "styles": ["apps/cms/src/styles.scss"],
+            "styles": [
+              "apps/cms/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -137,7 +140,10 @@
             "tsConfig": "apps/store/tsconfig.app.json",
             "aot": false,
             "assets": ["apps/store/src/favicon.ico", "apps/store/src/assets"],
-            "styles": ["apps/store/src/styles.scss"],
+            "styles": [
+              "apps/store/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -262,28 +268,28 @@
         }
       }
     },
-    "ui": {
+    "ui-layout": {
       "projectType": "library",
-      "root": "libs/ui",
-      "sourceRoot": "libs/ui/src",
+      "root": "libs/ui/layout",
+      "sourceRoot": "libs/ui/layout/src",
       "prefix": "glotrix",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/ui/tsconfig.lib.json",
-              "libs/ui/tsconfig.spec.json"
+              "libs/ui/layout/tsconfig.lib.json",
+              "libs/ui/layout/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ui/**"]
+            "exclude": ["**/node_modules/**", "!libs/ui/layout/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ui/jest.config.js",
-            "tsConfig": "libs/ui/tsconfig.spec.json",
-            "setupFile": "libs/ui/src/test-setup.ts"
+            "jestConfig": "libs/ui/layout/jest.config.js",
+            "tsConfig": "libs/ui/layout/tsconfig.spec.json",
+            "setupFile": "libs/ui/layout/src/test-setup.ts"
           }
         }
       },

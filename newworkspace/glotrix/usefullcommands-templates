@@ -1,0 +1,3 @@
+ng generate @schematics/angular:component layout/Container --project=ui-layout --export --dry-run
+
+ng generate @schematics/angular:component Row --project=ui-layout --module=ui-layout.module.ts --export --styles=scss --dry-run

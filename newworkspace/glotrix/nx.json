@@ -23,7 +23,7 @@
     "core": {
       "tags": []
     },
-    "ui": {
+    "ui-layout": {
       "tags": []
     }
   }

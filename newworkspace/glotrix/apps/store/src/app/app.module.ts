@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { LayoutModule } from '@glotrix/ui';
+import { UiLayoutModule } from '@glotrix/ui/layout';
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    LayoutModule,
+    UiLayoutModule,
     RouterModule.forRoot([], { initialNavigation: 'enabled' })
   ],
   providers: [],
