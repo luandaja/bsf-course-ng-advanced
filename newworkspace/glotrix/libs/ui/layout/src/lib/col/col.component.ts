@@ -13,7 +13,7 @@ export class ColComponent implements OnInit {
   @Input() lg: number;
   @Input() xl: number;
 
-  className : string = '';
+  className = '';
   sizes:  any ={
     'xs':'col',
     'sm':'col-sm',
@@ -28,13 +28,13 @@ export class ColComponent implements OnInit {
 
   private setClassSelectors(){
     const selectors = this.getSelectors();
-    for (let selector of selectors) {
+    for (const selector of selectors) {
       this.className += this.getClass(selector.id, selector.value);
     }
   }
 
   private getSelectors() {
-    const selectors : { id: string, value: number } = [];
+    const selectors = [];
     selectors.push({id:'xs',value: this.xs});
     selectors.push({id:'sm',value: this.sm});
     selectors.push({id:'md',value: this.md});
