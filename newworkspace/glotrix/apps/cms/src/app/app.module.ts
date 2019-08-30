@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { UiLayoutModule } from '@glotrix/ui/layout';
 import { AppRoutingModule } from './app-routing.module';
+import { LayoutModule } from './layout/layout.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -11,7 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     UiLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
