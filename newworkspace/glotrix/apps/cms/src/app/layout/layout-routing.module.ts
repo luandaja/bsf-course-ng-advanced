@@ -7,11 +7,11 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/profile',
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
+    path: '',
     component: DashboardLayoutComponent,
     children:[
       {

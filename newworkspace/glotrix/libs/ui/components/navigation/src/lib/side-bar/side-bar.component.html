@@ -16,7 +16,7 @@
 
   <ul class="navbar-nav" *ngFor="let linkOption of linkOptions">
     <li class="nav-item">
-      <a class="nav-link" [attr.href]="linkOption.Url">
+      <a class="nav-link" routerLink="{{linkOption.Url}}">
         <i class="fa fa-fw fa-search"></i>
         {{linkOption.Text}}
       </a>
