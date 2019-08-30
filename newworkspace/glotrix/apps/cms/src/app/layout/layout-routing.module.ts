@@ -1,4 +1,3 @@
-import { LoginModule } from './../login/login.module';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -26,11 +25,11 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'login',
+    path: '',
     component: LoginLayoutComponent,
     children:[
       {
-        path: 'sign-in',
+        path: 'login',
         loadChildren: () => import('../login/login.module').then(mod => mod.LoginModule)
       }
     ]

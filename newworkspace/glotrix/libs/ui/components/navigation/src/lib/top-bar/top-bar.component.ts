@@ -17,6 +17,5 @@ export class TopBarComponent implements OnInit {
 
   toggleSideBar(){
     this.isCollapsed = !this.isCollapsed;
-    console.log("open. isOpen:",this.isCollapsed);
   }
 }

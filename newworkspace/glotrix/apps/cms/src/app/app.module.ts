@@ -5,10 +5,8 @@ import { AppComponent } from './app.component';
 import { UiLayoutModule } from '@glotrix/ui/layout';
 //import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from './layout/layout.module';
-import { ProfileEditorModule } from './profile-editor/profile-editor.module';
 
 import {PreloadAllModules, RouterModule} from '@angular/router';
-import { ProductManagerModule } from './product-manager/product-manager.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,8 +16,7 @@ import { ProductManagerModule } from './product-manager/product-manager.module';
     RouterModule.forRoot([]),
     UiLayoutModule,
   //  AppRoutingModule,
-    LayoutModule,
-  ProductManagerModule
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
