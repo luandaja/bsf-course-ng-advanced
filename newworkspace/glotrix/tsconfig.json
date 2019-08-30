@@ -17,7 +17,13 @@
     "baseUrl": ".",
     "paths": {
       "@glotrix/core": ["libs/core/src/index.ts"],
-      "@glotrix/ui/layout": ["libs/ui/layout/src/index.ts"]
+      "@glotrix/ui/layout": ["libs/ui/layout/src/index.ts"],
+      "@glotrix/ui/components/navigation": [
+        "libs/ui/components/navigation/src/index.ts"
+      ],
+      "@glotrix/ui/components/ungrouped": [
+        "libs/ui/components/ungrouped/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

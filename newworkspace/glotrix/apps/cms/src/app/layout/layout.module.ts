@@ -1,3 +1,4 @@
+import { UiNavigationModule } from '@glotrix/ui/components/navigation';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +10,8 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
   declarations: [DashboardLayoutComponent],
   imports: [
     CommonModule,
-    LayoutRoutingModule
+    LayoutRoutingModule,
+    UiNavigationModule
   ]
 })
 export class LayoutModule { }
