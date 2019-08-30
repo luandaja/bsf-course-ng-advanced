@@ -10,10 +10,12 @@ import { LinkOption } from './linkOption';
 export class SideBarComponent implements OnInit {
 
   @Input() linkOptions: LinkOption[];
+  //@Input() isOpen: boolean;
 
   constructor() {}
 
   ngOnInit() {
+  //  console.log("sidebar on init",this.isOpen);
   }
 
 }
