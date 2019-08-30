@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule, UiComponentsUngroupedModule],
-  declarations: [TopBarComponent],
-  exports: [TopBarComponent]
+  declarations: [TopBarComponent, SideBarComponent],
+  exports: [TopBarComponent, SideBarComponent]
 })
 export class UiNavigationModule {}
