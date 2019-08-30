@@ -1,3 +1,7 @@
-<glotrix-top-bar></glotrix-top-bar>
-<glotrix-side-bar [linkOptions]="options"></glotrix-side-bar>
-<p>dashboard-layout works!</p>
+<header>
+  <glotrix-top-bar [linkOptions]="options"></glotrix-top-bar>
+</header>
+<div>
+    <h3>This is the dashboard layout</h3>
+    <router-outlet></router-outlet>
+</div>

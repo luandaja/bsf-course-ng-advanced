@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardLayoutComponent implements OnInit {
   options: LinkOption[] = [
-    {Text: "Products", Url:""},
-    {Text: "Analytics", Url:""},
-    {Text: "Profile", Url:""},
-    {Text: "Sold Products", Url:""}
+    { Text: "Products", Url: "/product" },
+    { Text: "Analytics", Url: "/profile" },
+    { Text: "Profile", Url: "/product" },
+    { Text: "Sold Products", Url: "/profile" }
   ]
   constructor() { }
 

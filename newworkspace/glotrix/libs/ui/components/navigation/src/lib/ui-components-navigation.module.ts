@@ -10,6 +10,6 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule, UiComponentsUngroupedModule],
   declarations: [TopBarComponent, SideBarComponent],
-  exports: [TopBarComponent, SideBarComponent]
+  exports: [TopBarComponent]
 })
 export class UiNavigationModule {}
