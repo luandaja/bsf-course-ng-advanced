@@ -1,1 +1,71 @@
-<h5>profile works!</h5>
+<br>
+<form class="round-border">
+  <glotrix-container>
+    <glotrix-row>
+      <glotrix-col [sm]='3'>
+        <glotrix-img-rounded [width]="200" [height]="200"
+          [source]="'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'">
+        </glotrix-img-rounded>
+      </glotrix-col>
+      <glotrix-col [sm]='9'>
+        <glotrix-row>
+          <glotrix-col [sm]="4">
+            <div class="form-group pr-3">
+              <label for="name">Nombre</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+          </glotrix-col>
+          <glotrix-col [sm]="4">
+            <div class="form-group pr-3">
+              <label for="lastname">Apellido</label>
+              <input type="text" class="form-control" id="lastname" required>
+            </div>
+          </glotrix-col>
+          <glotrix-col [sm]="4">
+            <div class="form-group">
+              <label for="facebook">Facebook</label>
+              <input type="text" class="form-control" id="facebook" required>
+            </div>
+          </glotrix-col>
+        </glotrix-row>
+        <glotrix-row>
+          <glotrix-col [sm]="4">
+            <div class="form-group pr-3">
+              <label for="twitter">Twitter</label>
+              <input type="text" class="form-control" id="twitter" required>
+            </div>
+          </glotrix-col>
+          <glotrix-col [sm]="4">
+            <div class="form-group pr-3">
+              <label for="instagram">Instagram</label>
+              <input type="text" class="form-control" id="instagram" required>
+            </div>
+          </glotrix-col>
+          <glotrix-col [sm]="4">
+            <div class="form-group">
+              <label for="website">Website</label>
+              <input type="text" class="form-control" id="website" required>
+            </div>
+          </glotrix-col>
+        </glotrix-row>
+      </glotrix-col>
+    </glotrix-row>
+    <glotrix-row>
+      <glotrix-col [sm]='12'>
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea class="form-control" id="description" rows="3"></textarea>
+        </div>
+      </glotrix-col>
+    </glotrix-row>
+  </glotrix-container>
+  <glotrix-row>
+    <glotrix-col [sm]="11">
+        <div class="pull-right">
+            <button type="button" class="btn btn-secondary mr-3">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+    </glotrix-col>
+  </glotrix-row>
+</form>
