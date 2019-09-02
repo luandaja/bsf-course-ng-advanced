@@ -23,7 +23,8 @@
       ],
       "@glotrix/ui/components/ungrouped": [
         "libs/ui/components/ungrouped/src/index.ts"
-      ]
+      ],
+      "@glotrix/ui/forms": ["libs/ui/forms/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

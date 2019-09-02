@@ -1,0 +1,32 @@
+<div [formGroup]="form">
+
+  <ng-container [ngSwitch]="entry.controlType">
+
+    <div *ngSwitchCase="'textbox'" class="form-group">
+      <label [attr.for]="entry.key">{{entry.label}}</label>
+      <input class="form-control" [type]="entry.type" [id]="entry.key" [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': submitted && form.controls.firstName.errors }">
+      <div *ngIf="submitted && form.controls.firstName.errors" class="invalid-feedback">
+        <div *ngIf="form.controls.firstName.errors.required">First Name is required</div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'textblock'" class="form-group">
+      <label [attr.for]="entry.key">{{entry.label}}</label>
+      <textarea class="form-control" [id]="entry.key" [rows]="entry.rows"></textarea>
+    </div>
+
+    <div *ngSwitchCase="'dropdown'" class="form-group">
+      <label [attr.for]="entry.key">{{entry.label}}</label>
+      <select [id]="entry.key" [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': submitted && form.controls.title.errors }">
+        <option *ngFor="let opt of entry.options" [value]="opt.key">{{opt.value}}</option>
+      </select>
+      <div *ngIf="submitted && form.controls.title.errors" class="invalid-feedback">
+        <div *ngIf="form.controls.title.errors.required">Title is required</div>
+      </div>
+    </div>
+
+  </ng-container>
+
+</div>
