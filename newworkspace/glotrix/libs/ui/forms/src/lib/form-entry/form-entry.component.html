@@ -1,32 +1,37 @@
 <div [formGroup]="form">
-
   <ng-container [ngSwitch]="entry.controlType">
 
     <div *ngSwitchCase="'textbox'" class="form-group">
       <label [attr.for]="entry.key">{{entry.label}}</label>
-      <input class="form-control" [type]="entry.type" [id]="entry.key" [formControlName]="entry.key"
-        [ngClass]="{ 'is-invalid': submitted && form.controls.firstName.errors }">
-      <div *ngIf="submitted && form.controls.firstName.errors" class="invalid-feedback">
-        <div *ngIf="form.controls.firstName.errors.required">First Name is required</div>
+      <input class="form-control" type="text" [id]="entry.key" [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': displayMessage[entry.key] }">
+      <!-- <small *ngIf="entry.maxLength">{{texbox.value.length}} / {{entry.maxLength}}</small> -->
+      <div *ngIf="displayMessage[entry.key]" class="invalid-feedback">
+        <p>{{displayMessage[entry.key]}}</p>
       </div>
     </div>
 
     <div *ngSwitchCase="'textblock'" class="form-group">
       <label [attr.for]="entry.key">{{entry.label}}</label>
-      <textarea class="form-control" [id]="entry.key" [rows]="entry.rows"></textarea>
+      <textarea class="form-control" [id]="entry.key" [rows]="entry.rows"
+        [ngClass]="{'is-invalid': displayMessage[entry.key]}" >
+      </textarea>
+      <!-- <small *ngIf="entry.maxLength">{{textblock.value.length}} / {{entry.maxLength}}</small> -->
+      <div *ngIf="displayMessage[entry.key]" class="invalid-feedback">
+        <p>{{displayMessage[entry.key]}}</p>
+      </div>
     </div>
 
     <div *ngSwitchCase="'dropdown'" class="form-group">
       <label [attr.for]="entry.key">{{entry.label}}</label>
       <select [id]="entry.key" [formControlName]="entry.key"
-        [ngClass]="{ 'is-invalid': submitted && form.controls.title.errors }">
+        [ngClass]="{ 'is-invalid': displayMessage[entry.key] }">
         <option *ngFor="let opt of entry.options" [value]="opt.key">{{opt.value}}</option>
       </select>
-      <div *ngIf="submitted && form.controls.title.errors" class="invalid-feedback">
-        <div *ngIf="form.controls.title.errors.required">Title is required</div>
+      <div *ngIf="displayMessage[entry.key]" class="invalid-feedback">
+        <p>{{displayMessage[entry.key]}}</p>
       </div>
     </div>
 
   </ng-container>
-
 </div>

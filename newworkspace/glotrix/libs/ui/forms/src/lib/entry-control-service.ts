@@ -4,16 +4,23 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EntryBase } from './entries/entry-base';
 
 @Injectable()
-export class QuestionControlService {
+export class EntryControlService {
   constructor() { }
 
-  toFormGroup(questions: EntryBase<any>[]) {
+  toFormGroup(entries: EntryBase<any>[]) {
     const group: any = {};
 
-    questions.forEach(question => {
-      group[question.key] = question.required ? new FormControl(question.value || '', Validators.required)
-        : new FormControl(question.value || '');
+    entries.forEach(entry => {
+      group[entry.key] = entry.required ? new FormControl(entry.value || '', Validators.required)
+        : new FormControl(entry.value || '');
     });
     return new FormGroup(group);
+  }
+  getValidationMessages(entries: EntryBase<any>[]) : { [key: string]: { [key: string]: string } } {
+    const validationMessages : { [key: string]: { [key: string]: string } } = {};
+    entries.forEach(entry => {
+       validationMessages[entry.key] = entry.valitationMessages;
+    });
+    return validationMessages;
   }
 }

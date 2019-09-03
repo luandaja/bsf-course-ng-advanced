@@ -5,7 +5,7 @@ export class EntryBase<T> {
   required: boolean;
   order: number;
   controlType: string;
-
+  valitationMessages:  { [key: string]: string  };
   constructor(options: {
     value?: T,
     key?: string,

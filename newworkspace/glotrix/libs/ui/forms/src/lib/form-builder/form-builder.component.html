@@ -1,0 +1,12 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let entry of entries" class="form-row">
+      <glotrix-form-entry [entry]="entry" [form]="form" [displayMessage]="displayMessage"></glotrix-form-entry>
+    </div>
+    <div class="form-row pull-right">
+      <button type="button" class="btn btn-secondary mr-3">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!(form.valid && form.dirty)">Guardar</button>
+      <!-- <button type="submit" [disabled]="!form.valid">Save</button> -->
+    </div>
+  </form>
+</div>

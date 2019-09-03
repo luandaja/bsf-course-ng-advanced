@@ -1,3 +1,4 @@
+import { UiFormsModule } from '@glotrix/ui/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +14,8 @@ import { UiComponentsUngroupedModule } from '@glotrix/ui/components/ungrouped';
     CommonModule,
     ProfileEditorRoutingModule,
     UiLayoutModule,
-    UiComponentsUngroupedModule
+    UiComponentsUngroupedModule,
+    UiFormsModule
   ]
 })
 export class ProfileEditorModule { }
