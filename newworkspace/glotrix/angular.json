@@ -274,7 +274,7 @@
       "projectType": "library",
       "root": "libs/ui/layout",
       "sourceRoot": "libs/ui/layout/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -292,74 +292,6 @@
             "jestConfig": "libs/ui/layout/jest.config.js",
             "tsConfig": "libs/ui/layout/tsconfig.spec.json",
             "setupFile": "libs/ui/layout/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
-    "ui-components-navigation": {
-      "projectType": "library",
-      "root": "libs/ui/components/navigation",
-      "sourceRoot": "libs/ui/components/navigation/src",
-      "prefix": "glotrix",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ui/components/navigation/tsconfig.lib.json",
-              "libs/ui/components/navigation/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui/components/navigation/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ui/components/navigation/jest.config.js",
-            "tsConfig": "libs/ui/components/navigation/tsconfig.spec.json",
-            "setupFile": "libs/ui/components/navigation/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
-    "ui-components-ungrouped": {
-      "projectType": "library",
-      "root": "libs/ui/components/ungrouped",
-      "sourceRoot": "libs/ui/components/ungrouped/src",
-      "prefix": "glotrix",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ui/components/ungrouped/tsconfig.lib.json",
-              "libs/ui/components/ungrouped/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui/components/ungrouped/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ui/components/ungrouped/jest.config.js",
-            "tsConfig": "libs/ui/components/ungrouped/tsconfig.spec.json",
-            "setupFile": "libs/ui/components/ungrouped/src/test-setup.ts"
           }
         }
       },

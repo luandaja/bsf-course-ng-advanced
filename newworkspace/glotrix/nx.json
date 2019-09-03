@@ -24,13 +24,7 @@
       "tags": []
     },
     "ui-layout": {
-      "tags": []
-    },
-    "ui-components-navigation": {
-      "tags": []
-    },
-    "ui-components-ungrouped": {
-      "tags": []
+      "tags": ["ui"]
     }
   }
 }
