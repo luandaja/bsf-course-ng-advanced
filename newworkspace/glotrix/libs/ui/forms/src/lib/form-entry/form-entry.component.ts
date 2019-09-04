@@ -8,13 +8,20 @@ import { EntryBase } from '../entries/entry-base';
   styleUrls: ['./form-entry.component.scss']
 })
 export class FormEntryComponent implements OnInit {
-  @Input() displayMessage: { [key: string]: string };
+
   @Input() entry: EntryBase<any>;
   @Input() form: FormGroup;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  get isValid() { return this.form.controls[this.entry.key].valid; }
+
+  get errors() { return Object.keys(this.form.controls[this.entry.key].errors); }
+
+  getErrorMessage(id: string) {
+    return this.entry.validationMessages[id];
   }
 
 }

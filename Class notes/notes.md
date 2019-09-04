@@ -227,5 +227,10 @@ Sus peligros son: mantenimiento al store
 ---------
 
 
+##Clase 8
 
+Extension de Chrome: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+Instalar libreria NgRX:
+ npm install @ngrx/store --save
+ npm install @ngrx/store-devtools --save
 

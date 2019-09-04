@@ -5,14 +5,17 @@ export class EntryBase<T> {
   required: boolean;
   order: number;
   controlType: string;
-  valitationMessages:  { [key: string]: string  };
+  col: string;
+  validationMessages: { [key: string]: string };
   constructor(options: {
     value?: T,
     key?: string,
     label?: string,
     required?: boolean,
     order?: number,
-    controlType?: string
+    controlType?: string,
+    validationMessages?: { [key: string]: string },
+    col?: string
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -20,5 +23,7 @@ export class EntryBase<T> {
     this.required = !!options.required;
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || '';
+    this.validationMessages = options.validationMessages;
+    this.col = options.col;
   }
 }

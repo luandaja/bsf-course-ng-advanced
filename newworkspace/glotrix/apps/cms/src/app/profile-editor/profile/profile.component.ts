@@ -1,5 +1,4 @@
 import { TextboxEntry } from './../../../../../../libs/ui/forms/src/lib/entries/textbox-entry';
-import { DropdownEntry } from './../../../../../../libs/ui/forms/src/lib/entries/dropdown-entry';
 import { EntryBase } from './../../../../../../libs/ui/forms/src/lib/entries/entry-base';
 import { Component, OnInit } from '@angular/core';
 
@@ -39,8 +38,9 @@ export class ProfileComponent implements OnInit {
         label: 'First name',
         value: 'Bombasto',
         required: true,
+        minlength: 2,
         order: 1,
-        valitationMessages: {
+        validationMessages: {
           required: 'First name is required.',
           minlength: 'First name must be at least three characters.',
           maxlength: 'First name cannot exceed 30 characters.'
@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
         label: 'Email',
         type: 'email',
         order: 2,
-        valitationMessages: {
+        validationMessages: {
           minlength: 'Email must be at least three characters.',
           maxlength: 'Email exceed 30 characters.'
         }
