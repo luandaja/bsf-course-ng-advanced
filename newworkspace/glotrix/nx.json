@@ -28,6 +28,9 @@
     },
     "ui-avatar": {
       "tags": ["ui"]
+    },
+    "ui-forms": {
+      "tags": ["ui"]
     }
   }
 }

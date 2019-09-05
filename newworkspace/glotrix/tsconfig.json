@@ -18,7 +18,8 @@
     "paths": {
       "@glotrix/core": ["libs/core/src/index.ts"],
       "@glotrix/ui/navigation": ["libs/ui/navigation/src/index.ts"],
-      "@glotrix/ui/avatar": ["libs/ui/avatar/src/index.ts"]
+      "@glotrix/ui/avatar": ["libs/ui/avatar/src/index.ts"],
+      "@glotrix/ui/forms": ["libs/ui/forms/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

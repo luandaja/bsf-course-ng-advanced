@@ -1,3 +1,4 @@
+import { UiFormsModule } from '@glotrix/ui/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,6 +8,11 @@ import { UiAvatarModule } from '@glotrix/ui/avatar';
 
 @NgModule({
   declarations: [ProfileComponent],
-  imports: [CommonModule, ProfileEditorRoutingModule, UiAvatarModule]
+  imports: [
+    CommonModule,
+    ProfileEditorRoutingModule,
+    UiAvatarModule,
+    UiFormsModule
+  ]
 })
 export class ProfileEditorModule {}

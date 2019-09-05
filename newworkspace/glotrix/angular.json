@@ -331,6 +331,37 @@
           "styleext": "scss"
         }
       }
+    },
+    "ui-forms": {
+      "projectType": "library",
+      "root": "libs/ui/forms",
+      "sourceRoot": "libs/ui/forms/src",
+      "prefix": "glotrix",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/forms/tsconfig.lib.json",
+              "libs/ui/forms/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/forms/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/forms/jest.config.js",
+            "tsConfig": "libs/ui/forms/tsconfig.spec.json",
+            "setupFile": "libs/ui/forms/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
