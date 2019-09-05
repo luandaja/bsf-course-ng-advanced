@@ -227,5 +227,28 @@ Sus peligros son: mantenimiento al store
 ---------
 
 
+##Clase 8
 
+Extension de Chrome: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+Instalar libreria NgRX:
+ npm install @ngrx/store --save
+ npm install @ngrx/store-devtools --save
 
+---------
+
+##Clase 9
+
+cuando se hacen slides del store para dividirlo por feature deberian pueden crearse iterfaces IAppState ..solo dos niveles
+
+auqi hay 3 niveles , se vuelve mas completo y el store deberia ser single. asi que se recomienda hacerlo solo a dos niveles
+store={
+	app:{
+		customers:{
+			customerA:[],
+			customerB:[]
+		}
+	}
+}
+Selectors: se recomenda q sean fuertemente tipados y desacolpados, es reutilizable
+
+---------
