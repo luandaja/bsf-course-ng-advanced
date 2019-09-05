@@ -25,6 +25,12 @@
     },
     "ui-layout": {
       "tags": ["ui"]
+    },
+    "ui-navigation": {
+      "tags": ["ui"]
+    },
+    "ui-avatar": {
+      "tags": ["ui"]
     }
   }
 }

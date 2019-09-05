@@ -300,6 +300,68 @@
           "styleext": "scss"
         }
       }
+    },
+    "ui-navigation": {
+      "projectType": "library",
+      "root": "libs/ui/navigation",
+      "sourceRoot": "libs/ui/navigation/src",
+      "prefix": "glotrix",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/navigation/tsconfig.lib.json",
+              "libs/ui/navigation/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/navigation/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/navigation/jest.config.js",
+            "tsConfig": "libs/ui/navigation/tsconfig.spec.json",
+            "setupFile": "libs/ui/navigation/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-avatar": {
+      "projectType": "library",
+      "root": "libs/ui/avatar",
+      "sourceRoot": "libs/ui/avatar/src",
+      "prefix": "glotrix",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/avatar/tsconfig.lib.json",
+              "libs/ui/avatar/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/avatar/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/avatar/jest.config.js",
+            "tsConfig": "libs/ui/avatar/tsconfig.spec.json",
+            "setupFile": "libs/ui/avatar/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
