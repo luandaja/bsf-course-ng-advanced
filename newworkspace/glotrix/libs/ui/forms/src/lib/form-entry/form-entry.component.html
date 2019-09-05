@@ -3,36 +3,46 @@
   <ng-container [ngSwitch]="entry.controlType">
     <div *ngSwitchCase="'textbox'" class="form-group ">
       <!--gtCol [sm]='entry.col'-->
-      <label [attr.for]="entry.key">{{entry.label}}</label>
-      <input class="form-control" type="text" [id]="entry.key" [formControlName]="entry.key"
-        [ngClass]="{ 'is-invalid': !isValid }">
-      <small *ngIf="entry.maxLength">{{texbox.value.length}} / {{entry.maxLength}}</small>
+      <label [attr.for]="entry.key">{{ entry.label }}</label>
+      <input
+        class="form-control"
+        type="text"
+        [id]="entry.key"
+        [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': !isValid }"
+      />
+      <small *ngIf="entry.maxLength"
+        >{{ texbox.value.length }} / {{ entry.maxLength }}</small
+      >
       <div *ngIf="!isValid" class="invalid-feedback">
-        <p *ngFor="let error of errors"> {{getErrorMessage(error)}}</p>
+        <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
       </div>
     </div>
 
     <div *ngSwitchCase="'textblock'" class="form-group ">
       <!--gtCol [sm]='entry.col'-->
-      <label [attr.for]="entry.key">{{entry.label}}</label>
+      <label [attr.for]="entry.key">{{ entry.label }}</label>
       <textarea class="form-control" [id]="entry.key" [rows]="entry.rows">
-            </textarea>
-      <small *ngIf="entry.maxLength">{{textblock.value.length}} / {{entry.maxLength}}</small>
+      </textarea>
+      <small *ngIf="entry.maxLength"
+        >{{ textblock.value.length }} / {{ entry.maxLength }}</small
+      >
       <div *ngIf="!isValid" class="invalid-feedback">
-        <p *ngFor="let error of errors"> {{getErrorMessage(error)}}</p>
+        <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
       </div>
     </div>
 
     <div *ngSwitchCase="'dropdown'" class="form-group ">
       <!--gtCol [sm]='entry.col'-->
-      <label [attr.for]="entry.key">{{entry.label}}</label>
+      <label [attr.for]="entry.key">{{ entry.label }}</label>
       <select [id]="entry.key" [formControlName]="entry.key">
-        <option *ngFor="let opt of entry.options" [value]="opt.key">{{opt.value}}</option>
+        <option *ngFor="let opt of entry.options" [value]="opt.key">{{
+          opt.value
+        }}</option>
       </select>
       <div *ngIf="!isValid" class="invalid-feedback">
-        <p *ngFor="let error of errors"> {{getErrorMessage(error)}}</p>
+        <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
       </div>
     </div>
-
   </ng-container>
 </ng-container>

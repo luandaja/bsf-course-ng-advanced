@@ -4,16 +4,16 @@ import { FormGroup } from '@angular/forms';
 import { EntryControlService } from '../entry-control-service';
 
 @Component({
-  selector: 'glotrix-form-builder',
+  selector: 'gt-form-builder',
   templateUrl: './form-builder.component.html',
   styleUrls: ['./form-builder.component.scss'],
-  providers: [ EntryControlService ]
+  providers: [EntryControlService]
 })
 export class FormBuilderComponent implements OnInit {
   @Input() entries: EntryBase<any>[] = [];
   form: FormGroup;
 
-  constructor(private entryControlService: EntryControlService) { }
+  constructor(private entryControlService: EntryControlService) {}
 
   ngOnInit() {
     this.form = this.entryControlService.toFormGroup(this.entries);

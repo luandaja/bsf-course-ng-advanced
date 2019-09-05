@@ -10,7 +10,7 @@
       },
       "root": "apps/cms",
       "sourceRoot": "apps/cms/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -129,7 +129,7 @@
       },
       "root": "apps/store",
       "sourceRoot": "apps/store/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -243,7 +243,7 @@
       "projectType": "library",
       "root": "libs/core",
       "sourceRoot": "libs/core/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -274,7 +274,7 @@
       "projectType": "library",
       "root": "libs/ui/navigation",
       "sourceRoot": "libs/ui/navigation/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -305,7 +305,7 @@
       "projectType": "library",
       "root": "libs/ui/avatar",
       "sourceRoot": "libs/ui/avatar/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -336,7 +336,7 @@
       "projectType": "library",
       "root": "libs/ui/forms",
       "sourceRoot": "libs/ui/forms/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
