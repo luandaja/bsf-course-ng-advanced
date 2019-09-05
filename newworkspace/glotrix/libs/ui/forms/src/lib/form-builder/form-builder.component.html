@@ -2,12 +2,22 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <section class="row">
       <ng-container *ngFor="let entry of entries">
-        <glotrix-form-entry [entry]="entry" [form]="form" class="col-4"></glotrix-form-entry>
+        <gt-form-entry
+          [entry]="entry"
+          [form]="form"
+          class="col-4"
+        ></gt-form-entry>
       </ng-container>
     </section>
     <div class="form-row pull-right">
       <button type="button" class="btn btn-secondary mr-3">Cancelar</button>
-      <button type="submit" class="btn btn-primary" [disabled]="!(form.valid && form.dirty)">Guardar</button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!(form.valid && form.dirty)"
+      >
+        Guardar
+      </button>
     </div>
   </form>
 </div>

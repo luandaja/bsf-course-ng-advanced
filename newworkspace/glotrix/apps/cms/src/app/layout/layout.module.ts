@@ -8,11 +8,12 @@ import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { UiAvatarModule } from '@glotrix/ui/avatar';
 
 @NgModule({
-  declarations: [
-    DashboardLayoutComponent,
-    LoginLayoutComponent,
+  declarations: [DashboardLayoutComponent, LoginLayoutComponent],
+  imports: [
+    CommonModule,
+    LayoutRoutingModule,
+    UiNavigationModule,
     UiAvatarModule
-  ],
-  imports: [CommonModule, LayoutRoutingModule, UiNavigationModule]
+  ]
 })
 export class LayoutModule {}

@@ -7,11 +7,7 @@ import { LayoutModule } from './layout/layout.module';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot([])
-    //RouterModule.forRoot([], { preloadingStrategy: PreloadAllModules }),
-  ],
+  imports: [BrowserModule, RouterModule.forRoot([]), LayoutModule],
   providers: [],
   bootstrap: [AppComponent]
 })
