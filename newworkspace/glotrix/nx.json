@@ -23,9 +23,6 @@
     "core": {
       "tags": []
     },
-    "ui-layout": {
-      "tags": ["ui"]
-    },
     "ui-navigation": {
       "tags": ["ui"]
     },

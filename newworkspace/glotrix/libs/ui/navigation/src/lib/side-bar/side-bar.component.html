@@ -1,11 +1,16 @@
-<nav class="sidebar navbar-dark blue-background" >
+<nav class="sidebar navbar-dark blue-background">
   <div class="container pt-3">
     <article class="row single-post no-gutters">
       <div class="col-md-12">
         <div class="image-wrapper float-left pr-3">
-          <glotrix-img-rounded [width]="60" [height]="60"
-            [source]="'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'">
-          </glotrix-img-rounded>
+          <gt-avatar
+            [width]="60"
+            [height]="60"
+            [source]="
+              'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'
+            "
+          >
+          </gt-avatar>
         </div>
         <div class="single-post-content-wrapper p-3">
           <span>Belatrix User</span>
@@ -16,9 +21,9 @@
 
   <ul class="navbar-nav" *ngFor="let linkOption of linkOptions">
     <li class="nav-item">
-      <a class="nav-link" routerLink="{{linkOption.Url}}">
+      <a class="nav-link" routerLink="{{ linkOption.Url }}">
         <i class="fa fa-fw fa-search"></i>
-        {{linkOption.Text}}
+        {{ linkOption.Text }}
       </a>
     </li>
   </ul>

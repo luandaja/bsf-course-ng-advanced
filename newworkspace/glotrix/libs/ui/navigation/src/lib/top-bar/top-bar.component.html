@@ -1,7 +1,15 @@
 <nav class="navbar navbar-dark orange-background">
-    <button class="navbar-toggler" type="button" (click)="toggleSideBar()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <glotrix-img-rounded class="right-padding  float-right" [source]="'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'"></glotrix-img-rounded>
+  <button class="navbar-toggler" type="button" (click)="toggleSideBar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <gt-avatar
+    class="right-padding  float-right"
+    [source]="
+      'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'
+    "
+  ></gt-avatar>
 </nav>
-<glotrix-side-bar [linkOptions]="linkOptions" [ngClass]="{'collapse': isCollapsed }"></glotrix-side-bar>
+<gt-side-bar
+  [linkOptions]="linkOptions"
+  [ngClass]="{ collapse: isCollapsed }"
+></gt-side-bar>

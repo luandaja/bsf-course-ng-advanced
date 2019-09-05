@@ -270,37 +270,6 @@
         }
       }
     },
-    "ui-layout": {
-      "projectType": "library",
-      "root": "libs/ui/layout",
-      "sourceRoot": "libs/ui/layout/src",
-      "prefix": "gt",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ui/layout/tsconfig.lib.json",
-              "libs/ui/layout/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/ui/layout/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ui/layout/jest.config.js",
-            "tsConfig": "libs/ui/layout/tsconfig.spec.json",
-            "setupFile": "libs/ui/layout/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "ui-navigation": {
       "projectType": "library",
       "root": "libs/ui/navigation",

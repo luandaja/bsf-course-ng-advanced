@@ -17,7 +17,6 @@
     "baseUrl": ".",
     "paths": {
       "@glotrix/core": ["libs/core/src/index.ts"],
-      "@glotrix/ui/layout": ["libs/ui/layout/src/index.ts"],
       "@glotrix/ui/navigation": ["libs/ui/navigation/src/index.ts"],
       "@glotrix/ui/avatar": ["libs/ui/avatar/src/index.ts"]
     }

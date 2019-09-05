@@ -1,21 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LinkOption } from '../side-bar/linkOption';
+import { LinkOption } from '../linkOption';
 
 @Component({
-  selector: 'glotrix-top-bar',
+  selector: 'gt-top-bar',
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
-
   isCollapsed = true;
 
   @Input() linkOptions: LinkOption[];
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  toggleSideBar(){
+  toggleSideBar() {
     this.isCollapsed = !this.isCollapsed;
   }
 }
