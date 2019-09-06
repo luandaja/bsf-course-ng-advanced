@@ -12,7 +12,7 @@ export class DashboardLayoutComponent implements OnInit {
     { Text: 'Add Product', Url: 'product' },
     { Text: 'Analytics', Url: 'analytics' },
     { Text: 'Profile', Url: 'profile' },
-    { Text: 'Sold Products', Url: 'sold-products' }
+    { Text: 'Sales', Url: 'sales' }
   ];
 
   protected isSidebarActive: Boolean = true;

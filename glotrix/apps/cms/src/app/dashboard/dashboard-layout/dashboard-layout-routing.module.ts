@@ -18,6 +18,14 @@ const modules: Routes = [
     path: 'product',
     loadChildren: () => import('../product-editor/product-editor.module').then(mod => mod.ProductEditorModule)
   },
+  {
+    path: 'sales',
+    loadChildren: () => import('../sales/sales.module').then(mod => mod.SalesModule)
+  },
+  {
+    path: 'analytics',
+    loadChildren: () => import('../analytics/analytics.module').then(mod => mod.AnalyticsModule)
+  },
 ];
 
 const routes: Routes = [
