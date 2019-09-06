@@ -12,13 +12,16 @@ import { EntryControlService } from '../entry-control-service';
 export class FormBuilderComponent implements OnInit {
   @Input() entries: EntryBase<any>[] = [];
   form: FormGroup;
+  isSubmitted = false;
 
-  constructor(private entryControlService: EntryControlService) {}
+  constructor(private entryControlService: EntryControlService) { }
 
   ngOnInit() {
     this.form = this.entryControlService.toFormGroup(this.entries);
   }
   onSubmit() {
+    this.isSubmitted = true;
     //TODO: this.form.value this will do something
+    console.log(this.form.value);
   }
 }

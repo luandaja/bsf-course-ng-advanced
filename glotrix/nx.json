@@ -31,6 +31,15 @@
     },
     "ui-forms": {
       "tags": ["ui"]
+    },
+    "tables": {
+      "tags": ["ui"]
+    },
+    "ui-tables": {
+      "tags": ["ui"]
+    },
+    "ui-search-bar": {
+      "tags": ["ui"]
     }
   }
 }

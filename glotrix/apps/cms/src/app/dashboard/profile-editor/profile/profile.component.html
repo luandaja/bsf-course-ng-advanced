@@ -1,75 +1,12 @@
-<br />
-<form class="round-border">
-  <div class="container">
-    <section class="row">
-      <section class="col-sm-3">
-        <gt-avatar
-          [width]="200"
-          [height]="200"
-          [source]="
-            'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'
-          "
-        >
-        </gt-avatar>
-      </section>
-      <section class="col-sm-9">
-        <section class="row">
-          <section class="col-sm-4">
-            <div class="form-group pr-3">
-              <label for="name">Nombre</label>
-              <input type="text" class="form-control" id="name" required />
-            </div>
-          </section>
-          <section class="col-sm-4">
-            <div class="form-group pr-3">
-              <label for="lastname">Apellido</label>
-              <input type="text" class="form-control" id="lastname" required />
-            </div>
-          </section>
-          <section class="col-sm-4">
-            <div class="form-group">
-              <label for="facebook">Facebook</label>
-              <input type="text" class="form-control" id="facebook" required />
-            </div>
-          </section>
-        </section>
-        <section class="row">
-          <section class="col-sm-4">
-            <div class="form-group pr-3">
-              <label for="twitter">Twitter</label>
-              <input type="text" class="form-control" id="twitter" required />
-            </div>
-          </section>
-          <section class="col-sm-4">
-            <div class="form-group pr-3">
-              <label for="instagram">Instagram</label>
-              <input type="text" class="form-control" id="instagram" required />
-            </div>
-          </section>
-          <section class="col-sm-4">
-            <div class="form-group">
-              <label for="website">Website</label>
-              <input type="text" class="form-control" id="website" required />
-            </div>
-          </section>
-        </section>
-      </section>
-    </section>
-    <section class="row">
-      <section class="col-12">
-        <div class="form-group">
-          <label for="description">Descripción</label>
-          <textarea class="form-control" id="description" rows="3"></textarea>
-        </div>
-      </section>
-    </section>
+<div class="row pt-3">
+  <div class="col-sm-1">
+    <gt-avatar [width]="200" [height]="200"
+      [source]="'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'">
+    </gt-avatar>
   </div>
-  <section class="row">
-    <section class="col-11">
-      <div class="pull-right">
-        <button type="button" class="btn btn-secondary mr-3">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-      </div>
-    </section>
-  </section>
-</form>
+  <div class="col-sm-11">
+    <gt-form-builder [entries]="entries">
+
+    </gt-form-builder>
+  </div>
+</div>

@@ -362,6 +362,91 @@
           "styleext": "scss"
         }
       }
+    },
+    "tables": {
+      "projectType": "library",
+      "root": "libs/tables",
+      "sourceRoot": "libs/tables/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/tables/tsconfig.lib.json",
+              "libs/tables/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/tables/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/tables/jest.config.js",
+            "tsConfig": "libs/tables/tsconfig.spec.json",
+            "setupFile": "libs/tables/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "ui-tables": {
+      "projectType": "library",
+      "root": "libs/ui/tables",
+      "sourceRoot": "libs/ui/tables/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/tables/tsconfig.lib.json",
+              "libs/ui/tables/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/tables/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/tables/jest.config.js",
+            "tsConfig": "libs/ui/tables/tsconfig.spec.json",
+            "setupFile": "libs/ui/tables/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "ui-search-bar": {
+      "projectType": "library",
+      "root": "libs/ui/search-bar",
+      "sourceRoot": "libs/ui/search-bar/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/search-bar/tsconfig.lib.json",
+              "libs/ui/search-bar/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/search-bar/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/search-bar/jest.config.js",
+            "tsConfig": "libs/ui/search-bar/tsconfig.spec.json",
+            "setupFile": "libs/ui/search-bar/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

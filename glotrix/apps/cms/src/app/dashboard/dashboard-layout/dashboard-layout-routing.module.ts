@@ -9,7 +9,15 @@ const modules: Routes = [
       import('../profile-editor/profile-editor.module').then(
         m => m.ProfileEditorModule
       )
-  }
+  },
+  {
+    path: 'product-manager',
+    loadChildren: () => import('../product-manager/product-manager.module').then(mod => mod.ProductManagerModule)
+  },
+  {
+    path: 'product',
+    loadChildren: () => import('../product-editor/product-editor.module').then(mod => mod.ProductEditorModule)
+  },
 ];
 
 const routes: Routes = [
@@ -26,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardLayoutRoutingModule {}
+export class DashboardLayoutRoutingModule { }

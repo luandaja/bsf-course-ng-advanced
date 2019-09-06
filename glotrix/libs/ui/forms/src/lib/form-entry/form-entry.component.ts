@@ -10,10 +10,11 @@ import { EntryBase } from '../entries/entry-base';
 export class FormEntryComponent implements OnInit {
   @Input() entry: EntryBase<any>;
   @Input() form: FormGroup;
+  @Input() isSubmitted: boolean;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   get isValid() {
     return this.form.controls[this.entry.key].valid;
