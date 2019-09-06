@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LinkOption } from '../linkOption';
 
 @Component({
@@ -7,13 +7,15 @@ import { LinkOption } from '../linkOption';
   styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
-  isCollapsed = true;
+  @Input() isSidebarActive = false;
+  @Output() isSidebarActiveChange = new EventEmitter<boolean>();
 
   @Input() linkOptions: LinkOption[];
 
   ngOnInit() {}
 
   toggleSideBar() {
-    this.isCollapsed = !this.isCollapsed;
+    this.isSidebarActive = !this.isSidebarActive;
+    this.isSidebarActiveChange.emit(this.isSidebarActive);
   }
 }

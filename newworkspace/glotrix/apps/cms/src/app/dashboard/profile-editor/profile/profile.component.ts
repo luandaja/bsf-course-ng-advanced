@@ -1,5 +1,4 @@
-import { TextboxEntry } from './../../../../../../libs/ui/forms/src/lib/entries/textbox-entry';
-import { EntryBase } from './../../../../../../libs/ui/forms/src/lib/entries/entry-base';
+import { TextboxEntry, EntryBase } from '@glotrix/ui/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

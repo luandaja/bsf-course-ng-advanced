@@ -1,5 +1,5 @@
-<nav class="sidebar navbar-dark blue-background">
-  <div class="container pt-3">
+<div id="sidebar-wrapper" [ngClass]="{ toggled: !isSidebarActive }">
+  <div class="sidebar-heading">
     <article class="row single-post no-gutters">
       <div class="col-md-12">
         <div class="image-wrapper float-left pr-3">
@@ -19,6 +19,40 @@
     </article>
   </div>
 
+  <div
+    class="list-group list-group-flush"
+    *ngFor="let linkOption of linkOptions"
+  >
+    <a
+      routerLink="{{ linkOption.Url }}"
+      class="list-group-item list-group-item-action "
+    >
+      <i class="fa fa-fw fa-search"></i>{{ linkOption.Text }}</a
+    >
+  </div>
+</div>
+<!-- 
+<nav class="sidebar navbar-dark blue-background">
+  <div class="container pt-3">
+    <article class="row single-post no-gutters">
+      <div class="col-md-12">
+        <div class="image-wrapper float-left pr-3">
+          <gt-avatar
+            [width]="60"
+            [height]="60"
+            [source]="
+              'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'
+            "
+          >
+          </gt-avatar>
+        </div>
+        <div class="single-post-content-wrapper p-3">
+          <span>Belatrix User</span>
+        </div>
+      </article>
+      </div>
+  </div>
+
   <ul class="navbar-nav" *ngFor="let linkOption of linkOptions">
     <li class="nav-item">
       <a class="nav-link" routerLink="{{ linkOption.Url }}">
@@ -27,4 +61,4 @@
       </a>
     </li>
   </ul>
-</nav>
+</nav> -->

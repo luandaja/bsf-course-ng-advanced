@@ -8,6 +8,6 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [CommonModule, UiAvatarModule, RouterModule],
   declarations: [TopBarComponent, SideBarComponent],
-  exports: [TopBarComponent]
+  exports: [TopBarComponent, SideBarComponent]
 })
 export class UiNavigationModule {}
