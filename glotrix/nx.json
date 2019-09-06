@@ -8,20 +8,29 @@
     "nx.json": "*"
   },
   "projects": {
-    "cms": {
-      "tags": []
-    },
     "cms-e2e": {
       "tags": []
     },
-    "store": {
+    "cms": {
       "tags": []
     },
     "store-e2e": {
       "tags": []
     },
-    "glotrix-ui": {
+    "store": {
       "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "ui-navigation": {
+      "tags": ["ui"]
+    },
+    "ui-avatar": {
+      "tags": ["ui"]
+    },
+    "ui-forms": {
+      "tags": ["ui"]
     }
   }
 }
