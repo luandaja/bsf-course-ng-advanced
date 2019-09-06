@@ -1,0 +1,14 @@
+<section class="d-flex">
+  <gt-side-bar
+    [linkOptions]="options"
+    [isSidebarActive]="isSidebarActive"
+  ></gt-side-bar>
+
+  <section id="#page-content-wrapper" class="flex-fill">
+    <gt-top-bar
+      [linkOptions]="options"
+      [(isSidebarActive)]="isSidebarActive"
+    ></gt-top-bar>
+    <router-outlet class="row"></router-outlet>
+  </section>
+</section>

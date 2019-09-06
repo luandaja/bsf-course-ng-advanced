@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { LinkOption } from '../linkOption';
 
 @Component({
@@ -9,6 +8,7 @@ import { LinkOption } from '../linkOption';
 })
 export class SideBarComponent implements OnInit {
   @Input() linkOptions: LinkOption[];
+  @Input() isSidebarActive = false;
 
   constructor() {}
 
