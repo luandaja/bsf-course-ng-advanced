@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'glotrix-root',
+  selector: 'gt-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

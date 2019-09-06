@@ -10,7 +10,7 @@
       },
       "root": "apps/cms",
       "sourceRoot": "apps/cms/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -22,7 +22,11 @@
             "tsConfig": "apps/cms/tsconfig.app.json",
             "aot": false,
             "assets": ["apps/cms/src/favicon.ico", "apps/cms/src/assets"],
-            "styles": ["apps/cms/src/styles.scss"],
+            "styles": [
+              "apps/cms/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -80,27 +84,25 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/jest:jest",
           "options": {
-            "main": "apps/cms/src/test.ts",
+            "jestConfig": "apps/cms/jest.config.js",
             "tsConfig": "apps/cms/tsconfig.spec.json",
-            "karmaConfig": "apps/cms/karma.conf.js",
-            "polyfills": "apps/cms/src/polyfills.ts",
-            "styles": [],
-            "scripts": [],
-            "assets": []
+            "setupFile": "apps/cms/src/test-setup.ts"
           }
         }
       }
     },
     "cms-e2e": {
       "root": "apps/cms-e2e",
+      "sourceRoot": "apps/cms-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@nrwl/cypress:cypress",
           "options": {
-            "protractorConfig": "apps/cms-e2e/protractor.conf.js",
+            "cypressConfig": "apps/cms-e2e/cypress.json",
+            "tsConfig": "apps/cms-e2e/tsconfig.e2e.json",
             "devServerTarget": "cms:serve"
           },
           "configurations": {
@@ -112,7 +114,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": "apps/cms-e2e/tsconfig.e2e.json",
+            "tsConfig": ["apps/cms-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/cms-e2e/**"]
           }
         }
@@ -127,7 +129,7 @@
       },
       "root": "apps/store",
       "sourceRoot": "apps/store/src",
-      "prefix": "glotrix",
+      "prefix": "gt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -139,7 +141,11 @@
             "tsConfig": "apps/store/tsconfig.app.json",
             "aot": false,
             "assets": ["apps/store/src/favicon.ico", "apps/store/src/assets"],
-            "styles": ["apps/store/src/styles.scss"],
+            "styles": [
+              "apps/store/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -197,27 +203,25 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/jest:jest",
           "options": {
-            "main": "apps/store/src/test.ts",
+            "jestConfig": "apps/store/jest.config.js",
             "tsConfig": "apps/store/tsconfig.spec.json",
-            "karmaConfig": "apps/store/karma.conf.js",
-            "polyfills": "apps/store/src/polyfills.ts",
-            "styles": [],
-            "scripts": [],
-            "assets": []
+            "setupFile": "apps/store/src/test-setup.ts"
           }
         }
       }
     },
     "store-e2e": {
       "root": "apps/store-e2e",
+      "sourceRoot": "apps/store-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@nrwl/cypress:cypress",
           "options": {
-            "protractorConfig": "apps/store-e2e/protractor.conf.js",
+            "cypressConfig": "apps/store-e2e/cypress.json",
+            "tsConfig": "apps/store-e2e/tsconfig.e2e.json",
             "devServerTarget": "store:serve"
           },
           "configurations": {
@@ -229,34 +233,127 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": "apps/store-e2e/tsconfig.e2e.json",
+            "tsConfig": ["apps/store-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/store-e2e/**"]
           }
         }
       }
     },
-    "glotrix-ui": {
+    "core": {
       "projectType": "library",
-      "root": "libs/glotrix-ui",
-      "sourceRoot": "libs/glotrix-ui/src",
-      "prefix": "glotrix",
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "prefix": "gt",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/glotrix-ui/tsconfig.lib.json",
-              "libs/glotrix-ui/tsconfig.spec.json"
+              "libs/core/tsconfig.lib.json",
+              "libs/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/glotrix-ui/**"]
+            "exclude": ["**/node_modules/**", "!libs/core/**"]
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/jest:jest",
           "options": {
-            "main": "libs/glotrix-ui/src/test.ts",
-            "tsConfig": "libs/glotrix-ui/tsconfig.spec.json",
-            "karmaConfig": "libs/glotrix-ui/karma.conf.js"
+            "jestConfig": "libs/core/jest.config.js",
+            "tsConfig": "libs/core/tsconfig.spec.json",
+            "setupFile": "libs/core/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-navigation": {
+      "projectType": "library",
+      "root": "libs/ui/navigation",
+      "sourceRoot": "libs/ui/navigation/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/navigation/tsconfig.lib.json",
+              "libs/ui/navigation/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/navigation/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/navigation/jest.config.js",
+            "tsConfig": "libs/ui/navigation/tsconfig.spec.json",
+            "setupFile": "libs/ui/navigation/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-avatar": {
+      "projectType": "library",
+      "root": "libs/ui/avatar",
+      "sourceRoot": "libs/ui/avatar/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/avatar/tsconfig.lib.json",
+              "libs/ui/avatar/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/avatar/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/avatar/jest.config.js",
+            "tsConfig": "libs/ui/avatar/tsconfig.spec.json",
+            "setupFile": "libs/ui/avatar/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-forms": {
+      "projectType": "library",
+      "root": "libs/ui/forms",
+      "sourceRoot": "libs/ui/forms/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/forms/tsconfig.lib.json",
+              "libs/ui/forms/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/forms/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/forms/jest.config.js",
+            "tsConfig": "libs/ui/forms/tsconfig.spec.json",
+            "setupFile": "libs/ui/forms/src/test-setup.ts"
           }
         }
       },
@@ -272,11 +369,11 @@
   },
   "schematics": {
     "@nrwl/angular:application": {
-      "unitTestRunner": "karma",
-      "e2eTestRunner": "protractor"
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
-      "unitTestRunner": "karma"
+      "unitTestRunner": "jest"
     }
   },
   "defaultProject": "cms"
