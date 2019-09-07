@@ -1,49 +1,17 @@
 <div class="container p-5">
-  <div class="row">
-    <div class="col-3">
-      <gt-search-bar placeholder="Search for a product name"></gt-search-bar>
-    </div>
-    <div class="col-3">
-      <select class="form-control">
-        <option>Select a category</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 p-3">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">See More</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products; index as i">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description}}</td>
-            <td>{{ product.price | currency }}</td>
-            <td>{{ product.quantity | number }}</td>
-            <td>See More</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-12">
-      <gt-pagination></gt-pagination>
-    </div>
-  </div>
+  <section class="row">
+    <gt-search-bar
+      placeholder="Search for a product name"
+      class="col-sm-6"
+    ></gt-search-bar>
+    <gt-category-filter class="col-sm-6"></gt-category-filter>
+  </section>
+
+  <section class="row">
+    <gt-table-main class="col-sm-12" [products]="products"></gt-table-main>
+  </section>
+
+  <section class="row">
+    <gt-pagination class="col-sm-12"></gt-pagination>
+  </section>
 </div>

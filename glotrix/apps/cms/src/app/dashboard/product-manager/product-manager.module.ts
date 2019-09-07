@@ -6,9 +6,15 @@ import { ProductMamagerComponent } from './product-mamager/product-mamager.compo
 import { UiSearchBarModule } from '@glotrix/ui/search-bar';
 import { UiTablesModule } from '@glotrix/ui/tables';
 
+import { TableMainComponent } from './table-main/table-main.component';
+import { CategoryFilterComponent } from './category-filter/category-filter.component';
 
 @NgModule({
-  declarations: [ProductMamagerComponent],
+  declarations: [
+    ProductMamagerComponent,
+    TableMainComponent,
+    CategoryFilterComponent
+  ],
   imports: [
     CommonModule,
     ProductManagerRoutingModule,
@@ -16,4 +22,4 @@ import { UiTablesModule } from '@glotrix/ui/tables';
     UiTablesModule
   ]
 })
-export class ProductManagerModule { }
+export class ProductManagerModule {}

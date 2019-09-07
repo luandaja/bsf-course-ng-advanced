@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AnalyticsRoutingModule } from './analytics-routing.module';
-import { ReportComponent } from './report/report.component';
 
+import { ActiveUsersReportComponent } from './active-users-report/active-users-report.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
 
 @NgModule({
-  declarations: [ReportComponent],
-  imports: [
-    CommonModule,
-    AnalyticsRoutingModule
-  ]
+  declarations: [ActiveUsersReportComponent, AnalyticsComponent],
+  imports: [CommonModule, AnalyticsRoutingModule]
 })
-export class AnalyticsModule { }
+export class AnalyticsModule {}
