@@ -24,22 +24,34 @@
       "tags": []
     },
     "ui-navigation": {
-      "tags": ["ui"]
+      "tags": [
+        "ui"
+      ]
     },
     "ui-avatar": {
-      "tags": ["ui"]
+      "tags": [
+        "ui"
+      ]
     },
     "ui-forms": {
-      "tags": ["ui"]
-    },
-    "tables": {
-      "tags": ["ui"]
+      "tags": [
+        "ui"
+      ]
     },
     "ui-tables": {
-      "tags": ["ui"]
+      "tags": [
+        "ui"
+      ]
     },
     "ui-search-bar": {
-      "tags": ["ui"]
+      "tags": [
+        "ui"
+      ]
+    },
+    "ui-carousel": {
+      "tags": [
+        "ui"
+      ]
     }
   }
 }

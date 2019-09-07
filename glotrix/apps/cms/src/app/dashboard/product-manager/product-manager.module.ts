@@ -5,6 +5,7 @@ import { ProductManagerRoutingModule } from './product-manager-routing.module';
 import { ProductMamagerComponent } from './product-mamager/product-mamager.component';
 import { UiSearchBarModule } from '@glotrix/ui/search-bar';
 import { UiTablesModule } from '@glotrix/ui/tables';
+import { UiCarouselModule } from '@glotrix/ui/carousel';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
@@ -14,7 +15,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     CommonModule,
     ProductManagerRoutingModule,
     UiSearchBarModule,
-    UiTablesModule
+    UiTablesModule,
+    UiCarouselModule
   ]
 })
 export class ProductManagerModule { }
