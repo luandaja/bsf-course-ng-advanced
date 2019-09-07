@@ -4,13 +4,26 @@ export function getConfiguration(data: any[]) {
   return {
     type: 'line',
     data: {
-      labels: ['tesrt'],
+      labels: data.map(item => item.date.toLocaleDateString()),
       datasets: [
         {
-          data: data
+          label: 'Active users',
+          data: data.map(item => item.count)
         }
-      ]
+      ],
+      fill: false,
+      steppedLine: true
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
     }
-    // options: {}
   } as ChartConfiguration;
 }
