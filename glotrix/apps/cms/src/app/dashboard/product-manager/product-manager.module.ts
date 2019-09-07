@@ -7,6 +7,8 @@ import { UiSearchBarModule } from '@glotrix/ui/search-bar';
 import { UiTablesModule } from '@glotrix/ui/tables';
 import { UiCarouselModule } from '@glotrix/ui/carousel';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { UiFormsModule } from '@glotrix/ui/forms';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     ProductManagerRoutingModule,
     UiSearchBarModule,
     UiTablesModule,
-    UiCarouselModule
+    UiCarouselModule,
+    UiFormsModule,
+    FormsModule
   ]
 })
 export class ProductManagerModule { }

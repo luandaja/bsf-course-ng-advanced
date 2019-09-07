@@ -13,7 +13,8 @@
 
     <div *ngSwitchCase="'textblock'" class="form-group ">
       <label [attr.for]="entry.key">{{ entry.label }}</label>
-      <textarea class="form-control" [id]="entry.key" [rows]="entry.rows">
+      <textarea class="form-control" [id]="entry.key" [rows]="entry.rows" [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }">
       </textarea>
       <small *ngIf="entry.maxLength">{{ textblock.value.length }} / {{ entry.maxLength }}</small>
       <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">

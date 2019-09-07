@@ -6,4 +6,5 @@ export interface IProduct {
   quantity?: number,
   isDelivered?: boolean,
   category?: string;
+  images?: string[];
 }

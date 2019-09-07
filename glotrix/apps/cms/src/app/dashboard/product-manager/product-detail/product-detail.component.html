@@ -1,24 +1,9 @@
 <div class="row col-12 pt-3">
   <div class="col-4">
-    <gt-carousel [images]=images></gt-carousel>
+    <gt-carousel [images]=product.images></gt-carousel>
   </div>
   <div class="col-8 boder-rounded">
-    <div class="row col-12 pt-3">
-      <h2>{{product.name}}</h2>
-    </div>
-    <hr>
-    <div class="row col-12">
-      <h5>{{product.category}}</h5>
-    </div>
-    <hr>
-    <div class="row col-12 bold">
-      <span>{{product.price | currency}}</span>
-      <span class="pl-5">Stock: {{product.quantity | number}} units</span>
-    </div>
-    <hr>
-    <div class="row col-12">
-      <p class="bold">Description:</p>
-      <p class="justify">{{product.description}}</p>
-    </div>
+    <gt-form-builder [entries]="entries">
+    </gt-form-builder>
   </div>
 </div>
