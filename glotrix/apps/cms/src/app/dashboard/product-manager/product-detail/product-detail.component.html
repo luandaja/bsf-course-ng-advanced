@@ -1,3 +1,20 @@
-<div class="col-4">
-  <gt-carousel [images]=images></gt-carousel>
+<div class="row col-12 pt-3">
+  <div class="col-4">
+    <gt-carousel [images]=images></gt-carousel>
+  </div>
+  <div class="col-8 boder-rounded">
+    <div class="row col-12 pt-3">
+      <h2>{{product.name}}</h2>
+    </div>
+    <div class="row col-12 pt-3">
+      <h5>{{product.category}}</h5>
+    </div>
+    <div class="row col-12 bold pt-3">
+      <span>{{product.price | currency}}</span>
+      <span class="pl-5">Stock: {{product.quantity | number}} units</span>
+    </div>
+    <div class="row col-12 pt-3">
+      <p class="justify">{{product.description}}</p>
+    </div>
+  </div>
 </div>
