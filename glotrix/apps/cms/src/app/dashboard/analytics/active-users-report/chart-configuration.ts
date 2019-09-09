@@ -1,6 +1,11 @@
-import { ChartConfiguration, ChartType } from 'chart.js';
+import { ChartConfiguration } from 'chart.js';
 
-export function getConfiguration(data: any[]) {
+export interface DataItem {
+  count: number;
+  date: Date;
+}
+
+export function getConfiguration(data: DataItem[]) {
   return {
     type: 'line',
     data: {
@@ -15,6 +20,10 @@ export function getConfiguration(data: any[]) {
       steppedLine: true
     },
     options: {
+      title: {
+        display: true,
+        text: 'Active users per day'
+      },
       scales: {
         yAxes: [
           {

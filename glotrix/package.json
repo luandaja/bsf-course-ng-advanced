@@ -38,6 +38,7 @@
     "@angular/platform-browser": "^8.2.5",
     "@angular/platform-browser-dynamic": "^8.2.5",
     "@angular/router": "^8.2.5",
+    "@ngrx/store": "^8.3.0",
     "@nrwl/angular": "8.4.13",
     "angular-font-awesome": "^3.1.2",
     "chart.js": "^2.8.0",

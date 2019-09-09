@@ -21,7 +21,7 @@ export class ActiveUsersReportComponent implements OnInit {
       getConfiguration([
         {
           date: new Date(),
-          count: 5
+          count: 2
         },
         {
           date: new Date(2019, 11, 25),

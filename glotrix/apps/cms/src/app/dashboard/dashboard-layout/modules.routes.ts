@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { LinkOption } from '@glotrix/ui/navigation';
+import startCase from 'lodash.startcase';
 
 export const appModules: Routes = [
   {
@@ -33,3 +35,8 @@ export const appModules: Routes = [
       import('../analytics/analytics.module').then(mod => mod.AnalyticsModule)
   }
 ];
+
+export const appModulesAsLinkOption: LinkOption[] = appModules.map(item => ({
+  url: item.path,
+  text: startCase(item.path)
+})) as LinkOption[];

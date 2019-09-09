@@ -1143,6 +1143,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@ngrx/store@^8.3.0":
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-8.3.0.tgz#f2eaf428ec9e8379801cc37e3f6bffe88c2af472"
+  integrity sha512-QtM5T6/wTYqAlqeW60ptqqrsBwYF7jvQHsh0yE3AnwZIQvSbLFM2t5S2kN+753v4rHiXVRrA5pLaLzjGhAKcSg==
+
 "@ngtools/webpack@8.3.3":
   version "8.3.3"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.3.3.tgz#6dba4ee99074474750fbdd59ef5afc9a2f0c9b9d"

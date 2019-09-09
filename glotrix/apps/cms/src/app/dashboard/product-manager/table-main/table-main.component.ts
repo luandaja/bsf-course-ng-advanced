@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IProduct } from '../../../shared';
+import { Product } from '../../../models';
 
 @Component({
   selector: 'gt-table-main',
@@ -7,7 +7,7 @@ import { IProduct } from '../../../shared';
   styleUrls: ['./table-main.component.scss']
 })
 export class TableMainComponent implements OnInit {
-  @Input() products: IProduct[] = [];
+  @Input() products: Product[] = [];
   constructor() {}
 
   ngOnInit() {}
