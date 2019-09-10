@@ -9,14 +9,25 @@ import { EntryBase, TextboxEntry, TextblockEntry } from '@glotrix/ui/forms';
 export class ProductComponent implements OnInit {
 
   entries: EntryBase<any>[];
-
+  fileLoaded: File;
+  previewImageUrl: any=null;
 
   constructor() { }
 
   ngOnInit() {
     this.entries = this.getEntrys();
   }
-
+  getPreviewImageUrl() {
+    const mimeType = this.fileLoaded.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return null;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(this.fileLoaded);
+    reader.onload = (_event) => {
+      this.previewImageUrl.emit(reader.result);
+    }
+  }
   getEntrys() {
     const entries: EntryBase<any>[] = [
       new TextboxEntry({

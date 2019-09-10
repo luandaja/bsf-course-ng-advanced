@@ -1,7 +1,13 @@
-<div class="row pt-3">
-  <div class="col-sm-11">
-    <gt-form-builder [entries]="entries">
-
-    </gt-form-builder>
+<div class="row col-12 pt-3">
+    <div class="col-8">
+      <gt-upload-file (fileLoaded)="fileLoaded"></gt-upload-file>
+      <div class="image-preview mb-3" *ngIf="previewUrl">
+          <img [src]="previewImageUrl" height="200" />
+      </div>
+    </div>
+    <div class="col-12 boder-rounded">
+      <gt-form-builder [entries]="entries">
+      </gt-form-builder>
+    </div>
   </div>
-</div>
+

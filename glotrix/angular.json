@@ -21,10 +21,7 @@
             "polyfills": "apps/cms/src/polyfills.ts",
             "tsConfig": "apps/cms/tsconfig.app.json",
             "aot": false,
-            "assets": [
-              "apps/cms/src/favicon.ico",
-              "apps/cms/src/assets"
-            ],
+            "assets": ["apps/cms/src/favicon.ico", "apps/cms/src/assets"],
             "styles": [
               "apps/cms/src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -83,10 +80,7 @@
               "apps/cms/tsconfig.app.json",
               "apps/cms/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/cms/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/cms/**"]
           }
         },
         "test": {
@@ -120,13 +114,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/cms-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/cms-e2e/**"
-            ]
+            "tsConfig": ["apps/cms-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/cms-e2e/**"]
           }
         }
       }
@@ -151,10 +140,7 @@
             "polyfills": "apps/store/src/polyfills.ts",
             "tsConfig": "apps/store/tsconfig.app.json",
             "aot": false,
-            "assets": [
-              "apps/store/src/favicon.ico",
-              "apps/store/src/assets"
-            ],
+            "assets": ["apps/store/src/favicon.ico", "apps/store/src/assets"],
             "styles": [
               "apps/store/src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -213,10 +199,7 @@
               "apps/store/tsconfig.app.json",
               "apps/store/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/store/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/store/**"]
           }
         },
         "test": {
@@ -250,13 +233,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/store-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/store-e2e/**"
-            ]
+            "tsConfig": ["apps/store-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/store-e2e/**"]
           }
         }
       }
@@ -274,10 +252,7 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/core/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/core/**"]
           }
         },
         "test": {
@@ -308,10 +283,7 @@
               "libs/ui/navigation/tsconfig.lib.json",
               "libs/ui/navigation/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui/navigation/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ui/navigation/**"]
           }
         },
         "test": {
@@ -342,10 +314,7 @@
               "libs/ui/avatar/tsconfig.lib.json",
               "libs/ui/avatar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui/avatar/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ui/avatar/**"]
           }
         },
         "test": {
@@ -376,10 +345,7 @@
               "libs/ui/forms/tsconfig.lib.json",
               "libs/ui/forms/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui/forms/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ui/forms/**"]
           }
         },
         "test": {
@@ -410,10 +376,7 @@
               "libs/ui/tables/tsconfig.lib.json",
               "libs/ui/tables/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui/tables/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ui/tables/**"]
           }
         },
         "test": {
@@ -440,10 +403,7 @@
               "libs/ui/search-bar/tsconfig.lib.json",
               "libs/ui/search-bar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui/search-bar/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ui/search-bar/**"]
           }
         },
         "test": {
@@ -474,10 +434,7 @@
               "libs/ui/carousel/tsconfig.lib.json",
               "libs/ui/carousel/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui/carousel/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ui/carousel/**"]
           }
         },
         "test": {
@@ -486,6 +443,37 @@
             "jestConfig": "libs/ui/carousel/jest.config.js",
             "tsConfig": "libs/ui/carousel/tsconfig.spec.json",
             "setupFile": "libs/ui/carousel/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-upload-file": {
+      "projectType": "library",
+      "root": "libs/ui/upload-file",
+      "sourceRoot": "libs/ui/upload-file/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/upload-file/tsconfig.lib.json",
+              "libs/ui/upload-file/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/upload-file/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/upload-file/jest.config.js",
+            "tsConfig": "libs/ui/upload-file/tsconfig.spec.json",
+            "setupFile": "libs/ui/upload-file/src/test-setup.ts"
           }
         }
       },
