@@ -10,17 +10,24 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { UiFormsModule } from '@glotrix/ui/forms';
 import { FormsModule } from '@angular/forms';
 
+import { TableMainComponent } from './table-main/table-main.component';
+import { CategoryFilterComponent } from './category-filter/category-filter.component';
+import { StoreModule } from '@ngrx/store';
+import { productsReducer } from '../store/products';
 
 @NgModule({
-  declarations: [ProductMamagerComponent, ProductDetailComponent],
+
+  declarations: [ProductMamagerComponent, TableMainComponent, CategoryFilterComponent,ProductDetailComponent,ProductDetailComponent],
+
   imports: [
     CommonModule,
     ProductManagerRoutingModule,
     UiSearchBarModule,
     UiTablesModule,
+    StoreModule.forFeature('products', productsReducer)
     UiCarouselModule,
     UiFormsModule,
     FormsModule
   ]
 })
-export class ProductManagerModule { }
+export class ProductManagerModule {}

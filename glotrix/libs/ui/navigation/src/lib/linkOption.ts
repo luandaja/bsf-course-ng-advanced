@@ -1,5 +1,5 @@
 export interface LinkOption {
- Text: string;
- Url: string;
- Image?: string;
+  text: string;
+  url: string;
+  image?: string;
 }

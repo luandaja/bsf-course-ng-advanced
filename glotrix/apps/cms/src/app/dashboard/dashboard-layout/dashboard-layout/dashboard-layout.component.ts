@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LinkOption } from '@glotrix/ui/navigation';
+import { appModulesAsLinkOption } from '../modules.routes';
 
 @Component({
   selector: 'gt-dashboard-layout',
@@ -7,17 +8,11 @@ import { LinkOption } from '@glotrix/ui/navigation';
   styleUrls: ['./dashboard-layout.component.scss']
 })
 export class DashboardLayoutComponent implements OnInit {
-  protected options: LinkOption[] = [
-    { Text: 'Products', Url: 'product-manager' },
-    { Text: 'Add Product', Url: 'product' },
-    { Text: 'Analytics', Url: 'analytics' },
-    { Text: 'Profile', Url: 'profile' },
-    { Text: 'Sales', Url: 'sales' }
-  ];
+  protected options: LinkOption[] = appModulesAsLinkOption;
 
   protected isSidebarActive: Boolean = true;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }
