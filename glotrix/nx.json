@@ -46,6 +46,9 @@
     },
     "ui-image-preview": {
       "tags": ["ui"]
+    },
+    "ui-images-upload": {
+      "tags": ["ui"]
     }
   }
 }
