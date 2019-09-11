@@ -7,27 +7,31 @@ import { EntryBase, TextboxEntry, TextblockEntry } from '@glotrix/ui/forms';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-
+  files: File[] = [];
+  fileSelected: File = null;
   entries: EntryBase<any>[];
-  fileLoaded: File;
-  previewImageUrl: any=null;
 
   constructor() { }
 
   ngOnInit() {
     this.entries = this.getEntrys();
   }
-  getPreviewImageUrl() {
-    const mimeType = this.fileLoaded.type;
-    if (mimeType.match(/image\/*/) == null) {
-      return null;
-    }
-    const reader = new FileReader();
-    reader.readAsDataURL(this.fileLoaded);
-    reader.onload = (_event) => {
-      this.previewImageUrl.emit(reader.result);
+
+  previewImage(file: File) {
+    this.fileSelected = file;
+  }
+
+  removeImage(fileRemoved: File) {
+    this.files = this.files.filter(file => file !== fileRemoved);
+    if (fileRemoved === this.fileSelected) {
+      this.fileSelected = null;
     }
   }
+
+  onFileLoaded(fileLoaded: File) {
+    this.files.push(fileLoaded);
+  }
+
   getEntrys() {
     const entries: EntryBase<any>[] = [
       new TextboxEntry({

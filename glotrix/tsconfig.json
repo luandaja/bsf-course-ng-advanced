@@ -23,7 +23,8 @@
       "@glotrix/ui/tables": ["libs/ui/tables/src/index.ts"],
       "@glotrix/ui/search-bar": ["libs/ui/search-bar/src/index.ts"],
       "@glotrix/ui/carousel": ["libs/ui/carousel/src/index.ts"],
-      "@glotrix/ui/upload-file": ["libs/ui/upload-file/src/index.ts"]
+      "@glotrix/ui/upload-file": ["libs/ui/upload-file/src/index.ts"],
+      "@glotrix/ui/image-preview": ["libs/ui/image-preview/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
