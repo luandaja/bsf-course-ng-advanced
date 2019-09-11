@@ -8,18 +8,17 @@ import { UiTablesModule } from '@glotrix/ui/tables';
 
 import { TableMainComponent } from './table-main/table-main.component';
 import { CategoryFilterComponent } from './category-filter/category-filter.component';
+import { StoreModule } from '@ngrx/store';
+import { productsReducer } from '../store/products';
 
 @NgModule({
-  declarations: [
-    ProductMamagerComponent,
-    TableMainComponent,
-    CategoryFilterComponent
-  ],
+  declarations: [ProductMamagerComponent, TableMainComponent, CategoryFilterComponent],
   imports: [
     CommonModule,
     ProductManagerRoutingModule,
     UiSearchBarModule,
-    UiTablesModule
+    UiTablesModule,
+    StoreModule.forFeature('products', productsReducer)
   ]
 })
 export class ProductManagerModule {}

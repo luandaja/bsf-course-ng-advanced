@@ -6,22 +6,7 @@ import { Product } from '../../../models';
   styleUrls: ['./product-mamager.component.scss']
 })
 export class ProductMamagerComponent implements OnInit {
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'Producto 1',
-      description: 'descripción producto 1',
-      price: 10.5,
-      quantity: 100
-    },
-    {
-      id: 1,
-      name: 'Producto 1',
-      description: 'descripción producto 1',
-      price: 10.5,
-      quantity: 100
-    }
-  ];
+  products: Product[] = [];
   constructor() {}
 
   ngOnInit() {}
