@@ -6,7 +6,7 @@ import { ProductMamagerComponent } from './product-mamager/product-mamager.compo
 import { UiSearchBarModule } from '@glotrix/ui/search-bar';
 import { UiTablesModule } from '@glotrix/ui/tables';
 import { UiCarouselModule } from '@glotrix/ui/carousel';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+
 import { UiFormsModule } from '@glotrix/ui/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -16,15 +16,14 @@ import { StoreModule } from '@ngrx/store';
 import { productsReducer } from '../store/products';
 
 @NgModule({
-
-  declarations: [ProductMamagerComponent, TableMainComponent, CategoryFilterComponent,ProductDetailComponent,ProductDetailComponent],
+  declarations: [ProductMamagerComponent, TableMainComponent, CategoryFilterComponent],
 
   imports: [
     CommonModule,
     ProductManagerRoutingModule,
     UiSearchBarModule,
     UiTablesModule,
-    StoreModule.forFeature('products', productsReducer)
+    StoreModule.forFeature('products', productsReducer),
     UiCarouselModule,
     UiFormsModule,
     FormsModule
