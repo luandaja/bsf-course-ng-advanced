@@ -23,6 +23,6 @@ const dummyData = [
 ];
 
 export const initalState: ProductsState = {
-  products: [...dummyData],
+  products: [],
   isLoading: false
 };
