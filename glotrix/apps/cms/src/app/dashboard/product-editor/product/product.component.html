@@ -1,26 +1,8 @@
-<div class="row col-sm-12 pt-3">
+<div class="container-fluid pl-3">
   <div class="col-sm-4">
     <section class="blue-border">
-      <gt-upload-file (fileLoaded)="onFileLoaded($event)"></gt-upload-file>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Filename</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let file of files">
-            <th scope="row">{{index}}</th>
-            <td>{{file.name}}</td>
-            <td (click)="previewImage(file)"><span class="fa fa-search"></span></td>
-            <td (click)="removeImage(file)"><span class="fa fa-trash"></span></td>
-          </tr>
-        </tbody>
-      </table>
-      <gt-image-preview *ngIf="fileSelected" [file]="fileSelected"></gt-image-preview>
+      <!-- <gt-upload-file (fileLoaded)="onFileLoaded($event)"></gt-upload-file> -->
+      <gt-images-upload (filesLoaded)="onFilesLoaded($event)"></gt-images-upload>
     </section>
   </div>
   <div class="col-sm-8">

@@ -1,1 +1,26 @@
-<p>images-upload works!</p>
+<div class="col-sm-12">
+  <gt-upload-file (fileLoaded)="onFileLoaded($event)"></gt-upload-file>
+</div>
+<div class="col-sm-12">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Filename</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files; index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>{{file.name}}</td>
+        <td (click)="previewImage(file)"><span class="fa fa-search"></span></td>
+        <td (click)="removeImage(file)"><span class="fa fa-trash"></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-sm-12">
+  <gt-image-preview *ngIf="fileSelected" [file]="fileSelected"></gt-image-preview>
+</div>

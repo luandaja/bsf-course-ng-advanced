@@ -5,8 +5,7 @@ import { ProductEditorRoutingModule } from './product-editor-routing.module';
 import { ProductComponent } from './product/product.component';
 import { UiFormsModule } from '@glotrix/ui/forms';
 import { UiCarouselModule } from '@glotrix/ui/carousel';
-import { UiUploadFileModule } from '@glotrix/ui/upload-file';
-import { UiImagePreviewModule } from '@glotrix/ui/image-preview';
+import { UiImagesUploadModule } from '@glotrix/ui/images-upload';
 
 @NgModule({
   declarations: [ProductComponent],
@@ -15,8 +14,7 @@ import { UiImagePreviewModule } from '@glotrix/ui/image-preview';
     ProductEditorRoutingModule,
     UiFormsModule,
     UiCarouselModule,
-    UiUploadFileModule,
-    UiImagePreviewModule
+    UiImagesUploadModule
   ]
 })
 export class ProductEditorModule { }

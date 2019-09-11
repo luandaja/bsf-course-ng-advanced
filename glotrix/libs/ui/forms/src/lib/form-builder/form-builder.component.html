@@ -1,15 +1,13 @@
-<div class="container pt-4">
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <section class="row">
-      <ng-container *ngFor="let entry of entries">
-        <gt-form-entry [entry]="entry" [form]="form" [class]="entry.col" [isSubmitted]="isSubmitted"></gt-form-entry>
-      </ng-container>
-    </section>
-    <div class="form-row pull-right">
-      <button type="button" class="btn btn-secondary mr-3">Cancelar</button>
-      <button type="submit" class="btn btn-primary" [disabled]="!(form.valid && form.dirty)">
-        Guardar
-      </button>
-    </div>
-  </form>
-</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <section class="row">
+    <ng-container *ngFor="let entry of entries">
+      <gt-form-entry [entry]="entry" [form]="form" [class]="entry.col" [isSubmitted]="isSubmitted"></gt-form-entry>
+    </ng-container>
+  </section>
+  <div class="form-row pull-right">
+    <button type="button" class="btn btn-secondary mr-3">Cancelar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!(form.valid && form.dirty)">
+      Guardar
+    </button>
+  </div>
+</form>

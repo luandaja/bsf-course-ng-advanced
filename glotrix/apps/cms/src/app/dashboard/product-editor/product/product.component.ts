@@ -7,8 +7,7 @@ import { EntryBase, TextboxEntry, TextblockEntry } from '@glotrix/ui/forms';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  files: File[] = [];
-  fileSelected: File = null;
+  //files: File[] = [];
   entries: EntryBase<any>[];
 
   constructor() { }
@@ -17,21 +16,9 @@ export class ProductComponent implements OnInit {
     this.entries = this.getEntrys();
   }
 
-  previewImage(file: File) {
-    this.fileSelected = file;
-  }
-
-  removeImage(fileRemoved: File) {
-    this.files = this.files.filter(file => file !== fileRemoved);
-    if (fileRemoved === this.fileSelected) {
-      this.fileSelected = null;
-    }
-  }
-
-  onFileLoaded(fileLoaded: File) {
-    this.files.push(fileLoaded);
-  }
-
+  // onFilesLoaded(filesLoaded: File[]){
+  //   this.files = filesLoaded;
+  // }
   getEntrys() {
     const entries: EntryBase<any>[] = [
       new TextboxEntry({
