@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../../models';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+
+import { ProductsState, selectProducts } from '../../store/products';
 @Component({
   selector: 'gt-product-mamager',
   templateUrl: './product-mamager.component.html',
@@ -7,7 +12,14 @@ import { Product } from '../../../models';
 })
 export class ProductMamagerComponent implements OnInit {
   products: Product[] = [];
-  constructor() {}
+  products$: Observable<Product[]>;
+
+  constructor(private store: Store<ProductsState>) {
+    this.products$ = this.store.pipe(
+      select(selectProducts),
+      tap(console.log)
+    );
+  }
 
   ngOnInit() {}
 }
