@@ -8,14 +8,15 @@ import { EntryBase, TextboxEntry, TextblockEntry } from '@glotrix/ui/forms';
 })
 export class ProductComponent implements OnInit {
 
-
   entries: EntryBase<any>[];
+
 
   constructor() { }
 
   ngOnInit() {
     this.entries = this.getEntrys();
   }
+
   getEntrys() {
     const entries: EntryBase<any>[] = [
       new TextboxEntry({

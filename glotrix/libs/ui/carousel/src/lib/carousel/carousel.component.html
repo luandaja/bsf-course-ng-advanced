@@ -1,0 +1,26 @@
+<div>
+  <div class="carousel">
+    <ul class="slides">
+      <ng-container *ngFor="let image of images; index as index">
+        <input type="radio" name="radio-buttons" [id]="getImageId(index)" checked />
+        <li class="slide-container">
+          <div class="slide-image">
+            <img [src]="image">
+          </div>
+          <div class="carousel-controls">
+            <label [for]="getPreviousImageId(index)" class="prev-slide">
+              <span>&lsaquo;</span>
+            </label>
+            <label [for]="getNextImageId(index)" class="next-slide">
+              <span>&rsaquo;</span>
+            </label>
+          </div>
+        </li>
+      </ng-container>
+      <div class="carousel-dots">
+        <label [for]="getImageId(index)" class="carousel-dot" [id]="'img-dot-'+index"
+          *ngFor="let image of images; index as index"></label>
+      </div>
+    </ul>
+  </div>
+</div>

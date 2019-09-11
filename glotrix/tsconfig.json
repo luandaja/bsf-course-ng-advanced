@@ -10,19 +10,42 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@glotrix/core": ["libs/core/src/index.ts"],
-      "@glotrix/ui/navigation": ["libs/ui/navigation/src/index.ts"],
-      "@glotrix/ui/avatar": ["libs/ui/avatar/src/index.ts"],
-      "@glotrix/ui/forms": ["libs/ui/forms/src/index.ts"],
-      "@glotrix/ui/tables": ["libs/ui/tables/src/index.ts"],
-      "@glotrix/ui/search-bar": ["libs/ui/search-bar/src/index.ts"]
+      "@glotrix/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@glotrix/ui/navigation": [
+        "libs/ui/navigation/src/index.ts"
+      ],
+      "@glotrix/ui/avatar": [
+        "libs/ui/avatar/src/index.ts"
+      ],
+      "@glotrix/ui/forms": [
+        "libs/ui/forms/src/index.ts"
+      ],
+      "@glotrix/ui/tables": [
+        "libs/ui/tables/src/index.ts"
+      ],
+      "@glotrix/ui/search-bar": [
+        "libs/ui/search-bar/src/index.ts"
+      ],
+      "@glotrix/ui/carousel": [
+        "libs/ui/carousel/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
