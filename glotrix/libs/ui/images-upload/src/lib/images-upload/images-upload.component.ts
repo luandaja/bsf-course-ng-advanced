@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Image } from '../Image';
 
 @Component({
   selector: 'gt-images-upload',
@@ -6,29 +7,30 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./images-upload.component.scss']
 })
 export class ImagesUploadComponent implements OnInit {
-  fileSelected: File = null;
-  files: File[] = [];
-  @Output() filesLoaded = new EventEmitter<File[]>();
+  imageSelected: Image | string = null;
+
+  @Output() imagesChange = new EventEmitter<Array<File | Image>>();
+  @Input() images: Image[] | File[] = [];
 
   constructor() { }
 
   ngOnInit() { }
 
   onFileLoaded(fileLoaded: File) {
-    this.files.push(fileLoaded);
-    this.filesLoaded.emit(this.files);
+    this.images.push(fileLoaded);
+    this.imagesChange.emit(this.images);
   }
 
-  previewImage(file: File) {
-    this.fileSelected = file;
+  previewImage(image: Image | File) {
+    this.imageSelected = (image instanceof File) ? image : image.url;
   }
 
-  removeImage(fileRemoved: File) {
-    this.files = this.files.filter(file => file !== fileRemoved);
-    if (fileRemoved === this.fileSelected) {
-      this.fileSelected = null;
+  removeImage(imageRemoved: Image | File, index: number) {
+    this.images.splice(index, 1);
+    if (imageRemoved === this.imageSelected) {
+      this.imageSelected = null;
     }
-    this.filesLoaded.emit(this.files);
+    this.imagesChange.emit(this.images);
   }
 
 }

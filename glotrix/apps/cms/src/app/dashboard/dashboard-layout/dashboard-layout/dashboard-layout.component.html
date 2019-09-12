@@ -1,15 +1,9 @@
 <section class="d-flex">
-  <gt-side-bar
-    [linkOptions]="options"
-    [isSidebarActive]="isSidebarActive"
-  ></gt-side-bar>
+  <gt-side-bar [linkOptions]="options" [isSidebarActive]="isSidebarActive"></gt-side-bar>
 
   <section id="#page-content-wrapper" class="flex-fill">
-    <gt-top-bar
-      [linkOptions]="options"
-      [(isSidebarActive)]="isSidebarActive"
-    ></gt-top-bar>
-    <div class="container">
+    <gt-top-bar [linkOptions]="options" [(isSidebarActive)]="isSidebarActive"></gt-top-bar>
+    <div class="container-fluid">
       <router-outlet></router-outlet>
     </div>
   </section>
