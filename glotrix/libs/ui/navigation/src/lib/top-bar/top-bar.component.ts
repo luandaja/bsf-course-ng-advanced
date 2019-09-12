@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { LinkOption } from '../linkOption';
+import { LinkOption } from '../../models/LinkOption';
+import { NavigationUser } from '../..';
 
 @Component({
   selector: 'gt-top-bar',
@@ -9,9 +10,7 @@ import { LinkOption } from '../linkOption';
 export class TopBarComponent implements OnInit {
   @Input() isSidebarActive = false;
   @Output() isSidebarActiveChange = new EventEmitter<boolean>();
-
-  @Input() linkOptions: LinkOption[];
-
+  @Input() userData: NavigationUser;
   ngOnInit() {}
 
   toggleSideBar() {
