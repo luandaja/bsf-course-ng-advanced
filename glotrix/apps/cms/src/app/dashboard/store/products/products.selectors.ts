@@ -3,7 +3,7 @@ import { ProductsState } from './products.state';
 
 const products = createFeatureSelector<ProductsState>('products');
 
-export const selectProducts = createSelector(
+export const getProducts = createSelector(
   products,
   (state: ProductsState) => state.products
 );

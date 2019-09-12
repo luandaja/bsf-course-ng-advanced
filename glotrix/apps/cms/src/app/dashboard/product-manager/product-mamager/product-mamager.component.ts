@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
-import { ProductsState, selectProducts } from '../../store/products';
+import { ProductsState, getProducts } from '../../store/products';
 @Component({
   selector: 'gt-product-mamager',
   templateUrl: './product-mamager.component.html',
@@ -16,7 +16,7 @@ export class ProductMamagerComponent implements OnInit {
 
   constructor(private store: Store<ProductsState>) {
     this.products$ = this.store.pipe(
-      select(selectProducts),
+      select(getProducts),
       tap(console.log)
     );
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LinkOption } from '../linkOption';
+import { LinkOption } from '../../models/LinkOption';
+import { NavigationUser } from '../../models/NavigationUser';
 
 @Component({
   selector: 'gt-side-bar',
@@ -9,7 +10,7 @@ import { LinkOption } from '../linkOption';
 export class SideBarComponent implements OnInit {
   @Input() linkOptions: LinkOption[];
   @Input() isSidebarActive = false;
-
+  @Input() userData: NavigationUser;
   constructor() {}
 
   ngOnInit() {}
