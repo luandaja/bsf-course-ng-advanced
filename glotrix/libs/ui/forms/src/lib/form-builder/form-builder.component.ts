@@ -14,10 +14,11 @@ export class FormBuilderComponent implements OnInit {
   form: FormGroup;
   isSubmitted = false;
 
-  constructor(private entryControlService: EntryControlService) { }
+  constructor(private entryControlService: EntryControlService) {}
 
   ngOnInit() {
     this.form = this.entryControlService.toFormGroup(this.entries);
+    console.log(this.form);
   }
   onSubmit() {
     this.isSubmitted = true;

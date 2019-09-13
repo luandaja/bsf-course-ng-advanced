@@ -6,17 +6,24 @@ export class EntryBase<T> {
   order: number;
   controlType: string;
   col: string;
+  validations: {
+    message: string;
+    name: string;
+    value: string;
+  }[];
   validationMessages: { [key: string]: string };
-  constructor(options: {
-    value?: T,
-    key?: string,
-    label?: string,
-    required?: boolean,
-    order?: number,
-    controlType?: string,
-    validationMessages?: { [key: string]: string },
-    col?: string
-  } = {}) {
+  constructor(
+    options: {
+      value?: T;
+      key?: string;
+      label?: string;
+      required?: boolean;
+      order?: number;
+      controlType?: string;
+      validationMessages?: { [key: string]: string };
+      col?: string;
+    } = {}
+  ) {
     this.value = options.value;
     this.key = options.key || '';
     this.label = options.label || '';

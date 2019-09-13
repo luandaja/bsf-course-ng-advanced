@@ -10,8 +10,8 @@
       >
       </gt-avatar>
     </section>
-    <section class="col-sm-10">
-      <gt-form-builder [entries]="entries"> </gt-form-builder>
+    <section class="col-sm-10" *ngIf="entries$">
+      <gt-form-builder [entries]="entries$ | async"> </gt-form-builder>
     </section>
   </section>
 </div>

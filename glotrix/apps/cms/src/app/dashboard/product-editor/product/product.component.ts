@@ -7,11 +7,9 @@ import { EntryBase, TextboxEntry, TextblockEntry } from '@glotrix/ui/forms';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-
   entries: EntryBase<any>[];
 
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.entries = this.getEntrys();
@@ -46,7 +44,8 @@ export class ProductComponent implements OnInit {
           maxlength: 'Description cannot exceed 30 characters.'
         }
       }),
-      new TextboxEntry({//This should be a currency entry. TBD
+      new TextboxEntry({
+        //This should be a currency entry. TBD
         key: 'price',
         label: 'Price',
         required: true,
@@ -54,7 +53,7 @@ export class ProductComponent implements OnInit {
         order: 3,
         col: 'col-sm-3',
         validationMessages: {
-          required: 'Price is required.',
+          required: 'Price is required.'
         }
       }),
       new TextboxEntry({

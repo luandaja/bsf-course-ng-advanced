@@ -1,11 +1,18 @@
 <ng-container [formGroup]="form">
   <ng-container [ngSwitch]="entry.controlType">
-
     <div *ngSwitchCase="'textbox'" class="form-group ">
       <label [attr.for]="entry.key">{{ entry.label }}</label>
-      <input class="form-control" type="text" [id]="entry.key" [formControlName]="entry.key"
-        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }" />
-      <small *ngIf="entry.maxLength">{{ texbox.value.length }} / {{ entry.maxLength }}</small>
+      <input
+        class="form-control"
+        type="text"
+        [id]="entry.key"
+        [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }"
+      />
+
+      <small *ngIf="entry.maxLength"
+        >{{ texbox.value.length }} / {{ entry.maxLength }}</small
+      >
       <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
         <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
       </div>
@@ -13,10 +20,17 @@
 
     <div *ngSwitchCase="'textblock'" class="form-group ">
       <label [attr.for]="entry.key">{{ entry.label }}</label>
-      <textarea class="form-control" [id]="entry.key" [rows]="entry.rows" [formControlName]="entry.key"
-        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }">
+      <textarea
+        class="form-control"
+        [id]="entry.key"
+        [rows]="entry.rows"
+        [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }"
+      >
       </textarea>
-      <small *ngIf="entry.maxLength">{{ textblock.value.length }} / {{ entry.maxLength }}</small>
+      <small *ngIf="entry.maxLength"
+        >{{ textblock.value.length }} / {{ entry.maxLength }}</small
+      >
       <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
         <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
       </div>
@@ -25,7 +39,9 @@
     <div *ngSwitchCase="'dropdown'" class="form-group ">
       <label [attr.for]="entry.key">{{ entry.label }}</label>
       <select [id]="entry.key" [formControlName]="entry.key">
-        <option *ngFor="let opt of entry.options" [value]="opt.key">{{opt.value}}</option>
+        <option *ngFor="let opt of entry.options" [value]="opt.key">{{
+          opt.value
+        }}</option>
       </select>
       <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
         <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>

@@ -9,6 +9,11 @@ export const initalState: AuthState = {
   islogged: false,
   user: {
     firstName: 'Belatrix user',
-    lastName: 'From Store'
+    lastName: 'From Store',
+    description: 'default user form store',
+    facebook: 'facebook',
+    instagram: 'instagram',
+    twitter: 'twitter',
+    website: 'website'
   }
 };

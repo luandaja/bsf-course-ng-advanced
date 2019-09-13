@@ -1,5 +1,11 @@
 import { TextboxEntry, EntryBase, TextblockEntry } from '@glotrix/ui/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { User } from '../../../models';
+import { Store, select } from '@ngrx/store';
+import { AuthState, getUser } from '../../../core/store/auth';
+import { take, tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'gt-profile',
@@ -7,18 +13,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  entries: EntryBase<any>[];
+  protected entries$: Observable<EntryBase<any>[]>;
 
-  constructor() { }
+  constructor(private store: Store<AuthState>) {}
 
   ngOnInit() {
-    this.entries = this.getEntrys();
+    this.entries$ = this.store.pipe(
+      select(getUser),
+      take(1),
+      map(this.getEntrys)
+    );
   }
 
-  getEntrys() {
+  getEntrys(user: User): EntryBase<any>[] {
     const entries: EntryBase<any>[] = [
       new TextboxEntry({
         key: 'firstName',
+        value: user.firstName,
         label: 'First name',
         required: true,
         minlength: 3,
@@ -32,6 +43,7 @@ export class ProfileComponent implements OnInit {
       }),
       new TextboxEntry({
         key: 'lastName',
+        value: user.lastName,
         label: 'Last name',
         required: true,
         minlength: 3,
@@ -45,6 +57,7 @@ export class ProfileComponent implements OnInit {
       }),
       new TextboxEntry({
         key: 'facebook',
+        value: user.facebook,
         label: 'Facebook',
         required: true,
         minlength: 2,
@@ -58,6 +71,7 @@ export class ProfileComponent implements OnInit {
       }),
       new TextboxEntry({
         key: 'twitter',
+        value: user.twitter,
         label: 'Twitter',
         required: true,
         minlength: 2,
@@ -71,6 +85,7 @@ export class ProfileComponent implements OnInit {
       }),
       new TextboxEntry({
         key: 'instagram',
+        value: user.instagram,
         label: 'Instagram',
         minlength: 3,
         order: 5,
@@ -83,6 +98,7 @@ export class ProfileComponent implements OnInit {
 
       new TextboxEntry({
         key: 'website',
+        value: user.website,
         label: 'Website',
         order: 6,
         col: 'col-sm-4',
@@ -93,8 +109,9 @@ export class ProfileComponent implements OnInit {
       }),
       new TextblockEntry({
         key: 'description',
+        value: user.description,
         label: 'Description',
-        order: 6,
+        order: 7,
         col: 'col-sm-12',
         validationMessages: {
           minlength: 'Email must be at least three characters.',
