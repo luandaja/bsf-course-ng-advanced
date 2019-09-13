@@ -1,4 +1,4 @@
-<div class="container pt-4">
+<div class="form-fluid">
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <section class="row">
       <ng-container *ngFor="let entry of entries">
@@ -6,9 +6,9 @@
       </ng-container>
     </section>
     <div class="form-row pull-right">
-      <button type="button" class="btn btn-secondary mr-3">Cancelar</button>
+      <button type="button" class="btn btn-secondary mr-3" [hidden]="!isCancelButtonVisible">Cancelar</button>
       <button type="submit" class="btn btn-primary" [disabled]="!(form.valid && form.dirty)">
-        Guardar
+        {{submitButtonText}}
       </button>
     </div>
   </form>

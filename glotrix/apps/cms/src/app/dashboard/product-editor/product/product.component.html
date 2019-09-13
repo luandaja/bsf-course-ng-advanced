@@ -1,7 +1,13 @@
-<div class="row pt-3">
-  <div class="col-sm-11">
-    <gt-form-builder [entries]="entries">
-
-    </gt-form-builder>
+<div class="row pl-3 pt-3">
+  <div class="col-sm-5">
+    <section class="blue-border">
+      <gt-images-upload (filesLoaded)="onFilesLoaded($event)"></gt-images-upload>
+    </section>
+  </div>
+  <div class="col-sm-7">
+    <section class="orange-border">
+      <gt-form-builder [entries]="entries">
+      </gt-form-builder>
+    </section>
   </div>
 </div>

@@ -443,6 +443,95 @@
         }
       }
     },
+    "ui-upload-file": {
+      "projectType": "library",
+      "root": "libs/ui/upload-file",
+      "sourceRoot": "libs/ui/upload-file/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/upload-file/tsconfig.lib.json",
+              "libs/ui/upload-file/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/upload-file/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/upload-file/jest.config.js",
+            "tsConfig": "libs/ui/upload-file/tsconfig.spec.json",
+            "setupFile": "libs/ui/upload-file/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-image-preview": {
+      "projectType": "library",
+      "root": "libs/ui/image-preview",
+      "sourceRoot": "libs/ui/image-preview/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/image-preview/tsconfig.lib.json",
+              "libs/ui/image-preview/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/image-preview/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/image-preview/jest.config.js",
+            "tsConfig": "libs/ui/image-preview/tsconfig.spec.json",
+            "setupFile": "libs/ui/image-preview/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-images-upload": {
+      "projectType": "library",
+      "root": "libs/ui/images-upload",
+      "sourceRoot": "libs/ui/images-upload/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/images-upload/tsconfig.lib.json",
+              "libs/ui/images-upload/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/images-upload/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/images-upload/jest.config.js",
+            "tsConfig": "libs/ui/images-upload/tsconfig.spec.json",
+            "setupFile": "libs/ui/images-upload/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
     "models": {
       "root": "libs/models",
       "sourceRoot": "libs/models/src",

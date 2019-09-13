@@ -4,7 +4,7 @@ import { AuthState, initalState } from './auth.state';
 
 const reducer = createReducer(
   initalState,
-  on(signIn, (state, { isLogged }) => ({ ...state, isLogged }))
+  on(signIn, (state, { isLogged }) => ({ ...state, isLogged: true }))
 );
 
 export function authReducer(state: AuthState | undefined, action: Action) {

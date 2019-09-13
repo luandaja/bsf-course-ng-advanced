@@ -7,12 +7,26 @@
         type="text"
         [id]="entry.key"
         [formControlName]="entry.key"
+        [placeholder]="entry.placeholder"
         [ngClass]="{ 'is-invalid': !isValid && isSubmitted }"
       />
-
       <small *ngIf="entry.maxLength"
         >{{ texbox.value.length }} / {{ entry.maxLength }}</small
       >
+      <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
+        <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'password'" class="form-group ">
+      <label [attr.for]="entry.key">{{ entry.label }}</label>
+      <input
+        class="form-control"
+        type="password"
+        [id]="entry.key"
+        [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }"
+      />
       <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
         <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
       </div>

@@ -43,6 +43,15 @@
     },
     "models": {
       "tags": ["models"]
+    },
+    "ui-upload-file": {
+      "tags": ["ui"]
+    },
+    "ui-image-preview": {
+      "tags": ["ui"]
+    },
+    "ui-images-upload": {
+      "tags": ["ui"]
     }
   }
 }
