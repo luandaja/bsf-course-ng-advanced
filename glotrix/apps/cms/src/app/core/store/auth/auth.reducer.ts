@@ -1,10 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { signIn } from './auth.actions';
+import { signIn, signInWithGoogle } from './auth.actions';
 import { AuthState, initalState } from './auth.state';
 
 const reducer = createReducer(
   initalState,
-  on(signIn, (state, { isLogged }) => ({ ...state, isLogged: true }))
+  on(signIn, (state, { username, password }) => ({ ...state, isLogged: true })),
+  on(signInWithGoogle, state => ({ ...state, isLogged: true }))
 );
 
 export function authReducer(state: AuthState | undefined, action: Action) {
