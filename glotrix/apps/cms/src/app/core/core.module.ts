@@ -22,4 +22,4 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     StoreRouterConnectingModule.forRoot()
   ]
 })
-export class CoreModule {}
+export class CoreModule { }

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitted(formData: any) {
     console.log("onSubmitted", formData);
-    this.store.dispatch(signIn({ isLogged: "user" }));
+    this.store.dispatch(signIn({ isLogged: true }));
   }
 
   getEntrys() {
