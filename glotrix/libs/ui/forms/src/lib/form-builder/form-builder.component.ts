@@ -26,6 +26,9 @@ export class FormBuilderComponent implements OnInit {
 
   onSubmit() {
     this.isSubmitted = true;
+    if (this.form.invalid) {
+      return;
+    }
     this.submitted.emit(this.form.value);
   }
 

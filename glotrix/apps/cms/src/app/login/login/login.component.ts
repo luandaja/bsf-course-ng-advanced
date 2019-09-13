@@ -27,13 +27,16 @@ export class LoginComponent implements OnInit {
       new TextboxEntry({
         key: 'username',
         label: 'Email',
+        placeholder: 'user@example.com',
         required: true,
         minlength: 3,
         order: 1,
         col: 'col-sm-12',
+        pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
         validationMessages: {
           required: 'Email is required.',
-          minlength: 'First name must be at least three characters.'
+          minlength: 'Email must be at least three characters.',
+          pattern: 'Email has no correct format.'
         }
       }),
       new PasswordEntry({

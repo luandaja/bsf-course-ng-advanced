@@ -2,12 +2,10 @@ import { EntryBase } from './entry-base';
 
 export class PasswordEntry extends EntryBase<string> {
   controlType = 'password';
-  minLength: number;
-  maxLength: number;
+  minlength: number;
 
   constructor(options: {} = {}) {
     super(options);
-    this.minLength = options['minLength'] || null;
-    this.maxLength = options['maxLength'] || null;
+    this.minlength = options['minlength'] || null;
   }
 }
