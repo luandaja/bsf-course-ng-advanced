@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthState, selectIsLogged } from './core/store/auth';
-import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { AuthState, getIsLogged } from './core/store/auth';
 
 @Component({
   selector: 'gt-root',
@@ -9,22 +10,22 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   title = 'cms';
   isLoggedIn$: Subscription;
 
-  constructor(private store: Store<AuthState>) { }
+  constructor(private store: Store<AuthState>, private router: Router) {}
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.store.pipe(select(selectIsLogged))
+    this.isLoggedIn$ = this.store
+      .pipe(select(getIsLogged))
       .subscribe((isLogged: boolean) => this.redirect(isLogged));
   }
 
   private redirect(isLogged: boolean) {
     if (isLogged) {
       console.log('loggeado');
-    }
-    else {
+      this.router.navigate(['/dashboard']);
+    } else {
       console.log('no loggeado');
     }
   }
@@ -32,5 +33,4 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.isLoggedIn$.unsubscribe();
   }
-
 }

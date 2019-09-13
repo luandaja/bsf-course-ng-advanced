@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EntryBase, TextboxEntry, PasswordEntry } from '@glotrix/ui/forms';
+import { EntryBase, PasswordEntry, TextboxEntry } from '@glotrix/ui/forms';
 import { Store } from '@ngrx/store';
 import { AuthState, signIn } from '../../core/store/auth';
 
@@ -11,14 +11,14 @@ import { AuthState, signIn } from '../../core/store/auth';
 export class LoginComponent implements OnInit {
   entries: EntryBase<any>[];
 
-  constructor(private store: Store<AuthState>) { }
+  constructor(private store: Store<AuthState>) {}
 
   ngOnInit() {
     this.entries = this.getEntrys();
   }
 
   onSubmitted(formData: any) {
-    console.log("onSubmitted", formData);
+    console.log('onSubmitted', formData);
     this.store.dispatch(signIn({ isLogged: true }));
   }
 
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         minlength: 3,
         order: 1,
         col: 'col-sm-12',
-        pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+        pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
         validationMessages: {
           required: 'Email is required.',
           minlength: 'Email must be at least three characters.',
