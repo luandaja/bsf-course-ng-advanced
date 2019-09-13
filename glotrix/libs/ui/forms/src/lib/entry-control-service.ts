@@ -5,7 +5,7 @@ import { EntryBase } from './entries/entry-base';
 
 @Injectable()
 export class EntryControlService {
-  constructor() {}
+  constructor() { }
 
   toFormGroup(entries: EntryBase<any>[]) {
     const group: any = {};
@@ -17,9 +17,8 @@ export class EntryControlService {
     });
     return new FormGroup(group);
   }
-  getValidationMessages(
-    entries: EntryBase<any>[]
-  ): { [key: string]: { [key: string]: string } } {
+
+  getValidationMessages(entries: EntryBase<any>[]): { [key: string]: { [key: string]: string } } {
     const validationMessages: { [key: string]: { [key: string]: string } } = {};
     entries.forEach(entry => {
       validationMessages[entry.key] = entry.validationMessages;

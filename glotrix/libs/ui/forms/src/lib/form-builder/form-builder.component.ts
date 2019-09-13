@@ -11,6 +11,8 @@ import { EntryControlService } from '../entry-control-service';
 })
 export class FormBuilderComponent implements OnInit {
   @Input() entries: EntryBase<any>[] = [];
+  @Input() isCancelButtonVisible = true;
+  @Input() submitButtonText = 'Save';
   form: FormGroup;
   isSubmitted = false;
 
