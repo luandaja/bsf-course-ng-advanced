@@ -1,11 +1,10 @@
-import { TextboxEntry, EntryBase, TextblockEntry } from '@glotrix/ui/forms';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { EntryBase, TextblockEntry, TextboxEntry } from '@glotrix/ui/forms';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { User } from '../../../models';
-import { Store, select } from '@ngrx/store';
+import { map, take } from 'rxjs/operators';
 import { AuthState, getUser } from '../../../core/store/auth';
-import { take, tap, map } from 'rxjs/operators';
+import { User } from '../../../models';
 
 @Component({
   selector: 'gt-profile',

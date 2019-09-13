@@ -2,10 +2,10 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AuthState } from './auth.state';
 
 const authFeature = createFeatureSelector<AuthState>('auth');
-
+//const authFeature = (state: AppState) => state.auth;
 export const getIsLogged = createSelector(
   authFeature,
-  state => state.islogged
+  state => state.isLogged
 );
 
 export const getUser = createSelector(
