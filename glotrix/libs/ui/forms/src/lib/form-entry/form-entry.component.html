@@ -11,6 +11,15 @@
       </div>
     </div>
 
+    <div *ngSwitchCase="'password'" class="form-group ">
+      <label [attr.for]="entry.key">{{ entry.label }}</label>
+      <input class="form-control" type="password" [id]="entry.key" [formControlName]="entry.key"
+        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }" />
+      <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
+        <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
+      </div>
+    </div>
+
     <div *ngSwitchCase="'textblock'" class="form-group ">
       <label [attr.for]="entry.key">{{ entry.label }}</label>
       <textarea class="form-control" [id]="entry.key" [rows]="entry.rows" [formControlName]="entry.key"

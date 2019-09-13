@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EntryBase, TextboxEntry } from '@glotrix/ui/forms';
+import { EntryBase, TextboxEntry, PasswordEntry } from '@glotrix/ui/forms';
+import { Store } from '@ngrx/store';
+import { AuthState, signIn } from '../../core/store/auth';
 
 @Component({
   selector: 'gt-login',
@@ -9,10 +11,15 @@ import { EntryBase, TextboxEntry } from '@glotrix/ui/forms';
 export class LoginComponent implements OnInit {
   entries: EntryBase<any>[];
 
-  constructor() { }
+  constructor(private store: Store<AuthState>) { }
 
   ngOnInit() {
     this.entries = this.getEntrys();
+  }
+
+  onSubmitted(formData: any) {
+    console.log("onSubmitted", formData);
+    this.store.dispatch(signIn({ isLogged: "user" }));
   }
 
   getEntrys() {
@@ -29,7 +36,7 @@ export class LoginComponent implements OnInit {
           minlength: 'First name must be at least three characters.'
         }
       }),
-      new TextboxEntry({
+      new PasswordEntry({
         key: 'password',
         label: 'Password',
         required: true,

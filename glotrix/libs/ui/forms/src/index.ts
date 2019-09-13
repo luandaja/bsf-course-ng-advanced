@@ -4,3 +4,4 @@ export * from './lib/entries/dropdown-entry';
 export * from './lib/entries/entry-base';
 export * from './lib/entries/textblok-entry';
 export * from './lib/entries/textbox-entry';
+export * from './lib/entries/password-entry';

@@ -5,7 +5,7 @@
         <span class="brand-name">BXCOMMERCE</span>
       </div>
       <div class="row">
-        <gt-avatar [width]="300" [height]="300" [source]="
+        <gt-avatar [width]="600" [height]="600" [source]="
                   'https://st2.depositphotos.com/8535708/11759/v/950/depositphotos_117593278-stock-illustration-vector-illustration-of-store-building.jpg'
                 ">
         </gt-avatar>
@@ -20,17 +20,20 @@
       </div>
     </div>
     <div class="col-sm-3 offset-sm-1 login-container">
-      <gt-form-builder [entries]="entries" [isCancelButtonVisible]="false" [submitButtonText]="'Login'">
+      <gt-form-builder [entries]="entries" [isCancelButtonVisible]="false" [submitButtonText]="'Login'"
+        (submitted)="onSubmitted($event)">
       </gt-form-builder>
-      <div class="form-fluid">
+      <div class=" form-fluid">
         <div class="form-row pb-1">
-          <button type="button" class="btn btn-block btn-social btn-google" (click)="authService.GoogleAuth()">
+          <button type="button" class="btn btn-block btn-social btn-google text-center"
+            (click)="authService.GoogleAuth()">
             <i class="fa fa-google"></i>
             Log in with Google
           </button>
         </div>
         <div class="form-row">
-          <button type="button" class="btn btn-block btn-social btn-instagram" (click)="authService.GoogleAuth()">
+          <button type="button" class="btn btn-block btn-social btn-instagram text-center"
+            (click)="authService.GoogleAuth()">
             <i class="fa fa-instagram"></i>
             Log in with Instagram
           </button>

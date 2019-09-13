@@ -40,3 +40,25 @@
 .form-fluid {
   padding-top: 50px;
 }
+.btn-social {
+  position: relative;
+  padding-left: 44px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-google:hover {
+  color: #fff;
+  background-color: #a32b1c;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+.btn-instagram:hover {
+  color: #fff;
+  background-color: #a80057;
+  border-color: rgba(0, 0, 0, 0.2);
+}
