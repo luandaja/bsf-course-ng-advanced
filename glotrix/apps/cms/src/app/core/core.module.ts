@@ -27,4 +27,4 @@ import { CustomSerializer } from './store/router';
     })
   ]
 })
-export class CoreModule {}
+export class CoreModule { }

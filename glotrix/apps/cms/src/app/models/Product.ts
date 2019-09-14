@@ -1,3 +1,5 @@
+import { Image } from '@glotrix/ui/images-upload';
+
 export interface Product {
   id?: number;
   name?: string;
@@ -5,4 +7,6 @@ export interface Product {
   price?: number;
   quantity?: number;
   isDelivered?: boolean;
+  category?: string;
+  images?: Image[] | File[];
 }

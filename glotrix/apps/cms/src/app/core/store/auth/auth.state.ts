@@ -1,14 +1,20 @@
 import { User } from '../../../models';
 
+export const authFeatureName = 'auth';
 export interface AuthState {
   user: User;
-  islogged: boolean;
+  isLogged: boolean;
 }
 
 export const initalState: AuthState = {
-  islogged: false,
+  isLogged: false,
   user: {
     firstName: 'Belatrix user',
-    lastName: 'From Store'
+    lastName: 'From Store',
+    description: 'default user form store',
+    facebook: 'facebook',
+    instagram: 'instagram',
+    twitter: 'twitter',
+    website: 'website'
   }
 };

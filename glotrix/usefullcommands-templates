@@ -7,3 +7,5 @@ ng generate @schematics/angular:directive col --project=ui-layout --module=ui-la
 ng generate @nrwl/angular:library layout --directory=ui --style=scss --tags=ui & cd ./libs/ui/layout/ & rm *.json
 
 ng generate @schematics/angular:component dashboard/analytics/ActiveUsersReport --project=cms --module=dashboard/analytics/analytics.module.ts --style=scss
+
+ng generate @schematics/angular:component entries/input --project=ui-forms --module=ui-forms.module.ts --inlineStyle --inlineTemplate --changeDetection=OnPush --prefix=gt --style=scss --no-interactive

@@ -1,28 +1,21 @@
 {
   "editor.autoIndent": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": false
+    // "source.organizeImports": true
   },
-  "editor.codeLens": false,
   "editor.cursorBlinking": "solid",
   "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorStyle": "line",
-  // "editor.fontSize": 14,
-  "editor.fontFamily": "Dank Mono, Operator Mono, Fira Code, Inconsolata, Menlo",
   "editor.fontLigatures": true,
   "editor.formatOnPaste": true,
   "editor.formatOnType": false,
   "editor.formatOnSave": true,
   "editor.letterSpacing": 0.5,
   "editor.lineHeight": 20,
-  "editor.minimap.enabled": false,
   "editor.renderWhitespace": "none",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.wordWrap": "off",
-
-  // "files.autoSave": "afterDelay",
-  // "files.autoSaveDelay": 1000,
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
@@ -33,10 +26,6 @@
       "when": "$(basename)"
     }
   },
-  "files.hotExit": "onExit",
   "files.defaultLanguage": "typescript",
-  "files.trimTrailingWhitespace": true,
-
-  "prettier.singleQuote": true,
-  "prettier.printWidth": 100
+  "files.trimTrailingWhitespace": true
 }

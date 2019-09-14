@@ -24,34 +24,34 @@
       "tags": []
     },
     "ui-navigation": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "ui-avatar": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "ui-forms": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "ui-tables": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "ui-search-bar": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "ui-carousel": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
+    },
+    "models": {
+      "tags": ["models"]
+    },
+    "ui-upload-file": {
+      "tags": ["ui"]
+    },
+    "ui-image-preview": {
+      "tags": ["ui"]
+    },
+    "ui-images-upload": {
+      "tags": ["ui"]
     }
   }
 }

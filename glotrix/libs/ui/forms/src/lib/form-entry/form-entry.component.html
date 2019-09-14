@@ -1,35 +1,20 @@
-<ng-container [formGroup]="form">
-  <ng-container [ngSwitch]="entry.controlType">
+<ng-container [ngSwitch]="entry.controlType">
+  <section *ngSwitchCase="'textbox'" class="form-group ">
+    <gt-textbox [entry]="entry"></gt-textbox>
+  </section>
 
-    <div *ngSwitchCase="'textbox'" class="form-group ">
-      <label [attr.for]="entry.key">{{ entry.label }}</label>
-      <input class="form-control" type="text" [id]="entry.key" [formControlName]="entry.key"
-        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }" />
-      <small *ngIf="entry.maxLength">{{ texbox.value.length }} / {{ entry.maxLength }}</small>
-      <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
-        <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
-      </div>
-    </div>
+  <section *ngSwitchCase="'textblock'" class="form-group ">
+    <gt-textblock [entry]="entry"></gt-textblock>
+  </section>
 
-    <div *ngSwitchCase="'textblock'" class="form-group ">
-      <label [attr.for]="entry.key">{{ entry.label }}</label>
-      <textarea class="form-control" [id]="entry.key" [rows]="entry.rows" [formControlName]="entry.key"
-        [ngClass]="{ 'is-invalid': !isValid && isSubmitted }">
-      </textarea>
-      <small *ngIf="entry.maxLength">{{ textblock.value.length }} / {{ entry.maxLength }}</small>
-      <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
-        <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
-      </div>
-    </div>
+  <section *ngSwitchCase="'password'" class="form-group ">
+    <gt-password [entry]="entry"></gt-password>
+  </section>
 
-    <div *ngSwitchCase="'dropdown'" class="form-group ">
-      <label [attr.for]="entry.key">{{ entry.label }}</label>
-      <select [id]="entry.key" [formControlName]="entry.key">
-        <option *ngFor="let opt of entry.options" [value]="opt.key">{{opt.value}}</option>
-      </select>
-      <div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
-        <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
-      </div>
-    </div>
-  </ng-container>
+  <section *ngSwitchCase="'dropdown'" class="form-group ">
+    <gt-dropdown [entry]="entry"></gt-dropdown>
+  </section>
 </ng-container>
+<div *ngIf="!isValid && isSubmitted" class="invalid-feedback">
+  <p *ngFor="let error of errors">{{ getErrorMessage(error) }}</p>
+</div>

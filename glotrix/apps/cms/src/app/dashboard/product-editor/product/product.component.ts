@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EntryBase, TextboxEntry, TextblockEntry } from '@glotrix/ui/forms';
+import { FieldType } from '@glotrix/ui/forms';
 
 @Component({
   selector: 'gt-product',
@@ -7,69 +7,102 @@ import { EntryBase, TextboxEntry, TextblockEntry } from '@glotrix/ui/forms';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  files: File[] = [];
+  entries: FieldType[];
 
-  entries: EntryBase<any>[];
-
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.entries = this.getEntrys();
   }
 
+  onFilesLoaded(filesLoaded: File[]) {
+    this.files = filesLoaded;
+  }
   getEntrys() {
-    const entries: EntryBase<any>[] = [
-      new TextboxEntry({
+    const entries: FieldType[] = [
+      {
+        controlType: 'textbox',
+        value: '',
         key: 'name',
         label: 'Name',
-        required: true,
-        minlength: 3,
         order: 1,
         col: 'col-sm-12',
-        validationMessages: {
-          required: 'Name is required.',
-          minlength: 'Name must be at least three characters.',
-          maxlength: 'Name cannot exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'Name must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Name is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'Name cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      }),
-      new TextblockEntry({
+      },
+      {
+        controlType: 'textblock',
+        value: '',
         key: 'description',
         label: 'Description',
-        required: true,
         rows: 5,
-        minlength: 3,
         order: 2,
         col: 'col-sm-12',
-        validationMessages: {
-          required: 'Description is required.',
-          minlength: 'Description must be at least three characters.',
-          maxlength: 'Description cannot exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'Name must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Name is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'Name cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      }),
-      new TextboxEntry({//This should be a currency entry. TBD
+      },
+      {
+        //This should be a currency entry. TBD
+        controlType: 'textbox',
+        value: '',
         key: 'price',
         label: 'Price',
-        required: true,
-        minlength: 2,
         order: 3,
         col: 'col-sm-3',
-        validationMessages: {
-          required: 'Price is required.',
+        validations: {
+          minlength: {
+            message: 'Price must be at least three characters.',
+            value: 2
+          },
+          required: {
+            message: 'Price is required.',
+            value: true
+          }
         }
-      }),
-      new TextboxEntry({
+      },
+      {
+        controlType: 'textbox',
+        value: '',
         key: 'quantity',
         label: 'Quantity',
-        required: true,
-        minlength: 2,
         order: 4,
         col: 'col-sm-3',
-        validationMessages: {
-          required: 'Quantity is required.',
-          minlength: 'Quantity must be at least three characters.',
-          maxlength: 'Quantity cannot exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'Quantity must be at least three characters.',
+            value: 4
+          },
+          required: {
+            message: 'Quantity is required.',
+            value: true
+          }
         }
-      })
+      }
     ];
 
     return entries.sort((a, b) => a.order - b.order);
