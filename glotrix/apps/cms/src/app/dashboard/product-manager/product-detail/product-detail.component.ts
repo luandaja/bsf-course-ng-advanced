@@ -31,16 +31,16 @@ export class ProductDetailComponent implements OnInit {
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."
   };
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    this.entries = this.getEntrys();
+    this.entries = this.getEntrys(this.product);
   }
-  getEntrys() {
+  getEntrys(product: Product) {
     const entries: FieldType[] = [
       {
         controlType: 'textbox',
-        value: '',
+        value: product.name,
         key: 'name',
         label: 'Name',
         order: 1,
@@ -62,7 +62,7 @@ export class ProductDetailComponent implements OnInit {
       },
       {
         controlType: 'textblock',
-        value: '',
+        value: product.description,
         key: 'description',
         label: 'Description',
         rows: 5,
@@ -86,7 +86,7 @@ export class ProductDetailComponent implements OnInit {
       {
         //This should be a currency entry. TBD
         controlType: 'textbox',
-        value: '',
+        value: product.price.toString(),
         key: 'price',
         label: 'Price',
         order: 3,
@@ -104,7 +104,7 @@ export class ProductDetailComponent implements OnInit {
       },
       {
         controlType: 'textbox',
-        value: '',
+        value: product.quantity.toString(),
         key: 'quantity',
         label: 'Quantity',
         order: 4,

@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LinkOption, NavigationUser } from '@glotrix/ui/navigation';
-import { appModulesAsLinkOption } from '../modules.routes';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { User } from '../../../models';
-import { Store, select } from '@ngrx/store';
-import { AppState } from '../../../core/store';
-import { getUser, getUserWithFullName } from '../../../core/store/auth';
 import { map } from 'rxjs/operators';
+import { AppState } from '../../../core/store';
+import { getUser, signOut } from '../../../core/store/auth';
+import { appModulesAsLinkOption } from '../modules.routes';
 
 @Component({
   selector: 'gt-dashboard-layout',
@@ -20,7 +20,7 @@ export class DashboardLayoutComponent {
 
   protected user$: Observable<NavigationUser>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.user$ = this.store.pipe(
       select(getUser),
       map(
@@ -31,5 +31,10 @@ export class DashboardLayoutComponent {
           } as NavigationUser)
       )
     );
+  }
+
+  onLogOut() {
+    this.store.dispatch(signOut());
+    this.router.navigateByUrl('login');
   }
 }

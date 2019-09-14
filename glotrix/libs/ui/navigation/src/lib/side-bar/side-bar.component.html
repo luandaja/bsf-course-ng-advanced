@@ -15,7 +15,13 @@
 
   <div class="list-group list-group-flush" *ngFor="let linkOption of linkOptions">
     <a routerLink="{{ linkOption.url }}" class="list-group-item list-group-item-action ">
-      <i class="fa fa-fw fa-search"></i>{{ linkOption.text }}</a
-    >
+      {{ linkOption.text }}
+    </a>
+  </div>
+  <div class="list-group list-group-flush">
+    <a (click)="onLogOut()" class="list-group-item list-group-item-action ">
+      <i class="fa fa-power-off"></i>
+      Log Out
+    </a>
   </div>
 </div>

@@ -117,29 +117,32 @@
         }
       }
     },
-    "store": {
+    "online-store": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/store",
-      "sourceRoot": "apps/store/src",
+      "root": "apps/online-store",
+      "sourceRoot": "apps/online-store/src",
       "prefix": "gt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/apps/store",
-            "index": "apps/store/src/index.html",
-            "main": "apps/store/src/main.ts",
-            "polyfills": "apps/store/src/polyfills.ts",
-            "tsConfig": "apps/store/tsconfig.app.json",
+            "index": "apps/online-store/src/index.html",
+            "main": "apps/online-store/src/main.ts",
+            "polyfills": "apps/online-store/src/polyfills.ts",
+            "tsConfig": "apps/online-store/tsconfig.app.json",
             "aot": false,
-            "assets": ["apps/store/src/favicon.ico", "apps/store/src/assets"],
+            "assets": [
+              "apps/online-store/src/favicon.ico",
+              "apps/online-store/src/assets"
+            ],
             "styles": [
-              "apps/store/src/styles.scss",
+              "apps/online-store/src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
@@ -149,8 +152,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/store/src/environments/environment.ts",
-                  "with": "apps/store/src/environments/environment.prod.ts"
+                  "replace": "apps/online-store/src/environments/environment.ts",
+                  "with": "apps/online-store/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -175,60 +178,63 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "store:build"
+            "browserTarget": "online-store:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "store:build:production"
+              "browserTarget": "online-store:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "store:build"
+            "browserTarget": "online-store:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/store/tsconfig.app.json", "apps/store/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/store/**"]
+            "tsConfig": [
+              "apps/online-store/tsconfig.app.json",
+              "apps/online-store/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/online-store/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/store/jest.config.js",
-            "tsConfig": "apps/store/tsconfig.spec.json",
-            "setupFile": "apps/store/src/test-setup.ts"
+            "jestConfig": "apps/online-store/jest.config.js",
+            "tsConfig": "apps/online-store/tsconfig.spec.json",
+            "setupFile": "apps/online-store/src/test-setup.ts"
           }
         }
       }
     },
-    "store-e2e": {
-      "root": "apps/store-e2e",
-      "sourceRoot": "apps/store-e2e/src",
+    "online-store-e2e": {
+      "root": "apps/online-store-e2e",
+      "sourceRoot": "apps/online-store-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/store-e2e/cypress.json",
-            "tsConfig": "apps/store-e2e/tsconfig.e2e.json",
-            "devServerTarget": "store:serve"
+            "cypressConfig": "apps/online-store-e2e/cypress.json",
+            "tsConfig": "apps/online-store-e2e/tsconfig.e2e.json",
+            "devServerTarget": "online-store:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "store:serve:production"
+              "devServerTarget": "online-store:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/store-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/store-e2e/**"]
+            "tsConfig": ["apps/online-store-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/online-store-e2e/**"]
           }
         }
       }

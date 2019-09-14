@@ -2,5 +2,8 @@
   <button class="navbar-toggler" type="button" (click)="toggleSideBar()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <gt-avatar class="right-padding float-right " [source]="userData?.photoUrl"></gt-avatar>
+  <div class="float-right">
+    <a class="right-padding" (click)="onLogOut()">Log out</a>
+    <gt-avatar class="right-padding" [source]="userData?.photoUrl"></gt-avatar>
+  </div>
 </nav>
