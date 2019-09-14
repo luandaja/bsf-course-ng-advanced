@@ -10,7 +10,6 @@ import { AuthState, getIsLogged } from './core/store/auth';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'cms';
   isLoggedIn$: Subscription;
 
   constructor(private store: Store<AuthState>, private router: Router) {}

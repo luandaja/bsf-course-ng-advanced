@@ -3,13 +3,16 @@
     [userData]="this.user$ | async"
     [linkOptions]="options"
     [isSidebarActive]="isSidebarActive"
+    (logOut)="onLogOut($event)"
   ></gt-side-bar>
 
   <section id="#page-content-wrapper" class="flex-fill">
     <gt-top-bar
       [userData]="this.user$ | async"
       [(isSidebarActive)]="isSidebarActive"
-    ></gt-top-bar>
+      (logOut)="onLogOut($event)"
+    >
+    </gt-top-bar>
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div>

@@ -5,4 +5,6 @@ export const signIn = createAction(
   props<{ username: string; password: string }>()
 );
 
+export const signOut = createAction('[Auth] Sign out');
+
 export const signInWithGoogle = createAction('[Auth] Sign in with Google');
