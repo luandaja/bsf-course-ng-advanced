@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Field } from '../../models/Field';
 import { InputComponent } from '../input';
-import { Observable } from 'rxjs';
-import { FormGroup } from '@angular/forms';
-import { ValidationType } from '../../models/Types';
 import { CommunicationService } from '../../services/communication.service';
 
 @Component({
