@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EntryBase, PasswordEntry, TextboxEntry } from '@glotrix/ui/forms';
+
 import { Store } from '@ngrx/store';
 import { AuthState, signIn } from '../../core/store/auth';
+import { FieldType } from '@glotrix/ui/forms';
 
 @Component({
   selector: 'gt-login',
@@ -9,7 +10,7 @@ import { AuthState, signIn } from '../../core/store/auth';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  entries: EntryBase<any>[];
+  entries: FieldType[];
 
   constructor(private store: Store<AuthState>) {}
 
@@ -23,34 +24,50 @@ export class LoginComponent implements OnInit {
   }
 
   getEntrys() {
-    const entries: EntryBase<any>[] = [
-      new TextboxEntry({
+    const entries: FieldType[] = [
+      {
+        controlType: 'textbox',
+        value: '',
         key: 'username',
         label: 'Email',
         placeholder: 'user@example.com',
-        required: true,
-        minlength: 3,
         order: 1,
         col: 'col-sm-12',
-        pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
-        validationMessages: {
-          required: 'Email is required.',
-          minlength: 'Email must be at least three characters.',
-          pattern: 'Email has no correct format.'
+
+        validations: {
+          pattern: {
+            message: 'The email is not valid',
+            value: '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
+          },
+          minlength: {
+            message: 'Password must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Password is required.',
+            value: true
+          }
         }
-      }),
-      new PasswordEntry({
+      },
+      {
+        controlType: 'password',
+        value: '',
         key: 'password',
         label: 'Password',
-        required: true,
-        minlength: 3,
+        pattern: '',
         order: 2,
         col: 'col-sm-12',
-        validationMessages: {
-          required: 'Password is required.',
-          minlength: 'Password must be at least three characters.'
+        validations: {
+          minlength: {
+            message: 'Password must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Password is required.',
+            value: true
+          }
         }
-      })
+      }
     ];
 
     return entries.sort((a, b) => a.order - b.order);

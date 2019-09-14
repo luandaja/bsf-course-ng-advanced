@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EntryBase, TextblockEntry, TextboxEntry } from '@glotrix/ui/forms';
+import { FieldType } from '@glotrix/ui/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { AuthState, getUser } from '../../../core/store/auth';
+import { AuthState, getUser, updateUser } from '../../../core/store/auth';
 import { User } from '../../../models';
 
 @Component({
@@ -12,7 +12,7 @@ import { User } from '../../../models';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  protected entries$: Observable<EntryBase<any>[]>;
+  protected entries$: Observable<FieldType[]>;
 
   constructor(private store: Store<AuthState>) {}
 
@@ -24,99 +24,170 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  getEntrys(user: User): EntryBase<any>[] {
-    const entries: EntryBase<any>[] = [
-      new TextboxEntry({
+  onSubmitted(user: User) {
+    this.store.dispatch(updateUser({ user: user }));
+  }
+
+  getEntrys(user: User): FieldType[] {
+    const entries: FieldType[] = [
+      {
+        controlType: 'textbox',
         key: 'firstName',
         value: user.firstName,
         label: 'First name',
-        required: true,
-        minlength: 3,
         order: 1,
         col: 'col-sm-4',
-        validationMessages: {
-          required: 'First name is required.',
-          minlength: 'First name must be at least three characters.',
-          maxlength: 'First name cannot exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'First name must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'First name is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'First name cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      }),
-      new TextboxEntry({
+      },
+      {
+        controlType: 'textbox',
         key: 'lastName',
         value: user.lastName,
         label: 'Last name',
-        required: true,
-        minlength: 3,
         order: 2,
         col: 'col-sm-4',
-        validationMessages: {
-          required: 'Last name is required.',
-          minlength: 'Last name must be at least three characters.',
-          maxlength: 'Last name cannot exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'Last name must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Last name is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'Last name cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      }),
-      new TextboxEntry({
+      },
+      {
+        controlType: 'textbox',
         key: 'facebook',
         value: user.facebook,
         label: 'Facebook',
-        required: true,
-        minlength: 2,
         order: 3,
         col: 'col-sm-4',
-        validationMessages: {
-          required: 'Facebook is required.',
-          minlength: 'Facebook must be at least three characters.',
-          maxlength: 'Facebook cannot exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'Facebook must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Facebook is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'Facebook cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      }),
-      new TextboxEntry({
+      },
+
+      {
+        controlType: 'textbox',
         key: 'twitter',
         value: user.twitter,
         label: 'Twitter',
-        required: true,
-        minlength: 2,
         order: 4,
         col: 'col-sm-4',
-        validationMessages: {
-          required: 'Twitter is required.',
-          minlength: 'Twitter must be at least three characters.',
-          maxlength: 'Twitter cannot exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'Twitter must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Twitter is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'Twitter cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      }),
-      new TextboxEntry({
+      },
+
+      {
+        controlType: 'textbox',
         key: 'instagram',
         value: user.instagram,
         label: 'Instagram',
-        minlength: 3,
         order: 5,
         col: 'col-sm-4',
-        validationMessages: {
-          minlength: 'Instagram must be at least three characters.',
-          maxlength: 'Instagram cannot exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'Instagram must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Instagram is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'Instagram cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      }),
+      },
 
-      new TextboxEntry({
+      {
+        controlType: 'textbox',
         key: 'website',
         value: user.website,
         label: 'Website',
         order: 6,
         col: 'col-sm-4',
-        validationMessages: {
-          minlength: 'Email must be at least three characters.',
-          maxlength: 'Email exceed 30 characters.'
+        validations: {
+          minlength: {
+            message: 'Website must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Website is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'Website cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      }),
-      new TextblockEntry({
+      },
+
+      {
+        controlType: 'textblock',
         key: 'description',
         value: user.description,
         label: 'Description',
         order: 7,
-        col: 'col-sm-12',
-        validationMessages: {
-          minlength: 'Email must be at least three characters.',
-          maxlength: 'Email exceed 30 characters.'
+        col: 'col-sm-4',
+        validations: {
+          minlength: {
+            message: 'Description must be at least three characters.',
+            value: 3
+          },
+          required: {
+            message: 'Description is required.',
+            value: true
+          },
+          maxlength: {
+            message: 'Description cannot exceed 30 characters.',
+            value: 30
+          }
         }
-      })
+      }
     ];
 
     return entries.sort((a, b) => a.order - b.order);
