@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { EntryBase } from '../entries/entry-base';
+import { FieldType } from '../models/Field';
 
 @Component({
   selector: 'gt-form-entry',
@@ -8,13 +8,13 @@ import { EntryBase } from '../entries/entry-base';
   styleUrls: ['./form-entry.component.scss']
 })
 export class FormEntryComponent implements OnInit {
-  @Input() entry: EntryBase<any>;
+  @Input() entry: FieldType;
   @Input() form: FormGroup;
   @Input() isSubmitted: boolean;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   get isValid() {
     return this.form.controls[this.entry.key].valid;
@@ -25,6 +25,6 @@ export class FormEntryComponent implements OnInit {
   }
 
   getErrorMessage(id: string) {
-    return this.entry.validationMessages[id];
+    return this.entry.validations[id].message;
   }
 }
