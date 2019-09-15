@@ -11,7 +11,7 @@ import { ProductsState, getProducts } from '../../store/products';
   styleUrls: ['./product-mamager.component.scss']
 })
 export class ProductMamagerComponent implements OnInit {
-  products: Product[] = [];
+
   products$: Observable<Product[]>;
 
   constructor(private store: Store<ProductsState>) {
@@ -21,5 +21,5 @@ export class ProductMamagerComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

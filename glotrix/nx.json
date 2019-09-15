@@ -55,6 +55,9 @@
     },
     "ui-login": {
       "tags": ["ui"]
+    },
+    "ui-card": {
+      "tags": ["ui"]
     }
   }
 }

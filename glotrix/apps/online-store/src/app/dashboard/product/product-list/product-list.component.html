@@ -1,1 +1,17 @@
-<p>product-list works!</p>
+<div class="pt-3">
+  <section class="row">
+    <gt-search-bar
+      placeholder="Search for a product name"
+      class="col-sm-3"
+    ></gt-search-bar>
+    <gt-category-filter class="col-sm-3"></gt-category-filter>
+  </section>
+  <section class="row">
+    <div class="card-group">
+      <gt-product-card
+        *ngFor="let product of products$ | async"
+        [product]="product"
+      ></gt-product-card>
+    </div>
+  </section>
+</div>
