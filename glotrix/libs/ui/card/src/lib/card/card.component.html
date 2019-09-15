@@ -1,0 +1,14 @@
+<div class="card">
+  <img [src]="imageUrl" class="card-img-top" [alt]="name" />
+  <div class="card-body">
+    <h5 class="card-title">{{ title }}</h5>
+    <p class="card-text">
+      {{ contentText }}
+    </p>
+    <p class="card-text">
+      {{ price | currency }}
+      <a class="pull-right" [routerLink]="{{url}}" [state]="{ id: 1 }">Ver más</a>
+    </p>
+  </div>
+</div>
+<!--https://on.ft.com/2kMTPnh-->

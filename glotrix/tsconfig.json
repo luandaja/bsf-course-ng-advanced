@@ -26,7 +26,9 @@
       "@glotrix/models": ["libs/models/src/index.ts"],
       "@glotrix/ui/upload-file": ["libs/ui/upload-file/src/index.ts"],
       "@glotrix/ui/image-preview": ["libs/ui/image-preview/src/index.ts"],
-      "@glotrix/ui/images-upload": ["libs/ui/images-upload/src/index.ts"]
+      "@glotrix/ui/images-upload": ["libs/ui/images-upload/src/index.ts"],
+      "@glotrix/ui/login": ["libs/ui/login/src/index.ts"],
+      "@glotrix/ui/card": ["libs/ui/card/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

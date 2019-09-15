@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { signIn, AuthState } from '../../core/store/auth';
+import { Store } from '@ngrx/store';
+import { SocialNetwork } from '@glotrix/ui/login';
+import { loginEntries, banner } from './entries';
 
 @Component({
   selector: 'gt-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  entries = loginEntries;
+  socialNetwork = SocialNetwork;
+  banner = banner;
 
-  constructor() { }
+  constructor(private store: Store<AuthState>) { }
 
-  ngOnInit() {
+  onSubmitted(formData: any) {
+    this.store.dispatch(
+      signIn({ username: formData.Email, password: formData.password })
+    );
   }
 
+  onGooglePlusSignIn() { }
+
+  onInstagramSignIn() { }
 }

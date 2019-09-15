@@ -52,6 +52,12 @@
     },
     "ui-images-upload": {
       "tags": ["ui"]
+    },
+    "ui-login": {
+      "tags": ["ui"]
+    },
+    "ui-card": {
+      "tags": ["ui"]
     }
   }
 }
