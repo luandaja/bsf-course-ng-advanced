@@ -15,6 +15,7 @@ export const initalState: AuthState = {
     facebook: 'facebook',
     instagram: 'instagram',
     twitter: 'twitter',
-    website: 'website'
+    website: 'website',
+    photoUrl: 'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'
   }
 };
