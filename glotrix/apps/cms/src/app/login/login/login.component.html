@@ -1,43 +1,25 @@
 <div class="container-fluid">
   <div class="row align-items-center">
-    <div class="col-sm-7 welcome-container">
-      <div class="row pull-left">
-        <span class="brand-name">BXCOMMERCE</span>
-      </div>
-      <div class="row">
-        <gt-avatar [width]="600" [height]="600" [source]="
-                  'https://st2.depositphotos.com/8535708/11759/v/950/depositphotos_117593278-stock-illustration-vector-illustration-of-store-building.jpg'
-                ">
-        </gt-avatar>
-      </div>
-      <div class="col-sm-3 offset-sm-1 fixed-bottom">
-        <div class="row">
-          <h2>Bienvenido</h2>
-        </div>
-        <div class="row">
-          <span>Te esperábamos, sigamos trabajando para el crecimiento de tu negocio.</span>
-        </div>
-      </div>
-    </div>
+    <gt-welcome-banner [banner]="banner" class="col-sm-7 px-0"></gt-welcome-banner>
     <div class="col-sm-3 offset-sm-1 login-container">
-      <gt-form-builder [entries]="entries" [isCancelButtonVisible]="false" [submitButtonText]="'Login'"
-        (submitted)="onSubmitted($event)">
+      <gt-form-builder
+        [entries]="entries"
+        [isCancelButtonVisible]="false"
+        [submitButtonText]="'Login'"
+        (submitted)="onSubmitted($event)"
+      >
       </gt-form-builder>
-      <div class=" form-fluid">
-        <div class="form-row pb-1">
-          <button type="button" class="btn btn-block btn-social btn-google text-center"
-            (click)="authService.GoogleAuth()">
-            <i class="fa fa-google"></i>
-            Log in with Google
-          </button>
-        </div>
-        <div class="form-row">
-          <button type="button" class="btn btn-block btn-social btn-instagram text-center"
-            (click)="authService.GoogleAuth()">
-            <i class="fa fa-instagram"></i>
-            Log in with Instagram
-          </button>
-        </div>
+      <div class="form-fluid">
+        <ui-social-button
+          (signedIn)="onGooglePlusSignIn()"
+          [socialNetwork]="socialNetwork.GooglePlus"
+          [text]="'Log in with Google'"
+        ></ui-social-button>
+        <ui-social-button
+          (signedIn)="onInstagramSignIn()"
+          [socialNetwork]="socialNetwork.Instagram"
+          [text]="'Log in with Instagram'"
+        ></ui-social-button>
       </div>
     </div>
   </div>

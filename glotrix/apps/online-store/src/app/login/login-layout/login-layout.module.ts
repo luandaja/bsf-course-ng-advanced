@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LoginLayoutRoutingModule } from './login-layout-routing.module';
 import { LoginComponent } from '../login/login.component';
 import { UiFormsModule } from '@glotrix/ui/forms';
-import { UiAvatarModule } from '@glotrix/ui/avatar';
+import { UiLoginModule } from '@glotrix/ui/login';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -12,7 +12,7 @@ import { UiAvatarModule } from '@glotrix/ui/avatar';
     CommonModule,
     LoginLayoutRoutingModule,
     UiFormsModule,
-    UiAvatarModule
+    UiLoginModule
   ]
 })
 export class LoginLayoutModule { }

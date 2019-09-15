@@ -23,9 +23,10 @@ export class FormBuilderComponent implements OnInit {
   constructor(
     private entryControlService: EntryControlService,
     private communication: CommunicationService
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.entries = this.entries.sort((a, b) => a.order - b.order);
     this.form = this.entryControlService.toFormGroup(this.entries);
     this.communication.setFormState({ form: this.form, isSubmitted: this.isSubmitted });
   }
