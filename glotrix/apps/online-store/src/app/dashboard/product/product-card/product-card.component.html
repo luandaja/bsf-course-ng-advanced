@@ -2,15 +2,13 @@
   <img [src]="product.images[0]" class="card-img-top" [alt]="product.name" />
   <div class="card-body">
     <h5 class="card-title text-center">{{ product.name }}</h5>
-    <p class="price text-center">{{ product.price | currency }}</p>
-    <p class="card-text block-with-text">
+    <div class="price text-center">{{ product.price | currency }}</div>
+    <div class="card-text block-with-text pr-2 pl-2">
       {{ product.description }}
-    </p>
-    <p class="card-text">
-      <a class="pull-right" [routerLink]="['detail']" [state]="{ product: product }"
-        >See more</a
-      >
-    </p>
+    </div>
+    <div class="pull-right pr-2">
+      <a [routerLink]="['detail', product.id]">See more</a>
+    </div>
     <button>Add to Cart</button>
   </div>
 </div>
