@@ -1,21 +1,32 @@
-import { Location } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Product } from '../../../models/Product';
-
+import { ActivatedRoute } from "@angular/router";
+import { Observable, Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { ProductsState, getProduct } from '../../store/products';
 @Component({
   selector: 'gt-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
+  productId$: Subscription;
+  @Input() product$: Observable<Product>;
 
-  @Input() product: Product;
-
-  constructor(private location: Location) { }
+  constructor(private route: ActivatedRoute, private store: Store<ProductsState>) { }
 
   ngOnInit() {
-    this.product = this.location.getState()["product"];
-    console.log("on product detail", this.location.getState()["product"]);
+    this.loadProduct(2);
+    this.productId$ = this.route.params.subscribe(params => this.loadProduct(Number(params['id'])));
+  }
+
+  loadProduct(id: number) {
+    this.product$ = this.store
+      .pipe(select(getProduct(id)));
+  }
+
+  ngOnDestroy(): void {
+    this.productId$.unsubscribe();
   }
 
 }

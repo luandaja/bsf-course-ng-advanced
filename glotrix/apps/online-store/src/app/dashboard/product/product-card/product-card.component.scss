@@ -34,6 +34,9 @@ a {
   width: 100%;
   font-size: 18px;
 }
+.card button:hover {
+  background-color: #f3b26e;
+}
 /* mixin for multiline */
 @mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white) {
   overflow: hidden;
@@ -41,7 +44,7 @@ a {
   line-height: $lineHeight;
   max-height: $lineHeight * $lineCount;
   text-align: justify;
-  padding: 10px;
+  margin-bottom: 5px;
   &:before {
     content: "...";
     position: absolute;
