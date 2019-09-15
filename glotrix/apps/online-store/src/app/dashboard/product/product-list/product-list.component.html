@@ -2,7 +2,8 @@
   <section class="row">
     <gt-search-bar
       placeholder="Search for a product name"
-      class="col-sm-3"
+      class="col-sm-6"
+      (keywordChange)="updateSeachKeyword($event)"
     ></gt-search-bar>
     <gt-category-filter class="col-sm-3"></gt-category-filter>
   </section>
