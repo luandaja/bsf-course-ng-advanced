@@ -1,0 +1,21 @@
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img [src]="cartItem.imageUrl" class="card-img" [alt]="cartItem.name" />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ cartItem.name }}</h5>
+        <p class="card-text block-with-text">
+          {{ cartItem.description }}
+        </p>
+        <p class="card-text">
+          <small class="text-muted">{{ cartItem.price | currency }}</small>
+        </p>
+        <div class="col-sm-6">
+          <gt-counter [(counter)]="cartItem.quantity"></gt-counter>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

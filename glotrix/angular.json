@@ -616,6 +616,37 @@
         }
       },
       "schematics": {}
+    },
+    "ui-counter": {
+      "projectType": "library",
+      "root": "libs/ui/counter",
+      "sourceRoot": "libs/ui/counter/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/counter/tsconfig.lib.json",
+              "libs/ui/counter/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/counter/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/counter/jest.config.js",
+            "tsConfig": "libs/ui/counter/tsconfig.spec.json",
+            "setupFile": "libs/ui/counter/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
