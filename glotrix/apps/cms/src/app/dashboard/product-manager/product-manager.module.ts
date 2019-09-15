@@ -15,10 +15,16 @@ import { StoreModule } from '@ngrx/store';
 import { productsReducer } from '../store/products';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { UiImagesUploadModule } from '@glotrix/ui/images-upload';
+import { ProductFiltersService } from './services/product-filters.service';
 
 @NgModule({
-  declarations: [ProductMamagerComponent, TableMainComponent, CategoryFilterComponent, ProductDetailComponent],
-
+  declarations: [
+    ProductMamagerComponent,
+    TableMainComponent,
+    CategoryFilterComponent,
+    ProductDetailComponent
+  ],
+  providers: [ProductFiltersService],
   imports: [
     CommonModule,
     ProductManagerRoutingModule,
@@ -30,4 +36,4 @@ import { UiImagesUploadModule } from '@glotrix/ui/images-upload';
     UiImagesUploadModule
   ]
 })
-export class ProductManagerModule { }
+export class ProductManagerModule {}
