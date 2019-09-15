@@ -1,16 +1,17 @@
 <div class="card">
   <img [src]="product.images[0]" class="card-img-top" [alt]="product.name" />
   <div class="card-body">
-    <h5 class="card-title">{{ product.name }}</h5>
-    <p class="card-text">
+    <h5 class="card-title text-center">{{ product.name }}</h5>
+    <p class="price text-center">{{ product.price | currency }}</p>
+    <p class="card-text block-with-text">
       {{ product.description }}
     </p>
     <p class="card-text">
-      {{ product.price | currency }}
-      <a class="pull-right" [routerLink]="['detail']" [state]="{ id: product.id }"
-        >Ver más</a
+      <a class="pull-right" [routerLink]="['detail']" [state]="{ product: product }"
+        >See more</a
       >
     </p>
+    <button>Add to Cart</button>
   </div>
 </div>
 <!--https://on.ft.com/2kMTPnh-->
