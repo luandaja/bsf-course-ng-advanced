@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'gt-search-bar',
@@ -6,11 +6,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-
+  @Output() keywordChange: EventEmitter<string> = new EventEmitter<string>();
   @Input() placeholder: string;
-  constructor() { }
+  constructor() {}
+  ngOnInit() {}
 
-  ngOnInit() {
+  onKeywordChange(value: any) {
+    this.keywordChange.emit(value.target.value);
   }
-
 }

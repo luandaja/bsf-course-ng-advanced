@@ -5,22 +5,13 @@ export interface ProductsState {
   isLoading: boolean;
 }
 
-const dummyData = [
-  {
-    id: 1,
-    name: 'Producto 1',
-    description: 'descripción producto 1',
-    price: 10.5,
-    quantity: 100
-  },
-  {
-    id: 1,
-    name: 'Producto 1',
-    description: 'descripción producto 1',
-    price: 10.5,
-    quantity: 100
-  }
-];
+const dummyData = Array.from({ length: 12 }, (_, i) => ({
+  id: i,
+  name: `Producto ${i}`,
+  description: `descripción producto ${i}`,
+  price: Math.random() * 10,
+  quantity: Math.random() * (1000 - 100)
+}));
 
 export const initalState: ProductsState = {
   products: [...dummyData],
