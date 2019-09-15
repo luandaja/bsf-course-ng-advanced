@@ -7,10 +7,57 @@ a {
   border-radius: 25px;
   margin: 10px;
   border: 1px solid #f89937;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 303px;
+}
+.card-body {
+  padding: 0px;
+}
+.price {
+  font-size: 22px;
 }
 .card-img-top {
   border-bottom: 1px solid #f89937;
   border-radius: 25px 25px 0px 0px;
   width: 300px;
   height: 300px;
+}
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #f89937;
+  border-radius: 0px 0px 25px 25px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+/* mixin for multiline */
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white) {
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount;
+  text-align: justify;
+  padding: 10px;
+  &:before {
+    content: "...";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    background: $bgColor;
+  }
+}
+
+.block-with-text {
+  @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);
 }

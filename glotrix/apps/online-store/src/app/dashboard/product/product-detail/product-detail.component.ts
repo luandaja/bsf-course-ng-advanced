@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit, Input } from '@angular/core';
+import { Product } from '../../../models/Product';
 
 @Component({
   selector: 'gt-product-detail',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor() { }
+  @Input() product: Product;
+
+  constructor(private location: Location) { }
 
   ngOnInit() {
+    this.product = this.location.getState()["product"];
+    console.log("on product detail", this.location.getState()["product"]);
   }
 
 }
