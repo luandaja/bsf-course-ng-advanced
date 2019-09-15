@@ -1,9 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { TextblockField } from '../../models/Field';
-import { ValidationType } from '../../models/Types';
 import { CommunicationService } from '../../services/communication.service';
 import { InputComponent } from '../input';
 
@@ -18,7 +14,7 @@ import { InputComponent } from '../input';
           [id]="entry.key"
           [rows]="entry.rows"
           [formControlName]="entry.key"
-          [ngClass]="{ 'is-invalid': !control.valid && data.isSubmitted }"
+          [ngClass]="{ 'is-invalid': !control.valid && state.isSubmitted }"
           [required]="validations.required?.value"
           [minlength]="validations.minlength?.value"
           [maxlength]="validations.maxlength?.value"

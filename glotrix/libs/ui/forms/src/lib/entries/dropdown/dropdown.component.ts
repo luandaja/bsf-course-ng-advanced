@@ -1,7 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { DropdownField } from '../../models/Field';
 import { CommunicationService } from '../../services/communication.service';
 import { InputComponent } from '../input';
