@@ -1,10 +1,10 @@
-<div class="card mb-3" style="max-width: 540px;">
+<div class="card mb-3">
   <div class="row no-gutters">
-    <div class="col-md-4">
+    <div class="col-md-4 pointer" (click)="goToDetail(cartItem.productId)">
       <img [src]="cartItem.imageUrl" class="card-img" [alt]="cartItem.name" />
     </div>
     <div class="col-md-8">
-      <div class="card-body">
+      <div class="card-body pointer" (click)="goToDetail(cartItem.productId)">
         <h5 class="card-title">{{ cartItem.name }}</h5>
         <p class="card-text block-with-text">
           {{ cartItem.description }}
@@ -12,8 +12,17 @@
         <p class="card-text">
           <small class="text-muted">{{ cartItem.price | currency }}</small>
         </p>
-        <div class="col-sm-6">
-          <gt-counter [(counter)]="cartItem.quantity"></gt-counter>
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-sm-6">
+              <gt-counter [(counter)]="cartItem.quantity"></gt-counter>
+            </div>
+            <div class="col-sm-6">
+              <button class="btn bold">
+                <span>Remove from cart<i class="fa fa-trash"></i></span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

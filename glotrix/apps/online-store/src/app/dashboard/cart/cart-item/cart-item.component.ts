@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { CartItem } from '../../../models/cartItem';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gt-cart-item',
@@ -11,9 +12,17 @@ export class CartItemComponent implements OnInit {
   @Input() cartItem: CartItem;
   // @Output() cartItemChange = new EventEmitter<CartItem>();
   alet = 3;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  goToDetail(productId: number) {
+    this.router.navigate(['/dashboard/products/detail/', productId])
+  }
+
+  remove() {
+
   }
 
 }
