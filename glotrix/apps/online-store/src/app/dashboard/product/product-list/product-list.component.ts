@@ -26,14 +26,10 @@ export class ProductListComponent implements OnInit {
     this.products$ = combineLatest(
       this.store.pipe(select(getProducts)),
       this.filters.getFiltersObservable()
-    ).pipe(
-      tap(console.log),
-      map(this.filterProductList)
-    );
+    ).pipe(map(this.filterProductList));
   }
 
   updateSeachKeyword(value: string) {
-    console.log(value);
     this.filters.setFilters({ keyword: value });
   }
 

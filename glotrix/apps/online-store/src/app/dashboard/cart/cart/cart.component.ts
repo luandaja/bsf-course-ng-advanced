@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { CartState, getCartItems } from '../../store/cart';
 import { Store, select } from '@ngrx/store';
 import { CartItem } from '../../../models/cartItem';
@@ -19,12 +19,10 @@ export class CartComponent implements OnInit {
   }
 
   get cartItemOrders() {
-    return this.cartItems$.pipe(map(this.mapCartItems), tap(console.log));
+    return this.cartItems$.pipe(map(this.mapCartItems));
   }
 
   private mapCartItems(cartItems: CartItem[]) {
     return cartItems.map(cartItem => ({ price: cartItem.price, quantity: cartItem.quantity }));
   }
-
-
 }

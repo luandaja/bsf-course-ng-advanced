@@ -4,8 +4,10 @@
       <img [src]="cartItem.imageUrl" class="card-img" [alt]="cartItem.name" />
     </div>
     <div class="col-md-8">
-      <div class="card-body pointer" (click)="goToDetail(cartItem.productId)">
-        <h5 class="card-title">{{ cartItem.name }}</h5>
+      <div class="card-body">
+        <h5 class="card-title pointer" (click)="goToDetail(cartItem.productId)">
+          {{ cartItem.name }}
+        </h5>
         <p class="card-text block-with-text">
           {{ cartItem.description }}
         </p>
@@ -15,10 +17,13 @@
         <div class="col-sm-8">
           <div class="row">
             <div class="col-sm-6">
-              <gt-counter [(counter)]="cartItem.quantity"></gt-counter>
+              <gt-counter
+                [counter]="cartItem.quantity"
+                (counterChange)="onCounterChanged($event)"
+              ></gt-counter>
             </div>
             <div class="col-sm-6">
-              <button class="btn bold">
+              <button class="btn bold" (click)="remove()">
                 <span>Remove from cart<i class="fa fa-trash"></i></span>
               </button>
             </div>
