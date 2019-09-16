@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { CartState, getCartItems } from '../../store/cart';
 import { Store, select } from '@ngrx/store';
 import { CartItem } from '../../../models/cartItem';
@@ -10,7 +10,7 @@ import { tap, map } from 'rxjs/operators';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnChanges {
   cartItems$: Observable<CartItem[]>;
   constructor(private store: Store<CartState>) { }
 
@@ -19,11 +19,15 @@ export class CartComponent implements OnInit {
   }
 
   get cartItemOrders() {
-    return this.cartItems$.pipe(map(this.mapCartItems), tap(console.log));
+    return this.cartItems$.pipe(map(this.mapCartItems));
   }
 
   private mapCartItems(cartItems: CartItem[]) {
     return cartItems.map(cartItem => ({ price: cartItem.price, quantity: cartItem.quantity }));
+  }
+
+  ngOnChanges() {
+    this.cartItems$.pipe(tap(console.log));
   }
 
 

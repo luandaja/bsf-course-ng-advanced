@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { CartItem } from '../../../models/cartItem';
 import { Router } from '@angular/router';
+import { removeCartItem, updateCartItem } from '../../store/cart/cart.actions';
+import { Store } from '@ngrx/store';
+import { CartState } from '../../store/cart';
 
 @Component({
   selector: 'gt-cart-item',
@@ -11,8 +14,8 @@ export class CartItemComponent implements OnInit {
 
   @Input() cartItem: CartItem;
   // @Output() cartItemChange = new EventEmitter<CartItem>();
-  alet = 3;
-  constructor(private router: Router) { }
+
+  constructor(private router: Router, private store: Store<CartState>, ) { }
 
   ngOnInit() {
   }
@@ -22,7 +25,11 @@ export class CartItemComponent implements OnInit {
   }
 
   remove() {
+    this.store.dispatch(removeCartItem({ cartItem: this.cartItem }));
+  }
 
+  onCounterChanged(counter: number) {
+    this.store.dispatch(updateCartItem({ cartItemId: this.cartItem.id, quantity: counter }));
   }
 
 }

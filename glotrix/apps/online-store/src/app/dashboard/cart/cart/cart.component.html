@@ -2,7 +2,7 @@
   <div class="col-sm-8">
     <gt-cart-item
       *ngFor="let cartItem of cartItems$ | async"
-      [(cartItem)]="cartItem"
+      [cartItem]="cartItem"
     ></gt-cart-item>
   </div>
   <div class="col-sm-4">

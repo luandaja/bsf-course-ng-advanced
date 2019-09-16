@@ -23,9 +23,18 @@ const dummyData = [
     name: 'Producto 4',
     description: descriptionLorem,
     price: 10.5,
-    quantity: 2,
+    quantity: 3,
     imageUrl: 'https://bit.ly/2lN8Upb',
     productId: 4
+  },
+  {
+    id: 3,
+    name: 'Producto 5',
+    description: descriptionLorem,
+    price: 10.5,
+    quantity: 3,
+    imageUrl: 'https://bit.ly/2lP4Kxa',
+    productId: 5
   }
 ];
 export const initalState: CartState = {
