@@ -58,6 +58,9 @@
     },
     "ui-card": {
       "tags": ["ui"]
+    },
+    "ui-counter": {
+      "tags": ["ui"]
     }
   }
 }
