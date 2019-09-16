@@ -10,7 +10,7 @@ import { tap, map } from 'rxjs/operators';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit, OnChanges {
+export class CartComponent implements OnInit {
   cartItems$: Observable<CartItem[]>;
   constructor(private store: Store<CartState>) { }
 
@@ -25,10 +25,4 @@ export class CartComponent implements OnInit, OnChanges {
   private mapCartItems(cartItems: CartItem[]) {
     return cartItems.map(cartItem => ({ price: cartItem.price, quantity: cartItem.quantity }));
   }
-
-  ngOnChanges() {
-    this.cartItems$.pipe(tap(console.log));
-  }
-
-
 }
