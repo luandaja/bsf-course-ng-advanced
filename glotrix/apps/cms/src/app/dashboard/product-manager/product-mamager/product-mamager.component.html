@@ -9,10 +9,16 @@
   </section>
 
   <section class="row">
-    <gt-table-main class="col-sm-12" [products]="products$ | async"></gt-table-main>
+    <gt-table-main class="col-sm-12"></gt-table-main>
   </section>
 
-  <section class="row">
-    <gt-pagination class="col-sm-12"></gt-pagination>
+  <section class="row" *ngIf="pagination$ | async as pagination">
+    <gt-pagination
+      class="col-sm-12"
+      [total]="total$ | async"
+      [page]="pagination.page"
+      [pageSize]="pagination.size"
+      (pageChange)="updatePagination($event)"
+    ></gt-pagination>
   </section>
 </div>
