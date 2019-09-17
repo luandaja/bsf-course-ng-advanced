@@ -8,4 +8,4 @@ const routes: Routes = [{ path: '', component: ProfileComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProfileEditorRoutingModule { }
+export class ProfileEditorRoutingModule {}

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { appModules, appModulesAsLinkOption } from './modules.routes';
-
+const defaultRoute = appModulesAsLinkOption[0].url;
 const routes: Routes = [
   {
     path: '',
@@ -11,7 +11,7 @@ const routes: Routes = [
       ...appModules,
       {
         path: '',
-        redirectTo: appModulesAsLinkOption[0].url,
+        redirectTo: defaultRoute,
         pathMatch: 'full'
       }
     ]
