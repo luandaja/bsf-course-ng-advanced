@@ -1,0 +1,30 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" width="5%">#</th>
+      <th scope="col" width="10%">Order Date</th>
+      <th scope="col">Client Name</th>
+      <th scope="col" width="10%">Total</th>
+      <th scope="col" width="15%">Delivery State</th>
+      <th scope="col" width="10%">See Invoice</th>
+      <th scope="col" width="10%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ order.date.toLocaleDateString() }}</td>
+      <td>{{ order.clientName }}</td>
+      <td>{{ order.total | currency }}</td>
+      <td>{{ order.status }}</td>
+      <td class="text-center">
+        <span> <i class="fa fa-search"></i></span>
+      </td>
+      <td class="text-center">
+        <button *ngIf="isPaid(order)" class="btn btn-light" (click)="delivered(order)">
+          Delivered
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
