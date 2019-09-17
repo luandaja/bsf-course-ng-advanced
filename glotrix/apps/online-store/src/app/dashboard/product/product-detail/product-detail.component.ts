@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from '../../../models/Product';
 import { ActivatedRoute } from "@angular/router";
 import { Observable, Subscription } from 'rxjs';
@@ -11,12 +11,11 @@ import { ProductsState, getProduct } from '../../../store/products';
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
   productId$: Subscription;
-  @Input() product$: Observable<Product>;
+  product$: Observable<Product>;
 
   constructor(private route: ActivatedRoute, private store: Store<ProductsState>) { }
 
   ngOnInit() {
-    this.loadProduct(2);
     this.productId$ = this.route.params.subscribe(params => this.loadProduct(Number(params['id'])));
   }
 
