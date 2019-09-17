@@ -3,9 +3,9 @@ import { FieldType } from '@glotrix/ui/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { AuthState, getUser, updateUser } from '../../../core/store/auth';
 import { User } from '../../../models';
 import { entries } from './entries';
+import { AuthState, getUser, updateUser } from '../../../store/auth';
 
 @Component({
   selector: 'gt-profile',
@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   protected entries$: Observable<FieldType[]>;
   protected photoUrl: string;
 
-  constructor(private store: Store<AuthState>) { }
+  constructor(private store: Store<AuthState>) {}
 
   ngOnInit() {
     this.entries$ = this.store.pipe(
@@ -35,6 +35,6 @@ export class ProfileComponent implements OnInit {
     return entries.map(entry => {
       entry.value = user[entry.key];
       return entry;
-    })
+    });
   }
 }

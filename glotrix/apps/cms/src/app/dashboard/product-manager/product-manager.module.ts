@@ -11,11 +11,9 @@ import { FormsModule } from '@angular/forms';
 
 import { TableMainComponent } from './table-main/table-main.component';
 import { CategoryFilterComponent } from './category-filter/category-filter.component';
-import { StoreModule } from '@ngrx/store';
-import { productsReducer } from '../store/products';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { UiImagesUploadModule } from '@glotrix/ui/images-upload';
-import { ProductFiltersService } from './services/product-filters.service';
+import { ProductTableFilterStoreModule } from '../../store/product-table-filter';
 
 @NgModule({
   declarations: [
@@ -24,16 +22,16 @@ import { ProductFiltersService } from './services/product-filters.service';
     CategoryFilterComponent,
     ProductDetailComponent
   ],
-  providers: [ProductFiltersService],
+
   imports: [
     CommonModule,
     ProductManagerRoutingModule,
     UiSearchBarModule,
     UiTablesModule,
-    StoreModule.forFeature('products', productsReducer),
     UiFormsModule,
     FormsModule,
-    UiImagesUploadModule
+    UiImagesUploadModule,
+    ProductTableFilterStoreModule
   ]
 })
 export class ProductManagerModule {}

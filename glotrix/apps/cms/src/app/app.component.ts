@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { AuthState, getIsLogged } from './core/store/auth';
+import { AuthState, getIsLogged } from './store/auth';
 
 @Component({
   selector: 'gt-root',
@@ -23,9 +23,10 @@ export class AppComponent implements OnInit, OnDestroy {
   private redirect(isLogged: boolean) {
     if (isLogged) {
       console.log('loggeado');
-      this.router.navigate(['/dashboard']);
+      // this.router.navigate(['/dashboard']);
     } else {
       console.log('no loggeado');
+      this.router.navigate(['/login']);
     }
   }
 

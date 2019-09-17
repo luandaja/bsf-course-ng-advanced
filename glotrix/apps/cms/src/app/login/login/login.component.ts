@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthState, signIn } from '../../core/store/auth';
 import { SocialNetwork } from '@glotrix/ui/login';
 import { loginEntries, banner } from './entries';
+import { AuthState, signIn } from '../../store/auth';
 
 @Component({
   selector: 'gt-login',
@@ -14,7 +14,7 @@ export class LoginComponent {
   socialNetwork = SocialNetwork;
   banner = banner;
 
-  constructor(private store: Store<AuthState>) { }
+  constructor(private store: Store<AuthState>) {}
 
   onSubmitted(formData: any) {
     this.store.dispatch(
@@ -22,9 +22,6 @@ export class LoginComponent {
     );
   }
 
-  onGooglePlusSignIn() { }
-
-  onInstagramSignIn() { }
-
-
+  onGooglePlusSignIn() {}
+  onInstagramSignIn() {}
 }

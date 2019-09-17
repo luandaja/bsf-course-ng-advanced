@@ -4,9 +4,8 @@ import { LinkOption, NavigationUser } from '@glotrix/ui/navigation';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AppState } from '../../../core/store';
-import { getUser, signOut } from '../../../core/store/auth';
 import { appModulesAsLinkOption } from '../modules.routes';
+import { AuthState, getUser, signOut } from '../../../store/auth';
 
 @Component({
   selector: 'gt-dashboard-layout',
@@ -20,7 +19,7 @@ export class DashboardLayoutComponent {
 
   protected user$: Observable<NavigationUser>;
 
-  constructor(private store: Store<AppState>, private router: Router) {
+  constructor(private store: Store<AuthState>, private router: Router) {
     this.user$ = this.store.pipe(
       select(getUser),
       map(
