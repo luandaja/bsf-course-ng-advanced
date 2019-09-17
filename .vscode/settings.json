@@ -26,6 +26,5 @@
       "when": "$(basename)"
     }
   },
-  "files.defaultLanguage": "typescript",
   "files.trimTrailingWhitespace": true
 }

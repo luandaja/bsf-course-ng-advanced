@@ -117,32 +117,32 @@
         }
       }
     },
-    "online-store": {
+    "eshop": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/online-store",
-      "sourceRoot": "apps/online-store/src",
+      "root": "apps/eshop",
+      "sourceRoot": "apps/eshop/src",
       "prefix": "gt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/online-store",
-            "index": "apps/online-store/src/index.html",
-            "main": "apps/online-store/src/main.ts",
-            "polyfills": "apps/online-store/src/polyfills.ts",
-            "tsConfig": "apps/online-store/tsconfig.app.json",
+            "outputPath": "dist/apps/eshop",
+            "index": "apps/eshop/src/index.html",
+            "main": "apps/eshop/src/main.ts",
+            "polyfills": "apps/eshop/src/polyfills.ts",
+            "tsConfig": "apps/eshop/tsconfig.app.json",
             "aot": false,
             "assets": [
-              "apps/online-store/src/favicon.ico",
-              "apps/online-store/src/assets"
+              "apps/eshop/src/favicon.ico",
+              "apps/eshop/src/assets"
             ],
             "styles": [
-              "apps/online-store/src/styles.scss",
+              "apps/eshop/src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
@@ -152,8 +152,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/online-store/src/environments/environment.ts",
-                  "with": "apps/online-store/src/environments/environment.prod.ts"
+                  "replace": "apps/eshop/src/environments/environment.ts",
+                  "with": "apps/eshop/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -178,63 +178,63 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "online-store:build"
+            "browserTarget": "eshop:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "online-store:build:production"
+              "browserTarget": "eshop:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "online-store:build"
+            "browserTarget": "eshop:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/online-store/tsconfig.app.json",
-              "apps/online-store/tsconfig.spec.json"
+              "apps/eshop/tsconfig.app.json",
+              "apps/eshop/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/online-store/**"]
+            "exclude": ["**/node_modules/**", "!apps/eshop/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/online-store/jest.config.js",
-            "tsConfig": "apps/online-store/tsconfig.spec.json",
-            "setupFile": "apps/online-store/src/test-setup.ts"
+            "jestConfig": "apps/eshop/jest.config.js",
+            "tsConfig": "apps/eshop/tsconfig.spec.json",
+            "setupFile": "apps/eshop/src/test-setup.ts"
           }
         }
       }
     },
-    "online-store-e2e": {
-      "root": "apps/online-store-e2e",
-      "sourceRoot": "apps/online-store-e2e/src",
+    "eshop-e2e": {
+      "root": "apps/eshop-e2e",
+      "sourceRoot": "apps/eshop-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/online-store-e2e/cypress.json",
-            "tsConfig": "apps/online-store-e2e/tsconfig.e2e.json",
-            "devServerTarget": "online-store:serve"
+            "cypressConfig": "apps/eshop-e2e/cypress.json",
+            "tsConfig": "apps/eshop-e2e/tsconfig.e2e.json",
+            "devServerTarget": "eshop:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "online-store:serve:production"
+              "devServerTarget": "eshop:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/online-store-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/online-store-e2e/**"]
+            "tsConfig": ["apps/eshop-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/eshop-e2e/**"]
           }
         }
       }
