@@ -26,7 +26,10 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "analyze-cms": "webpack-bundle-analyzer dist/apps/cms/stats-es2015.json"
+    "analyze-cms": "webpack-bundle-analyzer dist/apps/cms/stats-es2015.json",
+    "doc-cms": "npx compodoc -p apps/cms/tsconfig.app.json -d dist/doc/cms",
+    "doc-online-store": "npx compodoc -p apps/online-store/tsconfig.app.json -d dist/doc/online-store",
+    "doc-libs": "npx compodoc -p libs/tsconfig.compodoc.json --toggleMenuItems ['modules']"
   },
   "private": true,
   "dependencies": {
@@ -55,6 +58,7 @@
     "@angular/cli": "8.3.3",
     "@angular/compiler-cli": "^8.2.5",
     "@angular/language-service": "^8.2.5",
+    "@compodoc/compodoc": "^1.1.10",
     "@nrwl/cypress": "8.4.13",
     "@nrwl/jest": "8.4.13",
     "@nrwl/workspace": "8.4.13",
