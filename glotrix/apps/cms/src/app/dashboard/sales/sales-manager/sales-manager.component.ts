@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../models/Product';
 import { Order } from '../../../models/Order';
-import { Observable, combineLatest } from 'rxjs';
-import { OrdersState, getOrders } from '../../store/orders';
+import { Observable } from 'rxjs';
+import { OrdersState, getOrdersTotal } from '../../../store/orders';
 import { Store, select } from '@ngrx/store';
-import { tap, map } from 'rxjs/operators';
-import { OrderFilter } from '../models/OrderFilter';
-import { OrderFiltersService } from '../service/order-filter.service';
+import { OrderTableFilterState, getPagination, changeCurrentPage, setKeywordFilter } from '../../../store/order-table-filter';
 
 @Component({
   selector: 'gt-sales-manager',
@@ -15,38 +12,26 @@ import { OrderFiltersService } from '../service/order-filter.service';
 })
 export class SalesManagerComponent implements OnInit {
 
-  orders$: Observable<Order[]>;
+  protected orders$: Observable<Order[]>;
+  protected total$: Observable<number>;
+  protected pagination$: Observable<any>;
+
   constructor(
-    private store: Store<OrdersState>,
-    private filters: OrderFiltersService
+    private ordersStore: Store<OrdersState>,
+    private filtersStore: Store<OrderTableFilterState>
   ) { }
 
   ngOnInit() {
-    this.orders$ = combineLatest(
-      this.store.pipe(select(getOrders)),
-      this.filters.getFiltersObservable()
-    ).pipe(
-      tap(console.log),
-      map(this.filterProductList)
-    );
+    this.pagination$ = this.filtersStore.pipe(select(getPagination));
+    this.total$ = this.ordersStore.pipe(select(getOrdersTotal));
   }
 
-  updateSeachKeyword(value: string) {
-    this.filters.setFilters({ keyword: value });
+  updatePagination(page: number) {
+    this.filtersStore.dispatch(changeCurrentPage({ page }));
   }
 
-  private filterProductList(pair: [Order[], OrderFilter]) {
-    const { keyword = '', status } = pair[1];
-    const orders = pair[0]
-      .filter(p =>
-        Object.keys(p).some(k =>
-          p[k]
-            .toString()
-            .toLowerCase()
-            .includes(keyword.toLowerCase())
-        )
-      )
-      .filter(p => !status || p.status === status);
-    return orders;
+  updateSeachKeyword(keyword: string) {
+    this.filtersStore.dispatch(setKeywordFilter({ keyword }));
   }
+
 }

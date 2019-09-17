@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../../models';
 import { Store, select } from '@ngrx/store';
 import { ProductsState, getProducts } from '../../../store/products';
@@ -16,7 +16,7 @@ export class TableMainComponent implements OnInit {
   constructor(
     private productsStore: Store<ProductsState>,
     private filtersStore: Store<ProductTableFilterState>
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.products$ = combineLatest(

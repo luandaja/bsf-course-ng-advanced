@@ -1,0 +1,4 @@
+<select class="form-control" (change)="onChangeStatus($event.target.value)">
+  <option value>Select a status</option>
+  <option *ngFor="let status of statusList$ | async">{{ status }}</option>
+</select>

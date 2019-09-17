@@ -6,20 +6,20 @@ import { SalesManagerComponent } from './sales-manager/sales-manager.component';
 import { UiSearchBarModule } from '@glotrix/ui/search-bar';
 import { UiTablesModule } from '@glotrix/ui/tables';
 import { TableMainComponent } from './table-main/table-main.component';
-import { StoreModule } from '@ngrx/store';
-import { ordersReducer } from '../store/orders/orders.reducer';
-import { OrderFiltersService } from './service/order-filter.service';
+import { OrdersStoreModule } from '../../store/orders/orders-store.module';
+import { OrderTableFilterStoreModule } from '../../store/order-table-filter/order-table-filter-store.module';
+import { StatusFilterComponent } from './status-filter/status-filter.component';
 
 
 @NgModule({
-  declarations: [SalesManagerComponent, TableMainComponent],
+  declarations: [SalesManagerComponent, TableMainComponent, StatusFilterComponent],
   imports: [
     CommonModule,
     SalesRoutingModule,
     UiSearchBarModule,
     UiTablesModule,
-    StoreModule.forFeature('orders', ordersReducer),
-  ],
-  providers: [OrderFiltersService],
+    OrdersStoreModule,
+    OrderTableFilterStoreModule
+  ]
 })
 export class SalesModule { }

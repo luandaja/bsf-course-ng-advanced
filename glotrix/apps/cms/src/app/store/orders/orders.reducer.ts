@@ -1,8 +1,8 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { fetchOrders, setOrders, orderDelivered } from './orders.actions';
 import { OrdersState, initalState } from './orders.state';
-import { Order } from '../../../models/Order';
-import { OrderStatus } from '../../../models/OrderStatus';
+import { Order } from '../../models/Order';
+import { OrderStatus } from '../../models/OrderStatus';
 
 const reducer = createReducer(
   initalState,

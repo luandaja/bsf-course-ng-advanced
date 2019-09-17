@@ -1,8 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { OrdersState, getOrders } from '../../../store/orders';
+import { Store, select } from '@ngrx/store';
+import { orderDelivered } from '../../../store/orders/orders.actions';
+import { Observable, combineLatest } from 'rxjs';
+import { OrderTableFilterState, getFilters } from '../../../store/order-table-filter';
+import { map } from 'rxjs/operators';
 import { Order } from '../../../models/Order';
-import { OrdersState } from '../../store/orders/orders.state';
-import { Store } from '@ngrx/store';
-import { orderDelivered } from '../../store/orders/orders.actions';
 import { OrderStatus } from '../../../models/OrderStatus';
 
 @Component({
@@ -12,14 +15,21 @@ import { OrderStatus } from '../../../models/OrderStatus';
 })
 export class TableMainComponent implements OnInit {
 
-  @Input() orders: Order[];
-  constructor(private store: Store<OrdersState>) { }
+  protected orders$: Observable<Order[]>;
+
+  constructor(
+    private ordersStore: Store<OrdersState>,
+    private filtersStore: Store<OrderTableFilterState>) { }
 
   ngOnInit() {
+    this.orders$ = combineLatest(
+      this.ordersStore.pipe(select(getOrders)),
+      this.filtersStore.pipe(select(getFilters))
+    ).pipe(map(this.filterOrderList));
   }
 
   delivered(order: Order) {
-    this.store.dispatch(
+    this.ordersStore.dispatch(
       orderDelivered({ orderId: order.id })
     );
     console.log("toaster: order delivered!");
@@ -32,4 +42,24 @@ export class TableMainComponent implements OnInit {
   seeInvoice() {
     console.log("Toaster: future feature to see the order invoice");
   }
+
+  private filterOrderList(pair: [Order[], OrderTableFilterState]) {
+    const [orderList, filters] = pair;
+    const { keyword = '', status, pageSize, currentPage } = filters;
+    const orders = orderList
+      .filter(p =>
+        Object.keys(p).some(k =>
+          p[k]
+            .toString()
+            .toLowerCase()
+            .includes(keyword.toLowerCase())
+        )
+      )
+      .filter(p => !status || p.status === status)
+      .slice((currentPage - 1) * pageSize)
+      .slice(0, pageSize);
+
+    return orders;
+  }
 }
+

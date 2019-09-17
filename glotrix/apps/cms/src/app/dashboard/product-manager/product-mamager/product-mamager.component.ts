@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../../models';
-import { Observable, combineLatest } from 'rxjs';
-import { map, tap, filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { ProductsState, getProducts, getProductsTotal } from '../../../store/products';
+import { ProductsState, getProductsTotal } from '../../../store/products';
 import {
   ProductTableFilterState,
-  getFilters,
   getPagination,
   changeCurrentPage,
   setKeywordFilter
@@ -22,10 +20,11 @@ export class ProductMamagerComponent implements OnInit {
   protected products$: Observable<Product[]>;
   protected total$: Observable<number>;
   protected pagination$: Observable<any>;
+
   constructor(
     private productsStore: Store<ProductsState>,
     private filtersStore: Store<ProductTableFilterState>
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.pagination$ = this.filtersStore.pipe(select(getPagination));

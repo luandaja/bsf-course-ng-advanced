@@ -1,4 +1,4 @@
-import { Order } from '../../../models/Order';
+import { Order } from '../../models/Order';
 import { createAction, props } from '@ngrx/store';
 
 export const fetchOrders = createAction('[Orders] Fetch orders');
