@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { appModulesAsLinkOption } from '../modules.routes';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../../../core/store/app.state';
-import { getUser, signOut } from '../../../core/store/auth';
+import { AppState } from '../../../store/app.state';
+import { getUser, signOut } from '../../../store/auth';
 import { map } from 'rxjs/operators';
 
 @Component({

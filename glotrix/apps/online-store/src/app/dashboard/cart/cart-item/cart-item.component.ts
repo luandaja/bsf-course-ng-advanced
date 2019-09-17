@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartItem } from '../../../models/cartItem';
 import { Router } from '@angular/router';
-import { removeCartItem, updateCartItem } from '../../store/cart/cart.actions';
+import { removeCartItem, updateCartItem } from '../../../store/cart/cart.actions';
 import { Store } from '@ngrx/store';
-import { CartState } from '../../store/cart';
+import { CartState } from '../../../store/cart';
 
 @Component({
   selector: 'gt-cart-item',

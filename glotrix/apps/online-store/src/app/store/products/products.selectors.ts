@@ -24,3 +24,4 @@ export const getCategoriesFromProducts = createSelector(
   (state: ProductsState) =>
     [...new Set(state.products.map(p => p.category).filter(p => p !== undefined))]
 );
+

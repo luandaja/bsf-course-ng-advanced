@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { CartState, getCartItems } from '../../store/cart';
+import { CartState, getCartItems } from '../../../store/cart';
 import { Store, select } from '@ngrx/store';
 import { CartItem } from '../../../models/cartItem';
 import { Observable } from 'rxjs';

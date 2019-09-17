@@ -1,8 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { fetchCartItems, setCartItems, removeCartItem, updateCartItem, addCartItem } from './cart.actions';
 import { CartState, initalState } from './cart.state';
-import { CartItem } from '../../../models/cartItem';
-import { Product } from '../../../models/Product';
+import { CartItem } from '../../models/cartItem';
+import { Product } from '../../models/Product';
 
 const reducer = createReducer(
   initalState,
