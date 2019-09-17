@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CartItem } from '../../../models/cartItem';
 import { Router } from '@angular/router';
 import { removeCartItem, updateCartItem } from '../../store/cart/cart.actions';
@@ -13,12 +13,10 @@ import { CartState } from '../../store/cart';
 export class CartItemComponent implements OnInit {
 
   @Input() cartItem: CartItem;
-  // @Output() cartItemChange = new EventEmitter<CartItem>();
 
-  constructor(private router: Router, private store: Store<CartState>, ) { }
+  constructor(private router: Router, private store: Store<CartState>) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   goToDetail(productId: number) {
     this.router.navigate(['/dashboard/products/detail/', productId])

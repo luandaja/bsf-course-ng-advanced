@@ -1,41 +1,28 @@
-<div class="container p-5">
-  <div class="row">
+<div class="col-sm-10 pt-3 ml-sm-auto mr-sm-auto">
+  <section class="row">
     <div class="col-3">
-      <gt-search-bar placeholder="Search for a product name"></gt-search-bar>
+      <gt-search-bar
+        placeholder="Search for a client name"
+        class="col-sm-6"
+        (keywordChange)="updateSeachKeyword($event)"
+      ></gt-search-bar>
     </div>
     <div class="col-3">
       <select class="form-control">
-        <option>Select a category</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+        <option>Paid</option>
+        <option>Delivered</option>
       </select>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12 p-3">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Delivery State</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products; index as i">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ product.name }}</td>
-            <td>{{ product.quantity | number }}</td>
-            <td>{{ product.state}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-12">
-      <gt-pagination></gt-pagination>
-    </div>
-  </div>
+  </section>
+
+  <section class="row col-sm-12 ml-sm-auto mr-sm-auto">
+    <gt-table-main-sales
+      class="col-sm-12"
+      [orders]="orders$ | async"
+    ></gt-table-main-sales>
+  </section>
+
+  <section class="row">
+    <gt-pagination class="col-sm-12"></gt-pagination>
+  </section>
 </div>
