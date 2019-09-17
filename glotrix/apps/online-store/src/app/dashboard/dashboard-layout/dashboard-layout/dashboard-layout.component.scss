@@ -1,7 +1,9 @@
 .toggled {
   margin-left: 0;
 }
-
+i {
+  color: #fff;
+}
 @media (min-width: 768px) {
   .toggled {
     margin-left: -15rem;
