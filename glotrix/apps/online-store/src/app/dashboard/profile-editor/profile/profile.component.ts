@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FieldType } from '@glotrix/ui/forms';
 import { Store, select } from '@ngrx/store';
-import { AuthState, getUser, updateUser } from '../../../core/store/auth';
+import { AuthState, getUser, updateUser } from '../../../store/auth';
 import { take, map } from 'rxjs/operators';
 import { User } from '../../../models';
 import { entries } from './entries';

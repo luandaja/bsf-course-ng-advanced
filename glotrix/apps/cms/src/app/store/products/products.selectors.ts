@@ -22,5 +22,5 @@ export const getProduct = (id: number) =>
 export const getCategoriesFromProducts = createSelector(
   productsFeature,
   (state: ProductsState) =>
-    state.products.map(p => p.category).filter(p => p !== undefined)
+    [...new Set(state.products.map(p => p.category).filter(p => p !== undefined))]
 );

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../../../models/Product';
 import { Store } from '@ngrx/store';
-import { CartState, addCartItem } from '../../store/cart';
+import { CartState, addCartItem } from '../../../store/cart';
 
 @Component({
   selector: 'gt-product-card',

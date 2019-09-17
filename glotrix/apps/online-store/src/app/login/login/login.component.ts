@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { signIn, AuthState } from '../../core/store/auth';
+import { signIn, AuthState } from '../../store/auth';
 import { Store } from '@ngrx/store';
 import { SocialNetwork } from '@glotrix/ui/login';
 import { loginEntries, banner } from './entries';

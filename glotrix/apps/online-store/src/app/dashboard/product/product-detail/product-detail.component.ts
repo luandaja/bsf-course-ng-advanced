@@ -3,7 +3,7 @@ import { Product } from '../../../models/Product';
 import { ActivatedRoute } from "@angular/router";
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { ProductsState, getProduct } from '../../store/products';
+import { ProductsState, getProduct } from '../../../store/products';
 @Component({
   selector: 'gt-product-detail',
   templateUrl: './product-detail.component.html',

@@ -1,28 +1,24 @@
-<div class="col-sm-10 pt-3 ml-sm-auto mr-sm-auto">
+<div class="container p-5">
   <section class="row">
-    <div class="col-3">
-      <gt-search-bar
-        placeholder="Search for a client name"
-        class="col-sm-6"
-        (keywordChange)="updateSeachKeyword($event)"
-      ></gt-search-bar>
-    </div>
-    <div class="col-3">
-      <select class="form-control">
-        <option>Paid</option>
-        <option>Delivered</option>
-      </select>
-    </div>
+    <gt-search-bar
+      placeholder="Search for a client name"
+      class="col-sm-6"
+      (keywordChange)="updateSeachKeyword($event)"
+    ></gt-search-bar>
+    <gt-status-filter class="col-sm-6"></gt-status-filter>
   </section>
 
-  <section class="row col-sm-12 ml-sm-auto mr-sm-auto">
-    <gt-table-main-sales
+  <section class="row">
+    <gt-table-main-sales class="col-sm-12"></gt-table-main-sales>
+  </section>
+
+  <section class="row" *ngIf="pagination$ | async as pagination">
+    <gt-pagination
       class="col-sm-12"
-      [orders]="orders$ | async"
-    ></gt-table-main-sales>
-  </section>
-
-  <section class="row">
-    <gt-pagination class="col-sm-12"></gt-pagination>
+      [total]="total$ | async"
+      [page]="pagination.page"
+      [pageSize]="pagination.size"
+      (pageChange)="updatePagination($event)"
+    ></gt-pagination>
   </section>
 </div>

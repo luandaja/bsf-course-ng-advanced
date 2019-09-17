@@ -11,8 +11,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders; index as i">
-      <th scope="row">{{ i + 1 }}</th>
+    <tr *ngFor="let order of orders$ | async">
+      <th scope="row">{{ order.id }}</th>
       <td>{{ order.date.toLocaleDateString() }}</td>
       <td>{{ order.clientName }}</td>
       <td>{{ order.total | currency }}</td>

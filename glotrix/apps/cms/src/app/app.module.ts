@@ -17,4 +17,4 @@ import { AuthStoreModule } from './store/auth/auth-store.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

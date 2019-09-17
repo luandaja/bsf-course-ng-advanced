@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthState, getIsLogged } from './core/store/auth';
+import { AuthState, getIsLogged } from './store/auth';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 

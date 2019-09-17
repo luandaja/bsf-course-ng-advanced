@@ -15,4 +15,13 @@
       ></gt-product-card>
     </div>
   </section>
+  <section class="row" *ngIf="pagination$ | async as pagination">
+    <gt-pagination
+      class="col-sm-12"
+      [total]="total$ | async"
+      [page]="pagination.page"
+      [pageSize]="pagination.size"
+      (pageChange)="updatePagination($event)"
+    ></gt-pagination>
+  </section>
 </div>
