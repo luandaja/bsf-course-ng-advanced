@@ -29,7 +29,7 @@
     "analyze-cms": "webpack-bundle-analyzer dist/apps/cms/stats-es2015.json",
     "doc-cms": "npx compodoc -p apps/cms/tsconfig.app.json -d dist/doc/cms",
     "doc-online-store": "npx compodoc -p apps/online-store/tsconfig.app.json -d dist/doc/online-store",
-    "doc-libs": "npx compodoc -p libs/tsconfig.compodoc.json --toggleMenuItems ['modules']"
+    "doc-libs": "npx compodoc -p libs/tsconfig.compodoc.json"
   },
   "private": true,
   "dependencies": {
