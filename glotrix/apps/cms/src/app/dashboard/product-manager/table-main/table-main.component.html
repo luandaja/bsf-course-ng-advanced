@@ -6,7 +6,6 @@
       <th scope="col">Description</th>
       <th scope="col">Price</th>
       <th scope="col">Quantity</th>
-      <th scope="col">See More</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     </tr>
@@ -18,9 +17,16 @@
       <td>{{ product.description }}</td>
       <td>{{ product.price | currency }}</td>
       <td>{{ product.quantity | number }}</td>
-      <td>See More</td>
-      <td>Edit</td>
-      <td>Delete</td>
+      <td>
+        <a [routerLink]="['detail', product.id]">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+      </td>
+      <td>
+        <button class="btn bold" (click)="remove()">
+          <span><i class="fa fa-trash"></i></span>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

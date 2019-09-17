@@ -1,13 +1,12 @@
 <div class="row pl-3 pt-3">
-  <div class="col-sm-5">
+  <!-- <div class="col-sm-5">
     <section class="blue-border">
       <gt-images-upload [(images)]="product.images"></gt-images-upload>
     </section>
-  </div>
+  </div> -->
   <div class="col-sm-7">
-    <section class="orange-border">
-      <gt-form-builder [entries]="entries">
-      </gt-form-builder>
+    <section class="orange-border" *ngIf="entries$">
+      <gt-form-builder [entries]="entries$ | async"> </gt-form-builder>
     </section>
   </div>
 </div>
