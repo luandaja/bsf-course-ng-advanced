@@ -38,4 +38,8 @@ export class DashboardLayoutComponent {
     this.store.dispatch(signOut());
     this.router.navigateByUrl('login');
   }
+
+  goToCart() {
+    this.router.navigateByUrl('dashboard/cart');
+  }
 }
