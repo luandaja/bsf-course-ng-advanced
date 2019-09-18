@@ -23,8 +23,8 @@ describe('CounterComponent', () => {
 	});
 
 	it('should create', () => {
-		let substractButtonElement = fixture.debugElement.nativeElement.querySelector('button.btn.btn-counter.corner-left');
-		let addButtonElement = fixture.debugElement.nativeElement.querySelector('button.btn.btn-counter.corner-right');
+		const substractButtonElement = fixture.debugElement.nativeElement.querySelector('button.btn.btn-counter.corner-left');
+		const addButtonElement = fixture.debugElement.nativeElement.querySelector('button.btn.btn-counter.corner-right');
 
 		expect(component).toBeTruthy();
 		expect(substractButtonElement).toBeTruthy();
