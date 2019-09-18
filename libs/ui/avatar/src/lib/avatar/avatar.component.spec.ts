@@ -36,7 +36,7 @@ describe('AvatarComponent', () => {
 		expect(imageElement.height).toEqual(component.height);
 	});
 
-	it('load component with default values', () => {
+	it('should load component with default values', () => {
 		const defaultImg = 'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg';
 		const defaultValue = 30;
 
