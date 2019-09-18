@@ -34,7 +34,7 @@ describe('CounterComponent', () => {
 
 	it('should add button call add method', () => {
 		spyOn(component, 'add');
-		let addButton = fixture.debugElement.nativeElement.querySelector('button.btn.btn-counter.corner-right');
+		const addButton = fixture.debugElement.nativeElement.querySelector('button.btn.btn-counter.corner-right');
 		addButton.click();
 
 		fixture.whenStable().then(() => {
@@ -44,7 +44,7 @@ describe('CounterComponent', () => {
 
 	it('should substract button call substract method', () => {
 		spyOn(component, 'substract');
-		let substractButton = fixture.debugElement.nativeElement.querySelector('button.btn.btn-counter.corner-left');
+		const substractButton = fixture.debugElement.nativeElement.querySelector('button.btn.btn-counter.corner-left');
 		substractButton.click();
 
 		fixture.whenStable().then(() => {
