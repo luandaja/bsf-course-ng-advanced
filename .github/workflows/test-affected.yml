@@ -1,4 +1,4 @@
-name: CMS CI
+name: TEST Affected
 
 on:
   pull_request_review:
