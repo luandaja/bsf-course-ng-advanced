@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
+import { LoginLayoutModule } from '../login-layout/login-layout.module';
+import { LoginLayoutRoutingModule } from '../login-layout/login-layout-routing.module';
+import { UiLoginModule } from '@glotrix/ui/login';
+import { UiFormsModule } from '@glotrix/ui/forms';
 
 describe('LoginComponent', () => {
 	let component: LoginComponent;
@@ -8,13 +12,14 @@ describe('LoginComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [LoginComponent]
+			declarations: [LoginComponent],
+			imports: [LoginLayoutRoutingModule, UiLoginModule, UiFormsModule]
 		}).compileComponents();
 	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LoginComponent);
-		component = fixture.componentInstance;
+		component = fixture.debugElement.componentInstance;
 		fixture.detectChanges();
 	});
 
