@@ -1,110 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import { FieldType } from '@glotrix/ui/forms';
+import { Store, select } from '@ngrx/store';
+import { RouterStateUrl, getRouteId, RouterState } from '../../../store/router';
+import { tap, switchMap, map, filter, mergeMap } from 'rxjs/operators';
+import { ProductsState, getProduct } from '../../../store/products';
+import { Product } from '../../../models';
+import { Observable, pipe, iif, of } from 'rxjs';
+import { productFormFields } from './form-fields';
 
 @Component({
-  selector: 'gt-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+	selector: 'gt-product',
+	templateUrl: './product.component.html',
+	styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  files: File[] = [];
-  entries: FieldType[];
+	protected files: File[] = [];
+	protected entries$: Observable<FieldType[]>;
 
-  constructor() {}
+	constructor(
+		private routesStore: Store<RouterState>,
+		private productsStore: Store<ProductsState>
+	) {}
 
-  ngOnInit() {
-    this.entries = this.getEntrys();
-  }
+	ngOnInit() {
+		const loadFieldsWithProduct = pipe(
+			map(id => Number(id)),
+			switchMap(id => this.productsStore.pipe(select(getProduct(id), tap(console.log)))),
+			filter(product => product !== undefined),
+			map(this.updateEntriesWithProduct)
+		);
 
-  onFilesLoaded(filesLoaded: File[]) {
-    this.files = filesLoaded;
-  }
-  getEntrys() {
-    const entries: FieldType[] = [
-      {
-        controlType: 'textbox',
-        value: '',
-        key: 'name',
-        label: 'Name',
-        order: 1,
-        col: 'col-sm-12',
-        validations: {
-          minlength: {
-            message: 'Name must be at least three characters.',
-            value: 3
-          },
-          required: {
-            message: 'Name is required.',
-            value: true
-          },
-          maxlength: {
-            message: 'Name cannot exceed 30 characters.',
-            value: 30
-          }
-        }
-      },
-      {
-        controlType: 'textblock',
-        value: '',
-        key: 'description',
-        label: 'Description',
-        rows: 5,
-        order: 2,
-        col: 'col-sm-12',
-        validations: {
-          minlength: {
-            message: 'Name must be at least three characters.',
-            value: 3
-          },
-          required: {
-            message: 'Name is required.',
-            value: true
-          },
-          maxlength: {
-            message: 'Name cannot exceed 30 characters.',
-            value: 30
-          }
-        }
-      },
-      {
-        //This should be a currency entry. TBD
-        controlType: 'textbox',
-        value: '',
-        key: 'price',
-        label: 'Price',
-        order: 3,
-        col: 'col-sm-3',
-        validations: {
-          minlength: {
-            message: 'Price must be at least three characters.',
-            value: 2
-          },
-          required: {
-            message: 'Price is required.',
-            value: true
-          }
-        }
-      },
-      {
-        controlType: 'textbox',
-        value: '',
-        key: 'quantity',
-        label: 'Quantity',
-        order: 4,
-        col: 'col-sm-3',
-        validations: {
-          minlength: {
-            message: 'Quantity must be at least three characters.',
-            value: 4
-          },
-          required: {
-            message: 'Quantity is required.',
-            value: true
-          }
-        }
-      }
-    ];
+		const loadFieldsWithoutProduct = pipe(map(_ => productFormFields));
 
-    return entries.sort((a, b) => a.order - b.order);
-  }
+		this.productsStore.pipe(select(getProduct(1), tap(console.warn))).toPromise();
+		this.entries$ = this.routesStore.pipe(
+			select(getRouteId),
+			mergeMap(id =>
+				iif(
+					() => id === undefined,
+					of(id).pipe(loadFieldsWithoutProduct),
+					of(id).pipe(loadFieldsWithProduct)
+				)
+			)
+		);
+	}
+
+	onFilesLoaded(filesLoaded: File[]) {
+		this.files = filesLoaded;
+	}
+
+	updateEntriesWithProduct(product: Product) {
+		return productFormFields.map(field => {
+			let updatedField = field;
+			updatedField.value = product[field.key];
+			return updatedField;
+		});
+	}
 }

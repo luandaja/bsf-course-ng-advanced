@@ -12,4 +12,7 @@ export const updateProduct = createAction(
 	'[Products] Update product',
 	props<{ product: Product }>()
 );
-
+export const deleteProduct = createAction(
+	'[Products] Delete product',
+	props<{ productId: number }>()
+);
