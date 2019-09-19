@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SocialNetwork } from '@glotrix/ui/login';
-import { loginEntries, banner } from './entries';
+import { SocialNetwork, Banner } from '@glotrix/ui/login';
+import { loginEntries } from './form-fields';
 import { AuthState, signIn } from '../../store/auth';
+
+export const banner: Banner = {
+	upperText: 'BXCOMMERCE',
+	title: 'Bienvenido',
+	imageUrl:
+		'https://st2.depositphotos.com/8535708/11759/v/950/depositphotos_117593278-stock-illustration-vector-illustration-of-store-building.jpg',
+	contentText: 'Te esperábamos, sigamos trabajando para el crecimiento de tu negocio.'
+};
 
 @Component({
 	selector: 'gt-login',
