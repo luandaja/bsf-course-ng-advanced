@@ -9,5 +9,5 @@ import { Banner } from '../models/Banner';
 export class WelcomeBannerComponent {
 	@Input() banner: Banner;
 
-	constructor() {}
+	constructor() { }
 }

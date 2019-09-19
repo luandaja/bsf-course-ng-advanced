@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeBannerComponent should match snapshot 1`] = `
+<gt-welcome-banner
+  banner={[Function Object]}
+>
+  <section
+    class="welcome-container"
+  >
+    <div
+      class="d-flex flex-column m-3 h-100"
+    >
+      <div
+        class="p-2 mb-auto"
+      >
+        <span
+          class="brand-name"
+        >
+          my brand name
+        </span>
+      </div>
+      <div
+        class="p-2 align-self-center"
+      >
+        <gt-avatar />
+      </div>
+      <div
+        class="p-2 mt-auto w-50"
+      >
+        <h2>
+          my title2
+        </h2>
+        <span>
+          content
+        </span>
+      </div>
+    </div>
+  </section>
+</gt-welcome-banner>
+`;
+
+exports[`WelcomeBannerComponent should match snapshot2 1`] = `
+<gt-welcome-banner
+  banner={[Function Object]}
+>
+  <section
+    class="welcome-container"
+  >
+    <div
+      class="d-flex flex-column m-3 h-100"
+    >
+      <div
+        class="p-2 mb-auto"
+      >
+        <span
+          class="brand-name"
+        >
+          my brand name2
+        </span>
+      </div>
+      <div
+        class="p-2 align-self-center"
+      >
+        <gt-avatar />
+      </div>
+      <div
+        class="p-2 mt-auto w-50"
+      >
+        <h2>
+          my title22
+        </h2>
+        <span>
+          content2
+        </span>
+      </div>
+    </div>
+  </section>
+</gt-welcome-banner>
+`;
