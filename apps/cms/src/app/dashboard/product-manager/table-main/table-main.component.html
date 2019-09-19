@@ -1,32 +1,32 @@
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Price</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products$ | async">
-      <th scope="row">{{ product.id }}</th>
-      <td>{{ product.name }}</td>
-      <td>{{ product.description }}</td>
-      <td>{{ product.price | currency }}</td>
-      <td>{{ product.quantity | number }}</td>
-      <td>
-        <a [routerLink]="['detail', product.id]">
-          <i class="fa fa-pencil" aria-hidden="true"></i>
-        </a>
-      </td>
-      <td>
-        <button class="btn bold" (click)="remove()">
-          <span><i class="fa fa-trash"></i></span>
-        </button>
-      </td>
-    </tr>
-  </tbody>
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Name</th>
+			<th scope="col">Description</th>
+			<th scope="col">Price</th>
+			<th scope="col">Quantity</th>
+			<th scope="col">Edit</th>
+			<th scope="col">Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let product of products$ | async">
+			<th scope="row">{{ product.id }}</th>
+			<td>{{ product.name }}</td>
+			<td>{{ product.description }}</td>
+			<td>{{ product.price | currency }}</td>
+			<td>{{ product.quantity | number }}</td>
+			<td>
+				<a [routerLink]="['/dashboard/product', product.id]">
+					<i class="fa fa-pencil" aria-hidden="true"></i>
+				</a>
+			</td>
+			<td>
+				<button class="btn bold" (click)="deleteProduct(product.id)">
+					<span><i class="fa fa-trash"></i></span>
+				</button>
+			</td>
+		</tr>
+	</tbody>
 </table>

@@ -1233,6 +1233,11 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@ngrx/entity@^8.3.0":
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-8.3.0.tgz#2b6b7b16022ff742acfbc2e94f005e77492d1072"
+  integrity sha512-UBN+mMDJYxklXuJMwVN9lEC9XDPodOsXwczV+kyS7vz3B+i9docwmLM0PqucYIPnmXPcIM+rOa0HfJDacP9ZMA==
+
 "@ngrx/router-store@^8.3.0":
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-8.3.0.tgz#18462b7901843b3ab212459ffbd6cfe2b71e87e4"

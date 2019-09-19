@@ -13,15 +13,20 @@ import { ProductsStoreModule } from '../../store/products/product-store.module';
 import { ProductFilterStoreModule } from '../../store/product-filter';
 
 @NgModule({
-  declarations: [ProductDetailComponent, ProductListComponent, CategoryFilterComponent, ProductCardComponent],
-  imports: [
-    CommonModule,
-    ProductRoutingModule,
-    UiSearchBarModule,
-    UiCarouselModule,
-    UiTablesModule,
-    ProductsStoreModule,
-    ProductFilterStoreModule
-  ]
+	declarations: [
+		ProductDetailComponent,
+		ProductListComponent,
+		CategoryFilterComponent,
+		ProductCardComponent
+	],
+	imports: [
+		CommonModule,
+		ProductRoutingModule,
+		UiSearchBarModule,
+		UiCarouselModule,
+		UiTablesModule,
+		ProductsStoreModule,
+		ProductFilterStoreModule
+	]
 })
-export class ProductModule { }
+export class ProductModule {}
