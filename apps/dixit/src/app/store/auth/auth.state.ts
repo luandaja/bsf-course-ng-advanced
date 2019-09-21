@@ -1,16 +1,15 @@
-import { User } from '../../models';
+import { Player } from '../../models';
 
 export const authFeatureName = 'auth';
 export interface AuthState {
-	user: User;
+	user: Player;
 	isLogged: boolean;
 }
 
 export const initalState: AuthState = {
 	isLogged: true,
 	user: {
-		firstName: 'player',
-		lastName: 'From Store',
+		playerId: 1,
 		userName: 'zoemy',
 		photoUrl:
 			'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'
