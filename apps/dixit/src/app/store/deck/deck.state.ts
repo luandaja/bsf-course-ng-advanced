@@ -4,7 +4,7 @@ import { Card } from '../../models/Card';
 export const boardDeckFeatureName = 'deck';
 export interface DeckState {
 	activeCards: Card[];
-	playedCards: number[];
+	playedCards: Card[];
 	isLogged: boolean;
 }
 

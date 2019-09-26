@@ -1,6 +1,9 @@
-<section class="pt-3 col-sm-11  ml-sm-auto mr-sm-auto">
-	<gt-card *ngFor="let card of cards$ | async" [card]="card"></gt-card>
-</section>
-<div class="col-sm-12">
-	<button class="btn btn-light" (click)="showDeck()">Show Deck</button>
+<div class="row">
+	<section class="pt-3 col-sm-11  ml-sm-auto mr-sm-auto">
+		<gt-card *ngFor="let card of cards$ | async" [card]="card"></gt-card>
+	</section>
+	<div class="col-sm-12 pt/3">
+		<button class="btn btn-light" (click)="revealDeck()">Show Deck</button>
+	</div>
+
 </div>

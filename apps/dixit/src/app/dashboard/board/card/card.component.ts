@@ -10,18 +10,21 @@ export class CardComponent implements OnChanges {
 
 	protected cardImage: string;
 	private readonly reverseCardUrl = "assets/cards/reverse_card.jpg";
-	@Input() card: Card;
+
+	@Input() cardIndex: number;
+	@Input() isRevealed: boolean;
+
 
 	constructor() {
 		this.cardImage = this.reverseCardUrl;
 	}
 
 	ngOnChanges(): void {
-		this.cardImage = this.card.isRevealed ? this.getImageUrl() : this.reverseCardUrl;
+		this.cardImage = this.isRevealed ? this.getImageUrl() : this.reverseCardUrl;
 	}
 
 	getImageUrl(): string {
-		const card_index = this.card.cardIndex > 10 ? this.card.cardIndex : `0${this.card.cardIndex}`;
+		const card_index = this.cardIndex > 10 ? this.cardIndex : `0${this.cardIndex}`;
 		return `assets/cards/card_000${card_index}.jpg`;
 	}
 

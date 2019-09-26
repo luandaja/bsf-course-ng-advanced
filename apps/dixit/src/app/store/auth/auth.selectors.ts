@@ -4,26 +4,21 @@ import { AuthState } from './auth.state';
 const authFeature = createFeatureSelector<AuthState>('auth');
 //const authFeature = (state: AppState) => state.auth;
 export const getIsLogged = createSelector(
-  authFeature,
-  state => state.isLogged
+	authFeature,
+	state => state.isLogged
 );
 
 export const getUser = createSelector(
-  authFeature,
-  state => state.user
+	authFeature,
+	state => state.user
 );
 
 export const getUserWithFullName = createSelector(
-  authFeature,
-  state => ({ ...state.user, fullName: `${state.user.firstName} ${state.user.lastName}` })
-);
-
-export const getFullName = createSelector(
-  getUser,
-  user => `${user.firstName} ${user.lastName}`
+	authFeature,
+	state => ({ ...state.user, fullName: `${state.user.userName}` })
 );
 
 export const getPhotoUrl = createSelector(
-  getUser,
-  user => user.photoUrl
+	getUser,
+	user => user.photoUrl
 );

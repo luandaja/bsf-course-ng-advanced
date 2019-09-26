@@ -11,3 +11,7 @@ export const setCards = createAction(
 export const revealDeck = createAction(
 	'[Cards] Reveal active cards'
 );
+
+export const setActiveCard = createAction(
+	'[Cards] Set active card'
+);
