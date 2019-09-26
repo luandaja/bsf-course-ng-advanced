@@ -1,10 +1,12 @@
-import { revealDeck } from './../../../store/deck/deck.actions';
-import { Card } from './../../../models/Card';
+import { setGuessingTime, setHandCard, setHand } from '../../../store/game/game.actions';
 import { Component, OnInit } from '@angular/core';
-import { DeckState, getActiveCards, getPlayedCards } from '../../../store/deck';
+import { GameState, getBoardCards, getAvaiableCards, getPlayerTurn, getIsGuessingTime } from '../../../store/game';
 import { Store, select } from '@ngrx/store';
-import { tap, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { tap, map, filter, switchMap, mergeMap } from 'rxjs/operators';
+import { Observable, from, pipe } from 'rxjs';
+import { BoardCard } from '../../../models/BoardCard';
+import { AuthState, getUser } from '../../../store/auth';
+import { Player } from '../../../models';
 
 @Component({
 	selector: 'gt-table-board',
@@ -14,37 +16,40 @@ import { Observable } from 'rxjs';
 export class TableBoardComponent implements OnInit {
 
 	protected startDeckIndex = 1;
-	protected endDeckIndex = 100;
-	cards$: Observable<Card[]>;
-	usedCards$: Observable<Card[]>;
+	protected cardsCount = 100;
+	boardCards$: Observable<BoardCard[]>;
+	isGuessingTime$: Observable<boolean>;
 
-	constructor(private deckStore: Store<DeckState>) {
-		this.cards$ = this.deckStore.pipe(select(getActiveCards));
-	}
+
+	constructor(private gameStore: Store<GameState>,
+		private store: Store<AuthState>) { }
 
 	ngOnInit() {
+		this.boardCards$ = this.gameStore.pipe(select(getBoardCards));
+		this.isGuessingTime$ = this.gameStore.pipe(select(getIsGuessingTime));
+		this.store.pipe(
+			select(getUser),
+			mergeMap(user =>
+				this.gameStore.pipe(select(getPlayerTurn),
+					map(playerTurn => {
+						if (user.order === playerTurn) {
+							this.getHand(user)
+						}
+					})))
+		);
 	}
 
-	revealDeck(): void {
-		this.deckStore.dispatch(revealDeck());
+	showCards(): void {
+		this.gameStore.dispatch(setGuessingTime({ isGuessingTime: true }));
 	}
 
-	newRound(): void {
-		this.deckStore.pipe(
-			select(getPlayedCards),
-			map(this.getCard)
+	private getHand(user: Player) {
+		this.gameStore.pipe(
+			select(getAvaiableCards),
+			map(cards => {
+				this.gameStore.dispatch(setHand({ cards: cards.slice(0, 4), nextPlayerturn: user.order++ }))
+			})
 		)
-	}
-
-	private getCard(playedCards: Card[]) {
-		let cardIndex = 0;
-		do {
-			cardIndex = this.getDeckIndex();
-		} while (playedCards.includes(cardIndex));
-	}
-
-	private getDeckIndex(): number {
-		return Math.floor(Math.random() * this.endDeckIndex) + this.startDeckIndex;
 	}
 
 }

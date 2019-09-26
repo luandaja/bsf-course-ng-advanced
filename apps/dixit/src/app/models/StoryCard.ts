@@ -1,9 +1,7 @@
-import { BoardCard } from './BoardCard';
 import { Player } from './Player';
 
-export interface Board {
+export interface StoryCard {
 	title: string;
 	storyTeller: Player;
 	storyCardIndex: number;
-	cards: BoardCard[];
 }

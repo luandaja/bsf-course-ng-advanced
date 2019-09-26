@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BoardRoutingModule } from './board-routing.module';
 import { TableBoardComponent } from './table-board/table-board.component';
 import { CardComponent } from './card/card.component';
-import { DeckStoreModule } from '../../store/deck';
+import { GameStoreModule } from '../../store/game';
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import { DeckStoreModule } from '../../store/deck';
 	imports: [
 		CommonModule,
 		BoardRoutingModule,
-		DeckStoreModule
+		GameStoreModule
 	]
 })
 export class BoardModule { }

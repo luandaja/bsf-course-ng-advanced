@@ -1,9 +1,12 @@
 <div class="row">
 	<section class="pt-3 col-sm-11  ml-sm-auto mr-sm-auto">
-		<gt-card *ngFor="let card of cards$ | async" [card]="card"></gt-card>
+		<gt-card
+			*ngFor="let boardCard of boardCards$ | async"
+			[cardIndex]="boardCard.cardIndex"
+			[isRevealed]="isGuessingTime$ | async"
+		></gt-card>
 	</section>
 	<div class="col-sm-12 pt/3">
-		<button class="btn btn-light" (click)="revealDeck()">Show Deck</button>
+		<button class="btn btn-light" (click)="showCards()">Show Deck</button>
 	</div>
-
 </div>

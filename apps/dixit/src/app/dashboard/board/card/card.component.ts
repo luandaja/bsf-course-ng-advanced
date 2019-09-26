@@ -1,4 +1,3 @@
-import { Card } from './../../../models/Card';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
@@ -13,7 +12,6 @@ export class CardComponent implements OnChanges {
 
 	@Input() cardIndex: number;
 	@Input() isRevealed: boolean;
-
 
 	constructor() {
 		this.cardImage = this.reverseCardUrl;
