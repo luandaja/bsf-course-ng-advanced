@@ -24,7 +24,7 @@ export class TableBoardComponent implements OnInit {
 
 		const getUserHand = this.gameStore.pipe(select(getAvaiableCards), map(cards => {
 			console.log('getting hand', cards);
-			this.gameStore.dispatch(setHand({ cards: cards.slice(0, 4), nextPlayerturn: 2 }))
+			this.gameStore.dispatch(setHand({ cards: cards.slice(0, 5), nextPlayerturn: 2 }))
 		}
 		));
 

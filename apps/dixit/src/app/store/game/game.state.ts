@@ -40,7 +40,7 @@ export const initalState: GameState = {
 		{ cardIndex: 27, owner: vico, votes: [] },
 		{ cardIndex: 78, owner: ale, votes: [pao] }
 	],
-	currentHand: [4, 67, 23, 12],//4, 67, 23, 12
+	currentHand: [],//4, 67, 23, 12, 34
 	avaiableCards: generateCardIndexes(),
 	isLoading: true
 };
@@ -48,7 +48,7 @@ export const initalState: GameState = {
 
 function generateCardIndexes(): number[] {
 	const cardIndexes: number[] = [];
-	for (let index = 0; index < 100; index++) {
+	for (let index = 1; index < 100; index++) {
 		cardIndexes.push(index);
 	}
 	shuffle(cardIndexes);

@@ -1,9 +1,22 @@
 <div class="row">
 	<section class="pt-3 col-sm-11  ml-sm-auto mr-sm-auto">
-		<gt-card
-			*ngFor="let card of handCards$ | async"
-			[cardIndex]="card"
-			[isRevealed]="true"
-		></gt-card>
+		<div class="float-left card" *ngFor="let card of handCards$ | async">
+			<a
+				class="shadow"
+				(click)="selectCard(card)"
+				[ngClass]="{ selected: selectedCardIndex === card }"
+			>
+				<img [src]="getCardImage(card)" width="200" height="320" />
+			</a>
+		</div>
 	</section>
+</div>
+<div class="row-fluid col-sm-9">
+	<gt-story-editor
+		[cardIndex]="selectedCardIndex"
+		[userPlayer]="userPlayer$ | async"
+	></gt-story-editor>
+	<!-- <button class="btn btn-info" (click)="setStory()">
+		Do you want to throw this card?  [ngClass]="{ selected: isSelected }"
+	</button> -->
 </div>
