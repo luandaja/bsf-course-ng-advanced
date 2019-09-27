@@ -1,15 +1,12 @@
-<!-- <ng-container *ngIf="areVotesVisible$ | async as areVotesVisible">
-
-</ng-container> -->
-<gt-card
+<gt-board-card
 	*ngFor="let boardCard of boardCards$ | async"
-	[card]="boardCard"
+	[boardCard]="boardCard"
 	[isRevealed]="isGuessingTime$ | async"
 	[isSelected]="boardCard.cardIndex === selectedCard?.cardIndex"
 	(click)="selectCard(boardCard)"
 	[isJumping]="(storyCard$ | async)?.cardIndex === boardCard.cardIndex"
 >
-</gt-card>
+</gt-board-card>
 <div class="row col-sm-12">
 	<div
 		class="row col-sm-11 pt-2"
@@ -20,4 +17,3 @@
 		</button>
 	</div>
 </div>
-<!--[disabled]="areVotesVisible$ | async"-->

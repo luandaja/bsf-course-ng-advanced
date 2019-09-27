@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getCurrentStory } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, setBoardCard } from '../../../store/game';
 import { Observable } from 'rxjs';
 import { Player } from '../../../models';
 import { StoryCard } from '../../../models/StoryCard';
@@ -37,5 +37,16 @@ export class HandComponent implements OnInit {
 	selectCard(cardIndex: number) {
 		this.selectedCardIndex = cardIndex;
 	}
+
+	throwCard(userPlayer: Player) {
+		if (!this.selectedCardIndex) {
+			console.log("Yo have to select a card first!");
+			return;
+		}
+		const boardCard: BoardCard = { cardIndex: this.selectedCardIndex, owner: userPlayer, votes: [] };
+		this.gameStore.dispatch(setBoardCard({ boardCard }));
+	}
+
+
 
 }

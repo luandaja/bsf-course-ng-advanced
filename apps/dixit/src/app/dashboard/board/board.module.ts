@@ -9,9 +9,10 @@ import { UiAvatarModule } from '@glotrix/ui/avatar';
 import { StoryComponent } from './story/story.component';
 import { BoardCardsComponent } from './board-cards/board-cards.component';
 import { CardComponent } from './card/card.component';
+import { BoardCardComponent } from './board-card/board-card.component';
 
 @NgModule({
-	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent],
+	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent],
 	imports: [
 		CommonModule,
 		BoardRoutingModule,

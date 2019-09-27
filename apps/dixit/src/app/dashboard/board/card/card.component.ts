@@ -10,28 +10,24 @@ import { BoardCard } from '../../../models/BoardCard';
 	styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnChanges {
-
-	areVotesVisible$: Observable<boolean>;
-
 	protected cardImage: string;
 	private readonly reverseCardUrl = "assets/cards/reverse_card.jpg";
 
-	@Input() card: BoardCard;
 	@Input() isRevealed: boolean;
 	@Input() isJumping: boolean;
 	@Input() isSelected: boolean;
+	@Input() cardIndex: number;
 
-	constructor(private gameStore: Store<GameState>) {
+	constructor() {
 		this.cardImage = this.reverseCardUrl;
 	}
 
 	ngOnChanges(): void {
-		this.areVotesVisible$ = this.gameStore.pipe(select(getVotesVisibility));
 		this.cardImage = this.isRevealed ? this.getImageUrl() : this.reverseCardUrl;
 	}
 
 	getImageUrl(): string {
-		const card_index = this.card.cardIndex > 10 ? this.card.cardIndex : `0${this.card.cardIndex}`;
+		const card_index = this.cardIndex >= 10 ? this.cardIndex : `0${this.cardIndex}`;
 		return `assets/cards/card_000${card_index}.jpg`;
 	}
 

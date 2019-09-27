@@ -35,8 +35,9 @@ function vote(boardCards: BoardCard[], cardIndex: number, player: Player) {
 }
 
 function add(list: any[], item: any) {
-	list.push(item);
-	return list;
+	const newList = Object.assign([], list);
+	newList.push(item);
+	return newList;
 }
 
 function update(players: any[], player: any): any[] {
