@@ -1,10 +1,9 @@
 import { setGuessingTime, setHand, setPlayerTurn, setVotesVisibility } from '../../../store/game/game.actions';
 import { Component, OnInit } from '@angular/core';
-import { GameState, getBoardCards, getAvaiableCards, getIsGuessingTime, getTurn, getCurrentStory, getVotesVisibility } from '../../../store/game';
+import { GameState, getBoardCards, getAvaiableCards, getIsGuessingTime, getTurn, getCurrentStory, getVotesVisibility, getUserPlayer } from '../../../store/game';
 import { Store, select } from '@ngrx/store';
 import { tap, map, switchMap, mergeMap } from 'rxjs/operators';
 import { Observable, pipe, iif, of } from 'rxjs';
-import { AuthState, getUser } from '../../../store/auth';
 import { Player } from '../../../models';
 
 @Component({
@@ -14,15 +13,13 @@ import { Player } from '../../../models';
 })
 export class TableBoardComponent implements OnInit {
 
-	constructor(private gameStore: Store<GameState>,
-		private authStore: Store<AuthState>) { }
+
+	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
 
-
-		const isUsersTurn: Observable<boolean> = this.authStore.pipe(
-			select(getUser),
-			switchMap((user: Player) => this.gameStore.pipe(select(getTurn), map(playerTurn => playerTurn === user.order)))
+		const isUsersTurn: Observable<boolean> = this.gameStore.pipe(select(getUserPlayer),
+			switchMap((userPlayer: Player) => this.gameStore.pipe(select(getTurn), map(playerTurn => playerTurn === userPlayer.order)))
 		);
 
 		const getUserHand = this.gameStore.pipe(select(getAvaiableCards), map(cards => {

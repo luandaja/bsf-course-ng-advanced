@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StoryCard } from '../../../models/StoryCard';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentStory, setVotesVisibility } from '../../../store/game';
-import { AuthState, getUser } from '../../../store/auth';
+import { GameState, getCurrentStory, setVotesVisibility, getUserPlayer } from '../../../store/game';
 import { map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -16,15 +15,11 @@ export class StoryComponent implements OnInit {
 	currentStory$: Observable<StoryCard>;
 	isStoryTeller$: Observable<boolean>;
 
-	constructor(private gameStore: Store<GameState>,
-		private authStore: Store<AuthState>) { }
+	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
 		this.currentStory$ = this.gameStore.pipe(select(getCurrentStory));
-		this.isStoryTeller$ = this.authStore.pipe(
-			select(getUser),
-			switchMap(user => this.currentStory$.pipe(map(story => story.storyTeller.playerId === user.playerId)))
-		);
+		this.isStoryTeller$ = this.gameStore.pipe(select(getUserPlayer), map(user => user.isStoryTeller));
 	}
 
 	showVotes(): void {

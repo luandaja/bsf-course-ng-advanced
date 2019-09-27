@@ -55,4 +55,11 @@ export const updatePlayer = createAction(
 	props<{ player: Player }>()
 );
 
+export const signIn = createAction(
+	'[Auth] Sign in',
+	props<{ username: string; password: string }>()
+);
+
+
+export const signOut = createAction('[Auth] Sign out');
 

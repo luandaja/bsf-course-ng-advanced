@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { appModulesAsLinkOption } from '../modules.routes';
-import { AuthState, getUser, signOut } from '../../../store/auth';
+import { GameState, getUserPlayer, signOut } from '../../../store/game';
 
 @Component({
 	selector: 'gt-dashboard-layout',
@@ -19,9 +19,9 @@ export class DashboardLayoutComponent {
 
 	protected user$: Observable<NavigationUser>;
 
-	constructor(private store: Store<AuthState>, private router: Router) {
+	constructor(private store: Store<GameState>, private router: Router) {
 		this.user$ = this.store.pipe(
-			select(getUser),
+			select(getUserPlayer),
 			map(
 				user =>
 					({

@@ -3,13 +3,13 @@ import { CanActivate, Router, CanLoad } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import { AuthState, getIsLogged } from '../../store/auth';
+import { GameState, getIsLogged } from '../../store/game';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanLoad {
-	constructor(private router: Router, private store: Store<AuthState>) { }
+	constructor(private router: Router, private store: Store<GameState>) { }
 
 	public canLoad(): Observable<boolean> {
 		//	console.log('can load');

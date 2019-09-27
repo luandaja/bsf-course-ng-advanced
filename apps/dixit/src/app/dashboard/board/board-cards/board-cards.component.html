@@ -7,11 +7,14 @@
 	[isRevealed]="isGuessingTime$ | async"
 	[isSelected]="boardCard.cardIndex === selectedCard?.cardIndex"
 	(click)="selectCard(boardCard)"
-	[isJumping]="(storyCardIndex$ | async) === boardCard.cardIndex"
+	[isJumping]="(storyCard$ | async)?.cardIndex === boardCard.cardIndex"
 >
 </gt-card>
 <div class="row col-sm-12">
-	<div class="row col-sm-11 pt-2" *ngIf="selectedCard && canVote">
+	<div
+		class="row col-sm-11 pt-2"
+		*ngIf="selectedCard && canVote && !(userPlayer$ | async)?.isStoryTeller"
+	>
 		<button class="btn btn-info" (click)="vote()">
 			Do you want to vote for this card?
 		</button>

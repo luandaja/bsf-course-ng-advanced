@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BoardCard } from '../../../models/BoardCard';
 import { select, Store } from '@ngrx/store';
-import { getBoardCards, getIsGuessingTime, getVotesVisibility, GameState, getCurrentStory, setVote } from '../../../store/game';
+import { getBoardCards, getIsGuessingTime, getVotesVisibility, GameState, getCurrentStory, setVote, getUserPlayer } from '../../../store/game';
 import { StoryCard } from '../../../models/StoryCard';
 import { map, tap, switchMap } from 'rxjs/operators';
-import { AuthState, getUser } from '../../../store/auth';
+import { Player } from '../../../models';
 
 @Component({
 	selector: 'gt-board-cards',
@@ -15,19 +15,20 @@ import { AuthState, getUser } from '../../../store/auth';
 export class BoardCardsComponent implements OnInit {
 	boardCards$: Observable<BoardCard[]>;
 	isGuessingTime$: Observable<boolean>;
-	storyCardIndex$: Observable<number>;
+	storyCard$: Observable<StoryCard>;
+	userPlayer$: Observable<Player>;
 
 	//selectedCard$: Observable<BoardCard>;
 	selectedCard: BoardCard;
 	canVote = true;
 
-	constructor(private gameStore: Store<GameState>,
-		private authStore: Store<AuthState>) { }
+	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
 		this.boardCards$ = this.gameStore.pipe(select(getBoardCards));
 		this.isGuessingTime$ = this.gameStore.pipe(select(getIsGuessingTime));
-		this.storyCardIndex$ = this.gameStore.pipe(select(getCurrentStory), map(story => story.storyCardIndex));
+		this.storyCard$ = this.gameStore.pipe(select(getCurrentStory));
+		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
 	}
 
 	vote(): void {
@@ -41,8 +42,14 @@ export class BoardCardsComponent implements OnInit {
 		// 		this.gameStore.dispatch(setVote({ boardCard: this.selectedCard }));
 		// 	})
 		// );
-		this.authStore.pipe(select(getUser))
+
+		//story.storyTeller.playerId === user.playerId
+		this.userPlayer$
 			.subscribe(user => {
+				if (user.isStoryTeller) {
+					console.log("You are the story teller so you can't vote!");
+					return;
+				}
 				if (this.selectedCard.owner.playerId === user.playerId) {
 					console.log("You can't vote for your own card!");
 					return;
@@ -54,6 +61,7 @@ export class BoardCardsComponent implements OnInit {
 
 
 	selectCard(cardSelected: BoardCard) {
+		//	if()
 		if (!this.canVote)
 			return;
 

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { AuthState, getIsLogged } from './store/auth';
+import { GameState, getIsLogged } from './store/game';
 
 @Component({
 	selector: 'gt-root',
@@ -12,10 +12,10 @@ import { AuthState, getIsLogged } from './store/auth';
 export class AppComponent implements OnInit, OnDestroy {
 	isLoggedIn$: Subscription;
 
-	constructor(private store: Store<AuthState>, private router: Router) { }
+	constructor(private gameStore: Store<GameState>, private router: Router) { }
 
 	ngOnInit(): void {
-		this.isLoggedIn$ = this.store
+		this.isLoggedIn$ = this.gameStore
 			.pipe(select(getIsLogged))
 			.subscribe((isLogged: boolean) => this.redirect(isLogged));
 	}

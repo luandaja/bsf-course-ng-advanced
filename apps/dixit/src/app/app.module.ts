@@ -2,11 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 import { RouterStoreModule } from './store/router';
-import { AuthStoreModule } from './store/auth/auth-store.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
+import { GameStoreModule } from './store/game';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -15,7 +14,7 @@ import { CoreModule } from './core/core.module';
 		AppRoutingModule,
 		CoreModule,
 		RouterStoreModule,
-		AuthStoreModule,
+		GameStoreModule,
 		CoreModule
 	],
 	bootstrap: [AppComponent]

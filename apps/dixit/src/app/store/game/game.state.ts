@@ -6,6 +6,8 @@ export const gameFeatureName = 'game';
 export interface GameState {
 	players: Player[];
 	currentTurn: number;
+	userPlayer: Player;
+	isLogged: boolean;
 	isGuessingTime: boolean;
 	currentStory: StoryCard;
 	boardCards: BoardCard[];
@@ -24,8 +26,10 @@ const vico = { playerId: 6, userName: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov'
 
 export const initalState: GameState = {
 	players: [pao, walter, myriam, brenda, vico, ale],
+	userPlayer: { ...ale, isStoryTeller: false },
+	isLogged: true,
 	currentTurn: 6,
-	currentStory: { storyCardIndex: 78, title: 'test story', storyTeller: ale },
+	currentStory: { cardIndex: 78, title: 'test story', storyTeller: ale },
 	isGuessingTime: true,
 	areVotesVisible: false,
 	boardCards: [

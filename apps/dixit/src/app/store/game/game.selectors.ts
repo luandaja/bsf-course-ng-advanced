@@ -43,3 +43,12 @@ export const getTurn = createSelector(
 	(state: GameState) => state.currentTurn
 );
 
+export const getIsLogged = createSelector(
+	gameFeature,
+	state => state.isLogged
+);
+
+export const getUserPlayer = createSelector(
+	gameFeature,
+	state => state.userPlayer
+);

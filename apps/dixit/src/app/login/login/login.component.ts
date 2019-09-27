@@ -2,7 +2,7 @@ import { Banner } from '@glotrix/ui/login';
 import { Component, OnInit } from '@angular/core';
 import { loginEntries } from './form-fields';
 import { Store } from '@ngrx/store';
-import { AuthState, signIn } from '../../store/auth';
+import { GameState, signIn } from '../../store/game';
 
 export const banner: Banner = {
 	upperText: 'BXCOMMERCE',
@@ -22,7 +22,7 @@ export class LoginComponent {
 	entries = loginEntries;
 	banner = banner;
 
-	constructor(private store: Store<AuthState>) { }
+	constructor(private store: Store<GameState>) { }
 
 	onSubmitted(formData: any) {
 		this.store.dispatch(

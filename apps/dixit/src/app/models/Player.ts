@@ -4,4 +4,5 @@ export interface Player {
 	userName: string;
 	photoUrl: string;
 	score: number;
+	isStoryTeller?: boolean;
 }
