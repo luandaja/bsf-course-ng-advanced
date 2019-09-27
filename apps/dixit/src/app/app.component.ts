@@ -22,10 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	private redirect(isLogged: boolean) {
 		if (isLogged) {
-			console.log('loggeado');
+			//		console.log('loggeado');
 			this.router.navigate(['/dashboard']);
 		} else {
-			console.log('no loggeado');
+			//		console.log('no loggeado');
 			this.router.navigate(['/login']);
 		}
 	}

@@ -56,9 +56,6 @@
     "ui-login": {
       "tags": ["ui"]
     },
-    "ui-card": {
-      "tags": ["ui"]
-    },
     "ui-counter": {
       "tags": ["ui"]
     },
@@ -67,6 +64,9 @@
     },
     "dixit": {
       "tags": []
+    },
+    "ui-card": {
+      "tags": ["ui"]
     }
   }
 }

@@ -6,7 +6,7 @@ import { Player } from '../../models';
 export const fetchBoardCards = createAction('[Board Cards] Fetch board cards');
 
 export const setBoardCard = createAction(
-	'[Board Cards] Set board card',
+	'[Board Cards] Set single board card',
 	props<{ boardCard: BoardCard }>()
 );
 
@@ -15,28 +15,19 @@ export const setGuessingTime = createAction(
 	props<{ isGuessingTime: boolean }>()
 );
 
+export const setVotesVisibility = createAction(
+	'[Board Cards] Set votes isibility',
+	props<{ areVotesVisible: boolean }>()
+);
+
 export const setAvaiableCards = createAction(
-	'[Board Cards] Set avaiable cards index',
+	'[Board Cards] Set avaiable cards',
 	props<{ cards: number[] }>()
 );
 
-// export const setExcludedCard = createAction(
-// 	'[Board Cards] Set excluded card index',
-// 	props<{ cardIndex: number }>()
-// );
 export const setPlayerTurn = createAction(
-	'[Board Cards] Set player turn',
+	'[Board Cards] Set current turn',
 	props<{ playerTurn: number }>()
-);
-
-export const setHandCard = createAction(
-	'[Board Cards] Set hand card index',
-	props<{ cardIndex: number }>()
-);
-
-export const setHand = createAction(
-	'[Board Cards] Set hand index',
-	props<{ cards: number[], nextPlayerturn: number }>()
 );
 
 export const setCurrentStory = createAction(
@@ -44,8 +35,18 @@ export const setCurrentStory = createAction(
 	props<{ currentStory: StoryCard }>()
 );
 
+export const setHandCard = createAction(
+	'[Player Hand] Set single hand card',
+	props<{ cardIndex: number }>()
+);
+
+export const setHand = createAction(
+	'[Player Hand] Set player hand',
+	props<{ cards: number[], nextPlayerturn: number }>()
+);
+
 export const updatePlayer = createAction(
-	'[Board Cards] Update player',
+	'[Score] Update player',
 	props<{ player: Player }>()
 );
 

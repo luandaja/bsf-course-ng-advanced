@@ -1,0 +1,16 @@
+<gt-card
+	*ngFor="let boardCard of boardCards$ | async"
+	[cardIndex]="boardCard.cardIndex"
+	[isRevealed]="isGuessingTime$ | async"
+>
+	<ng-container *ngIf="getVotesVisibility$ | async">
+		<gt-avatar
+			class="pt-1"
+			*ngFor="let vote of boardCard.votes"
+			[width]="80"
+			[height]="80"
+			[source]="vote.photoUrl"
+		>
+		</gt-avatar>
+	</ng-container>
+</gt-card>

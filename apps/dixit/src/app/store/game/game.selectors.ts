@@ -23,12 +23,23 @@ export const getPlayers = createSelector(
 	(state: GameState) => state.players
 );
 
-export const getPlayerTurn = createSelector(
-	gameFeature,
-	(state: GameState) => state.playerTurn
-);
-
 export const getIsGuessingTime = createSelector(
 	gameFeature,
 	(state: GameState) => state.isGuessingTime
 );
+
+export const getVotesVisibility = createSelector(
+	gameFeature,
+	(state: GameState) => state.areVotesVisible
+);
+
+export const getCurrentHand = createSelector(
+	gameFeature,
+	(state: GameState) => state.currentHand
+);
+
+export const getTurn = createSelector(
+	gameFeature,
+	(state: GameState) => state.currentTurn
+);
+

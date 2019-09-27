@@ -1,5 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { fetchBoardCards, setGuessingTime, setBoardCard, setCurrentStory, updatePlayer, setHandCard, setAvaiableCards, setHand, setPlayerTurn } from './game.actions';
+import {
+	fetchBoardCards, setGuessingTime, setBoardCard, setCurrentStory, updatePlayer,
+	setHandCard, setAvaiableCards, setHand, setPlayerTurn, setVotesVisibility
+} from './game.actions';
 import { GameState, initalState } from './game.state';
 import { Player } from '../../models';
 
@@ -7,14 +10,15 @@ import { Player } from '../../models';
 const reducer = createReducer(
 	initalState,
 	on(fetchBoardCards, (state, { }) => ({ ...state, isLoading: true })),
-	on(setBoardCard, (state, { boardCard }) => ({ ...state, boardCards: add(state.boardCards, boardCard) })),
+	on(setBoardCard, (state, { boardCard }) => ({ ...state, boardCards: add(state.boardCards, boardCard), isGuessingTime: state.players.length === state.boardCards.length })),
 	on(setGuessingTime, (state, { isGuessingTime }) => ({ ...state, isGuessingTime })),
+	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible })),
 	on(setAvaiableCards, (state, { cards }) => ({ ...state, avaiableCards: cards })),
 	on(setHandCard, (state, { cardIndex }) => ({ ...state, currentHand: add(state.currentHand, cardIndex), avaiableCards: state.avaiableCards.filter(index => index !== cardIndex) })),
-	on(setPlayerTurn, (state, { playerTurn }) => ({ ...state, playerTurn })),
-	on(setHand, (state, { cards, nextPlayerturn }) => ({ ...state, currentHand: cards, avaiableCards: state.avaiableCards.filter(cardIndex => !cards.includes(cardIndex)), playerTurn: nextPlayerturn })),
+	on(setHand, (state, { cards, nextPlayerturn }) => ({ ...state, currentHand: cards, currentTurn: nextPlayerturn })),//avaiableCards: state.avaiableCards.filter(cardIndex => !cards.includes(cardIndex))
 	on(setCurrentStory, (state, { currentStory }) => ({ ...state, currentStory })),
-	on(updatePlayer, (state, { player }) => ({ ...state, players: update(state.players, player) }))
+	on(updatePlayer, (state, { player }) => ({ ...state, players: update(state.players, player) })),
+	on(setPlayerTurn, (state, { playerTurn }) => ({ ...state, currentTurn: playerTurn }))
 );
 
 function add(list: any[], item: any) {

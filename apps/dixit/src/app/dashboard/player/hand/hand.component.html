@@ -1,0 +1,9 @@
+<div class="row">
+	<section class="pt-3 col-sm-11  ml-sm-auto mr-sm-auto">
+		<gt-card
+			*ngFor="let card of handCards$ | async"
+			[cardIndex]="card"
+			[isRevealed]="true"
+		></gt-card>
+	</section>
+</div>

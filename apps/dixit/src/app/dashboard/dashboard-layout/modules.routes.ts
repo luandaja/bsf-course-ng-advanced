@@ -13,7 +13,7 @@ export const appModules: Routes = [
 			)
 	},
 	{
-		path: 'player',
+		path: 'hand',
 		canActivate: [AuthGuard],
 		loadChildren: () =>
 			import('../player/player.module').then(

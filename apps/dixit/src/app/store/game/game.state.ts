@@ -5,13 +5,14 @@ import { StoryCard } from '../../models/StoryCard';
 export const gameFeatureName = 'game';
 export interface GameState {
 	players: Player[];
+	currentTurn: number;
 	isGuessingTime: boolean;
 	currentStory: StoryCard;
 	boardCards: BoardCard[];
 	currentHand: number[];
 	avaiableCards: number[];
+	areVotesVisible: boolean;
 	isLoading: boolean;
-	playerTurn: number;
 }
 
 const pao = { playerId: 1, userName: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, order: 1 };
@@ -23,19 +24,20 @@ const ale = { playerId: 6, userName: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', 
 
 export const initalState: GameState = {
 	players: [pao, walter, myriam, brenda, vico, ale],
+	currentTurn: 6,
 	currentStory: { storyCardIndex: 78, title: 'test story', storyTeller: ale },
 	isGuessingTime: false,
+	areVotesVisible: false,
 	boardCards: [
-		{ cardIndex: 2, owner: pao },
-		{ cardIndex: 6, owner: walter },
-		{ cardIndex: 12, owner: myriam },
-		{ cardIndex: 34, owner: brenda },
-		{ cardIndex: 27, owner: vico },
-		{ cardIndex: 78, owner: ale }
+		{ cardIndex: 2, owner: pao, votes: [walter, brenda] },
+		{ cardIndex: 6, owner: walter, votes: [] },
+		{ cardIndex: 12, owner: myriam, votes: [vico] },
+		{ cardIndex: 34, owner: brenda, votes: [] },
+		{ cardIndex: 27, owner: vico, votes: [] },
+		{ cardIndex: 78, owner: ale, votes: [pao] }
 	],
-	currentHand: [4, 67, 23, 12],
+	currentHand: [4, 67, 23, 12],//4, 67, 23, 12
 	avaiableCards: generateCardIndexes(),
-	playerTurn: 1,
 	isLoading: true
 };
 
