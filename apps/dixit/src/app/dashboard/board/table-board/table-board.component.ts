@@ -4,10 +4,8 @@ import { GameState, getBoardCards, getAvaiableCards, getIsGuessingTime, getTurn,
 import { Store, select } from '@ngrx/store';
 import { tap, map, switchMap, mergeMap } from 'rxjs/operators';
 import { Observable, pipe, iif, of } from 'rxjs';
-import { BoardCard } from '../../../models/BoardCard';
 import { AuthState, getUser } from '../../../store/auth';
 import { Player } from '../../../models';
-import { StoryCard } from '../../../models/StoryCard';
 
 @Component({
 	selector: 'gt-table-board',
@@ -15,9 +13,6 @@ import { StoryCard } from '../../../models/StoryCard';
 	styleUrls: ['./table-board.component.scss']
 })
 export class TableBoardComponent implements OnInit {
-
-
-
 
 	constructor(private gameStore: Store<GameState>,
 		private authStore: Store<AuthState>) { }
@@ -55,8 +50,6 @@ export class TableBoardComponent implements OnInit {
 
 	}
 
-	showVotes(): void {
-		this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: true }));
-	}
+
 
 }

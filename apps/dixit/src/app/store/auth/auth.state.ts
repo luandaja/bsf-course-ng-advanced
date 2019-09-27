@@ -10,7 +10,7 @@ export const initalState: AuthState = {
 	isLogged: true,
 	user: {
 		playerId: 1,
-		userName: 'zoemy',
+		userName: 'ale',
 		score: 0,
 		order: 1,
 		photoUrl:

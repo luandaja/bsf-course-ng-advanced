@@ -14,13 +14,13 @@ export interface GameState {
 	areVotesVisible: boolean;
 	isLoading: boolean;
 }
+const ale = { playerId: 1, userName: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, order: 6 };
+const pao = { playerId: 2, userName: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, order: 1 };
+const walter = { playerId: 3, userName: 'Walter', photoUrl: 'https://bit.ly/2lQfYBH', score: 0, order: 2 };
+const myriam = { playerId: 4, userName: 'Myriam', photoUrl: 'https://bit.ly/2lOjrAQ', score: 0, order: 3 };
+const brenda = { playerId: 5, userName: 'Brenda', photoUrl: 'https://bit.ly/2leFz7h', score: 0, order: 4 };
+const vico = { playerId: 6, userName: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', score: 0, order: 5 };
 
-const pao = { playerId: 1, userName: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, order: 1 };
-const walter = { playerId: 2, userName: 'Walter', photoUrl: 'https://bit.ly/2lQfYBH', score: 0, order: 2 };
-const myriam = { playerId: 3, userName: 'Myriam', photoUrl: 'https://bit.ly/2lOjrAQ', score: 0, order: 3 };
-const brenda = { playerId: 4, userName: 'Brenda', photoUrl: 'https://bit.ly/2leFz7h', score: 0, order: 4 };
-const vico = { playerId: 5, userName: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', score: 0, order: 5 };
-const ale = { playerId: 6, userName: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, order: 6 };
 
 export const initalState: GameState = {
 	players: [pao, walter, myriam, brenda, vico, ale],
