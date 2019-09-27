@@ -23,11 +23,7 @@ export class StoryComponent implements OnInit {
 		this.currentStory$ = this.gameStore.pipe(select(getCurrentStory));
 		this.isStoryTeller$ = this.authStore.pipe(
 			select(getUser),
-			switchMap(user => this.currentStory$.pipe(map(story => {
-				console.log("user", user);
-				console.log("story teller", story.storyTeller);
-				return story.storyTeller.playerId === user.playerId
-			})))
+			switchMap(user => this.currentStory$.pipe(map(story => story.storyTeller.playerId === user.playerId)))
 		);
 	}
 

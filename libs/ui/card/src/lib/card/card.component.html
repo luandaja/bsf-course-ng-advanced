@@ -1,5 +1,4 @@
 <section class="float-left card">
-	<img [src]="cardImage" width="200" height="320" />
+	<img [src]="cardImage" width="200" height="320" [ngClass]="{jump: isJumping}"/>
 	<ng-content></ng-content>
-	<!-- <img src="'https://bit.ly/2lQfYBH'" width="60" height="60" /> -->
 </section>

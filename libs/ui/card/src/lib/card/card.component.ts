@@ -12,6 +12,8 @@ export class CardComponent implements OnChanges {
 
 	@Input() cardIndex: number;
 	@Input() isRevealed: boolean;
+	@Input() isJumping: boolean;
+
 
 	constructor() {
 		this.cardImage = this.reverseCardUrl;
