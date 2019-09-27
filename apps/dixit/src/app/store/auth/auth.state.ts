@@ -13,7 +13,6 @@ export const initalState: AuthState = {
 		userName: 'ale',
 		score: 0,
 		order: 1,
-		photoUrl:
-			'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'
+		photoUrl: 'https://bit.ly/2ngbfJT'
 	}
 };

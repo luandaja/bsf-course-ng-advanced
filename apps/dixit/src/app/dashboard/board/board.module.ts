@@ -5,18 +5,17 @@ import { BoardRoutingModule } from './board-routing.module';
 import { TableBoardComponent } from './table-board/table-board.component';
 
 import { GameStoreModule } from '../../store/game';
-import { UiCardModule } from '@glotrix/ui/card';
 import { UiAvatarModule } from '@glotrix/ui/avatar';
 import { StoryComponent } from './story/story.component';
 import { BoardCardsComponent } from './board-cards/board-cards.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
-	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent],
+	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent],
 	imports: [
 		CommonModule,
 		BoardRoutingModule,
 		GameStoreModule,
-		UiCardModule,
 		UiAvatarModule
 	]
 })

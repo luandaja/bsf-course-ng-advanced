@@ -1,21 +1,20 @@
-<section>
-	<gt-card
-		*ngFor="let boardCard of boardCards$ | async"
-		[cardIndex]="boardCard.cardIndex"
-		[isRevealed]="isGuessingTime$ | async"
-		[isJumping]="
-			(storyCardIndex$ | async) === boardCard.cardIndex && (areVotesVisible$ | async)
-		"
-	>
-		<ng-container *ngIf="areVotesVisible$ | async">
-			<gt-avatar
-				class="pt-1"
-				*ngFor="let vote of boardCard.votes"
-				[width]="80"
-				[height]="80"
-				[source]="vote.photoUrl"
-			>
-			</gt-avatar>
-		</ng-container>
-	</gt-card>
-</section>
+<!-- <ng-container *ngIf="areVotesVisible$ | async as areVotesVisible">
+
+</ng-container> -->
+<gt-card
+	*ngFor="let boardCard of boardCards$ | async"
+	[card]="boardCard"
+	[isRevealed]="isGuessingTime$ | async"
+	[isSelected]="boardCard.cardIndex === selectedCard?.cardIndex"
+	(click)="selectCard(boardCard)"
+	[isJumping]="(storyCardIndex$ | async) === boardCard.cardIndex"
+>
+</gt-card>
+<div class="row col-sm-12">
+	<div class="row col-sm-11 pt-2" *ngIf="selectedCard && canVote">
+		<button class="btn btn-info" (click)="vote()">
+			Do you want to vote for this card?
+		</button>
+	</div>
+</div>
+<!--[disabled]="areVotesVisible$ | async"-->

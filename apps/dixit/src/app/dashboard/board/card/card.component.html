@@ -1,0 +1,24 @@
+<div class="float-left card ">
+	<ng-container *ngIf="areVotesVisible$ | async">
+		<gt-avatar class="pb-1" [width]="80" [height]="80" [source]="card.owner.photoUrl">
+		</gt-avatar>
+	</ng-container>
+	<a class="shadow" [ngClass]="{ selected: isSelected && !disabled }">
+		<img
+			[src]="cardImage"
+			width="200"
+			height="320"
+			[ngClass]="{ jump: isJumping && (areVotesVisible$ | async) }"
+		/>
+	</a>
+	<ng-container *ngIf="areVotesVisible$ | async">
+		<gt-avatar
+			class="pt-1"
+			*ngFor="let vote of card.votes"
+			[width]="80"
+			[height]="80"
+			[source]="vote.photoUrl"
+		>
+		</gt-avatar>
+	</ng-container>
+</div>

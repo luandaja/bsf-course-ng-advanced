@@ -10,13 +10,18 @@ export const setBoardCard = createAction(
 	props<{ boardCard: BoardCard }>()
 );
 
+export const setVote = createAction(
+	'[Board Cards] Set vote',
+	props<{ cardIndex: number, player: Player }>()
+);
+
 export const setGuessingTime = createAction(
 	'[Board Cards] Set guessing time',
 	props<{ isGuessingTime: boolean }>()
 );
 
 export const setVotesVisibility = createAction(
-	'[Board Cards] Set votes isibility',
+	'[Board Cards] Set votes visibility',
 	props<{ areVotesVisible: boolean }>()
 );
 

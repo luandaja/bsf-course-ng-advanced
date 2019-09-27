@@ -26,7 +26,7 @@ export const initalState: GameState = {
 	players: [pao, walter, myriam, brenda, vico, ale],
 	currentTurn: 6,
 	currentStory: { storyCardIndex: 78, title: 'test story', storyTeller: ale },
-	isGuessingTime: false,
+	isGuessingTime: true,
 	areVotesVisible: false,
 	boardCards: [
 		{ cardIndex: 2, owner: pao, votes: [walter, brenda] },
