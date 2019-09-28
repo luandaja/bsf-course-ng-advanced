@@ -10,9 +10,10 @@ import { StoryComponent } from './story/story.component';
 import { BoardCardsComponent } from './board-cards/board-cards.component';
 import { CardComponent } from './card/card.component';
 import { BoardCardComponent } from './board-card/board-card.component';
+import { PlayersComponent } from './players/players.component';
 
 @NgModule({
-	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent],
+	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent, PlayersComponent],
 	imports: [
 		CommonModule,
 		BoardRoutingModule,

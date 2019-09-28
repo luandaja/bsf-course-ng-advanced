@@ -30,15 +30,15 @@ export const initalState: GameState = {
 	isLogged: true,
 	currentTurn: 6,
 	currentStory: { cardIndex: 78, title: 'test story', storyTeller: ale },
-	isGuessingTime: true,
+	isGuessingTime: false,
 	areVotesVisible: false,
 	boardCards: [
-		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
-		// { cardIndex: 6, owner: walter, votes: [] },
-		// { cardIndex: 12, owner: myriam, votes: [vico] },
-		// { cardIndex: 34, owner: brenda, votes: [] },
-		// { cardIndex: 27, owner: vico, votes: [] },
-		// { cardIndex: 78, owner: ale, votes: [pao] }
+		{ cardIndex: 2, owner: pao, votes: [walter, brenda] },
+		{ cardIndex: 6, owner: walter, votes: [] },
+		{ cardIndex: 12, owner: myriam, votes: [vico] },
+		{ cardIndex: 34, owner: brenda, votes: [] },
+		{ cardIndex: 27, owner: vico, votes: [] },
+		{ cardIndex: 78, owner: ale, votes: [pao] }
 	],
 	currentHand: [],//4, 67, 23, 12, 34
 	avaiableCards: generateCardIndexes(),

@@ -1,0 +1,5 @@
+<ul>
+	<li *ngFor="let player of players$ | async" class="m-2">
+		<gt-avatar [width]="60" [height]="60" [source]="player.photoUrl"> </gt-avatar>
+	</li>
+</ul>
