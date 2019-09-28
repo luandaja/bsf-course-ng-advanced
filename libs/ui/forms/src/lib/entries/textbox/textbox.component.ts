@@ -4,8 +4,8 @@ import { InputComponent } from '../input';
 import { CommunicationService } from '../../services/communication.service';
 
 @Component({
-  selector: 'gt-textbox',
-  template: `
+	selector: 'gt-textbox',
+	template: `
     <ng-container *ngIf="formState$ | async as state">
       <section [formGroup]="state.form">
         <label [attr.for]="entry.key">{{ entry.label }}</label>
@@ -22,20 +22,20 @@ import { CommunicationService } from '../../services/communication.service';
         />
 
         <small *ngIf="validations.maxlength"
-          >{{ control.value.length }} / {{ validations.maxlength.value }}</small
+          >{{ control.value?.length }} / {{ validations.maxlength?.value }}</small
         >
       </section>
     </ng-container>
   `,
-  styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+	styles: [],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TexboxComponent extends InputComponent implements OnInit {
-  @Input() entry: Field;
-  constructor(protected communication: CommunicationService) {
-    super(communication);
-  }
-  ngOnInit(): void {
-    this.initInput();
-  }
+	@Input() entry: Field;
+	constructor(protected communication: CommunicationService) {
+		super(communication);
+	}
+	ngOnInit(): void {
+		this.initInput();
+	}
 }

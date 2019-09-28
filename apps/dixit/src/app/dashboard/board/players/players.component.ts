@@ -1,9 +1,9 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getBoardCards } from '../../../store/game';
+import { GameState, getIsGuessingTime, getPlayers } from '../../../store/game';
 import { Player } from '../../../models';
 import { Observable } from 'rxjs';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
 	selector: 'gt-players',
@@ -18,10 +18,10 @@ export class PlayersComponent implements OnInit {
 
 	ngOnInit() {
 		this.players$ = this.gameStore.pipe(
-			select(getBoardCards),
-			map(boardCards => boardCards.map(boardCard => boardCard.owner)),
-			map(players => this.shuffle(players))
-		);
+			select(getIsGuessingTime),
+			switchMap(isGuessingTime => this.gameStore.pipe(select(getPlayers),
+				map(players => players.filter(player => isGuessingTime ? player.hasVoted : player.hasThrowCard)), map(players => this.shuffle(players))
+			)));
 	}
 
 	private shuffle(array) {

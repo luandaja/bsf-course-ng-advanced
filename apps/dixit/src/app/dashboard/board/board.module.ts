@@ -11,9 +11,10 @@ import { BoardCardsComponent } from './board-cards/board-cards.component';
 import { CardComponent } from './card/card.component';
 import { BoardCardComponent } from './board-card/board-card.component';
 import { PlayersComponent } from './players/players.component';
+import { VoteEditorComponent } from './vote-editor/vote-editor.component';
 
 @NgModule({
-	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent, PlayersComponent],
+	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent, PlayersComponent, VoteEditorComponent],
 	imports: [
 		CommonModule,
 		BoardRoutingModule,

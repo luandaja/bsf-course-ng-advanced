@@ -5,4 +5,6 @@ export interface Player {
 	photoUrl: string;
 	score: number;
 	isStoryTeller?: boolean;
+	hasVoted?: boolean;
+	hasThrowCard?: boolean;
 }

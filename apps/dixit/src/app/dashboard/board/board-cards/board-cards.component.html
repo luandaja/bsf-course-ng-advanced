@@ -8,12 +8,11 @@
 >
 </gt-board-card>
 <div class="row col-sm-12">
-	<div
-		class="row col-sm-11 pt-2"
-		*ngIf="selectedCard && canVote && !(userPlayer$ | async)?.isStoryTeller"
-	>
-		<button class="btn btn-info" (click)="vote()">
-			Do you want to vote for this card?
-		</button>
+	<div class="row col-sm-11 pt-2" *ngIf="playerCanVote$ | async">
+		<gt-vote-editor
+			[selectedCard]="selectedCard?.cardIndex"
+			[userPlayer]="userPlayer$ | async"
+		>
+		</gt-vote-editor>
 	</div>
 </div>

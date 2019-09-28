@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, setBoardCard } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, setBoardCard, getBoardCards } from '../../../store/game';
 import { Observable } from 'rxjs';
 import { Player } from '../../../models';
 import { StoryCard } from '../../../models/StoryCard';
@@ -29,10 +29,10 @@ export class HandComponent implements OnInit {
 		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
 
 		this.isStoryTellerTurn$ = this.gameStore.pipe(select(getCurrentStory),
-			switchMap(story => this.userPlayer$.pipe(map(user => user.isStoryTeller && story !== null)))
+			switchMap(story => this.userPlayer$.pipe(map(user => user.isStoryTeller && story === null)))
 		);
 		this.isPlayersTurn$ = this.gameStore.pipe(select(getCurrentStory),
-			switchMap(story => this.userPlayer$.pipe(map(user => !user.isStoryTeller && story !== null)))
+			switchMap(story => this.userPlayer$.pipe(map(user => !user.isStoryTeller && story !== null && !user.hasThrowCard)))
 		);
 	}
 
