@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Player } from '../../../models';
 import { StoryCard } from '../../../models/StoryCard';
 import { BoardCard } from '../../../models/BoardCard';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
 	selector: 'gt-hand',
@@ -14,7 +14,8 @@ import { map } from 'rxjs/operators';
 })
 export class HandComponent implements OnInit {
 	handCards$: Observable<number[]>;
-	storyCard$: Observable<StoryCard>;
+	isPlayersTurn$: Observable<boolean>;
+	isStoryTellerTurn$: Observable<boolean>;
 	userPlayer$: Observable<Player>;
 
 	boardCard: BoardCard;
@@ -25,8 +26,14 @@ export class HandComponent implements OnInit {
 
 	ngOnInit() {
 		this.handCards$ = this.gameStore.pipe(select(getCurrentHand));
-		this.storyCard$ = this.gameStore.pipe(select(getCurrentStory));
 		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
+
+		this.isStoryTellerTurn$ = this.gameStore.pipe(select(getCurrentStory),
+			switchMap(story => this.userPlayer$.pipe(map(user => user.isStoryTeller && story !== null)))
+		);
+		this.isPlayersTurn$ = this.gameStore.pipe(select(getCurrentStory),
+			switchMap(story => this.userPlayer$.pipe(map(user => !user.isStoryTeller && story !== null)))
+		);
 	}
 
 	getCardImage(cardIndex: number): string {
@@ -38,14 +45,7 @@ export class HandComponent implements OnInit {
 		this.selectedCardIndex = cardIndex;
 	}
 
-	throwCard(userPlayer: Player) {
-		if (!this.selectedCardIndex) {
-			console.log("Yo have to select a card first!");
-			return;
-		}
-		const boardCard: BoardCard = { cardIndex: this.selectedCardIndex, owner: userPlayer, votes: [] };
-		this.gameStore.dispatch(setBoardCard({ boardCard }));
-	}
+
 
 
 

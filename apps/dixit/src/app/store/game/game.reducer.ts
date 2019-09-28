@@ -11,7 +11,7 @@ import { BoardCard } from '../../models/BoardCard';
 const reducer = createReducer(
 	initalState,
 	on(fetchBoardCards, (state, { }) => ({ ...state, isLoading: true })),
-	on(setBoardCard, (state, { boardCard }) => ({ ...state, boardCards: add(state.boardCards, boardCard), isGuessingTime: state.players.length === state.boardCards.length })),
+	on(setBoardCard, (state, { boardCard }) => ({ ...state, boardCards: add(state.boardCards, boardCard), isGuessingTime: state.players.length === state.boardCards.length, currentHand: state.currentHand.filter(card => card !== boardCard.cardIndex) })),
 	on(setVote, (state, { cardIndex, player }) => ({ ...state, boardCards: vote(state.boardCards, cardIndex, player) })),
 	on(setGuessingTime, (state, { isGuessingTime }) => ({ ...state, isGuessingTime })),
 	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible })),

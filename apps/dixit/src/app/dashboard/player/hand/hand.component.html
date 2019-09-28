@@ -12,16 +12,16 @@
 	</section>
 </div>
 <ng-container *ngIf="userPlayer$ | async as userPlayer">
-	<div class="row-fluid col-sm-9">
+	<div class="row-fluid col-sm-9" *ngIf="isStoryTellerTurn$ | async">
 		<gt-story-editor
-			*ngIf="userPlayer.isStoryTeller"
 			[cardIndex]="selectedCardIndex"
 			[userPlayer]="userPlayer"
 		></gt-story-editor>
 	</div>
-	<div class="row-fluid col-sm-9 pt-3" *ngIf="!userPlayer.isStoryTeller">
-		<button class="btn btn-info" (click)="throwCard(userPlayer)">
-			Do you want to throw this card?
-		</button>
+	<div class="row-fluid col-sm-9 pt-3" *ngIf="isPlayersTurn$ | async">
+		<gt-card-selector
+			[cardIndex]="selectedCardIndex"
+			[userPlayer]="userPlayer"
+		></gt-card-selector>
 	</div>
 </ng-container>
