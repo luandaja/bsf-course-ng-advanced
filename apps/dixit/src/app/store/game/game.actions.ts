@@ -5,6 +5,8 @@ import { Player } from '../../models';
 
 export const fetchBoardCards = createAction('[Board Cards] Fetch board cards');
 
+export const nextRound = createAction('[Board Cards] Set next turn');
+
 export const setBoardCard = createAction(
 	'[Board Cards] Set single board card',
 	props<{ boardCard: BoardCard }>()
@@ -30,25 +32,25 @@ export const setAvaiableCards = createAction(
 	props<{ cards: number[] }>()
 );
 
-export const setPlayerTurn = createAction(
-	'[Board Cards] Set current turn',
-	props<{ playerTurn: number }>()
-);
-
 export const setCurrentStory = createAction(
 	'[Board Cards] Set current story',
 	props<{ currentStory: StoryCard }>()
 );
 
-export const setHandCard = createAction(
-	'[Player Hand] Set single hand card',
-	props<{ cardIndex: number }>()
+export const setUserHand = createAction(
+	'[Player Hand] Set hands card',
+	props<{ cardsCount: number }>()
 );
 
-export const setHand = createAction(
-	'[Player Hand] Set player hand',
-	props<{ cards: number[], nextPlayerturn: number }>()
-);
+// export const setHandCard = createAction(
+// 	'[Player Hand] Set single hand card',
+// 	props<{ cardIndex: number }>()
+// );
+
+// export const setHand = createAction(
+// 	'[Player Hand] Set player hand',
+// 	props<{ cards: number[] }>()
+// );
 
 export const updatePlayer = createAction(
 	'[Score] Update player',
@@ -59,7 +61,6 @@ export const signIn = createAction(
 	'[Auth] Sign in',
 	props<{ username: string; password: string }>()
 );
-
 
 export const signOut = createAction('[Auth] Sign out');
 

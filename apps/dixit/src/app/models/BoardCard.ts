@@ -6,7 +6,6 @@ export interface BoardCard {
 	votes?: Player[];
 }
 
-
 // export class Card {
 
 // 	cardIndex: number;

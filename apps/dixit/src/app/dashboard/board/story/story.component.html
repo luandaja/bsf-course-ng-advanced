@@ -7,6 +7,15 @@
 		<span class="align-middle story-title">{{ currentStory.title }}</span>
 	</div>
 	<div class="row col-sm-11 pt-2" *ngIf="isStoryTeller$ | async">
-		<button class="btn btn-info" (click)="showVotes()">Show Votes</button>
+		<button
+			class="btn btn-info"
+			(click)="showVotes()"
+			*ngIf="!(areVotesVisible$ | async)"
+		>
+			Show Votes
+		</button>
+		<button class="btn btn-info" (click)="nextRound()" *ngIf="areVotesVisible$ | async">
+			Next Round
+		</button>
 	</div>
 </div>
