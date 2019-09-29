@@ -42,16 +42,6 @@ export const setUserHand = createAction(
 	props<{ cardsCount: number }>()
 );
 
-// export const setHandCard = createAction(
-// 	'[Player Hand] Set single hand card',
-// 	props<{ cardIndex: number }>()
-// );
-
-// export const setHand = createAction(
-// 	'[Player Hand] Set player hand',
-// 	props<{ cards: number[] }>()
-// );
-
 export const updatePlayer = createAction(
 	'[Score] Update player',
 	props<{ player: Player }>()

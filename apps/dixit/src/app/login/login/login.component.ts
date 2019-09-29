@@ -5,11 +5,10 @@ import { Store } from '@ngrx/store';
 import { GameState, signIn } from '../../store/game';
 
 export const banner: Banner = {
-	upperText: 'BXCOMMERCE',
+	upperText: 'ONLINE BOARD GAMES',
 	title: 'Bienvenido a los sábados de juegos online',
-	imageUrl:
-		'https://st2.depositphotos.com/8535708/11759/v/950/depositphotos_117593278-stock-illustration-vector-illustration-of-store-building.jpg',
-	contentText: 'Te esperábamos, sigamosjugando!.'
+	imageUrl: 'assets/portada.jpg',
+	contentText: 'Te esperábamos, sigamos jugando!.'
 };
 
 @Component({
