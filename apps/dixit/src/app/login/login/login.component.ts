@@ -25,7 +25,7 @@ export class LoginComponent {
 
 	onSubmitted(formData: any) {
 		this.store.dispatch(
-			signIn({ username: formData.Email, password: formData.password })
+			signIn({ username: formData.username, photoUrl: formData.avatar })
 		);
 	}
 

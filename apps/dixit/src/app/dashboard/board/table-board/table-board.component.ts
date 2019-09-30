@@ -18,11 +18,10 @@ export class TableBoardComponent implements OnInit {
 		this.gameStore.pipe(select(getUserPlayer),
 			switchMap((userPlayer: Player) => this.gameStore.pipe(select(getTurn),
 				map(playerTurn => ({
-					isUserTurn: (playerTurn === 0 && userPlayer.order === 1) || (playerTurn === userPlayer.order),
+					isUserTurn: (playerTurn === 0 && userPlayer.playerId === 1) || (playerTurn === userPlayer.playerId),
 					cardsCount: playerTurn === 0 ? 5 : 1
 				})))),
 		).subscribe((turn) => {
-			console.log("subscribed", turn);
 			if (turn.isUserTurn)
 				this.gameStore.dispatch(setUserHand({ cardsCount: turn.cardsCount }));
 		});

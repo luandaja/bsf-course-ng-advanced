@@ -6,6 +6,12 @@ import { RouterStoreModule } from './store/router';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { GameStoreModule } from './store/game';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { GameEffects } from './store/game/game.effects';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -15,8 +21,12 @@ import { GameStoreModule } from './store/game';
 		CoreModule,
 		RouterStoreModule,
 		GameStoreModule,
-		CoreModule
+		CoreModule,
+		AngularFireModule.initializeApp(environment.firebaseConfig),
+		AngularFireDatabaseModule,
+		EffectsModule.forRoot([GameEffects])
 	],
+	providers: [AngularFirestore],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,11 +27,6 @@ export const setVotesVisibility = createAction(
 	props<{ areVotesVisible: boolean }>()
 );
 
-export const setAvaiableCards = createAction(
-	'[Board Cards] Set avaiable cards',
-	props<{ cards: number[] }>()
-);
-
 export const setCurrentStory = createAction(
 	'[Board Cards] Set current story',
 	props<{ currentStory: StoryCard }>()
@@ -42,14 +37,9 @@ export const setUserHand = createAction(
 	props<{ cardsCount: number }>()
 );
 
-export const updatePlayer = createAction(
-	'[Score] Update player',
-	props<{ player: Player }>()
-);
-
 export const signIn = createAction(
 	'[Auth] Sign in',
-	props<{ username: string; password: string }>()
+	props<{ username: string; photoUrl: string }>()
 );
 
 export const signOut = createAction('[Auth] Sign out');
