@@ -9,10 +9,9 @@ import { BoardCard } from '../../models/BoardCard';
 
 const reducer = createReducer(
 	initalState,
-	on(signInSuccess, (state, { username, photoUrl }) => ({
-		...state, isLogged: true, userPlayer: getUser(username, photoUrl, state),
-		players: add(state.players, [getUser(username, photoUrl, state)])
-	})),
+	on(signIn, (state, { }) => ({ ...state, isLoading: true })),
+	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLogged: true, userPlayer, players: add(state.players, [userPlayer]) })),
+
 	on(fetchBoardCards, (state, { }) => ({ ...state, isLoading: true })),
 	on(setBoardCard, (state, { boardCard }) => ({
 		...state, userPlayer: updateUserOnCardThrowed(state.userPlayer),

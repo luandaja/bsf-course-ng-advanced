@@ -11,5 +11,6 @@ export class Player {
 		this.username = userName;
 		this.photoUrl = photoUrl;
 		this.id = id;
+		this.isStoryTeller = id === 1;
 	}
 }
