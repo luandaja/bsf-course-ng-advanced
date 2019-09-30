@@ -24,9 +24,7 @@ export class LoginComponent {
 	constructor(private store: Store<GameState>) { }
 
 	onSubmitted(formData: any) {
-		this.store.dispatch(
-			signIn({ username: formData.username, photoUrl: formData.avatar })
-		);
+		this.store.dispatch(signIn({ username: formData.username, photoUrl: formData.avatar }));
 	}
 
 }

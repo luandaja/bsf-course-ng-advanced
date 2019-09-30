@@ -6,11 +6,12 @@ import {
 import { GameState, initalState } from './game.state';
 import { Player } from '../../models';
 import { BoardCard } from '../../models/BoardCard';
+import { add } from '../../models/Utils';
 
 const reducer = createReducer(
 	initalState,
 	on(signIn, (state, { }) => ({ ...state, isLoading: true })),
-	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLogged: true, userPlayer, players: add(state.players, [userPlayer]) })),
+	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLoading: false, isLogged: true, userPlayer, players: add(state.players, userPlayer) })),
 
 	on(fetchBoardCards, (state, { }) => ({ ...state, isLoading: true })),
 	on(setBoardCard, (state, { boardCard }) => ({
@@ -123,11 +124,6 @@ function updatedPlayesScore(state: GameState): Player[] {
 		});
 
 	return newPlayers;
-}
-
-function add(list: any[], item: any[]) {
-	const newList = Object.assign([], list);
-	return newList.concat(item);
 }
 
 function addBoardCard(list: any[], item: any) {

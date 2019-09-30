@@ -13,7 +13,8 @@ export class PlayerFirestoreService extends FirestoreService<Player>{
 
 	protected basePath = 'players';
 
-	constructor(protected firestore: AngularFirestore, private gameStore: Store<GameState>) {
+	constructor(protected firestore: AngularFirestore,
+		private gameStore: Store<GameState>) {
 		super(firestore);
 	}
 
