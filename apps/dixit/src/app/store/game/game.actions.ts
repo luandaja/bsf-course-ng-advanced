@@ -42,5 +42,10 @@ export const signIn = createAction(
 	props<{ username: string; photoUrl: string }>()
 );
 
+export const signInSuccess = createAction(
+	'[Auth] Sign in success',
+	props<{ username: string; photoUrl: string }>()
+);
+
 export const signOut = createAction('[Auth] Sign out');
 

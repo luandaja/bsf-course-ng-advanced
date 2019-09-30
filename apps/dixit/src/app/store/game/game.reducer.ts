@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
 	fetchBoardCards, setGuessingTime, setBoardCard, setCurrentStory,
-	setVotesVisibility, setVote, nextRound, setUserHand, signIn
+	setVotesVisibility, setVote, nextRound, setUserHand, signIn, signInSuccess
 } from './game.actions';
 import { GameState, initalState } from './game.state';
 import { Player } from '../../models';
@@ -9,20 +9,23 @@ import { BoardCard } from '../../models/BoardCard';
 
 const reducer = createReducer(
 	initalState,
-	on(signIn, (state, { username, photoUrl }) => ({ ...state, isLogged: true, userPlayer: getUser(username, photoUrl, state), players: add(state.players, [getUser(username, photoUrl, state)]) })),
+	on(signInSuccess, (state, { username, photoUrl }) => ({ ...state, isLogged: true, userPlayer: getUser(username, photoUrl, state), players: add(state.players, [getUser(username, photoUrl, state)]) })),
 	on(fetchBoardCards, (state, { }) => ({ ...state, isLoading: true })),
 	on(setBoardCard, (state, { boardCard }) => ({ ...state, userPlayer: updateUserOnCardThrowed(state.userPlayer), players: updatePlayersOnCardThrow(state.players, boardCard.owner), boardCards: addBoardCard(state.boardCards, boardCard), isGuessingTime: state.players.length === state.boardCards.length + 1, currentHand: state.currentHand.filter(card => card !== boardCard.cardIndex) })),
 	on(setVote, (state, { cardIndex, player }) => ({ ...state, userPlayer: updateUserOnPlayerVoted(state.userPlayer), players: updatePlayersVotes(state.players, player), boardCards: updateCardsOnVoted(state.boardCards, cardIndex, player) })),
 	on(setGuessingTime, (state, { isGuessingTime }) => ({ ...state, isGuessingTime })),
 	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible, players: updatedPlayesScore(state) })),
 	on(setCurrentStory, (state, { currentStory }) => ({ ...state, currentStory, boardCards: addBoardCard(state.boardCards, { cardIndex: currentStory.cardIndex, owner: currentStory.storyTeller, votes: [] }), currentHand: state.currentHand.filter(card => card !== currentStory.cardIndex) })),
-	on(nextRound, (state, { }) => ({ ...state, currentTurn: state.userPlayer.playerId + 1, currentStory: null, boardCards: [], userPlayer: state.players.find(player => player.playerId === state.userPlayer.playerId) })),
-	on(setUserHand, (state, { cardsCount }) => ({ ...state, currentTurn: state.userPlayer.playerId + 1, userPlayer: state.players.find(player => player.playerId === state.userPlayer.playerId), currentHand: add(state.currentHand, getHandCards(state.avaiableCards, cardsCount)), avaiableCards: state.avaiableCards.filter(card => !getHandCards(state.avaiableCards, cardsCount).includes(card)) })),
+	on(nextRound, (state, { }) => ({ ...state, currentTurn: state.userPlayer.id + 1, currentStory: null, boardCards: [], userPlayer: state.players.find(player => player.id === state.userPlayer.id) })),
+	on(setUserHand, (state, { cardsCount }) => ({ ...state, currentTurn: state.userPlayer.id + 1, userPlayer: state.players.find(player => player.id === state.userPlayer.id), currentHand: add(state.currentHand, getHandCards(state.avaiableCards, cardsCount)), avaiableCards: state.avaiableCards.filter(card => !getHandCards(state.avaiableCards, cardsCount).includes(card)) })),
 );
 
 function getUser(userName, photoUrl, state: GameState): Player {
 	const id = state.players.length + 1;
-	return { playerId: id, userName, photoUrl, score: 0, isStoryTeller: id === 1, hasVoted: false, hasThrowCard: false };
+	//const user = new Player(userName, photoUrl, id);
+	//	user.isStoryTeller = id === 1;
+	//return user;
+	return { id: id, username: userName, photoUrl, score: 0, isStoryTeller: id === 1, hasVoted: false, hasThrowCard: false };
 }
 
 function getHandCards(avaiableCards: number[], cardsCount: number): number[] {
@@ -58,7 +61,7 @@ function updateUserOnPlayerVoted(player: Player): Player {
 function updatePlayersVotes(players: Player[], userPlayer: Player) {
 	const newPlayers = players.map(player => Object.assign({}, player));
 	newPlayers.forEach(player => {
-		if (player.playerId === userPlayer.playerId)
+		if (player.id === userPlayer.id)
 			player.hasVoted = true;
 	});
 	return newPlayers;
@@ -67,7 +70,7 @@ function updatePlayersVotes(players: Player[], userPlayer: Player) {
 function updatePlayersOnCardThrow(players: Player[], userPlayer: Player) {
 	const newPlayers = players.map(player => Object.assign({}, player));
 	newPlayers.forEach(player => {
-		if (player.playerId === userPlayer.playerId)
+		if (player.id === userPlayer.id)
 			player.hasThrowCard = true;
 	});
 	return newPlayers;
@@ -77,16 +80,16 @@ function updatedPlayesScore(state: GameState): Player[] {
 	const correctCard = state.boardCards.find(boardCard => boardCard.cardIndex === state.currentStory.cardIndex);
 	const correctCardVotesCount = correctCard.votes.length;
 	const newPlayers = state.players.map(player => Object.assign({}, player));
-	const newStoryTeller = newPlayers.find(player => player.isStoryTeller).playerId + 1;
+	const newStoryTeller = newPlayers.find(player => player.isStoryTeller).id + 1;
 	if (correctCardVotesCount === newPlayers.length - 1 || correctCardVotesCount === 0) {
 		newPlayers.forEach((player, index) => {
 			if (!player.isStoryTeller)
 				newPlayers[index].score += 2;
 		});
 	} else {
-		const playersWhoGuessed = correctCard.votes.map(x => x.playerId);
+		const playersWhoGuessed = correctCard.votes.map(x => x.id);
 		newPlayers.forEach(player => {
-			if (player.isStoryTeller || playersWhoGuessed.includes(player.playerId)) {
+			if (player.isStoryTeller || playersWhoGuessed.includes(player.id)) {
 				player.score += 3;
 			}
 		});
@@ -95,12 +98,12 @@ function updatedPlayesScore(state: GameState): Player[] {
 	newPlayers
 		.forEach(player => {
 			if (!player.isStoryTeller) {
-				const playerCard = state.boardCards.find(boardCard => boardCard.owner.playerId === player.playerId);
+				const playerCard = state.boardCards.find(boardCard => boardCard.owner.id === player.id);
 				player.score += playerCard.votes.length;
 			}
 			player.hasThrowCard = false;
 			player.hasVoted = false;
-			player.isStoryTeller = newStoryTeller === player.playerId;
+			player.isStoryTeller = newStoryTeller === player.id;
 		});
 
 	return newPlayers;

@@ -25,7 +25,7 @@ export class DashboardLayoutComponent {
 			map(
 				user =>
 					({
-						fullName: user.userName,
+						fullName: user.username,
 						photoUrl: user.photoUrl
 					} as NavigationUser)
 			)

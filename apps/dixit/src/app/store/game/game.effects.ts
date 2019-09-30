@@ -20,9 +20,10 @@ export class GameEffects {
 			ofType(actions.signIn),
 			exhaustMap(action =>
 				from(this.firestore.collection('players').add({ username: action.username, photoUrl: action.photoUrl })).pipe(
-					map(() => ({ type: '[Auth] Sign in success' }),
+					map(() => (actions.signInSuccess({ username: action.username, photoUrl: action.photoUrl })),
 						catchError(() => EMPTY)
 					))
 			)));
+
 
 }

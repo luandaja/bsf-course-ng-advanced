@@ -1,6 +1,6 @@
 export interface Player {
-	playerId: number;
-	userName: string;
+	id: number;
+	username: string;
 	photoUrl: string;
 	score: number;
 	isStoryTeller?: boolean;
