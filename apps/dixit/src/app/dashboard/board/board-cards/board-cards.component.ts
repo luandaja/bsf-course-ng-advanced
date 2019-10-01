@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BoardCard } from '../../../models/BoardCard';
 import { select, Store } from '@ngrx/store';
-import { getBoardCards, getIsGuessingTime, getVotesVisibility, GameState, getCurrentStory, setVote, getUserPlayer } from '../../../store/game';
+import { getBoardCards, getIsGuessingTime, getVotesVisibility, GameState, getCurrentStory, setVote, getUserPlayer, fetchBoardCards } from '../../../store/game';
 import { StoryCard } from '../../../models/StoryCard';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { Player } from '../../../models';
@@ -19,12 +19,13 @@ export class BoardCardsComponent implements OnInit {
 	storyCard$: Observable<StoryCard>;
 	userPlayer$: Observable<Player>;
 
-	//selectedCard$: Observable<BoardCard>;
 	selectedCard: BoardCard;
 
 	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
+		this.gameStore.dispatch(fetchBoardCards());
+
 		this.boardCards$ = this.gameStore.pipe(select(getBoardCards));
 		this.isGuessingTime$ = this.gameStore.pipe(select(getIsGuessingTime));
 		this.storyCard$ = this.gameStore.pipe(select(getCurrentStory));

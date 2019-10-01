@@ -1,3 +1,4 @@
+import { UiSpinnerModule } from './../../../../../../libs/ui/spinner/src/lib/ui-spinner.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -19,7 +20,8 @@ import { VoteEditorComponent } from './vote-editor/vote-editor.component';
 		CommonModule,
 		BoardRoutingModule,
 		GameStoreModule,
-		UiAvatarModule
+		UiAvatarModule,
+		UiSpinnerModule
 	]
 })
 export class BoardModule { }

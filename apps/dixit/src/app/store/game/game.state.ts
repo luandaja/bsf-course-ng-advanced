@@ -24,7 +24,7 @@ const brenda = { id: 5, username: 'Brenda', photoUrl: 'https://bit.ly/2leFz7h', 
 const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
 
 export const initalState: GameState = {
-	players: [pao],// [pao, walter, myriam, brenda, vico, ale],
+	players: [],// [pao, walter, myriam, brenda, vico, ale],
 	userPlayer: null,//{ ...ale },
 	isLogged: false,
 	currentTurn: 0,
@@ -32,12 +32,12 @@ export const initalState: GameState = {
 	isGuessingTime: true,
 	areVotesVisible: false,
 	boardCards: [
-		{ cardIndex: 2, owner: pao, votes: [walter, brenda] },
-		{ cardIndex: 6, owner: walter, votes: [] },
-		{ cardIndex: 12, owner: myriam, votes: [vico] },
-		{ cardIndex: 34, owner: brenda, votes: [] },
-		{ cardIndex: 27, owner: vico, votes: [] },
-		{ cardIndex: 78, owner: ale, votes: [] }
+		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
+		// { cardIndex: 6, owner: walter, votes: [] },
+		// { cardIndex: 12, owner: myriam, votes: [vico] },
+		// { cardIndex: 34, owner: brenda, votes: [] },
+		// { cardIndex: 27, owner: vico, votes: [] },
+		// { cardIndex: 78, owner: ale, votes: [] }
 	],
 	currentHand: [],//4, 67, 23, 12, 34
 	avaiableCards: generateCardIndexes(),

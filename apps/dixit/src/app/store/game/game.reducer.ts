@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
 	fetchBoardCards, setGuessingTime, setBoardCard, setCurrentStory,
-	setVotesVisibility, setVote, nextRound, setUserHand, signIn, signInSuccess
+	setVotesVisibility, setVote, nextRound, setUserHand, signIn, signInSuccess, boardCardsLoaded
 } from './game.actions';
 import { GameState, initalState } from './game.state';
 import { Player } from '../../models';
@@ -14,32 +14,34 @@ const reducer = createReducer(
 	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLoading: false, isLogged: true, userPlayer, players: add(state.players, userPlayer) })),
 
 	on(fetchBoardCards, (state, { }) => ({ ...state, isLoading: true })),
-	on(setBoardCard, (state, { boardCard }) => ({
-		...state, userPlayer: updateUserOnCardThrowed(state.userPlayer),
-		players: updatePlayersOnCardThrow(state.players, boardCard.owner), boardCards: addBoardCard(state.boardCards, boardCard),
-		isGuessingTime: state.players.length === state.boardCards.length + 1,
-		currentHand: state.currentHand.filter(card => card !== boardCard.cardIndex)
-	})),
-	on(setVote, (state, { cardIndex, player }) => ({
-		...state, userPlayer: updateUserOnPlayerVoted(state.userPlayer),
-		players: updatePlayersVotes(state.players, player), boardCards: updateCardsOnVoted(state.boardCards, cardIndex, player)
-	})),
-	on(setGuessingTime, (state, { isGuessingTime }) => ({ ...state, isGuessingTime })),
-	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible, players: updatedPlayesScore(state) })),
-	on(setCurrentStory, (state, { currentStory }) => ({
-		...state, currentStory,
-		boardCards: addBoardCard(state.boardCards, { cardIndex: currentStory.cardIndex, owner: currentStory.storyTeller, votes: [] }),
-		currentHand: state.currentHand.filter(card => card !== currentStory.cardIndex)
-	})),
-	on(nextRound, (state, { }) => ({
-		...state, currentTurn: state.userPlayer.id + 1, currentStory: null, boardCards: [],
-		userPlayer: state.players.find(player => player.id === state.userPlayer.id)
-	})),
-	on(setUserHand, (state, { cardsCount }) => ({
-		...state, currentTurn: state.userPlayer.id + 1,
-		userPlayer: state.players.find(player => player.id === state.userPlayer.id), currentHand: concat(state.currentHand,
-			state.avaiableCards.slice(0, cardsCount)), avaiableCards: state.avaiableCards.filter(card => !state.avaiableCards.slice(0, cardsCount).includes(card))
-	})),
+	on(boardCardsLoaded, (state, { boardCards }) => ({ ...state, isLoading: false, boardCards })),
+
+	// on(setBoardCard, (state, { boardCard }) => ({
+	// 	...state, userPlayer: updateUserOnCardThrowed(state.userPlayer),
+	// 	players: updatePlayersOnCardThrow(state.players, boardCard.owner), boardCards: addBoardCard(state.boardCards, boardCard),
+	// 	isGuessingTime: state.players.length === state.boardCards.length + 1,
+	// 	currentHand: state.currentHand.filter(card => card !== boardCard.cardIndex)
+	// })),
+	// on(setVote, (state, { cardIndex, player }) => ({
+	// 	...state, userPlayer: updateUserOnPlayerVoted(state.userPlayer),
+	// 	players: updatePlayersVotes(state.players, player), boardCards: updateCardsOnVoted(state.boardCards, cardIndex, player)
+	// })),
+	// on(setGuessingTime, (state, { isGuessingTime }) => ({ ...state, isGuessingTime })),
+	// on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible, players: updatedPlayesScore(state) })),
+	// on(setCurrentStory, (state, { currentStory }) => ({
+	// 	...state, currentStory,
+	// 	boardCards: addBoardCard(state.boardCards, { cardIndex: currentStory.cardIndex, owner: currentStory.storyTeller, votes: [] }),
+	// 	currentHand: state.currentHand.filter(card => card !== currentStory.cardIndex)
+	// })),
+	// on(nextRound, (state, { }) => ({
+	// 	...state, currentTurn: state.userPlayer.id + 1, currentStory: null, boardCards: [],
+	// 	userPlayer: state.players.find(player => player.id === state.userPlayer.id)
+	// })),
+	// on(setUserHand, (state, { cardsCount }) => ({
+	// 	...state, currentTurn: state.userPlayer.id + 1,
+	// 	userPlayer: state.players.find(player => player.id === state.userPlayer.id), currentHand: concat(state.currentHand,
+	// 		state.avaiableCards.slice(0, cardsCount)), avaiableCards: state.avaiableCards.filter(card => !state.avaiableCards.slice(0, cardsCount).includes(card))
+	// })),
 );
 
 function getUser(userName, photoUrl, state: GameState): Player {

@@ -1,18 +1,10 @@
-<gt-board-card
-	*ngFor="let boardCard of boardCards$ | async"
-	[boardCard]="boardCard"
-	[isRevealed]="isGuessingTime$ | async"
-	[isSelected]="boardCard.cardIndex === selectedCard?.cardIndex"
-	(click)="selectCard(boardCard)"
-	[isJumping]="(storyCard$ | async)?.cardIndex === boardCard.cardIndex"
->
+<gt-board-card *ngFor="let boardCard of boardCards$ | async" [boardCard]="boardCard"
+	[isRevealed]="isGuessingTime$ | async" [isSelected]="boardCard.cardIndex === selectedCard?.cardIndex"
+	(click)="selectCard(boardCard)" [isJumping]="(storyCard$ | async)?.cardIndex === boardCard.cardIndex">
 </gt-board-card>
 <div class="row col-sm-12">
 	<div class="row col-sm-11 pt-2" *ngIf="playerCanVote$ | async">
-		<gt-vote-editor
-			[selectedCard]="selectedCard?.cardIndex"
-			[userPlayer]="userPlayer$ | async"
-		>
+		<gt-vote-editor [selectedCard]="selectedCard?.cardIndex" [userPlayer]="userPlayer$ | async">
 		</gt-vote-editor>
 	</div>
 </div>

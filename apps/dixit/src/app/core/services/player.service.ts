@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { FirestoreService } from './firestore.service';
-import { Player } from '../../models/Player';
-import { map, exhaustMap } from 'rxjs/operators';
+import { Player } from '../../models';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { GameState, getPlayers } from '../../store/game';
+import { map, exhaustMap } from 'rxjs/operators';
+import { PlayerFirebaseService } from './player.firebase.service';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class PlayerFirestoreService extends FirestoreService<Player>{
+export class PlayerService {
 
 	protected basePath = 'players';
 
-	constructor(protected firestore: AngularFirestore,
+	constructor(private firestore: PlayerFirebaseService,
 		private gameStore: Store<GameState>) {
-		super(firestore);
 	}
 
 	add(username: string, photoUrl: string) {
@@ -23,9 +23,8 @@ export class PlayerFirestoreService extends FirestoreService<Player>{
 			map((players => players.length)),
 			exhaustMap(playersCount => {
 				const user = new Player(username, photoUrl, playersCount + 1);
-				return super.create(user).pipe(map(_ => user));
+				return this.firestore.create(user).pipe(map(_ => user));
 			})
 		);
 	}
-
 }

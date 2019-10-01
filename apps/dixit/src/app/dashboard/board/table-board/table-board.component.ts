@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GameState, getAvaiableCards, getTurn, getUserPlayer, setUserHand } from '../../../store/game';
+import { GameState, getAvaiableCards, getTurn, getUserPlayer, setUserHand, getIsLoading } from '../../../store/game';
 import { Store, select } from '@ngrx/store';
 import { map, switchMap, mergeMap } from 'rxjs/operators';
 import { Observable, iif, of, Subscription } from 'rxjs';
@@ -16,10 +16,12 @@ const setupTurn = 0;
 
 export class TableBoardComponent implements OnInit, OnDestroy {
 
+	isLoading$: Observable<boolean>;
 	private playerHand: Subscription;
 	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
+		this.isLoading$ = this.gameStore.select(getIsLoading);
 		this.playerHand = this.gameStore.pipe(select(getUserPlayer),
 			switchMap((userPlayer: Player) => this.gameStore.pipe(select(getTurn),
 				map(playerTurn => ({

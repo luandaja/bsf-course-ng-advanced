@@ -4,6 +4,9 @@ import { StoryCard } from '../../models/StoryCard';
 import { Player } from '../../models';
 
 export const fetchBoardCards = createAction('[Board Cards] Fetch board cards');
+export const boardCardsLoaded = createAction('[Board Cards] Load board cards',
+	props<{ boardCards: BoardCard[] }>()
+);
 
 export const nextRound = createAction('[Board Cards] Set next turn');
 
