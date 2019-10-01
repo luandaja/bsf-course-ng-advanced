@@ -41,7 +41,7 @@ export const initalState: GameState = {
 	],
 	currentHand: [],//4, 67, 23, 12, 34
 	avaiableCards: generateCardIndexes(),
-	isLoading: true
+	isLoading: false
 };
 
 

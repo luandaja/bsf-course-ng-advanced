@@ -52,3 +52,9 @@ export const getUserPlayer = createSelector(
 	gameFeature,
 	state => state.userPlayer
 );
+
+
+export const getIsLoading = createSelector(
+	gameFeature,
+	state => state.isLoading
+);

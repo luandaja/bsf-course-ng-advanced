@@ -5,6 +5,7 @@ import { LoginLayoutRoutingModule } from './login-layout-routing.module';
 import { LoginComponent } from '../login/login.component';
 import { UiLoginModule } from '@glotrix/ui/login';
 import { UiFormsModule } from '@glotrix/ui/forms';
+import { UiSpinnerModule } from '@glotrix/ui/spinner';
 
 @NgModule({
 	declarations: [LoginComponent],
@@ -12,7 +13,8 @@ import { UiFormsModule } from '@glotrix/ui/forms';
 		CommonModule,
 		LoginLayoutRoutingModule,
 		UiLoginModule,
-		UiFormsModule
+		UiFormsModule,
+		UiSpinnerModule
 	]
 })
 export class LoginLayoutModule { }

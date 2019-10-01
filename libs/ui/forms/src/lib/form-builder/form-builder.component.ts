@@ -36,6 +36,6 @@ export class FormBuilderComponent implements OnInit {
 		this.communication.setFormState({ form: this.form, isSubmitted: this.isSubmitted });
 		if (this.form.invalid) return;
 		this.submitted.emit(this.form.value);
-		this.form.reset();
+		//this.form.reset();
 	}
 }

@@ -67,6 +67,9 @@
     },
     "ui-card": {
       "tags": ["ui"]
+    },
+    "ui-spinner": {
+      "tags": ["ui"]
     }
   }
 }

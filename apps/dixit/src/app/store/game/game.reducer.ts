@@ -6,7 +6,7 @@ import {
 import { GameState, initalState } from './game.state';
 import { Player } from '../../models';
 import { BoardCard } from '../../models/BoardCard';
-import { add } from '../../models/Utils';
+import { add, concat } from '../../models/Utils';
 
 const reducer = createReducer(
 	initalState,
@@ -37,7 +37,7 @@ const reducer = createReducer(
 	})),
 	on(setUserHand, (state, { cardsCount }) => ({
 		...state, currentTurn: state.userPlayer.id + 1,
-		userPlayer: state.players.find(player => player.id === state.userPlayer.id), currentHand: add(state.currentHand,
+		userPlayer: state.players.find(player => player.id === state.userPlayer.id), currentHand: concat(state.currentHand,
 			state.avaiableCards.slice(0, cardsCount)), avaiableCards: state.avaiableCards.filter(card => !state.avaiableCards.slice(0, cardsCount).includes(card))
 	})),
 );

@@ -5,6 +5,7 @@
 			<gt-form-builder [entries]="entries" [isCancelButtonVisible]="false" [submitButtonText]="'Login'"
 				(submitted)="onSubmitted($event)">
 			</gt-form-builder>
+			<gt-spinner [isLoading]="isLoading$ | async"></gt-spinner>
 		</div>
 	</div>
 </div>

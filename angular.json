@@ -761,6 +761,37 @@
           "styleext": "scss"
         }
       }
+    },
+    "ui-spinner": {
+      "projectType": "library",
+      "root": "libs/ui/spinner",
+      "sourceRoot": "libs/ui/spinner/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/spinner/tsconfig.lib.json",
+              "libs/ui/spinner/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/spinner/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/spinner/jest.config.js",
+            "tsConfig": "libs/ui/spinner/tsconfig.spec.json",
+            "setupFile": "libs/ui/spinner/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
