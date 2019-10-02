@@ -14,12 +14,14 @@ import { BoardCardComponent } from './board-card/board-card.component';
 import { PlayersComponent } from './players/players.component';
 import { VoteEditorComponent } from './vote-editor/vote-editor.component';
 import { StartGameComponent } from './start-game/start-game.component';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
 	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent, PlayersComponent, VoteEditorComponent, StartGameComponent],
 	imports: [
 		CommonModule,
 		BoardRoutingModule,
+		//	CoreModule,
 		GameStoreModule,
 		UiAvatarModule,
 		UiSpinnerModule

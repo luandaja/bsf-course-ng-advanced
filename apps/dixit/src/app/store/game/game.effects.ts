@@ -10,11 +10,11 @@ import { Store } from '@ngrx/store';
 import { GameState } from './game.state';
 import { getPlayers } from './game.selectors';
 import { PlayerService } from '../../core/services/player.service';
-import { add } from '../../models/Utils';
 import { BoardCard } from '../../models/BoardCard';
 import { StateFirebaseService } from '../../core/services/state.firebase.service';
 import { StoryFirebaseService } from '../../core/services/story.firebase.service';
 import { AvaiableCardsService } from '../../core/services/avaiable-cards.firebase.service';
+import { shuffle } from '../../models/Utils';
 
 
 @Injectable()
@@ -41,8 +41,13 @@ export class GameEffects {
 			ofType(actions.startGame),
 			exhaustMap(() =>
 				this.stateService.update("game-room", { hasGameStarted: true })
-					.pipe(map(() => actions.gameStarted()))
-			)));
+					.pipe(map(() => {
+						this.cardsService.insertBatch(this.generateCardIndexes());
+						return actions.gameStarted();
+					}))
+			)
+		)
+	);
 
 	setNextTurn$ = createEffect(() =>
 		this.actions$.pipe(
@@ -73,7 +78,6 @@ export class GameEffects {
 			exhaustMap(() =>
 				this.playerService.collection$()
 					.pipe(
-						take(1),
 						map((players) => actions.playersLoaded({ players }))
 					)
 			)
@@ -186,5 +190,12 @@ export class GameEffects {
 		)
 	);
 
-
+	private generateCardIndexes(): number[] {
+		const cardIndexes: number[] = [];
+		for (let index = 1; index <= 100; index++) {
+			cardIndexes.push(index);
+		}
+		shuffle(cardIndexes);
+		return cardIndexes;
+	}
 }

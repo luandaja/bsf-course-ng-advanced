@@ -2,7 +2,7 @@ import { Banner } from '@glotrix/ui/login';
 import { Component, OnInit } from '@angular/core';
 import { loginEntries } from './form-fields';
 import { Store } from '@ngrx/store';
-import { GameState, signIn, getIsLoading } from '../../store/game';
+import { GameState, signIn, getIsLoading, fetchPlayers } from '../../store/game';
 import { Observable } from 'rxjs';
 
 export const banner: Banner = {
@@ -23,15 +23,15 @@ export class LoginComponent implements OnInit {
 	banner = banner;
 	isLoading$: Observable<boolean>;
 
-	constructor(private store: Store<GameState>) { }
+	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
-		this.isLoading$ = this.store.select(getIsLoading);
+		this.isLoading$ = this.gameStore.select(getIsLoading);
+		this.gameStore.dispatch(fetchPlayers());
 	}
 
 	onSubmitted(formData: any) {
-		console.log("sign in");
-		this.store.dispatch(signIn({ username: formData.username, photoUrl: formData.avatar }));
+		this.gameStore.dispatch(signIn({ username: formData.username, photoUrl: formData.avatar }));
 	}
 
 }

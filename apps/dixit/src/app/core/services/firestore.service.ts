@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
 import { Observable, from, combineLatest } from 'rxjs';
-import { map, tap, exhaustMap } from 'rxjs/operators';
+import { map, exhaustMap } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
@@ -60,6 +60,15 @@ export abstract class FirestoreService<T> {
 					return batch.commit();
 				})
 			);
+	}
+
+	insertBatch(cards: number[]) {
+		const batch = this.firebase.firestore.batch();
+		cards.forEach(cardIndex => {
+			const docReference = this.firebase.collection(`${this.basePath}`).doc(cardIndex.toString()).ref;
+			batch.set(docReference, { id: cardIndex, cardIndex });
+		});
+		return batch.commit();
 	}
 
 }

@@ -15,18 +15,18 @@ import { PlayerService } from './core/services/player.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 	isLoggedIn$: Subscription;
-	avaiableCards$: Subscription;
-	currentStory$: Subscription;
-	currentState$: Subscription;
+	// avaiableCards$: Subscription;
+	// currentStory$: Subscription;
+	// currentState$: Subscription;
 	//players$: Subscription;
 
 	constructor(
 		private gameStore: Store<GameState>,
 		//private playerService: PlayerService,
-		private router: Router,
-		private stateService: StateFirebaseService,
-		private storyService: StoryFirebaseService,
-		private cardsService: AvaiableCardsService,
+		private router: Router
+		// private stateService: StateFirebaseService,
+		// private storyService: StoryFirebaseService,
+		// private cardsService: AvaiableCardsService,
 	) { }
 
 	ngOnInit(): void {
@@ -40,16 +40,6 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.redirect(isLogged)
 	}
 
-	private onLoggedIn() {
-		//	this.players$ = this.playerService.collection$().subscribe(players => this.gameStore.dispatch(playersLoaded({ players })));
-		this.avaiableCards$ = this.cardsService.collection$().subscribe(cards => this.gameStore.dispatch(avaiableCardsLoaded({ cards })));
-		this.currentStory$ = this.storyService.doc$("game-room").subscribe(currentStory => this.gameStore.dispatch(currentStorySetted({ currentStory })));
-		this.currentState$ = this.stateService.doc$("game-room").subscribe(currentState => {
-			this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: currentState.areVotesVisible }));
-			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: currentState.curentTurn }));
-			this.gameStore.dispatch(updateHasGameStarted({ hasGameStarted: currentState.hasGameStarted }));
-		});
-	}
 
 	private redirect(isLogged: boolean) {
 		const moduleUrl = isLogged ? '/dashboard' : '/login';
@@ -58,9 +48,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy(): void {
 		this.isLoggedIn$.unsubscribe();
-		this.avaiableCards$.unsubscribe();
-		this.currentStory$.unsubscribe();
-		this.currentState$.unsubscribe();
+		// this.avaiableCards$.unsubscribe();
+		// this.currentStory$.unsubscribe();
+		// this.currentState$.unsubscribe();
 		//	this.players$.unsubscribe();
 	}
 }

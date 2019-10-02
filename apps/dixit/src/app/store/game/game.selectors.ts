@@ -63,6 +63,16 @@ export const getIsLoading = createSelector(
 	state => state.isLoading
 );
 
+export const getTurnInfo = createSelector(
+	gameFeature,
+	state => {
+		const { currentTurn, userPlayer } = state;
+		const isUserTurn = (currentTurn === 0 && userPlayer.id === 1) || (currentTurn === userPlayer.id);
+		const cardsCount = currentTurn === 0 ? 5 : 1;
+		return { isUserTurn, cardsCount }
+	}
+);
+
 export const getAlgo = createSelector(
 	gameFeature,
 	state => {

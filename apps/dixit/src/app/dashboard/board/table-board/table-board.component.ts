@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GameState, getAvaiableCards, getTurn, getUserPlayer, setUserHand, getIsLoading } from '../../../store/game';
+import { GameState, setUserHand, getIsLoading, getTurnInfo, setVotesVisibility, updateCurrentTurn, updateHasGameStarted, avaiableCardsLoaded, currentStorySetted } from '../../../store/game';
 import { Store, select } from '@ngrx/store';
-import { map, switchMap, mergeMap } from 'rxjs/operators';
-import { Observable, iif, of, Subscription } from 'rxjs';
-import { Player } from '../../../models';
+import { Observable, Subscription } from 'rxjs';
+import { StateFirebaseService } from '../../../core/services/state.firebase.service';
+import { StoryFirebaseService } from '../../../core/services/story.firebase.service';
+import { AvaiableCardsService } from '../../../core/services/avaiable-cards.firebase.service';
 
-const setupCardsCount = 5;
-const incrementCount = 1;
-const setupTurn = 0;
 @Component({
 	selector: 'gt-table-board',
 	templateUrl: './table-board.component.html',
@@ -18,23 +16,37 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 
 	isLoading$: Observable<boolean>;
 	private playerHand: Subscription;
-	constructor(private gameStore: Store<GameState>) { }
+	private avaiableCards$: Subscription;
+	private currentStory$: Subscription;
+	private currentState$: Subscription;
+
+	constructor(private gameStore: Store<GameState>,
+		private stateService: StateFirebaseService,
+		private storyService: StoryFirebaseService,
+		private cardsService: AvaiableCardsService, ) { }
 
 	ngOnInit() {
 		this.isLoading$ = this.gameStore.select(getIsLoading);
-		this.playerHand = this.gameStore.pipe(select(getUserPlayer),
-			switchMap((userPlayer: Player) => this.gameStore.pipe(select(getTurn),
-				map(playerTurn => ({
-					isUserTurn: (playerTurn === setupTurn && userPlayer.id === 1) || (playerTurn === userPlayer.id),
-					cardsCount: playerTurn === setupTurn ? setupCardsCount : incrementCount
-				})))),
-		).subscribe((turn) => {
-			if (turn.isUserTurn)
-				this.gameStore.dispatch(setUserHand({ cardsCount: turn.cardsCount }));
+		this.playerHand = this.gameStore.pipe(select(getTurnInfo)).subscribe((turnInfo) => {
+			if (turnInfo.isUserTurn)
+				this.gameStore.dispatch(setUserHand({ cardsCount: turnInfo.cardsCount }));
+		});
+		this.onGameStart();
+	}
+
+	private onGameStart() {
+		this.avaiableCards$ = this.cardsService.collection$().subscribe(cards => this.gameStore.dispatch(avaiableCardsLoaded({ cards })));
+		this.currentStory$ = this.storyService.doc$("game-room").subscribe(currentStory => this.gameStore.dispatch(currentStorySetted({ currentStory })));
+		this.currentState$ = this.stateService.doc$("game-room").subscribe(currentState => {
+			this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: currentState.areVotesVisible }));
+			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: currentState.curentTurn }));
 		});
 	}
 
-	ngOnDestroy() {
+	ngOnDestroy(): void {
 		this.playerHand.unsubscribe();
+		this.avaiableCards$.unsubscribe();
+		this.currentStory$.unsubscribe();
+		this.currentState$.unsubscribe();
 	}
 }

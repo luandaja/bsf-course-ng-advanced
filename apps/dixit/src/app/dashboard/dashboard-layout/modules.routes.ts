@@ -4,6 +4,7 @@ import startCase from 'lodash.startcase';
 import { AuthGuard } from '../../core/services/auth.guard';
 
 export const appModules: Routes = [
+
 	{
 		path: 'board',
 		canActivate: [AuthGuard],
