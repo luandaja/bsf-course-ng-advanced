@@ -6,9 +6,9 @@ export const gameFeatureName = 'game';
 export interface GameState {
 	players: Player[];
 	currentTurn: number;
+	isGuessingTime: boolean;
 	userPlayer: Player;
 	isLogged: boolean;
-	isGuessingTime: boolean;
 	currentStory: StoryCard;
 	boardCards: BoardCard[];
 	currentHand: number[];
@@ -28,8 +28,8 @@ export const initalState: GameState = {
 	userPlayer: null,//{ ...ale },
 	isLogged: false,
 	currentTurn: 0,
-	currentStory: { cardIndex: 78, title: 'test story', storyTeller: ale },
-	isGuessingTime: true,
+	currentStory: null,//{ cardIndex: 78, title: 'test story', storyTeller: ale },
+	isGuessingTime: false,
 	areVotesVisible: false,
 	boardCards: [
 		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
@@ -40,7 +40,7 @@ export const initalState: GameState = {
 		// { cardIndex: 78, owner: ale, votes: [] }
 	],
 	currentHand: [],//4, 67, 23, 12, 34
-	avaiableCards: generateCardIndexes(),
+	avaiableCards: [],// generateCardIndexes(),
 	isLoading: false
 };
 

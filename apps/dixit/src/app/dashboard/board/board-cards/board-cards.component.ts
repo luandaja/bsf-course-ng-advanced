@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BoardCard } from '../../../models/BoardCard';
 import { select, Store } from '@ngrx/store';
-import { getBoardCards, getIsGuessingTime, getVotesVisibility, GameState, getCurrentStory, setVote, getUserPlayer, fetchBoardCards } from '../../../store/game';
+import { getBoardCards, getIsGuessingTime, GameState, getCurrentStory, getUserPlayer, fetchBoardCards } from '../../../store/game';
 import { StoryCard } from '../../../models/StoryCard';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { Player } from '../../../models';

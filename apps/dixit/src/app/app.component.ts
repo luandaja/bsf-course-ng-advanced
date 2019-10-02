@@ -2,7 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { GameState, getIsLogged } from './store/game';
+import { GameState, getIsLogged, currentStorySetted, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, playersLoaded } from './store/game';
+import { StateFirebaseService } from './core/services/state.firebase.service';
+import { StoryFirebaseService } from './core/services/story.firebase.service';
+import { AvaiableCardsService } from './core/services/avaiable-cards.firebase.service';
+import { PlayerService } from './core/services/player.service';
 
 @Component({
 	selector: 'gt-root',
@@ -11,26 +15,51 @@ import { GameState, getIsLogged } from './store/game';
 })
 export class AppComponent implements OnInit, OnDestroy {
 	isLoggedIn$: Subscription;
+	avaiableCards$: Subscription;
+	currentStory$: Subscription;
+	currentState$: Subscription;
+	players$: Subscription;
 
-	constructor(private gameStore: Store<GameState>, private router: Router) { }
+	constructor(
+		private gameStore: Store<GameState>,
+		private playerService: PlayerService,
+		private router: Router,
+		private stateService: StateFirebaseService,
+		private storyService: StoryFirebaseService,
+		private cardsService: AvaiableCardsService,
+	) { }
 
 	ngOnInit(): void {
-		this.isLoggedIn$ = this.gameStore
-			.pipe(select(getIsLogged))
-			.subscribe((isLogged: boolean) => this.redirect(isLogged));
+		this.isLoggedIn$ = this.gameStore.pipe(select(getIsLogged)).subscribe((isLogged) => this.onStart(isLogged));
+	}
+
+	private onStart(isLogged: boolean) {
+		if (isLogged) {
+			this.onLoggedIn();
+		}
+		this.redirect(isLogged)
+	}
+
+	private onLoggedIn() {
+		this.players$ = this.playerService.collection$().subscribe(players => this.gameStore.dispatch(playersLoaded({ players })));
+		this.avaiableCards$ = this.cardsService.collection$().subscribe(cards => this.gameStore.dispatch(avaiableCardsLoaded({ cards })));
+		this.currentStory$ = this.storyService.doc$("game-room").subscribe(currentStory => this.gameStore.dispatch(currentStorySetted({ currentStory })));
+		this.currentState$ = this.stateService.doc$("game-room").subscribe(currentState => {
+			this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: currentState.areVotesVisible }))
+			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: currentState.curentTurn }))
+		});
 	}
 
 	private redirect(isLogged: boolean) {
-		if (isLogged) {
-			//		console.log('loggeado');
-			this.router.navigate(['/dashboard']);
-		} else {
-			//		console.log('no loggeado');
-			this.router.navigate(['/login']);
-		}
+		const moduleUrl = isLogged ? '/dashboard' : '/login';
+		this.router.navigate([moduleUrl]);
 	}
 
 	ngOnDestroy(): void {
 		this.isLoggedIn$.unsubscribe();
+		this.avaiableCards$.unsubscribe();
+		this.currentStory$.unsubscribe();
+		this.currentState$.unsubscribe();
+		this.players$.unsubscribe();
 	}
 }

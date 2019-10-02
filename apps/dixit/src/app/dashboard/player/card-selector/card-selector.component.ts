@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Player } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
 import { Store } from '@ngrx/store';
@@ -13,7 +13,6 @@ export class CardSelectorComponent implements OnChanges {
 
 	@Input() cardIndex: number;
 	@Input() userPlayer: Player;
-	//hasBeenEmitted = false;
 
 	constructor(private gameStore: Store<GameState>) { }
 
@@ -24,16 +23,11 @@ export class CardSelectorComponent implements OnChanges {
 	}
 
 	throwCard(userPlayer: Player) {
-		// if (this.hasBeenEmitted) {
-		// 	console.log("You already voted!");
-		// 	return;
-		// }
 		if (!this.cardIndex) {
 			console.log("You have to select a card first!");
 			return;
 		}
-	//	this.hasBeenEmitted = true;
-		const boardCard: BoardCard = { cardIndex: this.cardIndex, owner: userPlayer, votes: [] };
+		const boardCard: BoardCard = { id: this.cardIndex, cardIndex: this.cardIndex, owner: userPlayer, votes: [] };
 		this.gameStore.dispatch(setBoardCard({ boardCard }));
 	}
 }

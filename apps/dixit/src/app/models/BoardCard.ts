@@ -1,6 +1,7 @@
 import { Player } from './Player';
 
 export interface BoardCard {
+	id?: number;
 	cardIndex: number;
 	owner: Player;
 	votes?: Player[];

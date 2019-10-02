@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StoryCard } from '../../../models/StoryCard';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentStory, setVotesVisibility, getUserPlayer, getVotesVisibility, nextRound } from '../../../store/game';
+import { GameState, getCurrentStory, showVotes, getUserPlayer, getVotesVisibility, nextRound } from '../../../store/game';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -25,7 +25,7 @@ export class StoryComponent implements OnInit {
 	}
 
 	showVotes(): void {
-		this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: true }));
+		this.gameStore.dispatch(showVotes());
 	}
 
 	nextRound(): void {

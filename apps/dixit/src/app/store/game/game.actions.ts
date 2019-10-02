@@ -4,20 +4,41 @@ import { StoryCard } from '../../models/StoryCard';
 import { Player } from '../../models';
 
 export const fetchBoardCards = createAction('[Board Cards] Fetch board cards');
-export const boardCardsLoaded = createAction('[Board Cards] Load board cards',
+export const boardCardsLoaded = createAction('[Board Cards] Loaded board cards',
 	props<{ boardCards: BoardCard[] }>()
 );
 
+export const fetchAvaiableCards = createAction('[Board Cards] Fetch avaiable cards');
+export const avaiableCardsLoaded = createAction('[Board Cards] Loaded avaiable cards',
+	props<{ cards: number[] }>()
+);
+
+export const fetchPlayers = createAction('[Board Card] Fetch players');
+export const playersLoaded = createAction('[Board Cards] Loaded players',
+	props<{ players: Player[] }>()
+);
+
 export const nextRound = createAction('[Board Cards] Set next turn');
+export const nextRoundSetted = createAction('[Board Cards] next turn setted', props<{ nextTurn: number }>());
 
 export const setBoardCard = createAction(
 	'[Board Cards] Set single board card',
 	props<{ boardCard: BoardCard }>()
 );
 
+export const boardCardSetted = createAction(
+	'[Board Cards] Single board card setted',
+	props<{ boardCard: BoardCard }>()
+);
+
 export const setVote = createAction(
 	'[Board Cards] Set vote',
-	props<{ cardIndex: number, player: Player }>()
+	props<{ boardCard: BoardCard }>()
+);
+
+export const voteSetted = createAction(
+	'[Board Cards] vote setted',
+	props<{ boardCard: BoardCard }>()
 );
 
 export const setGuessingTime = createAction(
@@ -25,13 +46,22 @@ export const setGuessingTime = createAction(
 	props<{ isGuessingTime: boolean }>()
 );
 
-export const setVotesVisibility = createAction(
-	'[Board Cards] Set votes visibility',
-	props<{ areVotesVisible: boolean }>()
+export const updateCurrentTurn = createAction(
+	'[Player Hand] Update current turn',
+	props<{ currentTurn: number }>()
 );
+export const setNextTurn = createAction('[Board Cards] Set next turn');
+//export const nextTurnSetted = createAction('[Board Cards] Next turn setted');
+
+export const showVotes = createAction('[Board Cards] Set votes visibility to true');
+export const votesShown = createAction('[Board Cards] Votes visibility setted');
 
 export const setCurrentStory = createAction(
 	'[Board Cards] Set current story',
+	props<{ currentStory: StoryCard }>()
+);
+export const currentStorySetted = createAction(
+	'[Board Cards] Current story setted',
 	props<{ currentStory: StoryCard }>()
 );
 
@@ -40,15 +70,29 @@ export const setUserHand = createAction(
 	props<{ cardsCount: number }>()
 );
 
+export const setVotesVisibility = createAction(
+	'[Player Hand] Set votes visibility',
+	props<{ areVotesVisible: boolean }>()
+);
+
+export const userHandSetted = createAction(
+	'[Player Hand] User hands card setted',
+	props<{ cards: number[] }>()
+);
+
 export const signIn = createAction(
 	'[Auth] Sign in',
 	props<{ username: string; photoUrl: string }>()
 );
 
-export const signInSuccess = createAction(
-	'[Auth] Sign in success',
+export const signInSuccess = createAction('[Auth] Sign in success');
+
+export const updateUserPlayer = createAction(
+	'[Auth] Update user player',
 	props<{ userPlayer: Player }>()
 );
 
 export const signOut = createAction('[Auth] Sign out');
+
+
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, setBoardCard, getBoardCards } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getCurrentStory } from '../../../store/game';
 import { Observable } from 'rxjs';
 import { Player } from '../../../models';
 import { StoryCard } from '../../../models/StoryCard';
@@ -20,7 +20,6 @@ export class HandComponent implements OnInit {
 
 	boardCard: BoardCard;
 	selectedCardIndex: number;
-
 
 	constructor(private gameStore: Store<GameState>) { }
 
@@ -44,9 +43,5 @@ export class HandComponent implements OnInit {
 	selectCard(cardIndex: number) {
 		this.selectedCardIndex = cardIndex;
 	}
-
-
-
-
 
 }
