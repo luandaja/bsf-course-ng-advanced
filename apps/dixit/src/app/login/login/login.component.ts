@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	onSubmitted(formData: any) {
+		console.log("sign in");
 		this.store.dispatch(signIn({ username: formData.username, photoUrl: formData.avatar }));
 	}
 

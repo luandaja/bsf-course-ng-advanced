@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Player } from '../../models';
 import { Store, select } from '@ngrx/store';
 import { GameState, getPlayers, getUserPlayer, getBoardCards, getCurrentStory, getAvaiableCards } from '../../store/game';
-import { map, exhaustMap } from 'rxjs/operators';
+import { map, exhaustMap, switchMap, tap, switchMapTo, take } from 'rxjs/operators';
 import { PlayerFirebaseService } from './player.firebase.service';
 import { StoryCard } from '../../models/StoryCard';
 import { BoardCard } from '../../models/BoardCard';
-import { combineLatest } from 'rxjs';
+import { combineLatest, of } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,10 +23,12 @@ export class PlayerService {
 
 	add(username: string, photoUrl: string) {
 		return this.gameStore.select(getPlayers).pipe(
-			map((players => players.length)),
-			exhaustMap(playersCount => {
+			take(1),
+			map(players => players.length),
+			switchMap(async (playersCount) => {
 				const user = new Player(username, photoUrl, playersCount + 1);
-				return this.firestore.create(user).pipe(map(_ => user));
+				await this.firestore.create(user);
+				return user;
 			})
 		);
 	}

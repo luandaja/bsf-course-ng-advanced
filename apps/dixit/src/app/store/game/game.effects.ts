@@ -30,11 +30,18 @@ export class GameEffects {
 	signIn$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.signIn),
-			exhaustMap(action =>
-				this.playerService.add(action.username, action.photoUrl)
-					.pipe(
-						map(() => actions.signInSuccess()),
-						catchError(() => EMPTY))
+			switchMap(async action => {
+				const user = await this.playerService.add(action.username, action.photoUrl).toPromise();
+				return actions.signInSuccess({ userPlayer: { ...user } })
+			}
+			)));
+
+	startGame$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.startGame),
+			exhaustMap(() =>
+				this.stateService.update("game-room", { hasGameStarted: true })
+					.pipe(map(() => actions.gameStarted()))
 			)));
 
 	setNextTurn$ = createEffect(() =>
@@ -55,6 +62,19 @@ export class GameEffects {
 						take(1),
 						map((boardCards) => actions.boardCardsLoaded({ boardCards })),
 						catchError(() => EMPTY)
+					)
+			)
+		)
+	);
+
+	fetchPlayers$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.fetchPlayers),
+			exhaustMap(() =>
+				this.playerService.collection$()
+					.pipe(
+						take(1),
+						map((players) => actions.playersLoaded({ players }))
 					)
 			)
 		)
@@ -130,7 +150,7 @@ export class GameEffects {
 					.pipe(
 						switchMap(() => this.playerService.updateScore()),
 						//switchMap((userPlayer) => [actions.votesShown, actions.updateUserPlayer({ userPlayer })]
-						switchMap(() => [actions.votesShown]
+						switchMap(() => [actions.votesShown()]
 						)
 					)
 			)

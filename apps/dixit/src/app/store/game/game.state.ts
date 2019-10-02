@@ -15,6 +15,7 @@ export interface GameState {
 	avaiableCards: number[];
 	areVotesVisible: boolean;
 	isLoading: boolean;
+	hasGameStarted: boolean
 }
 const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
@@ -26,6 +27,7 @@ const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', scor
 export const initalState: GameState = {
 	players: [],// [pao, walter, myriam, brenda, vico, ale],
 	userPlayer: null,//{ ...ale },
+	hasGameStarted: false,
 	isLogged: false,
 	currentTurn: 0,
 	currentStory: null,//{ cardIndex: 78, title: 'test story', storyTeller: ale },

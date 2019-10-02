@@ -85,14 +85,24 @@ export const signIn = createAction(
 	props<{ username: string; photoUrl: string }>()
 );
 
-export const signInSuccess = createAction('[Auth] Sign in success');
+export const signInSuccess = createAction(
+	'[Auth] Sign in success',
+	props<{ userPlayer: Player }>());
 
 export const updateUserPlayer = createAction(
 	'[Auth] Update user player',
 	props<{ userPlayer: Player }>()
 );
 
+export const updateHasGameStarted = createAction(
+	'[Game] Update has game started',
+	props<{ hasGameStarted: boolean }>()
+);
+
+export const startGame = createAction('[Game] start game');
+export const gameStarted = createAction('[Game] game started');
 export const signOut = createAction('[Auth] Sign out');
+
 
 
 

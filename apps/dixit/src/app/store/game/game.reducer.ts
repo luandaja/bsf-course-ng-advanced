@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
 	fetchBoardCards, setBoardCard, setCurrentStory,
 	showVotes, nextRound, signIn, signInSuccess, boardCardsLoaded, boardCardSetted,
-	updateUserPlayer, setVote, currentStorySetted, votesShown, nextRoundSetted, userHandSetted, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, playersLoaded, setNextTurn
+	updateUserPlayer, setVote, currentStorySetted, votesShown, nextRoundSetted, userHandSetted, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, playersLoaded, setNextTurn, updateHasGameStarted
 } from './game.actions';
 import { GameState, initalState } from './game.state';
 import { add, concat, shuffle, update } from '../../models/Utils';
@@ -10,10 +10,9 @@ import { add, concat, shuffle, update } from '../../models/Utils';
 const reducer = createReducer(
 	initalState,
 	on(signIn, (state, { }) => ({ ...state, isLoading: true })),
-	on(signInSuccess, (state, { }) => ({ ...state, isLoading: false, isLogged: true })),
-	//on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLoading: false, isLogged: true, userPlayer, players: add(state.players, userPlayer) })),
+	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLoading: false, isLogged: true, userPlayer })),
 
-	on(playersLoaded, (state, { players }) => ({ ...state, players, userPlayer: getUserPlayer(state) })),
+	on(playersLoaded, (state, { players }) => ({ ...state, players })),
 
 	on(fetchBoardCards, (state, { }) => ({ ...state, isLoading: true })),
 	on(boardCardsLoaded, (state, { boardCards }) => ({ ...state, isLoading: false, boardCards })),
@@ -29,6 +28,8 @@ const reducer = createReducer(
 	on(updateUserPlayer, (state, { userPlayer }) => ({ ...state, userPlayer, players: update(state.players, state.userPlayer) })),
 
 	on(setVote, (state, { }) => ({ ...state, isLoading: true })),
+
+	on(updateHasGameStarted, (state, { hasGameStarted }) => ({ ...state, hasGameStarted })),
 
 	on(setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
 	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false })),

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { GameState, getIsLogged, currentStorySetted, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, playersLoaded } from './store/game';
+import { GameState, getIsLogged, currentStorySetted, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted } from './store/game';
 import { StateFirebaseService } from './core/services/state.firebase.service';
 import { StoryFirebaseService } from './core/services/story.firebase.service';
 import { AvaiableCardsService } from './core/services/avaiable-cards.firebase.service';
@@ -18,11 +18,11 @@ export class AppComponent implements OnInit, OnDestroy {
 	avaiableCards$: Subscription;
 	currentStory$: Subscription;
 	currentState$: Subscription;
-	players$: Subscription;
+	//players$: Subscription;
 
 	constructor(
 		private gameStore: Store<GameState>,
-		private playerService: PlayerService,
+		//private playerService: PlayerService,
 		private router: Router,
 		private stateService: StateFirebaseService,
 		private storyService: StoryFirebaseService,
@@ -34,19 +34,20 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 
 	private onStart(isLogged: boolean) {
-		if (isLogged) {
-			this.onLoggedIn();
-		}
+		// if (isLogged) {
+		// 	this.onLoggedIn();
+		// }
 		this.redirect(isLogged)
 	}
 
 	private onLoggedIn() {
-		this.players$ = this.playerService.collection$().subscribe(players => this.gameStore.dispatch(playersLoaded({ players })));
+		//	this.players$ = this.playerService.collection$().subscribe(players => this.gameStore.dispatch(playersLoaded({ players })));
 		this.avaiableCards$ = this.cardsService.collection$().subscribe(cards => this.gameStore.dispatch(avaiableCardsLoaded({ cards })));
 		this.currentStory$ = this.storyService.doc$("game-room").subscribe(currentStory => this.gameStore.dispatch(currentStorySetted({ currentStory })));
 		this.currentState$ = this.stateService.doc$("game-room").subscribe(currentState => {
-			this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: currentState.areVotesVisible }))
-			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: currentState.curentTurn }))
+			this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: currentState.areVotesVisible }));
+			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: currentState.curentTurn }));
+			this.gameStore.dispatch(updateHasGameStarted({ hasGameStarted: currentState.hasGameStarted }));
 		});
 	}
 
@@ -60,6 +61,6 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.avaiableCards$.unsubscribe();
 		this.currentStory$.unsubscribe();
 		this.currentState$.unsubscribe();
-		this.players$.unsubscribe();
+		//	this.players$.unsubscribe();
 	}
 }

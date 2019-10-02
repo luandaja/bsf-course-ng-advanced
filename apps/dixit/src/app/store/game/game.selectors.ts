@@ -53,8 +53,21 @@ export const getUserPlayer = createSelector(
 	state => state.userPlayer
 );
 
+export const getHasGameStarted = createSelector(
+	gameFeature,
+	state => state.hasGameStarted
+);
 
 export const getIsLoading = createSelector(
 	gameFeature,
 	state => state.isLoading
+);
+
+export const getAlgo = createSelector(
+	gameFeature,
+	state => {
+		const { hasGameStarted, isGuessingTime, players } = state;
+		return { hasGameStarted, isGuessingTime, players }
+	}
+	//({hasGameStaerted: state.hasGameStarted, isGuessingTime: state.hasGameStarted, players: state.players })
 );

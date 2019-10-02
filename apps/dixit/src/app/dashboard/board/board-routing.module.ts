@@ -1,10 +1,9 @@
-import { TableBoardComponent } from './table-board/table-board.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { StartGameComponent } from './start-game/start-game.component';
 
 const routes: Routes = [
-	{ path: '', component: TableBoardComponent },
+	{ path: '', component: StartGameComponent },
 ];
 
 @NgModule({
