@@ -186,20 +186,20 @@ export class GameEffects {
 	// 	)
 	// );
 
-	nextRound$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(actions.nextRound),
-			pipe(action =>
-				forkJoin(
-					this.stateService.update("game-room", { currentStory: null }),
-					this.boardCardsService.deleteCollection()
-					//	this.playerService.getNextTurn()
-				).pipe(
-					switchMap(() => [actions.nextRoundSetted()])
-				)
-			)
-		)
-	);
+	// nextRound$ = createEffect(() =>
+	// 	this.actions$.pipe(
+	// 		ofType(actions.nextRound),
+	// 		pipe(action =>
+	// 			forkJoin(
+	// 				this.stateService.update("game-room", { currentStory: null }),
+	// 				this.boardCardsService.deleteCollection()
+	// 				//	this.playerService.getNextTurn()
+	// 			).pipe(
+	// 				switchMap(() => [actions.nextRoundSetted()])
+	// 			)
+	// 		)
+	// 	)
+	// );
 
 
 
