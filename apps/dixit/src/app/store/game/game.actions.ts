@@ -18,8 +18,8 @@ export const playersLoaded = createAction('[Board Cards] Loaded players',
 	props<{ players: Player[] }>()
 );
 
-export const nextRound = createAction('[Board Cards] Set next turn');
-export const nextRoundSetted = createAction('[Board Cards] next turn setted', props<{ nextTurn: number }>());
+export const nextRound = createAction('[Board Cards] Set next round');
+export const nextRoundSetted = createAction('[Board Cards] next riund setted');
 
 export const setBoardCard = createAction(
 	'[Board Cards] Set single board card',
