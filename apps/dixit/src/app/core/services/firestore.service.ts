@@ -28,6 +28,12 @@ export abstract class FirestoreService<T> {
 	}
 
 	doc$(id: string): Observable<T> {
+		return this.firebase.collection(`${this.basePath}`).doc<T>(id).valueChanges();
+		//return this.firebase.doc<T>(`${this.basePath}`).valueChanges();
+	}
+
+	snapshot$(id: string): Observable<T> {
+		//const f = this.firebase.collection<T>(`${this.basePath}`).doc(id).snapshotChanges({});
 		return this.firebase.doc<T>(`${this.basePath}/${id}`).valueChanges();
 	}
 

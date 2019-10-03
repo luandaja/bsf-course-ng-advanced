@@ -2,7 +2,7 @@ import { BoardCardsFirestoreService } from '../../core/services/board-cards.fire
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, from, of, combineLatest, forkJoin, pipe } from 'rxjs';
-import { map, mergeMap, catchError, exhaustMap, switchMap, take, tap } from 'rxjs/operators';
+import { map, mergeMap, catchError, exhaustMap, switchMap, take, tap, mergeAll } from 'rxjs/operators';
 import * as actions from './game.actions';
 import { PlayerService } from '../../core/services/player.service';
 import { BoardCard } from '../../models/BoardCard';
@@ -22,7 +22,7 @@ export class GameEffects {
 		private cardsService: AvaiableCardsService,
 		private boardCardsService: BoardCardsFirestoreService) {
 
-		const g = this.stateService.update("game-room", { areVotesVisible: true });
+		//	const g = this.stateService.update("game-room", { areVotesVisible: true });
 	}
 
 	signIn$ = createEffect(() =>
@@ -145,17 +145,19 @@ export class GameEffects {
 	// 	)
 	// );
 
-	// showVotes$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.showVotes),
-	// 		tap(async action => {
-	// 			await this.stateService.update("game-room", { areVotesVisible: true });
-	// 			return this.playerService.updateScore()
-	// 				.pipe(exhaustMap((userPlayer) => [actions.votesShown, actions.updateUserPlayer({ userPlayer })]))
-	// 		}
-	// 		)
-	// 	)
-	// );
+	showVotes$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.showVotes),
+			switchMap(async action => {
+				await this.stateService.update("game-room", { areVotesVisible: true });
+				const userPlayer = await this.playerService.updateScore().toPromise();
+				return actions.votesShown({ userPlayer });
+				//	return from([actions.votesShown, actions.updateUserPlayer({ userPlayer })]).pipe(mergeAll());
+
+			}
+			)
+		)
+	);
 
 	// showVotes$ = createEffect(() =>
 	// 	this.actions$.pipe(

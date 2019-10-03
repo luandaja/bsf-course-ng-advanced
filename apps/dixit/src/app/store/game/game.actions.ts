@@ -54,7 +54,9 @@ export const setNextTurn = createAction('[Board Cards] Set next turn');
 //export const nextTurnSetted = createAction('[Board Cards] Next turn setted');
 
 export const showVotes = createAction('[Board Cards] Set votes visibility to true');
-export const votesShown = createAction('[Board Cards] Votes visibility setted');
+export const votesShown = createAction('[Board Cards] Votes visibility setted',
+	props<{ userPlayer: Player }>()
+);
 
 export const setCurrentStory = createAction(
 	'[Board Cards] Set current story',

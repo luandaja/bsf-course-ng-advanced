@@ -6,6 +6,7 @@ import { StateFirebaseService } from '../../../core/services/state.firebase.serv
 // import { StoryFirebaseService } from '../../../core/services/story.firebase.service';
 import { AvaiableCardsService } from '../../../core/services/avaiable-cards.firebase.service';
 import { BoardCardsFirestoreService } from '../../../core/services/board-cards.firestore.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
 	selector: 'gt-table-board',
@@ -31,7 +32,7 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.onGameStart();
 		this.isLoading$ = this.gameStore.select(getIsLoading);
-		this.playerHand = this.gameStore.pipe(select(getTurnInfo)).subscribe((turnInfo) => {
+		this.playerHand = this.gameStore.pipe(select(getTurnInfo), distinctUntilChanged((x, y) => x.isUserTurn === y.isUserTurn)).subscribe((turnInfo) => {
 			console.log("turnInfo", turnInfo);
 			if (turnInfo.isUserTurn)
 				this.gameStore.dispatch(setUserHand({ cardsCount: turnInfo.cardsCount }));
@@ -42,7 +43,7 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 		this.avaiableCards$ = this.cardsService.collection$()
 			.subscribe(cards => this.gameStore.dispatch(avaiableCardsLoaded({ cards })));
 
-		this.currentState$ = this.stateService.doc$("game-room").subscribe(currentState => {
+		this.currentState$ = this.stateService.doc$("game-room").pipe().subscribe(currentState => {
 			console.log("table-board", currentState);
 			this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: currentState.areVotesVisible }));
 			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: currentState.currentTurn }));

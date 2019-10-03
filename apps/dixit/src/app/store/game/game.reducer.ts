@@ -35,7 +35,7 @@ const reducer = createReducer(
 	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentState: { ...state.currentState, currentStory }, isLoading: false })),
 
 	on(showVotes, (state, { }) => ({ ...state, isLoading: true })),
-	on(votesShown, (state, { }) => ({ ...state, isLoading: false, currentState: { ...state.currentState, areVotesVisible: true } })),
+	on(votesShown, (state, { userPlayer }) => ({ ...state, isLoading: false, userPlayer, players: update(state.players, state.userPlayer), currentState: { ...state.currentState, areVotesVisible: true } })),
 
 	on(nextRound, (state, { }) => ({ ...state, isLoading: true })),
 	on(nextRoundSetted, (state, { }) => ({ ...state, isLoading: false, boardCards: [], currentState: { ...state.currentState, currentTurn: state.userPlayer.id + 1, currentStory: null } })),
