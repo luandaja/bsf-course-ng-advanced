@@ -20,6 +20,7 @@ export class BoardCardComponent implements OnChanges {
 	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnChanges(): void {
+		console.log("cardIndex " + this.boardCard.cardIndex + " isJumping " + this.isJumping);
 		this.areVotesVisible$ = this.gameStore.pipe(select(getVotesVisibility));
 	}
 

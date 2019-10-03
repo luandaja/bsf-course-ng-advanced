@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
-import { Observable, from, combineLatest } from 'rxjs';
+import { Observable, from, combineLatest, of } from 'rxjs';
 import { map, exhaustMap } from 'rxjs/operators';
+import { BoardCard } from '../../models/BoardCard';
+import { StoryCard } from '../../models/StoryCard';
 
 @Injectable({
 	providedIn: 'root'
@@ -34,7 +36,8 @@ export abstract class FirestoreService<T> {
 	}
 
 	update(id: string, value: T) {
-		return from(this.firebase.collection<T>(`${this.basePath}`).doc(id).update(value));
+		return this.firebase.collection<T>(`${this.basePath}`).doc(id).update(value);
+		//return of(f);
 	}
 
 	deleteCollection() {
@@ -67,6 +70,16 @@ export abstract class FirestoreService<T> {
 		cards.forEach(cardIndex => {
 			const docReference = this.firebase.collection(`${this.basePath}`).doc(cardIndex.toString()).ref;
 			batch.set(docReference, { id: cardIndex, cardIndex });
+		});
+		return batch.commit();
+	}
+
+
+	initBoardCards(boardCards: BoardCard[]) {
+		const batch = this.firebase.firestore.batch();
+		boardCards.forEach(boardCard => {
+			const docReference = this.firebase.collection(`${this.basePath}`).doc(boardCard.cardIndex.toString()).ref;
+			batch.set(docReference, { ...boardCard, id: boardCard.cardIndex });
 		});
 		return batch.commit();
 	}

@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { GameState, getIsLogged, currentStorySetted, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted } from './store/game';
 import { StateFirebaseService } from './core/services/state.firebase.service';
-import { StoryFirebaseService } from './core/services/story.firebase.service';
+//import { StoryFirebaseService } from './core/services/story.firebase.service';
 import { AvaiableCardsService } from './core/services/avaiable-cards.firebase.service';
 import { PlayerService } from './core/services/player.service';
 

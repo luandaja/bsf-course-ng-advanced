@@ -15,7 +15,7 @@ export const getAvaiableCards = createSelector(
 
 export const getCurrentStory = createSelector(
 	gameFeature,
-	(state: GameState) => state.currentStory
+	(state: GameState) => state.currentState.currentStory
 );
 
 export const getPlayers = createSelector(
@@ -30,7 +30,7 @@ export const getIsGuessingTime = createSelector(
 
 export const getVotesVisibility = createSelector(
 	gameFeature,
-	(state: GameState) => state.areVotesVisible
+	(state: GameState) => state.currentState.areVotesVisible
 );
 
 export const getCurrentHand = createSelector(
@@ -40,7 +40,7 @@ export const getCurrentHand = createSelector(
 
 export const getTurn = createSelector(
 	gameFeature,
-	(state: GameState) => state.currentTurn
+	(state: GameState) => state.currentState.currentTurn
 );
 
 export const getIsLogged = createSelector(
@@ -55,7 +55,7 @@ export const getUserPlayer = createSelector(
 
 export const getHasGameStarted = createSelector(
 	gameFeature,
-	state => state.hasGameStarted
+	state => state.currentState.hasGameStarted
 );
 
 export const getIsLoading = createSelector(
@@ -66,9 +66,9 @@ export const getIsLoading = createSelector(
 export const getTurnInfo = createSelector(
 	gameFeature,
 	state => {
-		const { currentTurn, userPlayer } = state;
-		const isUserTurn = (currentTurn === 0 && userPlayer.id === 1) || (currentTurn === userPlayer.id);
-		const cardsCount = currentTurn === 0 ? 5 : 1;
+		const { currentState, userPlayer } = state;
+		const isUserTurn = (currentState.currentTurn === 0 && userPlayer.id === 1) || (currentState.currentTurn === userPlayer.id);
+		const cardsCount = currentState.currentTurn === 0 ? 5 : 1;
 		return { isUserTurn, cardsCount }
 	}
 );
@@ -76,8 +76,16 @@ export const getTurnInfo = createSelector(
 export const getAlgo = createSelector(
 	gameFeature,
 	state => {
-		const { hasGameStarted, isGuessingTime, players } = state;
-		return { hasGameStarted, isGuessingTime, players }
+		const { currentState, isGuessingTime, players } = state;
+		return { hasGameStarted: currentState.hasGameStarted, isGuessingTime, players }
 	}
 	//({hasGameStaerted: state.hasGameStarted, isGuessingTime: state.hasGameStarted, players: state.players })
+);
+
+export const getScoreInput = createSelector(
+	gameFeature,
+	state => {
+		const { userPlayer, boardCards, currentState, players } = state;
+		return { userPlayer, boardCards, currentStory: currentState.currentStory, players }
+	}
 );

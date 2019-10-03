@@ -26,9 +26,9 @@ export class BoardCardsComponent implements OnInit {
 	ngOnInit() {
 		this.gameStore.dispatch(fetchBoardCards());
 
-		this.boardCards$ = this.gameStore.pipe(select(getBoardCards));
+		this.boardCards$ = this.gameStore.pipe(select(getBoardCards), tap(console.log));
 		this.isGuessingTime$ = this.gameStore.pipe(select(getIsGuessingTime));
-		this.storyCard$ = this.gameStore.pipe(select(getCurrentStory));
+		this.storyCard$ = this.gameStore.pipe(select(getCurrentStory), tap(console.log));
 		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
 
 		this.playerCanVote$ = this.gameStore.pipe(select(getCurrentStory),

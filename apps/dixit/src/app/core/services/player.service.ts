@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Player } from '../../models';
 import { Store, select } from '@ngrx/store';
-import { GameState, getPlayers, getUserPlayer, getBoardCards, getCurrentStory, getAvaiableCards } from '../../store/game';
+import { GameState, getPlayers, getUserPlayer, getBoardCards, getCurrentStory, getAvaiableCards, getScoreInput } from '../../store/game';
 import { map, exhaustMap, switchMap, tap, switchMapTo, take } from 'rxjs/operators';
 import { PlayerFirebaseService } from './player.firebase.service';
 import { StoryCard } from '../../models/StoryCard';
 import { BoardCard } from '../../models/BoardCard';
 import { combineLatest, of } from 'rxjs';
+import { BoardComponent } from '../../dashboard/board/board/board.component';
 
 @Injectable({
 	providedIn: 'root'
@@ -35,27 +36,29 @@ export class PlayerService {
 
 	playerThrowCard() {
 		return this.gameStore.select(getUserPlayer).pipe(
-			exhaustMap(userPlayer => {
+			exhaustMap(async userPlayer => {
 				userPlayer.hasThrowCard = true;
-				return this.firestore.update(userPlayer.id.toString(), userPlayer).pipe(map(_ => userPlayer));
+				await this.firestore.update(userPlayer.id.toString(), userPlayer);
+				return userPlayer;
 			})
 		);
 	}
 
 	playerVote() {
 		return this.gameStore.select(getUserPlayer).pipe(
-			exhaustMap(userPlayer => {
+			exhaustMap(async userPlayer => {
 				userPlayer.hasVoted = true;
-				return this.firestore.update(userPlayer.id.toString(), userPlayer).pipe(map(_ => userPlayer));
+				await this.firestore.update(userPlayer.id.toString(), userPlayer);
+				return userPlayer;
 			})
 		);
 	}
 
-	getNextTurn() {
-		return this.gameStore.select(getUserPlayer).pipe(
-			map(userPlayer => userPlayer === null ? 0 : userPlayer.id + 1)
-		);
-	}
+	// getNextTurn() {
+	// 	return this.gameStore.select(getUserPlayer).pipe(
+	// 		map(userPlayer => userPlayer === null ? 0 : userPlayer.id + 1)
+	// 	);
+	// }
 
 	getUserHand(cardsCount: number) {
 		return this.gameStore.pipe(select(getAvaiableCards),
@@ -63,16 +66,25 @@ export class PlayerService {
 	}
 
 	updateScore() {
-		return combineLatest(
-			this.gameStore.pipe(select(getUserPlayer)),
-			this.gameStore.pipe(select(getBoardCards)),
-			this.gameStore.pipe(select(getCurrentStory)),
-			this.gameStore.pipe(select(getPlayers))
-		).pipe(map(this.calculateScore));
+		return this.gameStore.pipe(select(getScoreInput),
+			switchMap(async input => {
+				{
+					const { userPlayer, boardCards, currentStory, players } = input;
+					const updatedPlayer = this.calculateScore(userPlayer, boardCards, currentStory, players);
+					await this.firestore.update(updatedPlayer.id.toString(), updatedPlayer);
+					return updatedPlayer;
+				}
+			}))
+		// return combineLatest(
+		// 	this.gameStore.pipe(select(getUserPlayer)),
+		// 	this.gameStore.pipe(select(getBoardCards)),
+		// 	this.gameStore.pipe(select(getCurrentStory)),
+		// 	this.gameStore.pipe(select(getPlayers))
+		// ).pipe(map(this.calculateScore));
 	}
 
-	private calculateScore(pair: [Player, BoardCard[], StoryCard, Player[]]) {
-		const [userPlayer, boardCards, currentStory, players] = pair;
+	private calculateScore(userPlayer: Player, boardCards: BoardCard[], currentStory: StoryCard, players: Player[]) {
+		//const [userPlayer, boardCards, currentStory, players] = pair;
 		const correctCard = boardCards.find(boardCard => boardCard.cardIndex === currentStory.cardIndex);
 		const correctVotesCount = correctCard.votes.length;
 

@@ -1,21 +1,18 @@
 import { Player } from '../../models';
 import { BoardCard } from '../../models/BoardCard';
-import { StoryCard } from '../../models/StoryCard';
+import { CurrentState } from '../../models/State';
 
 export const gameFeatureName = 'game';
 export interface GameState {
 	players: Player[];
-	currentTurn: number;
-	isGuessingTime: boolean;
 	userPlayer: Player;
 	isLogged: boolean;
-	currentStory: StoryCard;
 	boardCards: BoardCard[];
 	currentHand: number[];
 	avaiableCards: number[];
-	areVotesVisible: boolean;
 	isLoading: boolean;
-	hasGameStarted: boolean
+	currentState: CurrentState;
+	isGuessingTime?: boolean;
 }
 const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
@@ -26,13 +23,18 @@ const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', scor
 
 export const initalState: GameState = {
 	players: [],// [pao, walter, myriam, brenda, vico, ale],
-	userPlayer: null,//{ ...ale },
-	hasGameStarted: false,
-	isLogged: false,
-	currentTurn: 0,
-	currentStory: null,//{ cardIndex: 78, title: 'test story', storyTeller: ale },
-	isGuessingTime: false,
-	areVotesVisible: false,
+	userPlayer: { ...ale },
+	currentState: {
+		currentTurn: 0,
+		areVotesVisible: false,
+		hasGameStarted: true,
+		//currentStory: null
+	},
+	isLogged: true,
+	isGuessingTime: true,
+	currentHand: [],//4, 67, 23, 12, 34
+	avaiableCards: [],// generateCardIndexes(),
+	isLoading: false,
 	boardCards: [
 		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
 		// { cardIndex: 6, owner: walter, votes: [] },
@@ -40,10 +42,7 @@ export const initalState: GameState = {
 		// { cardIndex: 34, owner: brenda, votes: [] },
 		// { cardIndex: 27, owner: vico, votes: [] },
 		// { cardIndex: 78, owner: ale, votes: [] }
-	],
-	currentHand: [],//4, 67, 23, 12, 34
-	avaiableCards: [],// generateCardIndexes(),
-	isLoading: false
+	]
 };
 
 

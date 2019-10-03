@@ -19,7 +19,7 @@ export class StoryComponent implements OnInit {
 	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
-		this.currentStory$ = this.gameStore.pipe(select(getCurrentStory));
+		this.currentStory$ = this.gameStore.pipe(select(getCurrentStory), tap(console.log));
 		this.isStoryTeller$ = this.gameStore.pipe(select(getUserPlayer), map(user => user.isStoryTeller));
 		this.areVotesVisible$ = this.gameStore.pipe(select(getVotesVisibility));
 	}

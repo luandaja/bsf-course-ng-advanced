@@ -29,22 +29,22 @@ const reducer = createReducer(
 
 	on(setVote, (state, { }) => ({ ...state, isLoading: true })),
 
-	on(updateHasGameStarted, (state, { hasGameStarted }) => ({ ...state, hasGameStarted })),
+	on(updateHasGameStarted, (state, { hasGameStarted }) => ({ ...state, currentState: { ...state.currentState, hasGameStarted } })),
 
 	on(setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
-	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false })),
+	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentState: { ...state.currentState, currentStory }, isLoading: false })),
 
 	on(showVotes, (state, { }) => ({ ...state, isLoading: true })),
-	on(votesShown, (state, { }) => ({ ...state, isLoading: false, areVotesVisible: true })),
+	on(votesShown, (state, { }) => ({ ...state, isLoading: false, currentState: { ...state.currentState, areVotesVisible: true } })),
 
 	on(nextRound, (state, { }) => ({ ...state, isLoading: true })),
-	on(nextRoundSetted, (state, { nextTurn }) => ({ ...state, isLoading: false, currentTurn: nextTurn, currentStory: null, boardCards: [] })),
+	on(nextRoundSetted, (state, { }) => ({ ...state, isLoading: false, boardCards: [], currentState: { ...state.currentState, currentTurn: state.userPlayer.id + 1, currentStory: null } })),
 
 	on(userHandSetted, (state, { cards }) => ({ ...state, isLoading: false, currentHand: concat(state.currentHand, cards) })),
 
-	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible })),
-	//on(setNextTurn, (state, { }) => ({ ...state, currentTurn: state.userPlayer.id + 1 })),
-	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, currentTurn })),
+	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, currentState: { ...state.currentState, areVotesVisible } })),
+
+	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, currentState: { ...state.currentState, currentTurn } })),
 );
 
 function getUserPlayer(state: GameState) {
