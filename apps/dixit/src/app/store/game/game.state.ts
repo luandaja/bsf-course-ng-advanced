@@ -1,6 +1,6 @@
 import { Player } from '../../models';
 import { BoardCard } from '../../models/BoardCard';
-import { CurrentState } from '../../models/State';
+import { StoryCard } from '../../models/StoryCard';
 
 export const gameFeatureName = 'game';
 export interface GameState {
@@ -11,8 +11,11 @@ export interface GameState {
 	currentHand: number[];
 	avaiableCards: number[];
 	isLoading: boolean;
-	currentState: CurrentState;
 	isGuessingTime?: boolean;
+	currentTurn?: number;
+	areVotesVisible?: boolean;
+	hasGameStarted?: boolean;
+	currentStory?: StoryCard;
 }
 const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
@@ -24,12 +27,10 @@ const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', scor
 export const initalState: GameState = {
 	players: [],// [pao, walter, myriam, brenda, vico, ale],
 	userPlayer: { ...ale },
-	currentState: {
-		currentTurn: 0,
-		areVotesVisible: false,
-		hasGameStarted: true,
-		//currentStory: null
-	},
+	currentTurn: 0,
+	areVotesVisible: false,
+	hasGameStarted: true,
+	currentStory: null,
 	isLogged: true,
 	isGuessingTime: true,
 	currentHand: [],//4, 67, 23, 12, 34
@@ -44,20 +45,3 @@ export const initalState: GameState = {
 		// { cardIndex: 78, owner: ale, votes: [] }
 	]
 };
-
-
-function generateCardIndexes(): number[] {
-	const cardIndexes: number[] = [];
-	for (let index = 1; index < 100; index++) {
-		cardIndexes.push(index);
-	}
-	shuffle(cardIndexes);
-	return cardIndexes;
-}
-
-function shuffle(array) {
-	for (let i = array.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[array[i], array[j]] = [array[j], array[i]];
-	}
-}

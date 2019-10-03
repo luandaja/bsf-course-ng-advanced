@@ -6,8 +6,7 @@ import { map, mergeMap, catchError, exhaustMap, switchMap, take, tap, mergeAll }
 import * as actions from './game.actions';
 import { PlayerService } from '../../core/services/player.service';
 import { BoardCard } from '../../models/BoardCard';
-import { StateFirebaseService } from '../../core/services/state.firebase.service';
-// import { StoryFirebaseService } from '../../core/services/story.firebase.service';
+import { StatusBoardFirebaseService, StatusBoard } from '../../core/services/state.firebase.service';
 import { AvaiableCardsService } from '../../core/services/avaiable-cards.firebase.service';
 import { shuffle } from '../../models/Utils';
 
@@ -17,8 +16,7 @@ export class GameEffects {
 
 	constructor(private actions$: Actions,
 		private playerService: PlayerService,
-		private stateService: StateFirebaseService,
-		//private storyService: StoryFirebaseService,
+		private stateService: StatusBoardFirebaseService,
 		private cardsService: AvaiableCardsService,
 		private boardCardsService: BoardCardsFirestoreService) {
 
@@ -149,11 +147,9 @@ export class GameEffects {
 		this.actions$.pipe(
 			ofType(actions.showVotes),
 			switchMap(async action => {
-				await this.stateService.update("game-room", { areVotesVisible: true });
+				await this.stateService.update(StatusBoard.VotesVisibility, { areVotesVisible: true });
 				const userPlayer = await this.playerService.updateScore().toPromise();
 				return actions.votesShown({ userPlayer });
-				//	return from([actions.votesShown, actions.updateUserPlayer({ userPlayer })]).pipe(mergeAll());
-
 			}
 			)
 		)

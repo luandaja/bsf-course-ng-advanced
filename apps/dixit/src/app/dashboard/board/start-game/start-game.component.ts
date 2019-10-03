@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { GameState, startGame, getHasGameStarted, getPlayers, updateHasGameStarted } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { StateFirebaseService } from '../../../core/services/state.firebase.service';
+import { StatusBoardFirebaseService } from '../../../core/services/state.firebase.service';
 
 @Component({
 	selector: 'gt-start-game',

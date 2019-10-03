@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GameState, setUserHand, getIsLoading, getTurnInfo, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, currentStorySetted } from '../../../store/game';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { StateFirebaseService } from '../../../core/services/state.firebase.service';
+import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
 // import { StoryFirebaseService } from '../../../core/services/story.firebase.service';
 import { AvaiableCardsService } from '../../../core/services/avaiable-cards.firebase.service';
 import { BoardCardsFirestoreService } from '../../../core/services/board-cards.firestore.service';
@@ -23,10 +23,8 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 	private currentState$: Subscription;
 
 	constructor(private gameStore: Store<GameState>,
-		private stateService: StateFirebaseService,
+		private stateService: StatusBoardFirebaseService,
 		private boardCardService: BoardCardsFirestoreService,
-
-		// private storyService: StoryFirebaseService,
 		private cardsService: AvaiableCardsService, ) { }
 
 	ngOnInit() {
@@ -42,35 +40,43 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 	private onGameStart() {
 		this.avaiableCards$ = this.cardsService.collection$()
 			.subscribe(cards => this.gameStore.dispatch(avaiableCardsLoaded({ cards })));
-
-		this.currentState$ = this.stateService.doc$("game-room").pipe().subscribe(currentState => {
-			console.log("table-board", currentState);
-			this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: currentState.areVotesVisible }));
-			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: currentState.currentTurn }));
-			this.gameStore.dispatch(currentStorySetted({ currentStory: currentState.currentStory }));
+		this.currentState$ = this.stateService.doc$(StatusBoard.VotesVisibility).subscribe(state => {
+			console.log("table-board", state);
+			this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: state.areVotesVisible }));
+		});
+		this.currentState$ = this.stateService.doc$(StatusBoard.CurrentPlayerTurn).subscribe(state => {
+			console.log("table-board", state);
+			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: state.currentTurn }));
+		});
+		this.currentState$ = this.stateService.doc$(StatusBoard.CurrentStory).subscribe(state => {
+			console.log("table-board", state);
+			this.gameStore.dispatch(currentStorySetted({ currentStory: state.currentStory }));
 		});
 	}
 
-	seed() {
-		const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
-		const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
-		const walter = { id: 3, username: 'Walter', photoUrl: 'https://bit.ly/2lQfYBH', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
-		const myriam = { id: 4, username: 'Myriam', photoUrl: 'https://bit.ly/2lOjrAQ', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
-		const brenda = { id: 5, username: 'Brenda', photoUrl: 'https://bit.ly/2leFz7h', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
-		const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
+	// seed() {
+	// const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
+	// const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
+	// const walter = { id: 3, username: 'Walter', photoUrl: 'https://bit.ly/2lQfYBH', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
+	// const myriam = { id: 4, username: 'Myriam', photoUrl: 'https://bit.ly/2lOjrAQ', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
+	// const brenda = { id: 5, username: 'Brenda', photoUrl: 'https://bit.ly/2leFz7h', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
+	// const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
 
-		const cards = [
-			{ cardIndex: 2, owner: pao, votes: [walter, brenda] },
-			{ cardIndex: 6, owner: walter, votes: [] },
-			{ cardIndex: 12, owner: myriam, votes: [vico] },
-			{ cardIndex: 34, owner: brenda, votes: [] },
-			{ cardIndex: 27, owner: vico, votes: [] },
-			{ cardIndex: 78, owner: ale, votes: [] }
-		]
-		this.boardCardService.initBoardCards(cards);
-		const story = { cardIndex: 78, title: 'test story', storyTeller: ale };
-		this.stateService.update("game-room", { currentStory: story });
-	}
+	// const cards = [
+	// 	{ cardIndex: 2, owner: pao, votes: [walter, brenda] },
+	// 	{ cardIndex: 6, owner: walter, votes: [] },
+	// 	{ cardIndex: 12, owner: myriam, votes: [vico] },
+	// 	{ cardIndex: 34, owner: brenda, votes: [] },
+	// 	{ cardIndex: 27, owner: vico, votes: [] },
+	// 	{ cardIndex: 78, owner: ale, votes: [] }
+	// ]
+	// this.boardCardService.initBoardCards(cards);
+	// const story = { cardIndex: 78, title: 'test story', storyTeller: ale };
+	// this.stateService.update(StatusBoard.CurrentStory, { currentStory: story }).then(() => console.log("saved!"));
+	// this.stateService.update(StatusBoard.GameState, { hasGameStarted: false }).then(() => console.log("saved!"));
+	// this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: 0 }).then(() => console.log("saved!"));
+	// this.stateService.update(StatusBoard.VotesVisibility, { areVotesVisible: false }).then(() => console.log("saved!"));
+	// }
 	ngOnDestroy(): void {
 		this.playerHand.unsubscribe();
 		this.avaiableCards$.unsubscribe();

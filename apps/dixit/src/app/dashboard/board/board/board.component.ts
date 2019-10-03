@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { GameState, getHasGameStarted, updateHasGameStarted } from '../../../store/game';
 import { Store, select } from '@ngrx/store';
-import { StateFirebaseService } from '../../../core/services/state.firebase.service';
+import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
 
 @Component({
 	selector: 'gt-board',
@@ -15,11 +15,11 @@ export class BoardComponent implements OnInit, OnDestroy {
 	currentState$: Subscription;
 
 	constructor(private gameStore: Store<GameState>,
-		private stateService: StateFirebaseService) { }
+		private stateService: StatusBoardFirebaseService) { }
 
 	ngOnInit() {
 		this.hasGameStarted$ = this.gameStore.pipe(select(getHasGameStarted));
-		this.currentState$ = this.stateService.doc$("game-room").subscribe(currentState => {
+		this.currentState$ = this.stateService.doc$(StatusBoard.GameState).subscribe(currentState => {
 			console.log("board", currentState)
 			this.gameStore.dispatch(updateHasGameStarted({ hasGameStarted: currentState.hasGameStarted }));
 		});

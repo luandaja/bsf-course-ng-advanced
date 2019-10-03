@@ -29,22 +29,22 @@ const reducer = createReducer(
 
 	on(setVote, (state, { }) => ({ ...state, isLoading: true })),
 
-	on(updateHasGameStarted, (state, { hasGameStarted }) => ({ ...state, currentState: { ...state.currentState, hasGameStarted } })),
+	on(updateHasGameStarted, (state, { hasGameStarted }) => ({ ...state, hasGameStarted })),
 
 	on(setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
-	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentState: { ...state.currentState, currentStory }, isLoading: false })),
+	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false })),
 
 	on(showVotes, (state, { }) => ({ ...state, isLoading: true })),
-	on(votesShown, (state, { userPlayer }) => ({ ...state, isLoading: false, userPlayer, players: update(state.players, state.userPlayer), currentState: { ...state.currentState, areVotesVisible: true } })),
+	on(votesShown, (state, { userPlayer }) => ({ ...state, isLoading: false, userPlayer, players: update(state.players, state.userPlayer), areVotesVisible: true })),
 
 	on(nextRound, (state, { }) => ({ ...state, isLoading: true })),
-	on(nextRoundSetted, (state, { }) => ({ ...state, isLoading: false, boardCards: [], currentState: { ...state.currentState, currentTurn: state.userPlayer.id + 1, currentStory: null } })),
+	on(nextRoundSetted, (state, { }) => ({ ...state, isLoading: false, boardCards: [], currentTurn: state.userPlayer.id + 1, currentStory: null })),
 
 	on(userHandSetted, (state, { cards }) => ({ ...state, isLoading: false, currentHand: concat(state.currentHand, cards) })),
 
-	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, currentState: { ...state.currentState, areVotesVisible } })),
+	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible })),
 
-	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, currentState: { ...state.currentState, currentTurn } })),
+	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, currentTurn })),
 );
 
 function getUserPlayer(state: GameState) {
