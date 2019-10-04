@@ -20,7 +20,6 @@ export class GameEffects {
 		private cardsService: AvaiableCardsService,
 		private boardCardsService: BoardCardsFirestoreService) {
 
-		//	const g = this.stateService.update("game-room", { areVotesVisible: true });
 	}
 
 	signIn$ = createEffect(() =>
@@ -32,18 +31,17 @@ export class GameEffects {
 			}
 			)));
 
-	// startGame$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.startGame),
-	// 		exhaustMap(() =>
-	// 			this.stateService.update("game-room", { hasGameStarted: true })
-	// 				.pipe(map(() => {
-	// 					this.cardsService.insertBatch(this.generateCardIndexes());
-	// 					return actions.gameStarted();
-	// 				}))
-	// 		)
-	// 	)
-	// );
+	startGame$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.startGame),
+			switchMap(async action => {
+				await this.stateService.update(StatusBoard.GameState, { hasGameStarted: true });
+				await this.cardsService.insertBatch(this.generateCardIndexes());
+				return actions.gameStarted();
+			}
+			)
+		)
+	);
 
 	// setNextTurn$ = createEffect(() =>
 	// 	this.actions$.pipe(
@@ -68,18 +66,18 @@ export class GameEffects {
 		)
 	);
 
-	// fetchPlayers$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.fetchPlayers),
-	// 		exhaustMap(() =>
-	// 			this.playerService.collection$()
-	// 				.pipe(
-	// 					tap(console.log),
-	// 					map((players) => actions.playersLoaded({ players }))
-	// 				)
-	// 		)
-	// 	)
-	// );
+	fetchPlayers$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.fetchPlayers),
+			exhaustMap(() =>
+				this.playerService.collection$()
+					.pipe(
+						take(1),
+						map((players) => actions.playersLoaded({ players }))
+					)
+			)
+		)
+	);
 
 	// fetchAvaiableCards$ = createEffect(() =>
 	// 	this.actions$.pipe(
@@ -148,27 +146,18 @@ export class GameEffects {
 			ofType(actions.showVotes),
 			switchMap(async action => {
 				await this.stateService.update(StatusBoard.VotesVisibility, { areVotesVisible: true });
-				const userPlayer = await this.playerService.updateScore().toPromise();
-				return actions.votesShown({ userPlayer });
+				return actions.nothing(); //actions.setVotesVisibility({ areVotesVisible: true });
 			}
 			)
 		)
 	);
 
-	// showVotes$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.showVotes),
-	// 		exhaustMap(async () => {
-	// 			await this.stateService.update("game-room", { areVotesVisible: true });
-	// 			return this.playerService.updateScore()
-	// 				.pipe(
-	// 					exhaustMap(userPlayer => actions.votesShown)
-	// 				)
-	// 			//	return actions.updateUserPlayer();
-	// 			//this.playerService.updateScore().pipe(switchMap(userPlayer=> [actions.votesShown, actions.updateUserPlayer({ userPlayer })]))
-	// 		})
-	// 	)
-	// );
+	updatePlayerScore$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.updatePlayerScore),
+			switchMap(action => this.playerService.updateScore().pipe(take(1), map(userPlayer => actions.playerScoreUpdated({ userPlayer }))))
+		)
+	);
 
 	// setUserHand$ = createEffect(() =>
 	// 	this.actions$.pipe(
@@ -184,22 +173,18 @@ export class GameEffects {
 	// 	)
 	// );
 
-	// nextRound$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.nextRound),
-	// 		pipe(action =>
-	// 			forkJoin(
-	// 				this.stateService.update("game-room", { currentStory: null }),
-	// 				this.boardCardsService.deleteCollection()
-	// 				//	this.playerService.getNextTurn()
-	// 			).pipe(
-	// 				switchMap(() => [actions.nextRoundSetted()])
-	// 			)
-	// 		)
-	// 	)
-	// );
 
-
+	nextRound$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.nextRound),
+			switchMap(async action => {
+				await this.stateService.update(StatusBoard.CurrentStory, { currentStory: null });
+				await this.boardCardsService.deleteCollection().toPromise();
+				return actions.nextRoundSetted();
+			}
+			)
+		)
+	);
 
 	private generateCardIndexes(): number[] {
 		const cardIndexes: number[] = [];

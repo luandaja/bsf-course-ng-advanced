@@ -2,11 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { GameState, getIsLogged, currentStorySetted, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted } from './store/game';
-import { StatusBoardFirebaseService } from './core/services/state.firebase.service';
-//import { StoryFirebaseService } from './core/services/story.firebase.service';
-import { AvaiableCardsService } from './core/services/avaiable-cards.firebase.service';
-import { PlayerService } from './core/services/player.service';
+import { GameState, getIsLogged, getHasGameStarted } from './store/game';
 
 @Component({
 	selector: 'gt-root',
@@ -15,42 +11,23 @@ import { PlayerService } from './core/services/player.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 	isLoggedIn$: Subscription;
-	// avaiableCards$: Subscription;
-	// currentStory$: Subscription;
-	// currentState$: Subscription;
-	//players$: Subscription;
+	hasGameStarted$: Subscription;
 
-	constructor(
-		private gameStore: Store<GameState>,
-		//private playerService: PlayerService,
-		private router: Router
-		// private stateService: StateFirebaseService,
-		// private storyService: StoryFirebaseService,
-		// private cardsService: AvaiableCardsService,
-	) { }
+	constructor(private gameStore: Store<GameState>,
+		private router: Router) { }
 
 	ngOnInit(): void {
-		this.isLoggedIn$ = this.gameStore.pipe(select(getIsLogged)).subscribe((isLogged) => this.onStart(isLogged));
-	}
-
-	private onStart(isLogged: boolean) {
-		// if (isLogged) {
-		// 	this.onLoggedIn();
-		// }
-		this.redirect(isLogged)
-	}
-
-
-	private redirect(isLogged: boolean) {
-		const moduleUrl = isLogged ? '/dashboard' : '/login';
-		this.router.navigate([moduleUrl]);
+		this.isLoggedIn$ = this.gameStore.pipe(select(getIsLogged))
+			.subscribe((isLogged) => this.redirect(isLogged ? '/dashboard/board/start' : '/login'));
 	}
 
 	ngOnDestroy(): void {
 		this.isLoggedIn$.unsubscribe();
-		// this.avaiableCards$.unsubscribe();
-		// this.currentStory$.unsubscribe();
-		// this.currentState$.unsubscribe();
-		//	this.players$.unsubscribe();
+		// this.hasGameStarted$.unsubscribe();
 	}
+
+	private redirect(url: string) {
+		this.router.navigate([url]);
+	}
+
 }

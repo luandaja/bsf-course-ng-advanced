@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
 	fetchBoardCards, setBoardCard, setCurrentStory,
 	showVotes, nextRound, signIn, signInSuccess, boardCardsLoaded, boardCardSetted,
-	updateUserPlayer, setVote, currentStorySetted, votesShown, nextRoundSetted, userHandSetted, setVotesVisibility, updateCurrentTurn, avaiableCardsLoaded, playersLoaded, setNextTurn, updateHasGameStarted
+	updateUserPlayer, setVote, currentStorySetted, nextRoundSetted, userHandSetted, updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted, votesVisibilitySetted, setVotesVisibility, playerScoreUpdated
 } from './game.actions';
 import { GameState, initalState } from './game.state';
 import { add, concat, shuffle, update } from '../../models/Utils';
@@ -31,18 +31,25 @@ const reducer = createReducer(
 
 	on(updateHasGameStarted, (state, { hasGameStarted }) => ({ ...state, hasGameStarted })),
 
+	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible })),
+
 	on(setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
 	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false })),
 
 	on(showVotes, (state, { }) => ({ ...state, isLoading: true })),
-	on(votesShown, (state, { userPlayer }) => ({ ...state, isLoading: false, userPlayer, players: update(state.players, state.userPlayer), areVotesVisible: true })),
+	on(votesVisibilitySetted, (state, { userPlayer }) => {
+		console.log("votesVisibilitySetted", userPlayer);
+		return ({ ...state, isLoading: false, areVotesVisible: true })
+	}),
+	on(playerScoreUpdated, (state, { userPlayer }) => {
+		console.log("playerScoreUpdated", userPlayer);
+		return ({ ...state, isLoading: false, userPlayer, players: update(state.players, userPlayer) })
+	}),
 
 	on(nextRound, (state, { }) => ({ ...state, isLoading: true })),
 	on(nextRoundSetted, (state, { }) => ({ ...state, isLoading: false, boardCards: [], currentTurn: state.userPlayer.id + 1, currentStory: null })),
 
 	on(userHandSetted, (state, { cards }) => ({ ...state, isLoading: false, currentHand: concat(state.currentHand, cards) })),
-
-	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible })),
 
 	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, currentTurn })),
 );

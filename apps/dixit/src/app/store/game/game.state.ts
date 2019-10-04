@@ -17,7 +17,7 @@ export interface GameState {
 	hasGameStarted?: boolean;
 	currentStory?: StoryCard;
 }
-const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
+const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 3, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
 const walter = { id: 3, username: 'Walter', photoUrl: 'https://bit.ly/2lQfYBH', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
 const myriam = { id: 4, username: 'Myriam', photoUrl: 'https://bit.ly/2lOjrAQ', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
@@ -29,10 +29,10 @@ export const initalState: GameState = {
 	userPlayer: { ...ale },
 	currentTurn: 0,
 	areVotesVisible: false,
-	hasGameStarted: true,
+	hasGameStarted: false,
 	currentStory: null,
 	isLogged: true,
-	isGuessingTime: true,
+	isGuessingTime: false,
 	currentHand: [],//4, 67, 23, 12, 34
 	avaiableCards: [],// generateCardIndexes(),
 	isLoading: false,

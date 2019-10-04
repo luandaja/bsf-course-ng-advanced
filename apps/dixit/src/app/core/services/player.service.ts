@@ -22,6 +22,10 @@ export class PlayerService {
 		return this.firestore.collection$();
 	}
 
+	create(value: any) {
+		return this.firestore.create(value);
+	}
+
 	add(username: string, photoUrl: string) {
 		return this.gameStore.select(getPlayers).pipe(
 			take(1),
@@ -66,32 +70,30 @@ export class PlayerService {
 	}
 
 	updateScore() {
+		console.log("update score");
 		return this.gameStore.pipe(select(getScoreInput),
 			switchMap(async input => {
 				{
 					const { userPlayer, boardCards, currentStory, players } = input;
-					const updatedPlayer = this.calculateScore(userPlayer, boardCards, currentStory, players);
+					const updatedPlayer = this.calculateScore({ ...userPlayer }, boardCards, currentStory, players);
 					await this.firestore.update(updatedPlayer.id.toString(), updatedPlayer);
 					return updatedPlayer;
 				}
 			}))
-		// return combineLatest(
-		// 	this.gameStore.pipe(select(getUserPlayer)),
-		// 	this.gameStore.pipe(select(getBoardCards)),
-		// 	this.gameStore.pipe(select(getCurrentStory)),
-		// 	this.gameStore.pipe(select(getPlayers))
-		// ).pipe(map(this.calculateScore));
 	}
 
 	private calculateScore(userPlayer: Player, boardCards: BoardCard[], currentStory: StoryCard, players: Player[]) {
-		//const [userPlayer, boardCards, currentStory, players] = pair;
 		const correctCard = boardCards.find(boardCard => boardCard.cardIndex === currentStory.cardIndex);
 		const correctVotesCount = correctCard.votes.length;
 
 		const somePlayersGuessed = correctVotesCount !== players.length - 1 && correctVotesCount !== 0;
 		const hasPlayerGuessed = correctCard.votes.find(player => player.id === userPlayer.id) !== undefined;
 
-		userPlayer.score = somePlayersGuessed ? (hasPlayerGuessed ? 2 : 0) : (!userPlayer.isStoryTeller ? 2 : 0);
+		if (userPlayer.isStoryTeller) {
+			userPlayer.score += somePlayersGuessed ? 2 : 0;
+		} else {
+			userPlayer.score += somePlayersGuessed ? (hasPlayerGuessed ? 2 : 0) : 2;
+		}
 
 		if (!userPlayer.isStoryTeller) {
 			const playerCard = boardCards.find(boardCard => boardCard.owner.id === userPlayer.id)

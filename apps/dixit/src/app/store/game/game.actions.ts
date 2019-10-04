@@ -51,12 +51,8 @@ export const updateCurrentTurn = createAction(
 	props<{ currentTurn: number }>()
 );
 export const setNextTurn = createAction('[Board Cards] Set next turn');
-//export const nextTurnSetted = createAction('[Board Cards] Next turn setted');
 
-export const showVotes = createAction('[Board Cards] Set votes visibility to true');
-export const votesShown = createAction('[Board Cards] Votes visibility setted',
-	props<{ userPlayer: Player }>()
-);
+export const showVotes = createAction('[Board Cards] Show votes');
 
 export const setCurrentStory = createAction(
 	'[Board Cards] Set current story',
@@ -75,6 +71,22 @@ export const setUserHand = createAction(
 export const setVotesVisibility = createAction(
 	'[Player Hand] Set votes visibility',
 	props<{ areVotesVisible: boolean }>()
+);
+
+
+export const votesVisibilitySetted = createAction(
+	'[Board] Votes visibility setted',
+	props<{ userPlayer: Player }>()
+);
+
+
+export const updatePlayerScore = createAction(
+	'[Player Hand] Update player score'
+);
+
+export const playerScoreUpdated = createAction(
+	'[Player Hand] Player score updated',
+	props<{ userPlayer: Player }>()
 );
 
 export const userHandSetted = createAction(
@@ -104,6 +116,7 @@ export const updateHasGameStarted = createAction(
 export const startGame = createAction('[Game] start game');
 export const gameStarted = createAction('[Game] game started');
 export const signOut = createAction('[Auth] Sign out');
+export const nothing = createAction('Nothing');
 
 
 

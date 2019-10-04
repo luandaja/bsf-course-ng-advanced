@@ -18,9 +18,8 @@ export abstract class FirestoreService<T> {
 		return this.firebase.collection(`${this.basePath}`);
 	}
 
-	create(value: T) {
-		const id = this.firebase.createId();
-		return from(this.collection.doc(id).set(Object.assign({}, { id }, value)))
+	create(value: any) {
+		return from(this.collection.doc(value.id + '').set(Object.assign({}, { id: '' + value.id }, value)));
 	}
 
 	delete(id: string) {
