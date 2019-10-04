@@ -17,11 +17,10 @@ import { BoardCardsFirestoreService } from '../../../core/services/board-cards.f
 export class TableBoardComponent implements OnInit, OnDestroy {
 
 	isLoading$: Observable<boolean>;
-	private playerHand: Subscription;
 	private avaiableCards$: Subscription;
-	private currentStory$: Subscription;
-	private currentState$: Subscription;
 	private updateScore$: Subscription;
+	private areVotesVisible$: Subscription;
+	private currentStory$: Subscription;
 
 	constructor(private gameStore: Store<GameState>,
 		private stateService: StatusBoardFirebaseService,
@@ -34,16 +33,11 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.onGameStart();
 		this.isLoading$ = this.gameStore.select(getIsLoading);
-		this.playerHand = this.gameStore.pipe(select(getTurnInfo), distinctUntilChanged((x, y) => x.isUserTurn === y.isUserTurn)).subscribe((turnInfo) => {
-			console.log("turnInfo", turnInfo);
-			if (turnInfo.isUserTurn)
-				this.gameStore.dispatch(setUserHand({ cardsCount: turnInfo.cardsCount }));
-		});
 	}
 
 	private onGameStart() {
 		this.avaiableCards$ = this.cardsService.collection$()
-			.subscribe(cards => this.gameStore.dispatch(avaiableCardsLoaded({ cards })));
+			.subscribe((results: any[]) => this.gameStore.dispatch(avaiableCardsLoaded({ cards: results.map(result => result.cardIndex) })));
 
 		this.updateScore$ = this.gameStore.select(getVotesVisibility).subscribe(areVotesVisible => {
 			console.log("updateScore");
@@ -52,27 +46,23 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 			}
 		})
 
-		this.currentState$ = this.stateService.doc$(StatusBoard.VotesVisibility).pipe(distinctUntilChanged((x, y) => x.areVotesVisible === y.areVotesVisible))
+		this.areVotesVisible$ = this.stateService.doc$(StatusBoard.VotesVisibility).pipe(distinctUntilChanged((x, y) => x.areVotesVisible === y.areVotesVisible))
 			.subscribe(state => {
 				console.log("table-board", state);
 				this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: state.areVotesVisible }));
 			});
-		this.currentState$ = this.stateService.doc$(StatusBoard.CurrentPlayerTurn).subscribe(state => {
-			console.log("table-board", state);
-			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: state.currentTurn }));
-		});
-		this.currentState$ = this.stateService.doc$(StatusBoard.CurrentStory).subscribe(state => {
+
+		this.currentStory$ = this.stateService.doc$(StatusBoard.CurrentStory).subscribe(state => {
 			console.log("table-board", state);
 			this.gameStore.dispatch(currentStorySetted({ currentStory: state.currentStory }));
 		});
 	}
 
 	ngOnDestroy(): void {
-		this.playerHand.unsubscribe();
 		this.avaiableCards$.unsubscribe();
-		this.currentStory$.unsubscribe();
-		this.currentState$.unsubscribe();
 		this.updateScore$.unsubscribe();
+		this.areVotesVisible$.unsubscribe();
+		this.currentStory$.unsubscribe();
 	}
 
 	async seed() {

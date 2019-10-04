@@ -49,7 +49,7 @@ const reducer = createReducer(
 	on(nextRound, (state, { }) => ({ ...state, isLoading: true })),
 	on(nextRoundSetted, (state, { }) => ({ ...state, isLoading: false, boardCards: [], currentTurn: state.userPlayer.id + 1, currentStory: null })),
 
-	on(userHandSetted, (state, { cards }) => ({ ...state, isLoading: false, currentHand: concat(state.currentHand, cards) })),
+	on(userHandSetted, (state, { cards }) => ({ ...state, isLoading: false, isFirstRound: false, currentHand: concat(state.currentHand, cards), avaiableCards: state.avaiableCards.filter(x => !cards.includes(x)) })),
 
 	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, currentTurn })),
 );

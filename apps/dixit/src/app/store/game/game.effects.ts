@@ -20,6 +20,8 @@ export class GameEffects {
 		private cardsService: AvaiableCardsService,
 		private boardCardsService: BoardCardsFirestoreService) {
 
+
+
 	}
 
 	signIn$ = createEffect(() =>
@@ -159,6 +161,39 @@ export class GameEffects {
 		)
 	);
 
+	setUserHand$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.setUserHand),
+			switchMap(async action => {
+				const result = await this.playerService.getUserHand(action.cardsCount).toPromise();
+				console.log('result', result);
+				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: result.currentTurn + 1 });
+				await this.cardsService.deleteQueryBatch(result.cards.map(card => card.toString()))
+				console.log('firing nothing');
+				//const f = result.cards.map(x => x.cardIndex);
+				return actions.userHandSetted({ cards: result.cards });
+			}
+			)
+		)
+	);
+
+	// setUserHand$ = createEffect(() =>
+	// 	this.actions$.pipe(
+	// 		ofType(actions.setUserHand),
+	// 		switchMap(action => {
+	// 			return this.playerService.getUserHand(action.cardsCount)
+	// 				.pipe(
+	// 					mergeMap((info) => this.cardsService.deleteQueryBatch(info.cards.map(card => card.toString())).pipe(map(() => info))),
+	// 					switchMap(as=> this.stateService.update(StatusBoard.CurrentPlayerTurn, {currentTurn: as.currentTurn })),
+	// 					exhaustMap((cards) => [actions.userHandSetted({ cards }), actions.setNextTurn()]
+	// 					)
+	// 				)
+	// 		}
+	// 		)
+	// 	)
+	// );
+
+
 	// setUserHand$ = createEffect(() =>
 	// 	this.actions$.pipe(
 	// 		ofType(actions.setUserHand),
@@ -172,6 +207,21 @@ export class GameEffects {
 	// 		)
 	// 	)
 	// );
+
+	// setUserHand$ = createEffect(() =>
+	// 	this.actions$.pipe(
+	// 		ofType(actions.setUserHand),
+	// 		switchMap(async action => {
+	// 			const handInfo = await this.playerService.getUserHand(action.cardsCount).toPromise();
+	// 			await this.cardsService.deleteQueryBatch(handInfo.cards.map(card => card.toString())).toPromise();
+	// 			await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: handInfo.currentTurn });
+	// 			return actions.userHandSetted({ cards: handInfo.cards });
+	// 		}
+	// 		)
+	// 	)
+	// );
+
+
 
 
 	nextRound$ = createEffect(() =>
@@ -189,7 +239,7 @@ export class GameEffects {
 
 	private generateCardIndexes(): number[] {
 		const cardIndexes: number[] = [];
-		for (let index = 1; index <= 100; index++) {
+		for (let index = 0; index < 100; index++) {
 			cardIndexes.push(index);
 		}
 		shuffle(cardIndexes);

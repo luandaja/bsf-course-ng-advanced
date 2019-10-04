@@ -16,6 +16,7 @@ export interface GameState {
 	areVotesVisible?: boolean;
 	hasGameStarted?: boolean;
 	currentStory?: StoryCard;
+	isFirstRound?: boolean;
 }
 const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 3, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
@@ -36,6 +37,7 @@ export const initalState: GameState = {
 	currentHand: [],//4, 67, 23, 12, 34
 	avaiableCards: [],// generateCardIndexes(),
 	isLoading: false,
+	isFirstRound: true,
 	boardCards: [
 		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
 		// { cardIndex: 6, owner: walter, votes: [] },
