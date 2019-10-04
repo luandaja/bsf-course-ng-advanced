@@ -27,7 +27,6 @@ export class VoteEditorComponent implements OnChanges {
 			console.log("You have to select a card to vote for");
 			return;
 		}
-		this.selectedCard.votes.push(this.userPlayer);
-		this.gameStore.dispatch(setVote({ boardCard: this.selectedCard }));
+		this.gameStore.dispatch(setVote({ boardCard: this.selectedCard, userPlayer: this.userPlayer }));
 	}
 }

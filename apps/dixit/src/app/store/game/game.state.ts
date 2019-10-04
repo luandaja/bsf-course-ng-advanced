@@ -33,7 +33,7 @@ export const initalState: GameState = {
 	hasGameStarted: false,
 	currentStory: null,
 	isLogged: true,
-	isGuessingTime: false,
+	isGuessingTime: true,
 	currentHand: [4, 67, 23, 12, 34],//4, 67, 23, 12, 34
 	avaiableCards: [],// generateCardIndexes(),
 	isLoading: false,

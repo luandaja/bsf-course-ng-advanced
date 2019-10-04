@@ -35,7 +35,7 @@ export const boardCardSetted = createAction(
 
 export const setVote = createAction(
 	'[Board Cards] Set vote',
-	props<{ boardCard: BoardCard }>()
+	props<{ boardCard: BoardCard, userPlayer: Player }>()
 );
 
 export const voteSetted = createAction(

@@ -8,7 +8,7 @@ import { PlayerService } from '../../core/services/player.service';
 import { BoardCard } from '../../models/BoardCard';
 import { StatusBoardFirebaseService, StatusBoard } from '../../core/services/state.firebase.service';
 import { AvaiableCardsService } from '../../core/services/avaiable-cards.firebase.service';
-import { shuffle } from '../../models/Utils';
+import { shuffle, add } from '../../models/Utils';
 
 
 @Injectable()
@@ -18,11 +18,7 @@ export class GameEffects {
 		private playerService: PlayerService,
 		private stateService: StatusBoardFirebaseService,
 		private cardsService: AvaiableCardsService,
-		private boardCardsService: BoardCardsFirestoreService) {
-
-
-
-	}
+		private boardCardsService: BoardCardsFirestoreService) { }
 
 	signIn$ = createEffect(() =>
 		this.actions$.pipe(
@@ -95,34 +91,6 @@ export class GameEffects {
 	// 	)
 	// );
 
-	// setBoardCard$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.setBoardCard),
-	// 		switchMap(action =>
-	// 			this.boardCardsService.create(action.boardCard)
-	// 				.pipe(
-	// 					switchMap(() => this.playerService.playerThrowCard()),
-	// 					//switchMap((userPlayer) => [actions.boardCardSetted({ boardCard: action.boardCard }), actions.updateUserPlayer({ userPlayer })]
-	// 					switchMap(() => [actions.boardCardSetted({ boardCard: action.boardCard })]
-	// 					)
-	// 				)
-	// 		)
-	// 	)
-	// );
-
-
-	setBoardCard$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(actions.setBoardCard),
-			switchMap(async action => {
-				await this.boardCardsService.create(action.boardCard).toPromise();
-				await this.playerService.playerThrowCard().toPromise();
-				return actions.boardCardSetted({ boardCard: action.boardCard });
-			}
-			)
-		)
-	);
-
 	setCurrentStory$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.setCurrentStory),
@@ -136,10 +104,55 @@ export class GameEffects {
 		)
 	);
 
-	// setVote$ = createEffect(() =>
+	setBoardCard$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.setBoardCard),
+			switchMap(async action => {
+				await this.boardCardsService.create(action.boardCard).toPromise();
+				await this.playerService.playerThrowCard().toPromise();
+				return actions.boardCardSetted({ boardCard: action.boardCard });
+			}
+			)
+		)
+	);
+
+	setVote$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.setVote),
+			switchMap(async action => {
+				// Object.values(test.votes)
+				//	await this.boardCardsService.merge({ id: action.boardCard.cardIndex, votes: [action.userPlayer] });
+				await this.playerService.playerVote().toPromise();
+				const boardCard: BoardCard = { ...action.boardCard, votes: add(action.boardCard.votes, action.userPlayer) };
+				await this.boardCardsService.update(action.boardCard.cardIndex.toString(), boardCard);
+				console.log("thrown card", boardCard);
+				return actions.voteSetted({ boardCard: boardCard });
+			}
+			)
+		)
+	);
+
+	setUserHand$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.setUserHand),
+			switchMap(async action => {
+				const result = await this.playerService.getUserHand(action.cardsCount).toPromise();
+				console.log('result', result);
+				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: result.currentTurn + 1 });
+				await this.cardsService.deleteQueryBatch(result.cards.map(card => card.toString()));
+				console.log('firing nothing');
+				//const f = result.cards.map(x => x.cardIndex);
+				return actions.userHandSetted({ cards: result.cards });
+			}
+			)
+		)
+	);
+
+
+	// setVote2$ = createEffect(() =>
 	// 	this.actions$.pipe(
 	// 		ofType(actions.setVote),
-	// 		exhaustMap(action =>
+	// 		switchMap(action =>
 	// 			this.boardCardsService.update(action.boardCard.id.toString(), action.boardCard)
 	// 				.pipe(
 	// 					switchMap(() => this.playerService.playerVote()),
@@ -168,68 +181,6 @@ export class GameEffects {
 			switchMap(action => this.playerService.updateScore().pipe(take(1), map(userPlayer => actions.playerScoreUpdated({ userPlayer }))))
 		)
 	);
-
-	setUserHand$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(actions.setUserHand),
-			switchMap(async action => {
-				const result = await this.playerService.getUserHand(action.cardsCount).toPromise();
-				console.log('result', result);
-				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: result.currentTurn + 1 });
-				await this.cardsService.deleteQueryBatch(result.cards.map(card => card.toString()))
-				console.log('firing nothing');
-				//const f = result.cards.map(x => x.cardIndex);
-				return actions.userHandSetted({ cards: result.cards });
-			}
-			)
-		)
-	);
-
-	// setUserHand$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.setUserHand),
-	// 		switchMap(action => {
-	// 			return this.playerService.getUserHand(action.cardsCount)
-	// 				.pipe(
-	// 					mergeMap((info) => this.cardsService.deleteQueryBatch(info.cards.map(card => card.toString())).pipe(map(() => info))),
-	// 					switchMap(as=> this.stateService.update(StatusBoard.CurrentPlayerTurn, {currentTurn: as.currentTurn })),
-	// 					exhaustMap((cards) => [actions.userHandSetted({ cards }), actions.setNextTurn()]
-	// 					)
-	// 				)
-	// 		}
-	// 		)
-	// 	)
-	// );
-
-
-	// setUserHand$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.setUserHand),
-	// 		exhaustMap(action =>
-	// 			this.playerService.getUserHand(action.cardsCount)
-	// 				.pipe(
-	// 					switchMap((cards) => this.cardsService.deleteQueryBatch(cards.map(card => card.toString())).pipe(map(() => cards))),
-	// 					exhaustMap((cards) => [actions.userHandSetted({ cards }), actions.setNextTurn()]
-	// 					)
-	// 				)
-	// 		)
-	// 	)
-	// );
-
-	// setUserHand$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.setUserHand),
-	// 		switchMap(async action => {
-	// 			const handInfo = await this.playerService.getUserHand(action.cardsCount).toPromise();
-	// 			await this.cardsService.deleteQueryBatch(handInfo.cards.map(card => card.toString())).toPromise();
-	// 			await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: handInfo.currentTurn });
-	// 			return actions.userHandSetted({ cards: handInfo.cards });
-	// 		}
-	// 		)
-	// 	)
-	// );
-
-
 
 
 	nextRound$ = createEffect(() =>

@@ -23,6 +23,6 @@ export function shuffle<T>(array: T[]) {
 export function update(array: any[], updatedItem: any) {
 	const newArray = array.map(item => Object.assign({}, item));
 	const index = newArray.findIndex(item => item.id === updatedItem.id);
-	newArray.splice(index, 0, updatedItem);
+	newArray.splice(index, 1, updatedItem);
 	return newArray;
 }

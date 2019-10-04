@@ -40,19 +40,22 @@ export class PlayerService {
 
 	playerThrowCard() {
 		return this.gameStore.select(getUserPlayer).pipe(
+			take(1),
 			switchMap(async userPlayer => {
-				await this.firestore.update(userPlayer.id.toString(), { ...userPlayer, hasThrowCard: true });
-				return userPlayer;
+				const player = { ...userPlayer, hasThrowCard: true };
+				await this.firestore.update(player.id.toString(), player);
+				return player;
 			})
 		);
 	}
 
 	playerVote() {
 		return this.gameStore.select(getUserPlayer).pipe(
-			exhaustMap(async userPlayer => {
-				userPlayer.hasVoted = true;
-				await this.firestore.update(userPlayer.id.toString(), userPlayer);
-				return userPlayer;
+			take(1),
+			switchMap(async userPlayer => {
+				const player = { ...userPlayer, hasVoted: true };
+				await this.firestore.update(player.id.toString(), player);
+				return player;
 			})
 		);
 	}

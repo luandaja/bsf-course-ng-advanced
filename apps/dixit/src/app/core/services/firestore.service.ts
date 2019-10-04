@@ -18,6 +18,10 @@ export abstract class FirestoreService<T> {
 		return this.firebase.collection(`${this.basePath}`);
 	}
 
+	merge(value: any) {
+		return this.collection.doc(value.id + '').set(Object.assign({}, { id: '' + value.id }, value), { merge: true });
+	}
+
 	create(value: any) {
 		return from(this.collection.doc(value.id + '').set(Object.assign({}, { id: '' + value.id }, value)));
 	}
