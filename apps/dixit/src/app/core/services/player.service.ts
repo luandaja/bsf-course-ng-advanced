@@ -7,7 +7,6 @@ import { PlayerFirebaseService } from './player.firebase.service';
 import { StoryCard } from '../../models/StoryCard';
 import { BoardCard } from '../../models/BoardCard';
 import { combineLatest, of } from 'rxjs';
-import { BoardComponent } from '../../dashboard/board/board/board.component';
 
 @Injectable({
 	providedIn: 'root'
