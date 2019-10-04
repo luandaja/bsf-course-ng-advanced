@@ -179,6 +179,7 @@ export class GameEffects {
 			ofType(actions.nextRound),
 			switchMap(async action => {
 				await this.stateService.update(StatusBoard.CurrentStory, { currentStory: null });
+				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: action.nextTurn });
 				await this.boardCardsService.deleteCollection().toPromise();
 				return actions.nextRoundSetted();
 			}
