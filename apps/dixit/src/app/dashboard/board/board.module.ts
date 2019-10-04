@@ -15,10 +15,9 @@ import { PlayersComponent } from './players/players.component';
 import { VoteEditorComponent } from './vote-editor/vote-editor.component';
 import { StartGameComponent } from './start-game/start-game.component';
 import { CoreModule } from '../../core/core.module';
-import { BoardComponent } from './board/board.component';
 
 @NgModule({
-	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent, PlayersComponent, VoteEditorComponent, StartGameComponent, BoardComponent],
+	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent, PlayersComponent, VoteEditorComponent, StartGameComponent],
 	imports: [
 		CommonModule,
 		BoardRoutingModule,

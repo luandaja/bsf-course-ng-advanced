@@ -41,15 +41,6 @@ export class GameEffects {
 		)
 	);
 
-	// setNextTurn$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.setNextTurn),
-	// 		exhaustMap(() =>
-	// 			this.playerService.getNextTurn()
-	// 				.pipe(
-	// 					map((nextTurn) => actions.updateCurrentTurn({ currentTurn: nextTurn })))
-	// 		)));
-
 	fetchBoardCards$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.fetchBoardCards),
@@ -77,19 +68,19 @@ export class GameEffects {
 		)
 	);
 
-	// fetchAvaiableCards$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.fetchAvaiableCards),
-	// 		exhaustMap(() =>
-	// 			this.cardsService.collection$()
-	// 				.pipe(
-	// 					take(1),
-	// 					map((cards) => actions.avaiableCardsLoaded({ cards })),
-	// 					catchError(() => EMPTY)
-	// 				)
-	// 		)
-	// 	)
-	// );
+	fetchAvaiableCards$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.fetchAvaiableCards),
+			exhaustMap(() =>
+				this.cardsService.collection$()
+					.pipe(
+						take(1),
+						map((cards) => actions.avaiableCardsLoaded({ cards })),
+						catchError(() => EMPTY)
+					)
+			)
+		)
+	);
 
 	setCurrentStory$ = createEffect(() =>
 		this.actions$.pipe(
@@ -147,22 +138,6 @@ export class GameEffects {
 			)
 		)
 	);
-
-
-	// setVote2$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.setVote),
-	// 		switchMap(action =>
-	// 			this.boardCardsService.update(action.boardCard.id.toString(), action.boardCard)
-	// 				.pipe(
-	// 					switchMap(() => this.playerService.playerVote()),
-	// 					//switchMap((userPlayer) => [actions.boardCardSetted({ boardCard: action.boardCard }), actions.updateUserPlayer({ userPlayer })]
-	// 					switchMap(() => [actions.boardCardSetted({ boardCard: action.boardCard })]
-	// 					)
-	// 				)
-	// 		)
-	// 	)
-	// );
 
 	showVotes$ = createEffect(() =>
 		this.actions$.pipe(
