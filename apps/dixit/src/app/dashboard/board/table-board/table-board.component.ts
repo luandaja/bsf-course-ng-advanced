@@ -52,10 +52,12 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 				this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: state.areVotesVisible }));
 			});
 
-		this.currentStory$ = this.stateService.doc$(StatusBoard.CurrentStory).subscribe(state => {
-			console.log("table-board", state);
-			this.gameStore.dispatch(currentStorySetted({ currentStory: state.currentStory }));
-		});
+		this.currentStory$ = this.stateService.doc$(StatusBoard.CurrentStory).pipe(distinctUntilChanged((x, y) => x.currentStory === y.currentStory))
+			.subscribe(state => {
+				console.log("table-board", state);
+				if (state.currentStory !== null)
+					this.gameStore.dispatch(currentStorySetted({ currentStory: state.currentStory }));
+			});
 	}
 
 	ngOnDestroy(): void {

@@ -98,7 +98,7 @@ export class GameEffects {
 	// setBoardCard$ = createEffect(() =>
 	// 	this.actions$.pipe(
 	// 		ofType(actions.setBoardCard),
-	// 		exhaustMap(action =>
+	// 		switchMap(action =>
 	// 			this.boardCardsService.create(action.boardCard)
 	// 				.pipe(
 	// 					switchMap(() => this.playerService.playerThrowCard()),
@@ -110,6 +110,32 @@ export class GameEffects {
 	// 	)
 	// );
 
+
+	setBoardCard$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.setBoardCard),
+			switchMap(async action => {
+				await this.boardCardsService.create(action.boardCard).toPromise();
+				await this.playerService.playerThrowCard().toPromise();
+				return actions.boardCardSetted({ boardCard: action.boardCard });
+			}
+			)
+		)
+	);
+
+	setCurrentStory$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.setCurrentStory),
+			switchMap(async action => {
+				await this.stateService.update(StatusBoard.CurrentStory, { currentStory: action.currentStory });
+				const boardCard: BoardCard = { id: action.currentStory.cardIndex, cardIndex: action.currentStory.cardIndex, owner: action.currentStory.storyTeller, votes: [] };
+				await this.boardCardsService.create(boardCard).toPromise();
+				return actions.currentStorySetted({ currentStory: action.currentStory });
+			}
+			)
+		)
+	);
+
 	// setVote$ = createEffect(() =>
 	// 	this.actions$.pipe(
 	// 		ofType(actions.setVote),
@@ -119,24 +145,6 @@ export class GameEffects {
 	// 					switchMap(() => this.playerService.playerVote()),
 	// 					//switchMap((userPlayer) => [actions.boardCardSetted({ boardCard: action.boardCard }), actions.updateUserPlayer({ userPlayer })]
 	// 					switchMap(() => [actions.boardCardSetted({ boardCard: action.boardCard })]
-	// 					)
-	// 				)
-	// 		)
-	// 	)
-	// );
-
-	// setCurrentStory$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(actions.setCurrentStory),
-	// 		exhaustMap(action =>
-	// 			this.stateService.update("game-room", { currentStory: action.currentStory })
-	// 				.pipe(
-	// 					switchMap(() => {
-	// 						const boardCard: BoardCard = { id: action.currentStory.cardIndex, cardIndex: action.currentStory.cardIndex, owner: action.currentStory.storyTeller, votes: [] };
-	// 						return this.boardCardsService.create(boardCard).pipe(map(() => boardCard));
-	// 					}),
-	// 					//	switchMap((boardCard) => [actions.currentStorySetted({ currentStory: action.currentStory }), actions.boardCardSetted({ boardCard })]
-	// 					switchMap(() => [actions.currentStorySetted({ currentStory: action.currentStory })]
 	// 					)
 	// 				)
 	// 		)

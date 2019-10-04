@@ -34,7 +34,7 @@ const reducer = createReducer(
 	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible })),
 
 	on(setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
-	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false })),
+	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false, currentHand: state.currentHand.filter(x => x !== currentStory.cardIndex) })),
 
 	on(showVotes, (state, { }) => ({ ...state, isLoading: true })),
 	on(votesVisibilitySetted, (state, { userPlayer }) => {

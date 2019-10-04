@@ -40,9 +40,8 @@ export class PlayerService {
 
 	playerThrowCard() {
 		return this.gameStore.select(getUserPlayer).pipe(
-			exhaustMap(async userPlayer => {
-				userPlayer.hasThrowCard = true;
-				await this.firestore.update(userPlayer.id.toString(), userPlayer);
+			switchMap(async userPlayer => {
+				await this.firestore.update(userPlayer.id.toString(), { ...userPlayer, hasThrowCard: true });
 				return userPlayer;
 			})
 		);
