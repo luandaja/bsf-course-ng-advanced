@@ -111,12 +111,9 @@ export class GameEffects {
 		this.actions$.pipe(
 			ofType(actions.setVote),
 			switchMap(async action => {
-				// Object.values(test.votes)
-				//	await this.boardCardsService.merge({ id: action.boardCard.cardIndex, votes: [action.userPlayer] });
 				await this.playerService.playerVote().toPromise();
 				const boardCard: BoardCard = { ...action.boardCard, votes: add(action.boardCard.votes, action.userPlayer) };
 				await this.boardCardsService.update(action.boardCard.cardIndex.toString(), boardCard);
-				console.log("thrown card", boardCard);
 				return actions.voteSetted({ boardCard: boardCard });
 			}
 			)
@@ -128,11 +125,8 @@ export class GameEffects {
 			ofType(actions.setUserHand),
 			switchMap(async action => {
 				const result = await this.playerService.getUserHand(action.cardsCount).toPromise();
-				console.log('result', result);
 				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: result.currentTurn + 1 });
 				await this.cardsService.deleteQueryBatch(result.cards.map(card => card.toString()));
-				console.log('firing nothing');
-				//const f = result.cards.map(x => x.cardIndex);
 				return actions.userHandSetted({ cards: result.cards });
 			}
 			)

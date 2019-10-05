@@ -68,7 +68,7 @@ export const getTurnInfo = createSelector(
 	}
 );
 
-export const getAlgo = createSelector(
+export const getPlayersState = createSelector(
 	gameFeature,
 	state => {
 		const { hasGameStarted, isGuessingTime, players } = state;

@@ -59,19 +59,10 @@ export class PlayerService {
 		);
 	}
 
-	// getNextTurn() {
-	// 	return this.gameStore.select(getUserPlayer).pipe(
-	// 		map(userPlayer => userPlayer === null ? 0 : userPlayer.id + 1)
-	// 	);
-	// }
-	//{ cards: info.avaiableCards.slice(0, cardsCount), currentTurn: info.currentTurn }
 	getUserHand(cardsCount: number) {
 		return this.gameStore.select(getAvaiableCards).pipe(take(1),
 			map((info) => ({ cards: info.avaiableCards.slice(0, cardsCount), currentTurn: info.currentTurn }))
 		);
-
-		// return this.gameStore.select(getAvaiableCards),
-		// 	switchMap());
 	}
 
 	updateScore() {

@@ -29,7 +29,6 @@ export class StoryEditorComponent implements OnChanges {
 			return;
 		}
 		const currentStory: StoryCard = { title: formData.title, storyTeller: this.userPlayer, cardIndex: this.cardIndex };
-		console.log("currentStory", currentStory);
 		this.gameStore.dispatch(setCurrentStory({ currentStory }));
 	}
 

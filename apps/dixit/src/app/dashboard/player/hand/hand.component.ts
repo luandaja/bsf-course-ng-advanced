@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, updateCurrentTurn, getTurnInfo, setUserHand } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, updateCurrentTurn, getTurnInfo, setUserHand, avaiableCardsLoaded } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
 import { Player } from '../../../models';
-import { StoryCard } from '../../../models/StoryCard';
 import { BoardCard } from '../../../models/BoardCard';
 import { map, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
+import { AvaiableCardsService } from '../../../core/services/avaiable-cards.firebase.service';
 
 @Component({
 	selector: 'gt-hand',
@@ -19,20 +19,24 @@ export class HandComponent implements OnInit, OnDestroy {
 	isStoryTellerTurn$: Observable<boolean>;
 	userPlayer$: Observable<Player>;
 
+	private avaiableCardsChanges$: Subscription;
 	private playerHand$: Subscription;
 	private currentTurn$: Subscription;
 	boardCard: BoardCard;
 	selectedCardIndex: number;
 
 	constructor(private gameStore: Store<GameState>,
-		private stateService: StatusBoardFirebaseService) { }
+		private stateService: StatusBoardFirebaseService,
+		private cardsService: AvaiableCardsService) { }
 
 	ngOnInit() {
 		this.handCards$ = this.gameStore.pipe(select(getCurrentHand));
 		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
 
+		this.avaiableCardsChanges$ = this.cardsService.collection$()
+			.subscribe((results: any[]) => this.gameStore.dispatch(avaiableCardsLoaded({ cards: results.map(result => result.cardIndex) })));
+
 		this.playerHand$ = this.gameStore.pipe(select(getTurnInfo), distinctUntilChanged((x, y) => x.isUserTurn === y.isUserTurn)).subscribe((turnInfo) => {
-			console.log("turnInfo", turnInfo);
 			if (turnInfo.isUserTurn)
 				this.gameStore.dispatch(setUserHand({ cardsCount: turnInfo.cardsCount }));
 		});
@@ -43,16 +47,14 @@ export class HandComponent implements OnInit, OnDestroy {
 			switchMap(story => this.userPlayer$.pipe(map(user => !user.isStoryTeller && story !== null && !user.hasThrowCard)))
 		);
 		this.currentTurn$ = this.stateService.doc$(StatusBoard.CurrentPlayerTurn).subscribe(state => {
-			console.log("hand CurrentPlayerTurn", state);
 			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: state.currentTurn }));
 		});
 	}
 
 	ngOnDestroy() {
-		// if (!this.currentTurn$)
 		this.currentTurn$.unsubscribe();
-
 		this.playerHand$.unsubscribe();
+		this.avaiableCardsChanges$.unsubscribe();
 	}
 
 	getCardImage(cardIndex: number): string {
