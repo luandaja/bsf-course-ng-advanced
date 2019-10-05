@@ -34,7 +34,9 @@ export class GameEffects {
 			ofType(actions.startGame),
 			switchMap(async action => {
 				await this.stateService.update(StatusBoard.GameState, { hasGameStarted: true });
-				await this.cardsService.insertBatch(this.generateCardIndexes());
+				const shuffled = this.generateCardIndexes();
+				console.log('shuffled', shuffled)
+				await this.cardsService.insertBatch(shuffled);
 				return actions.gameStarted();
 			}
 			)
@@ -49,20 +51,6 @@ export class GameEffects {
 					.pipe(
 						take(1),
 						map((players) => actions.playersLoaded({ players }))
-					)
-			)
-		)
-	);
-
-	fetchAvaiableCards$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(actions.fetchAvaiableCards),
-			exhaustMap(() =>
-				this.cardsService.collection$()
-					.pipe(
-						take(1),
-						map((cards) => actions.avaiableCardsLoaded({ cards })),
-						catchError(() => EMPTY)
 					)
 			)
 		)
@@ -112,7 +100,7 @@ export class GameEffects {
 			switchMap(async action => {
 				const result = await this.playerService.getUserHand(action.cardsCount).toPromise();
 				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: result.currentTurn + 1 });
-				await this.cardsService.deleteQueryBatch(result.cards.map(card => card.toString()));
+				await this.cardsService.deleteQueryBatch(result.cards.map(card => card.toString())).toPromise();
 				return actions.userHandSetted({ cards: result.cards });
 			}
 			)
@@ -156,7 +144,6 @@ export class GameEffects {
 		for (let index = 0; index < 100; index++) {
 			cardIndexes.push(index);
 		}
-		shuffle(cardIndexes);
-		return cardIndexes;
+		return shuffle(cardIndexes);
 	}
 }

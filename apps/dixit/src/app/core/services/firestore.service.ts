@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
 import { Observable, from, combineLatest, of } from 'rxjs';
-import { map, exhaustMap } from 'rxjs/operators';
+import { map, exhaustMap, take } from 'rxjs/operators';
 import { BoardCard } from '../../models/BoardCard';
 import { StoryCard } from '../../models/StoryCard';
 
@@ -35,6 +35,7 @@ export abstract class FirestoreService<T> {
 	}
 
 	collection$(queryFn?: QueryFn): Observable<T[]> {
+		//return this.firebase.collection<T>(`${this.basePath}`, ref=> ref.orderBy('order')) .valueChanges();
 		return this.firebase.collection<T>(`${this.basePath}`, queryFn).valueChanges();
 	}
 
@@ -52,16 +53,16 @@ export abstract class FirestoreService<T> {
 			}));
 	}
 	deleteQueryBatch(ids: string[]) {
-		const queries = ids.map(element => this.firebase.collection(`${this.basePath}`).doc(element).valueChanges());
-		return combineLatest(...queries)
+		const queries = ids.map(element => this.firebase.collection(`${this.basePath}`).doc(element).snapshotChanges());
+		Object.assign([], queries)
+		return combineLatest(Object.assign([], queries))
 			.pipe(
+				take(1),
 				exhaustMap((querySnapshot) => {
 					const batch = this.firebase.firestore.batch();
-					querySnapshot.forEach(function (doc) {
-						// For each doc, add a delete operation to the batch
-						batch.delete(doc.ref);
+					querySnapshot.forEach(function (doc: any) {
+						batch.delete(doc.payload.ref);
 					});
-					// Commit the batch
 					return batch.commit();
 				})
 			);
@@ -69,9 +70,10 @@ export abstract class FirestoreService<T> {
 
 	insertBatch(cards: number[]) {
 		const batch = this.firebase.firestore.batch();
-		cards.forEach(cardIndex => {
+		cards.forEach((cardIndex, index) => {
+			console.log(cardIndex);
 			const docReference = this.firebase.collection(`${this.basePath}`).doc(cardIndex.toString()).ref;
-			batch.set(docReference, { id: cardIndex, cardIndex });
+			batch.set(docReference, { id: cardIndex, cardIndex, order: index });
 		});
 		return batch.commit();
 	}

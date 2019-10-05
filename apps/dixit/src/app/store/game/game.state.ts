@@ -34,10 +34,10 @@ export const initalState: GameState = {
 	currentStory: null,
 	isLogged: true,
 	isGuessingTime: true,
-	currentHand: [4, 67, 23, 12, 34],//4, 67, 23, 12, 34
+	currentHand: [],//[4, 67, 23, 12, 34],//4, 67, 23, 12, 34
 	avaiableCards: [],// generateCardIndexes(),
 	isLoading: false,
-	isFirstRound: false,
+	isFirstRound: true,
 	boardCards: [
 		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
 		// { cardIndex: 6, owner: walter, votes: [] },

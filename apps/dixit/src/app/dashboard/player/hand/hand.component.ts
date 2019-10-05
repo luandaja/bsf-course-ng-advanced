@@ -33,7 +33,7 @@ export class HandComponent implements OnInit, OnDestroy {
 		this.handCards$ = this.gameStore.pipe(select(getCurrentHand));
 		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
 
-		this.avaiableCardsChanges$ = this.cardsService.collection$()
+		this.avaiableCardsChanges$ = this.cardsService.collection$(ref => ref.orderBy('order'))
 			.subscribe((results: any[]) => this.gameStore.dispatch(avaiableCardsLoaded({ cards: results.map(result => result.cardIndex) })));
 
 		this.playerHand$ = this.gameStore.pipe(select(getTurnInfo), distinctUntilChanged((x, y) => x.isUserTurn === y.isUserTurn)).subscribe((turnInfo) => {
