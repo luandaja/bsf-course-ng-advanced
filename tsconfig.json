@@ -29,7 +29,9 @@
       "@glotrix/ui/images-upload": ["libs/ui/images-upload/src/index.ts"],
       "@glotrix/ui/login": ["libs/ui/login/src/index.ts"],
       "@glotrix/ui/counter": ["libs/ui/counter/src/index.ts"],
-      "@glotrix/ui/clau": ["libs/ui/clau/src/index.ts"]
+      "@glotrix/ui/clau": ["libs/ui/clau/src/index.ts"],
+      "@glotrix/ui/card": ["libs/ui/card/src/index.ts"],
+      "@glotrix/ui/spinner": ["libs/ui/spinner/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

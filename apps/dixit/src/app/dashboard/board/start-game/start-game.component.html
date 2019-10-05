@@ -1,0 +1,28 @@
+<div class="row col-sm-12 pt-2">
+	<div class="col-sm-2 blue-border pl-3 mr-3">
+		<div class="row">
+			<gt-players class="pull-right"></gt-players>
+		</div>
+		<div class="row col-sm-8">
+			<button
+				class="btn btn-info"
+				(click)="startGame()"
+				[disabled]="unableStartGame$ | async"
+			>
+				Start Game
+			</button>
+		</div>
+	</div>
+	<div class="col-sm-7 blue-border">
+		<div class="row align-items-center">
+			<h1>{{ welcomeInfo.title }}</h1>
+			<span>{{ welcomeInfo.description }}</span>
+		</div>
+		<div class="row align-items-center">
+			<img
+				class="img-fluid"
+				src="https://www.ultraboardgames.com/img/slideshow/dixit.jpg"
+			/>
+		</div>
+	</div>
+</div>

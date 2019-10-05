@@ -1,66 +1,75 @@
 {
-	"npmScope": "glotrix",
-	"implicitDependencies": {
-		"angular.json": "*",
-		"package.json": "*",
-		"tsconfig.json": "*",
-		"tslint.json": "*",
-		"nx.json": "*"
-	},
-	"projects": {
-		"cms-e2e": {
-			"tags": []
-		},
-		"cms": {
-			"tags": []
-		},
-		"eshop-e2e": {
-			"tags": []
-		},
-		"eshop": {
-			"tags": []
-		},
-		"core": {
-			"tags": []
-		},
-		"ui-navigation": {
-			"tags": ["ui"]
-		},
-		"ui-avatar": {
-			"tags": ["ui"]
-		},
-		"ui-forms": {
-			"tags": ["ui"]
-		},
-		"ui-tables": {
-			"tags": ["ui"]
-		},
-		"ui-search-bar": {
-			"tags": ["ui"]
-		},
-		"ui-carousel": {
-			"tags": ["ui"]
-		},
-		"models": {
-			"tags": ["models"]
-		},
-		"ui-upload-file": {
-			"tags": ["ui"]
-		},
-		"ui-image-preview": {
-			"tags": ["ui"]
-		},
-		"ui-images-upload": {
-			"tags": ["ui"]
-		},
-		"ui-login": {
-			"tags": ["ui"]
-		},
-		"ui-card": {
-			"tags": ["ui"]
-		},
-		"ui-counter": {
-			"tags": ["ui"]
-		}
-	}
+  "npmScope": "glotrix",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "cms-e2e": {
+      "tags": []
+    },
+    "cms": {
+      "tags": []
+    },
+    "eshop-e2e": {
+      "tags": []
+    },
+    "eshop": {
+      "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "ui-navigation": {
+      "tags": ["ui"]
+    },
+    "ui-avatar": {
+      "tags": ["ui"]
+    },
+    "ui-forms": {
+      "tags": ["ui"]
+    },
+    "ui-tables": {
+      "tags": ["ui"]
+    },
+    "ui-search-bar": {
+      "tags": ["ui"]
+    },
+    "ui-carousel": {
+      "tags": ["ui"]
+    },
+    "models": {
+      "tags": ["models"]
+    },
+    "ui-upload-file": {
+      "tags": ["ui"]
+    },
+    "ui-image-preview": {
+      "tags": ["ui"]
+    },
+    "ui-images-upload": {
+      "tags": ["ui"]
+    },
+    "ui-login": {
+      "tags": ["ui"]
+    },
+    "ui-counter": {
+      "tags": ["ui"]
+    },
+    "dixit-e2e": {
+      "tags": []
+    },
+    "dixit": {
+      "tags": []
+    },
+    "ui-card": {
+      "tags": ["ui"]
+    },
+    "ui-spinner": {
+      "tags": ["ui"]
+    }
+  }
 }

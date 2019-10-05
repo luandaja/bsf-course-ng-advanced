@@ -117,6 +117,122 @@
         }
       }
     },
+    "dixit": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/dixit",
+      "sourceRoot": "apps/dixit/src",
+      "prefix": "gt",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/dixit",
+            "index": "apps/dixit/src/index.html",
+            "main": "apps/dixit/src/main.ts",
+            "polyfills": "apps/dixit/src/polyfills.ts",
+            "tsConfig": "apps/dixit/tsconfig.app.json",
+            "aot": false,
+            "assets": ["apps/dixit/src/favicon.ico", "apps/dixit/src/assets"],
+            "styles": [
+              "apps/dixit/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/dixit/src/environments/environment.ts",
+                  "with": "apps/dixit/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dixit:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dixit:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dixit:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/dixit/tsconfig.app.json", "apps/dixit/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/dixit/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/dixit/jest.config.js",
+            "tsConfig": "apps/dixit/tsconfig.spec.json",
+            "setupFile": "apps/dixit/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "dixit-e2e": {
+      "root": "apps/dixit-e2e",
+      "sourceRoot": "apps/dixit-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/dixit-e2e/cypress.json",
+            "tsConfig": "apps/dixit-e2e/tsconfig.e2e.json",
+            "devServerTarget": "dixit:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dixit:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/dixit-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/dixit-e2e/**"]
+          }
+        }
+      }
+    },
     "eshop": {
       "projectType": "application",
       "schematics": {
@@ -137,10 +253,7 @@
             "polyfills": "apps/eshop/src/polyfills.ts",
             "tsConfig": "apps/eshop/tsconfig.app.json",
             "aot": false,
-            "assets": [
-              "apps/eshop/src/favicon.ico",
-              "apps/eshop/src/assets"
-            ],
+            "assets": ["apps/eshop/src/favicon.ico", "apps/eshop/src/assets"],
             "styles": [
               "apps/eshop/src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -195,10 +308,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/eshop/tsconfig.app.json",
-              "apps/eshop/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/eshop/tsconfig.app.json", "apps/eshop/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/eshop/**"]
           }
         },
@@ -590,6 +700,37 @@
       },
       "schematics": {}
     },
+    "ui-counter": {
+      "projectType": "library",
+      "root": "libs/ui/counter",
+      "sourceRoot": "libs/ui/counter/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/counter/tsconfig.lib.json",
+              "libs/ui/counter/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/counter/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/counter/jest.config.js",
+            "tsConfig": "libs/ui/counter/tsconfig.spec.json",
+            "setupFile": "libs/ui/counter/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
     "ui-card": {
       "projectType": "library",
       "root": "libs/ui/card",
@@ -615,30 +756,34 @@
           }
         }
       },
-      "schematics": {}
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     },
-    "ui-counter": {
+    "ui-spinner": {
       "projectType": "library",
-      "root": "libs/ui/counter",
-      "sourceRoot": "libs/ui/counter/src",
+      "root": "libs/ui/spinner",
+      "sourceRoot": "libs/ui/spinner/src",
       "prefix": "gt",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/ui/counter/tsconfig.lib.json",
-              "libs/ui/counter/tsconfig.spec.json"
+              "libs/ui/spinner/tsconfig.lib.json",
+              "libs/ui/spinner/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ui/counter/**"]
+            "exclude": ["**/node_modules/**", "!libs/ui/spinner/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ui/counter/jest.config.js",
-            "tsConfig": "libs/ui/counter/tsconfig.spec.json",
-            "setupFile": "libs/ui/counter/src/test-setup.ts"
+            "jestConfig": "libs/ui/spinner/jest.config.js",
+            "tsConfig": "libs/ui/spinner/tsconfig.spec.json",
+            "setupFile": "libs/ui/spinner/src/test-setup.ts"
           }
         }
       },

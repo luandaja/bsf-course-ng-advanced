@@ -1,0 +1,27 @@
+<div class="row">
+	<section class="pt-3 col-sm-11  ml-sm-auto mr-sm-auto">
+		<div class="float-left card" *ngFor="let card of handCards$ | async">
+			<div
+				class="shadow"
+				(click)="selectCard(card)"
+				[ngClass]="{ selected: selectedCardIndex === card }"
+			>
+				<img [src]="getCardImage(card)" width="200" height="320" />
+			</div>
+		</div>
+	</section>
+</div>
+<ng-container *ngIf="userPlayer$ | async as userPlayer">
+	<div class="row-fluid col-sm-9" *ngIf="isStoryTellerTurn$ | async">
+		<gt-story-editor
+			[cardIndex]="selectedCardIndex"
+			[userPlayer]="userPlayer"
+		></gt-story-editor>
+	</div>
+	<div class="row-fluid col-sm-9 pt-3" *ngIf="isPlayersTurn$ | async">
+		<gt-card-selector
+			[cardIndex]="selectedCardIndex"
+			[userPlayer]="userPlayer"
+		></gt-card-selector>
+	</div>
+</ng-container>
