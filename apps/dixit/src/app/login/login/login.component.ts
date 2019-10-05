@@ -4,6 +4,7 @@ import { loginEntries } from './form-fields';
 import { Store } from '@ngrx/store';
 import { GameState, signIn, getIsLoading, fetchPlayers } from '../../store/game';
 import { Observable } from 'rxjs';
+import { SnackbarService } from '@glotrix/ui/snackbar';
 
 export const banner: Banner = {
 	upperText: 'ONLINE BOARD GAMES',
@@ -23,9 +24,10 @@ export class LoginComponent implements OnInit {
 	banner = banner;
 	isLoading$: Observable<boolean>;
 
-	constructor(private gameStore: Store<GameState>) { }
+	constructor(private gameStore: Store<GameState>, private snackbarService: SnackbarService) { }
 
 	ngOnInit() {
+
 		this.isLoading$ = this.gameStore.select(getIsLoading);
 		this.gameStore.dispatch(fetchPlayers());
 	}

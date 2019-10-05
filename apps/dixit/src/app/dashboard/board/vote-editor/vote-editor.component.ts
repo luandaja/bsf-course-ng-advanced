@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { GameState, setVote } from '../../../store/game';
 import { Player } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
+import { SnackbarService } from '@glotrix/ui/snackbar';
 
 @Component({
 	selector: 'gt-vote-editor',
@@ -14,7 +15,8 @@ export class VoteEditorComponent implements OnChanges {
 	@Input() selectedCard: BoardCard;
 	@Input() userPlayer: Player;
 
-	constructor(private gameStore: Store<GameState>) { }
+	constructor(private gameStore: Store<GameState>,
+		private snackbarService: SnackbarService) { }
 
 	ngOnChanges() { }
 
@@ -24,7 +26,7 @@ export class VoteEditorComponent implements OnChanges {
 
 	vote(): void {
 		if (!this.selectedCard) {
-			console.log("You have to select a card to vote for");
+			this.snackbarService.showWarning("You have to select a card to vote for!", 'Dixit');
 			return;
 		}
 		this.gameStore.dispatch(setVote({ boardCard: this.selectedCard, userPlayer: this.userPlayer }));

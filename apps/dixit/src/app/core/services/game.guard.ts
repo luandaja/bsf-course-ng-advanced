@@ -15,7 +15,6 @@ export class GameGuard implements CanLoad {
 	public canLoad(): Observable<boolean> {
 		return this.store.pipe(select(getHasGameStarted),
 			map(hasGameStarted => {
-				console.log("game guard");
 				if (!hasGameStarted) {
 					this.router.navigate(['/dashboard/board/start']);
 					return false;

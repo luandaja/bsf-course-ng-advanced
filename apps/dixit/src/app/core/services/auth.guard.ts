@@ -12,12 +12,10 @@ export class AuthGuard implements CanActivate, CanLoad {
 	constructor(private router: Router, private store: Store<GameState>) { }
 
 	public canLoad(): Observable<boolean> {
-		//	console.log('can load');
 		return this.verifyUser();
 	}
 
 	public canActivate(): Observable<boolean> {
-		//	console.log('can activate');
 		return this.verifyUser();
 	}
 
@@ -26,7 +24,6 @@ export class AuthGuard implements CanActivate, CanLoad {
 			map(isLoggedIn => {
 				if (!isLoggedIn) {
 					//this.store$.dispatch(new AuthActions.NavigateToLogin());
-					//		console.log(`( No. Redirect the user back to login. )`);
 					this.router.navigate(['/login']);
 					return false;
 				}

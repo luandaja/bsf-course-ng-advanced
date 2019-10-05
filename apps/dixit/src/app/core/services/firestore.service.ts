@@ -35,7 +35,6 @@ export abstract class FirestoreService<T> {
 	}
 
 	collection$(queryFn?: QueryFn): Observable<T[]> {
-		//return this.firebase.collection<T>(`${this.basePath}`, ref=> ref.orderBy('order')) .valueChanges();
 		return this.firebase.collection<T>(`${this.basePath}`, queryFn).valueChanges();
 	}
 
@@ -71,7 +70,6 @@ export abstract class FirestoreService<T> {
 	insertBatch(cards: number[]) {
 		const batch = this.firebase.firestore.batch();
 		cards.forEach((cardIndex, index) => {
-			console.log(cardIndex);
 			const docReference = this.firebase.collection(`${this.basePath}`).doc(cardIndex.toString()).ref;
 			batch.set(docReference, { id: cardIndex, cardIndex, order: index });
 		});
