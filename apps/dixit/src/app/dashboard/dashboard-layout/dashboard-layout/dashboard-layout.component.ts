@@ -13,11 +13,11 @@ import { GameState, getUserPlayer, signOut } from '../../../store/game';
 	styleUrls: ['./dashboard-layout.component.scss']
 })
 export class DashboardLayoutComponent {
-	protected options: LinkOption[] = appModulesAsLinkOption;
+	options: LinkOption[] = appModulesAsLinkOption;
 
-	protected isSidebarActive: Boolean = true;
+	isSidebarActive: Boolean = true;
 
-	protected user$: Observable<NavigationUser>;
+	user$: Observable<NavigationUser>;
 
 	constructor(private store: Store<GameState>, private router: Router) {
 		this.user$ = this.store.pipe(

@@ -1,0 +1,6 @@
+{
+	"hosting": {
+		"public": "dist/apps/dixit",
+		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+	}
+}

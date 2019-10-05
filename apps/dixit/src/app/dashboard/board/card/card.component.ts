@@ -10,7 +10,7 @@ import { BoardCard } from '../../../models/BoardCard';
 	styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnChanges {
-	protected cardImage: string;
+	cardImage: string;
 	private readonly reverseCardUrl = "assets/cards/reverse_card.jpg";
 
 	@Input() isRevealed: boolean;
