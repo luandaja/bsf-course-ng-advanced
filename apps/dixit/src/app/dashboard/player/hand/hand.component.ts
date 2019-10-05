@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, updateCurrentTurn, getTurnInfo, setUserHand, avaiableCardsLoaded } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, updateCurrentTurn, getTurnInfo, setUserHand, avaiableCardsLoaded, getIsPlayersTurn, getIsStoryTellerTurn } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
 import { Player } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
@@ -40,12 +40,8 @@ export class HandComponent implements OnInit, OnDestroy {
 			if (turnInfo.isUserTurn)
 				this.gameStore.dispatch(setUserHand({ cardsCount: turnInfo.cardsCount }));
 		});
-		this.isStoryTellerTurn$ = this.gameStore.pipe(select(getCurrentStory),
-			switchMap(story => this.userPlayer$.pipe(map(user => user.isStoryTeller && story === null)))
-		);
-		this.isPlayersTurn$ = this.gameStore.pipe(select(getCurrentStory),
-			switchMap(story => this.userPlayer$.pipe(map(user => !user.isStoryTeller && story !== null && !user.hasThrowCard)))
-		);
+		this.isStoryTellerTurn$ = this.gameStore.pipe(select(getIsStoryTellerTurn));
+		this.isPlayersTurn$ = this.gameStore.pipe(select(getIsPlayersTurn));
 		this.currentTurn$ = this.stateService.doc$(StatusBoard.CurrentPlayerTurn).subscribe(state => {
 			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: state.currentTurn }));
 		});

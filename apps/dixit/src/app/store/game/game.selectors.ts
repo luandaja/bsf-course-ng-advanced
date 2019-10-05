@@ -91,3 +91,18 @@ export const getAvaiableCards = createSelector(
 		return { currentTurn: userPlayer.id, avaiableCards }
 	}
 );
+
+export const getPlayerCanVote = createSelector(
+	gameFeature,
+	(state: GameState) => !state.userPlayer.isStoryTeller && state.currentStory !== null && !state.userPlayer.hasVoted
+);
+
+export const getIsPlayersTurn = createSelector(
+	gameFeature,
+	(state: GameState) => !state.userPlayer.isStoryTeller && state.currentStory !== null && !state.userPlayer.hasThrowCard
+);
+
+export const getIsStoryTellerTurn = createSelector(
+	gameFeature,
+	(state: GameState) => state.userPlayer.isStoryTeller && state.currentStory === null
+);
