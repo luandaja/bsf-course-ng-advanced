@@ -13,7 +13,7 @@ import { PlayerService } from '../../../core/services/player.service';
 	styleUrls: ['./start-game.component.scss']
 })
 export class StartGameComponent implements OnInit, OnDestroy {
-	private readonly welcomeInfo: { title: string, description: string } = {
+	readonly welcomeInfo: { title: string, description: string } = {
 		title: 'Welcome to Dixit!',
 		description: 'Dixit is a charades-like game where each player attempts to guess another player’s. Let’s wait for other players. You need to be between 3 to 6 in order to start the game.'
 	};
