@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { BoardCard } from '../../../models/BoardCard';
 import { select, Store } from '@ngrx/store';
-import { getBoardCards, getIsGuessingTime, GameState, getCurrentStory, getUserPlayer, fetchBoardCards, boardCardsLoaded } from '../../../store/game';
+import { getBoardCards, getIsGuessingTime, GameState, getCurrentStory, getUserPlayer, boardCardsLoaded } from '../../../store/game';
 import { StoryCard } from '../../../models/StoryCard';
 import { map, switchMap } from 'rxjs/operators';
 import { Player } from '../../../models';
@@ -26,8 +26,6 @@ export class BoardCardsComponent implements OnInit {
 		private boardCardsService: BoardCardsFirestoreService) { }
 
 	ngOnInit() {
-		this.gameStore.dispatch(fetchBoardCards());
-
 		this.boardCardsChanges$ = this.boardCardsService.collection$().subscribe(boardCards => this.gameStore.dispatch(boardCardsLoaded({ boardCards })));
 		this.boardCards$ = this.gameStore.pipe(select(getBoardCards));
 		this.isGuessingTime$ = this.gameStore.pipe(select(getIsGuessingTime));

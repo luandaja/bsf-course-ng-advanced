@@ -1,8 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
-	fetchBoardCards, setBoardCard, setCurrentStory,
+	setBoardCard, setCurrentStory,
 	showVotes, nextRound, signIn, signInSuccess, boardCardsLoaded, boardCardSetted,
-	updateUserPlayer, setVote, currentStorySetted, nextRoundSetted, userHandSetted, updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted, votesVisibilitySetted, setVotesVisibility, playerScoreUpdated, voteSetted
+	updateUserPlayer, setVote, currentStorySetted, nextRoundSetted, userHandSetted,
+	updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted, setVotesVisibility, playerScoreUpdated, voteSetted
 } from './game.actions';
 import { GameState, initalState } from './game.state';
 import { add, concat, shuffle, update } from '../../models/Utils';
@@ -10,12 +11,11 @@ import { add, concat, shuffle, update } from '../../models/Utils';
 const reducer = createReducer(
 	initalState,
 	on(signIn, (state, { }) => ({ ...state, isLoading: true })),
-	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLoading: false, isLogged: true, userPlayer })),
+	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLogged: true, userPlayer })),
 
 	on(playersLoaded, (state, { players }) => ({ ...state, players })),
 
-	on(fetchBoardCards, (state, { }) => ({ ...state, isLoading: true })),
-	on(boardCardsLoaded, (state, { boardCards }) => ({ ...state, isLoading: false, boardCards })),
+	on(boardCardsLoaded, (state, { boardCards }) => ({ ...state, boardCards })),
 
 	on(avaiableCardsLoaded, (state, { cards }) => ({ ...state, avaiableCards: cards })),
 
@@ -27,7 +27,7 @@ const reducer = createReducer(
 	})),
 
 	on(setVote, (state, { }) => ({ ...state, isLoading: true })),
-	on(voteSetted, (state, { boardCard }) => ({ ...state, boardCards: update(state.boardCards, boardCard), userPlayer: { ...state.userPlayer, hasVoted: true } })),
+	on(voteSetted, (state, { boardCard }) => ({ ...state, isLoading: false, boardCards: update(state.boardCards, boardCard), userPlayer: { ...state.userPlayer, hasVoted: true } })),
 
 	on(updateUserPlayer, (state, { userPlayer }) => ({ ...state, userPlayer, players: update(state.players, state.userPlayer) })),
 
@@ -39,7 +39,6 @@ const reducer = createReducer(
 	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false, currentHand: state.currentHand.filter(x => x !== currentStory.cardIndex) })),
 
 	on(showVotes, (state, { }) => ({ ...state, isLoading: true })),
-	on(votesVisibilitySetted, (state, { userPlayer }) => ({ ...state, isLoading: false, areVotesVisible: true })),
 	on(playerScoreUpdated, (state, { userPlayer }) => ({ ...state, isLoading: false, userPlayer, players: update(state.players, userPlayer) })),
 
 	on(nextRound, (state, { }) => ({ ...state, isLoading: true })),
@@ -49,10 +48,6 @@ const reducer = createReducer(
 
 	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, currentTurn })),
 );
-
-function getUserPlayer(state: GameState) {
-	return (state.userPlayer === null) ? state.userPlayer : state.players.find(player => player.id === state.userPlayer.id)
-}
 
 function addBoardCard(list: any[], item: any) {
 	const newList = add(list, item);

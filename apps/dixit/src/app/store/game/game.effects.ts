@@ -41,20 +41,6 @@ export class GameEffects {
 		)
 	);
 
-	fetchBoardCards$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(actions.fetchBoardCards),
-			exhaustMap(() =>
-				this.boardCardsService.collection$()
-					.pipe(
-						take(1),
-						map((boardCards) => actions.boardCardsLoaded({ boardCards })),
-						catchError(() => EMPTY)
-					)
-			)
-		)
-	);
-
 	fetchPlayers$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.fetchPlayers),

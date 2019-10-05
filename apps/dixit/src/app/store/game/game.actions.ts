@@ -3,7 +3,6 @@ import { BoardCard } from '../../models/BoardCard';
 import { StoryCard } from '../../models/StoryCard';
 import { Player } from '../../models';
 
-export const fetchBoardCards = createAction('[Board Cards] Fetch board cards');
 export const boardCardsLoaded = createAction('[Board Cards] Loaded board cards',
 	props<{ boardCards: BoardCard[] }>()
 );
@@ -74,13 +73,6 @@ export const setVotesVisibility = createAction(
 	'[Player Hand] Set votes visibility',
 	props<{ areVotesVisible: boolean }>()
 );
-
-
-export const votesVisibilitySetted = createAction(
-	'[Board] Votes visibility setted',
-	props<{ userPlayer: Player }>()
-);
-
 
 export const updatePlayerScore = createAction(
 	'[Player Hand] Update player score'
