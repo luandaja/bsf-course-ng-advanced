@@ -14,3 +14,15 @@
   font-weight: 400;
   font-style: italic;
 }
+.message {
+  background-color: #ee331d;
+  opacity: 0.8;
+  border-radius: 19px;
+}
+@media only screen and (max-width: 600px) {
+  .welcome-container {
+    height: 40vh;
+    margin-bottom: 15px;
+    background-size: 91% 72%;
+  }
+}

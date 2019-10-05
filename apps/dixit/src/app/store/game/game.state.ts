@@ -27,12 +27,12 @@ const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', scor
 
 export const initalState: GameState = {
 	players: [],// [pao, walter, myriam, brenda, vico, ale],
-	userPlayer: { ...pao },
+	userPlayer: null,//{ ...pao },
 	currentTurn: 0,
 	areVotesVisible: false,
 	hasGameStarted: false,
 	currentStory: null,
-	isLogged: true,
+	isLogged: false,
 	isGuessingTime: true,
 	currentHand: [],//[4, 67, 23, 12, 34],//4, 67, 23, 12, 34
 	avaiableCards: [],// generateCardIndexes(),
