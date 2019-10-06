@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Avatar } from '@glotrix/ui/avatar';
 import { Store, select } from '@ngrx/store';
-import { GameState, playersLoaded, getPlayersState, getPlayers } from '../../../store/game';
+import { GameState, playersLoaded, getPlayersState, getPlayers, boardCardSetted } from '../../../store/game';
 import { PlayerService } from '../../../core/services/player.service';
-import { map } from 'rxjs/operators';
+import { map, switchMapTo, switchMap } from 'rxjs/operators';
 import { Player } from '../../../models';
 
 @Component({
@@ -24,7 +24,11 @@ export class ScoreBoardComponent implements OnInit, OnDestroy {
 		this.playersChanges$ = this.playerService.collection$()
 			.subscribe((players) => this.gameStore.dispatch(playersLoaded({ players })));
 
-		this.players$ = this.gameStore.pipe(select(getPlayers));
+		this.players$ = this.gameStore.pipe(select(getPlayers), map(players => {
+			const newPlayers = Object.assign([], players) as Player[];
+			newPlayers.sort((a, b) => b.score - a.score);
+			return newPlayers;
+		}));
 	}
 
 	ngOnDestroy() {

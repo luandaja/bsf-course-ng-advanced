@@ -35,7 +35,7 @@ export class StartGameComponent implements OnInit, OnDestroy {
 		this.gameRedirection$ = this.gameStore.pipe(select(getHasGameStarted))
 			.subscribe((hasGameStarted) => {
 				this.snackbarService.showInfo(hasGameStarted ? "Let's start the match!" : "Welcome, let's wait for the other players", 'Dixit');
-				this.redirect(hasGameStarted ? '/dashboard/board' : '/dashboard/board/start');
+				this.redirect(hasGameStarted ? '/dashboard/hand' : '/dashboard/board/start');
 			});
 
 		this.players$ = this.playerService.collection$()

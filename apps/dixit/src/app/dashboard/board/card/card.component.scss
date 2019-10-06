@@ -1,12 +1,7 @@
 .shadow:hover {
-  margin: 0.4em;
-  padding: 1em;
-  cursor: pointer;
-  background: transparent;
-  text-decoration: none;
-  color: #666;
+  transform: scale(1.04);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
 }
-
 .selected {
   margin: 0.4em;
   padding: 1em;
