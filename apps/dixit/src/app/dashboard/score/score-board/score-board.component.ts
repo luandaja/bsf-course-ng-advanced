@@ -31,7 +31,4 @@ export class ScoreBoardComponent implements OnInit, OnDestroy {
 		this.playersChanges$.unsubscribe();
 	}
 
-	// private mapToAvatars(players: Player[]) {
-	// 	return players.map(player => ({ imageUrl: player.photoUrl, description: `${player.username} - ${player.score}` } as Avatar))
-	// }
 }

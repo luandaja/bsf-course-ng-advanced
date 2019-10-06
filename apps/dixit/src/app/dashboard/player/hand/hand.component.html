@@ -1,14 +1,6 @@
 <div
 	class="row col-sm-10 orange-border m-2 col-sm-11  justify-content-center ml-sm-auto mr-sm-auto"
 >
-	<div
-		class="card shadow"
-		*ngFor="let card of handCards$ | async"
-		(click)="selectCard(card)"
-		[ngClass]="{ selected: selectedCardIndex === card }"
-	>
-		<img [src]="getCardImage(card)" width="200" height="320" />
-	</div>
 	<ng-container *ngIf="userPlayer$ | async as userPlayer">
 		<div class="col-sm-6 pb-2" *ngIf="isStoryTellerTurn$ | async">
 			<gt-story-editor
@@ -23,4 +15,12 @@
 			></gt-card-selector>
 		</div>
 	</ng-container>
+	<div
+		class="card shadow"
+		*ngFor="let card of handCards$ | async"
+		(click)="selectCard(card)"
+		[ngClass]="{ selected: selectedCardIndex === card }"
+	>
+		<img [src]="getCardImage(card)" width="200" height="320" />
+	</div>
 </div>
