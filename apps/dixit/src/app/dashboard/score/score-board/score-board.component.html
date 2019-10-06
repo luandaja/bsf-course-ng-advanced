@@ -1,1 +1,17 @@
-<gt-avatars [avatars]="players$ | async"></gt-avatars>
+<div class="float-left" *ngFor="let player of players$ | async">
+	<div class="score-item">
+		<div class="score-title">
+			{{ player.username }}
+		</div>
+		<div class="score-value">
+			<gt-avatar
+				class="pb-1"
+				[width]="180"
+				[height]="180"
+				[source]="player.photoUrl"
+			></gt-avatar>
+		</div>
+		<hr />
+		<span class="keywords">{{ player.score }} pts</span>
+	</div>
+</div>

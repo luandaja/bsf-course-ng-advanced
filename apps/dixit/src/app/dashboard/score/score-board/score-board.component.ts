@@ -14,7 +14,7 @@ import { Player } from '../../../models';
 })
 export class ScoreBoardComponent implements OnInit, OnDestroy {
 
-	players$: Observable<Avatar[]>;
+	players$: Observable<Player[]>;
 	playersChanges$: Subscription;
 
 	constructor(private gameStore: Store<GameState>,
@@ -24,14 +24,14 @@ export class ScoreBoardComponent implements OnInit, OnDestroy {
 		this.playersChanges$ = this.playerService.collection$()
 			.subscribe((players) => this.gameStore.dispatch(playersLoaded({ players })));
 
-		this.players$ = this.gameStore.pipe(select(getPlayers), map(players => this.mapToAvatars(players)));
+		this.players$ = this.gameStore.pipe(select(getPlayers));
 	}
 
 	ngOnDestroy() {
 		this.playersChanges$.unsubscribe();
 	}
 
-	private mapToAvatars(players: Player[]) {
-		return players.map(player => ({ imageUrl: player.photoUrl, description: `${player.username} - ${player.score}` } as Avatar))
-	}
+	// private mapToAvatars(players: Player[]) {
+	// 	return players.map(player => ({ imageUrl: player.photoUrl, description: `${player.username} - ${player.score}` } as Avatar))
+	// }
 }
