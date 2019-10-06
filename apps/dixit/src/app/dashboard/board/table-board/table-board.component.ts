@@ -42,7 +42,7 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 
 		this.currentStory$ = this.stateService.doc$(StatusBoard.CurrentStory).pipe(distinctUntilChanged((x, y) => x.currentStory === y.currentStory))
 			.subscribe(state => {
-				if (state.currentStory !== null)
+				if (state.currentStory)
 					this.gameStore.dispatch(currentStorySetted({ currentStory: state.currentStory }));
 			});
 	}

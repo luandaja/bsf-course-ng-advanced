@@ -10,7 +10,7 @@
 		<img [src]="getCardImage(card)" width="200" height="320" />
 	</div>
 	<ng-container *ngIf="userPlayer$ | async as userPlayer">
-		<div class="row col-sm-10" *ngIf="isStoryTellerTurn$ | async">
+		<div class="col-sm-6 pb-2" *ngIf="isStoryTellerTurn$ | async">
 			<gt-story-editor
 				[cardIndex]="selectedCardIndex"
 				[userPlayer]="userPlayer"
