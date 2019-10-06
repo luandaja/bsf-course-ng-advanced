@@ -4,16 +4,19 @@
   padding: 20px;
   height: 100%;
 }
+.orange-border {
+  min-height: 680px;
+}
 img {
   padding-top: 10px;
   border-radius: 90px;
 }
 span {
   padding-top: 10px;
-  font-family: "Segoe Script", cursive;
-  font-size: 25px;
+  font-family: monospace;
+  font-size: xx-large;
 }
 
 h2 {
-  font-family: "Segoe Script", cursive;
+  font-family: monospace;
 }

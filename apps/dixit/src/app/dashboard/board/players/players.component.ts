@@ -16,6 +16,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
 
 	players$: Observable<Avatar[]>;
 	playersChanges$: Subscription;
+	title: string;
 
 	constructor(private gameStore: Store<GameState>,
 		private playerService: PlayerService) { }
@@ -35,9 +36,11 @@ export class PlayersComponent implements OnInit, OnDestroy {
 	}
 
 	private mapToAvatars(players: Player[]) {
-		return players.map(player => ({ imageUrl: player.photoUrl, description: player.username } as Avatar))
+		return players.map(player => ({ imageUrl: player.photoUrl } as Avatar))
 	}
+
 	private getPlayers(hasGameStarted: boolean, isGuessingTime: boolean, players: Player[]) {
+		this.title = !hasGameStarted ? 'Players' : (isGuessingTime ? 'Cards thrown by' : 'Votes setted by');
 		return (!hasGameStarted) ? players : shuffle(players.filter(player => isGuessingTime ? player.hasVoted : player.hasThrowCard));
 	}
 }
