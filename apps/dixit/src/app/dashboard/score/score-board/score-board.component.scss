@@ -1,0 +1,40 @@
+.score-item {
+  border-radius: 3px;
+  width: 220px;
+  height: auto;
+  background: #fff;
+  margin: 20px;
+  vertical-align: top;
+  text-align: center;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s cubic-bezier(0.3, 0.6, 0.2, 1.8);
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+  }
+}
+
+.score-value {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  color: #fff;
+  margin: 10px auto;
+}
+.score-title {
+  width: 100%;
+  color: white;
+  display: block;
+  position: relative;
+  background: #ffc08b;
+  padding: 7px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.keywords {
+  font-size: 28px;
+  font-weight: 400;
+}
+hr {
+  border-top: 1px solid #ffc08b;
+}

@@ -141,7 +141,8 @@
             "styles": [
               "apps/dixit/src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/font-awesome/css/font-awesome.css"
+							"node_modules/font-awesome/css/font-awesome.css",
+							"libs/ui/snackbar/src/lib/snackbar.scss"
             ],
             "scripts": []
           },
@@ -784,6 +785,37 @@
             "jestConfig": "libs/ui/spinner/jest.config.js",
             "tsConfig": "libs/ui/spinner/tsconfig.spec.json",
             "setupFile": "libs/ui/spinner/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-snackbar": {
+      "projectType": "library",
+      "root": "libs/ui/snackbar",
+      "sourceRoot": "libs/ui/snackbar/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/snackbar/tsconfig.lib.json",
+              "libs/ui/snackbar/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/snackbar/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/snackbar/jest.config.js",
+            "tsConfig": "libs/ui/snackbar/tsconfig.spec.json",
+            "setupFile": "libs/ui/snackbar/src/test-setup.ts"
           }
         }
       },

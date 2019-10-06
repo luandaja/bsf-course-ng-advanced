@@ -33,7 +33,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^8.2.5",
+    "@angular/animations": "^8.2.9",
     "@angular/common": "^8.2.5",
     "@angular/compiler": "^8.2.5",
     "@angular/core": "^8.2.5",
@@ -54,6 +54,7 @@
     "firebase": "^7.0.0",
     "font-awesome": "^4.7.0",
     "lodash.startcase": "^4.4.0",
+    "ngx-toastr": "^11.1.0",
     "rxjs": "~6.4.0",
     "zone.js": "^0.9.1"
   },

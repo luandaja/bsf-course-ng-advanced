@@ -3,10 +3,10 @@ import { Store, select } from '@ngrx/store';
 import { GameState, playersLoaded, getPlayersState } from '../../../store/game';
 import { Player } from '../../../models';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMapTo } from 'rxjs/operators';
 import { shuffle } from '../../../models/Utils';
 import { PlayerService } from '../../../core/services/player.service';
-
+import { Avatar } from '@glotrix/ui/avatar';
 @Component({
 	selector: 'gt-players',
 	templateUrl: './players.component.html',
@@ -14,8 +14,9 @@ import { PlayerService } from '../../../core/services/player.service';
 })
 export class PlayersComponent implements OnInit, OnDestroy {
 
-	players$: Observable<Player[]>;
+	players$: Observable<Avatar[]>;
 	playersChanges$: Subscription;
+	title: string;
 
 	constructor(private gameStore: Store<GameState>,
 		private playerService: PlayerService) { }
@@ -26,14 +27,20 @@ export class PlayersComponent implements OnInit, OnDestroy {
 
 		this.players$ = this.gameStore.pipe(select(getPlayersState), map(result => {
 			const { hasGameStarted, isGuessingTime, players } = result;
-			if (!hasGameStarted)
-				return players;
-			else
-				return shuffle(players.filter(player => isGuessingTime ? player.hasVoted : player.hasThrowCard));
-		}));
+			return this.getPlayers(hasGameStarted, isGuessingTime, players);
+		}), map(players => this.mapToAvatars(players)));
 	}
 
 	ngOnDestroy() {
 		this.playersChanges$.unsubscribe();
+	}
+
+	private mapToAvatars(players: Player[]) {
+		return players.map(player => ({ imageUrl: player.photoUrl } as Avatar))
+	}
+
+	private getPlayers(hasGameStarted: boolean, isGuessingTime: boolean, players: Player[]) {
+		this.title = !hasGameStarted ? 'Players' : (isGuessingTime ? 'Cards thrown by' : 'Votes setted by');
+		return (!hasGameStarted) ? players : shuffle(players.filter(player => isGuessingTime ? player.hasVoted : player.hasThrowCard));
 	}
 }

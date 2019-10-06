@@ -7,7 +7,6 @@ export const boardCardsLoaded = createAction('[Board Cards] Loaded board cards',
 	props<{ boardCards: BoardCard[] }>()
 );
 
-export const fetchAvaiableCards = createAction('[Board Cards] Fetch avaiable cards');
 export const avaiableCardsLoaded = createAction('[Board Cards] Loaded avaiable cards',
 	props<{ cards: number[] }>()
 );

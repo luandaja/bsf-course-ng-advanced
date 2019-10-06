@@ -70,6 +70,9 @@
     },
     "ui-spinner": {
       "tags": ["ui"]
+    },
+    "ui-snackbar": {
+      "tags": ["ui"]
     }
   }
 }

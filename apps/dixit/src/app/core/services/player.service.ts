@@ -66,7 +66,6 @@ export class PlayerService {
 	}
 
 	updateScore() {
-		console.log("update score");
 		return this.gameStore.pipe(select(getScoreInput),
 			switchMap(async input => {
 				{

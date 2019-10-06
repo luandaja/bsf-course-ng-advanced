@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { BoardCard } from '../../../models/BoardCard';
 import { select, Store } from '@ngrx/store';
-import { getBoardCards, getIsGuessingTime, GameState, getCurrentStory, getUserPlayer, boardCardsLoaded } from '../../../store/game';
+import { getBoardCards, getIsGuessingTime, GameState, getCurrentStory, getUserPlayer, boardCardsLoaded, getPlayerCanVote } from '../../../store/game';
 import { StoryCard } from '../../../models/StoryCard';
 import { map, switchMap } from 'rxjs/operators';
 import { Player } from '../../../models';
@@ -32,9 +32,10 @@ export class BoardCardsComponent implements OnInit {
 		this.storyCard$ = this.gameStore.pipe(select(getCurrentStory));
 		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
 
-		this.playerCanVote$ = this.gameStore.pipe(select(getCurrentStory),
-			switchMap(story => this.userPlayer$.pipe(map(user => !user.isStoryTeller && story !== null && !user.hasVoted)))
-		);
+		// this.playerCanVote$ = this.gameStore.pipe(select(getCurrentStory),
+		// 	switchMap(story => this.userPlayer$.pipe(map(user => !user.isStoryTeller && story !== null && !user.hasVoted)))
+		// );
+		this.playerCanVote$ = this.gameStore.pipe(select(getPlayerCanVote));
 	}
 
 	selectCard(cardSelected: BoardCard) {

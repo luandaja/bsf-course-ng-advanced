@@ -61,9 +61,9 @@ export const getIsLoading = createSelector(
 export const getTurnInfo = createSelector(
 	gameFeature,
 	state => {
-		const { currentTurn, userPlayer, isFirstRound: firstRound } = state;
+		const { currentTurn, userPlayer, isFirstRound } = state;
 		const isUserTurn = currentTurn === userPlayer.id;
-		const cardsCount = firstRound ? 5 : 1;
+		const cardsCount = isFirstRound ? 5 : 1;
 		return { isUserTurn, cardsCount }
 	}
 );
@@ -90,4 +90,19 @@ export const getAvaiableCards = createSelector(
 		const { userPlayer, avaiableCards } = state;
 		return { currentTurn: userPlayer.id, avaiableCards }
 	}
+);
+
+export const getPlayerCanVote = createSelector(
+	gameFeature,
+	(state: GameState) => !state.userPlayer.isStoryTeller && state.currentStory !== null && !state.userPlayer.hasVoted
+);
+
+export const getIsPlayersTurn = createSelector(
+	gameFeature,
+	(state: GameState) => !state.userPlayer.isStoryTeller && state.currentStory !== null && !state.userPlayer.hasThrowCard
+);
+
+export const getIsStoryTellerTurn = createSelector(
+	gameFeature,
+	(state: GameState) => state.userPlayer.isStoryTeller && state.currentStory === null
 );

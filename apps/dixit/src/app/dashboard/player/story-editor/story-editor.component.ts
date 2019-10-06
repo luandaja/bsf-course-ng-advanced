@@ -7,6 +7,7 @@ import { Player } from '../../../models';
 import { Store } from '@ngrx/store';
 import { GameState, setCurrentStory } from '../../../store/game';
 import { StoryCard } from '../../../models/StoryCard';
+import { SnackbarService } from '@glotrix/ui/snackbar';
 
 @Component({
 	selector: 'gt-story-editor',
@@ -19,13 +20,14 @@ export class StoryEditorComponent implements OnChanges {
 	@Input() cardIndex: number;
 	@Input() userPlayer: Player;
 
-	constructor(private gameStore: Store<GameState>) { }
+	constructor(private gameStore: Store<GameState>,
+		private snackbarService: SnackbarService) { }
 
 	ngOnChanges() { }
 
 	onSubmitted(formData: any) {
 		if (!this.cardIndex) {
-			console.log("Yo have to select a card first!");
+			this.snackbarService.showWarning("You have to select a card first!", 'Dixit');
 			return;
 		}
 		const currentStory: StoryCard = { title: formData.title, storyTeller: this.userPlayer, cardIndex: this.cardIndex };

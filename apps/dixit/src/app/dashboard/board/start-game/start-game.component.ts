@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
 import { Router } from '@angular/router';
 import { PlayerService } from '../../../core/services/player.service';
+import { SnackbarService } from '@glotrix/ui/snackbar';
 
 @Component({
 	selector: 'gt-start-game',
@@ -26,24 +27,21 @@ export class StartGameComponent implements OnInit, OnDestroy {
 	constructor(private gameStore: Store<GameState>,
 		private playerService: PlayerService,
 		private stateService: StatusBoardFirebaseService,
+		private snackbarService: SnackbarService,
 		private router: Router) { }
 
 	ngOnInit() {
 
 		this.gameRedirection$ = this.gameStore.pipe(select(getHasGameStarted))
 			.subscribe((hasGameStarted) => {
-				console.log('hasGameStarted', hasGameStarted);
-				this.redirect(hasGameStarted ? '/dashboard/board' : '/dashboard/board/start');
+				this.snackbarService.showInfo(hasGameStarted ? "Let's start the match!" : "Welcome, let's wait for the other players", 'Dixit');
+				this.redirect(hasGameStarted ? '/dashboard/hand' : '/dashboard/board/start');
 			});
 
-		this.players$ = this.playerService.collection$().subscribe(players => {
-			console.log("listen players", players);
-			this.gameStore.dispatch(playersLoaded({ players: Object.assign([], players) }));
-		});
-		this.hasGameStarted$ = this.stateService.doc$(StatusBoard.GameState).subscribe(state => {
-			console.log("has-game-started", state);
-			this.gameStore.dispatch(updateHasGameStarted({ hasGameStarted: state.hasGameStarted }));
-		});
+		this.players$ = this.playerService.collection$()
+			.subscribe(players => this.gameStore.dispatch(playersLoaded({ players: Object.assign([], players) })));
+		this.hasGameStarted$ = this.stateService.doc$(StatusBoard.GameState)
+			.subscribe(state => this.gameStore.dispatch(updateHasGameStarted({ hasGameStarted: state.hasGameStarted })));
 		this.unableStartGame$ = this.gameStore.pipe(select(getPlayers), map(players => players.length < 3 || players.length > 6));
 	}
 

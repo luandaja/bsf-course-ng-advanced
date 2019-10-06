@@ -13,6 +13,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { GameEffects } from './store/game/game.effects';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UiSnackbarModule } from '@glotrix/ui/snackbar';
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
@@ -22,6 +24,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 		RouterStoreModule,
 		GameStoreModule,
 		CoreModule,
+		UiSnackbarModule,
+		BrowserAnimationsModule,
 		AngularFireModule.initializeApp(environment.firebaseConfig),
 		AngularFireDatabaseModule,
 		EffectsModule.forRoot([GameEffects])

@@ -1,6 +1,2 @@
-<ul>
-	<li *ngFor="let player of players$ | async" class="m-2">
-		<gt-avatar [width]="60" [height]="60" [source]="player.photoUrl"> </gt-avatar>
-		<span class="pl-3">{{ player.username }}</span>
-	</li>
-</ul>
+<span>{{ title }}</span
+><gt-avatars [avatars]="players$ | async"></gt-avatars>

@@ -3,6 +3,7 @@ import { Player } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
 import { Store } from '@ngrx/store';
 import { GameState, setBoardCard } from '../../../store/game';
+import { SnackbarService } from '@glotrix/ui/snackbar';
 
 @Component({
 	selector: 'gt-card-selector',
@@ -14,7 +15,8 @@ export class CardSelectorComponent implements OnChanges {
 	@Input() cardIndex: number;
 	@Input() userPlayer: Player;
 
-	constructor(private gameStore: Store<GameState>) { }
+	constructor(private gameStore: Store<GameState>,
+		private snackbarService: SnackbarService) { }
 
 	ngOnChanges() { }
 
@@ -24,7 +26,7 @@ export class CardSelectorComponent implements OnChanges {
 
 	throwCard(userPlayer: Player) {
 		if (!this.cardIndex) {
-			console.log("You have to select a card first!");
+			this.snackbarService.showWarning("You have to select a card first!", 'Dixit');
 			return;
 		}
 		const boardCard: BoardCard = { id: this.cardIndex, cardIndex: this.cardIndex, owner: userPlayer, votes: [] };

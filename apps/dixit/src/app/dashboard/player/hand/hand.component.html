@@ -1,27 +1,28 @@
-<div class="row">
-	<section class="pt-3 col-sm-11  ml-sm-auto mr-sm-auto">
-		<div class="float-left card" *ngFor="let card of handCards$ | async">
-			<div
-				class="shadow"
-				(click)="selectCard(card)"
-				[ngClass]="{ selected: selectedCardIndex === card }"
-			>
-				<img [src]="getCardImage(card)" width="200" height="320" />
-			</div>
+<div
+	class="row col-sm-10 orange-border m-2 col-sm-11  justify-content-center ml-sm-auto mr-sm-auto"
+>
+	<ng-container *ngIf="userPlayer$ | async as userPlayer">
+		<div class="col-sm-6 pb-2" *ngIf="isStoryTellerTurn$ | async">
+			<gt-story-editor
+				[cardIndex]="selectedCardIndex"
+				[userPlayer]="userPlayer"
+			></gt-story-editor>
 		</div>
-	</section>
+		<div class="row col-sm-9 pt-3" *ngIf="isPlayersTurn$ | async">
+			<gt-card-selector
+				[cardIndex]="selectedCardIndex"
+				[userPlayer]="userPlayer"
+			></gt-card-selector>
+		</div>
+	</ng-container>
+	<div class="row col-sm-12 justify-content-center">
+		<div
+			class="card shadow"
+			*ngFor="let card of handCards$ | async"
+			(click)="selectCard(card)"
+			[ngClass]="{ selected: selectedCardIndex === card }"
+		>
+			<img [src]="getCardImage(card)" width="200" height="320" />
+		</div>
+	</div>
 </div>
-<ng-container *ngIf="userPlayer$ | async as userPlayer">
-	<div class="row-fluid col-sm-9" *ngIf="isStoryTellerTurn$ | async">
-		<gt-story-editor
-			[cardIndex]="selectedCardIndex"
-			[userPlayer]="userPlayer"
-		></gt-story-editor>
-	</div>
-	<div class="row-fluid col-sm-9 pt-3" *ngIf="isPlayersTurn$ | async">
-		<gt-card-selector
-			[cardIndex]="selectedCardIndex"
-			[userPlayer]="userPlayer"
-		></gt-card-selector>
-	</div>
-</ng-container>
