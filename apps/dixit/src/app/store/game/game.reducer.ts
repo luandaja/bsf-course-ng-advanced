@@ -3,7 +3,7 @@ import {
 	setBoardCard, setCurrentStory,
 	showVotes, nextRound, signIn, signInSuccess, boardCardsLoaded, boardCardSetted,
 	updateUserPlayer, setVote, currentStorySetted, nextRoundSetted, userHandSetted,
-	updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted, setVotesVisibility, playerScoreUpdated, voteSetted
+	updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted, setVotesVisibility, playerScoreUpdated, voteSetted, recoverPlayerState, playerStateRecovered
 } from './game.actions';
 import { GameState, initalState } from './game.state';
 import { add, concat, shuffle, update } from '../../models/Utils';
@@ -12,6 +12,7 @@ const reducer = createReducer(
 	initalState,
 	on(signIn, (state, { }) => ({ ...state, isLoading: true })),
 	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLogged: true, userPlayer })),
+	on(playerStateRecovered, (state, { player, isFirstRound, currentHand, isLogged, isGuessingTime }) => ({ ...state, isLogged: isLogged, userPlayer: player, isFirstRound, currentHand, isGuessingTime })),
 
 	on(playersLoaded, (state, { players }) => ({ ...state, players })),
 

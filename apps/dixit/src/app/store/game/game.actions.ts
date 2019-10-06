@@ -36,6 +36,8 @@ export const setVote = createAction(
 	props<{ boardCard: BoardCard, userPlayer: Player }>()
 );
 
+export const saveUser = createAction('[App State] Save user');
+
 export const voteSetted = createAction(
 	'[Board Cards] vote setted',
 	props<{ boardCard: BoardCard }>()
@@ -106,11 +108,13 @@ export const updateHasGameStarted = createAction(
 	props<{ hasGameStarted: boolean }>()
 );
 
+export const playerStateRecovered = createAction(
+	'[AppState] Player state recovered',
+	props<{ player: Player, isLogged: boolean, currentHand: number[], isFirstRound: boolean, isGuessingTime: boolean }>()
+);
+
+export const recoverPlayerState = createAction('[AppState] recover player state');
 export const startGame = createAction('[Game] start game');
 export const gameStarted = createAction('[Game] game started');
 export const signOut = createAction('[Auth] Sign out');
 export const nothing = createAction('Nothing');
-
-
-
-

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Player } from '../../models';
 import { Store, select } from '@ngrx/store';
-import { GameState, getPlayers, getUserPlayer, getBoardCards, getCurrentStory, getAvaiableCards, getScoreInput } from '../../store/game';
+import { GameState, getPlayers, getUserPlayer, getBoardCards, getCurrentStory, getAvaiableCards, getScoreInput, getUserPlayerState } from '../../store/game';
 import { map, exhaustMap, switchMap, tap, switchMapTo, take } from 'rxjs/operators';
 import { PlayerFirebaseService } from './player.firebase.service';
 import { StoryCard } from '../../models/StoryCard';
 import { BoardCard } from '../../models/BoardCard';
 import { combineLatest, of } from 'rxjs';
+import { LocalStorageService, StorageKey } from './local-storage.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,6 +15,7 @@ import { combineLatest, of } from 'rxjs';
 export class PlayerService {
 
 	constructor(private firestore: PlayerFirebaseService,
+		private localStorage: LocalStorageService,
 		private gameStore: Store<GameState>) {
 	}
 
@@ -77,6 +79,26 @@ export class PlayerService {
 			}))
 	}
 
+	recoverPlayerState() {
+		return {
+			currentHand: this.localStorage.get(StorageKey.currentHand),
+			userPlayer: this.localStorage.get(StorageKey.userPlayer),
+			isLogged: this.localStorage.get(StorageKey.isLogged),
+			isGuessingTime: this.localStorage.get(StorageKey.isGuessingTime),
+			isFirstRound: this.localStorage.get(StorageKey.isFirstRound)
+		}
+	}
+
+	savePlayerState() {
+		return this.gameStore.pipe(select(getUserPlayerState), take(1), map(userPlayerState => {
+			this.localStorage.set(StorageKey.currentHand, userPlayerState.currentHand);
+			this.localStorage.set(StorageKey.isFirstRound, userPlayerState.isFirstRound);
+			this.localStorage.set(StorageKey.isGuessingTime, userPlayerState.isGuessingTime);
+			this.localStorage.set(StorageKey.isLogged, userPlayerState.isLogged);
+			this.localStorage.set(StorageKey.userPlayer, userPlayerState.userPlayer);
+		}))
+	}
+
 	private calculateScore(userPlayer: Player, boardCards: BoardCard[], currentStory: StoryCard, players: Player[]) {
 		const correctCard = boardCards.find(boardCard => boardCard.cardIndex === currentStory.cardIndex);
 		const correctVotesCount = correctCard.votes.length;
@@ -100,5 +122,6 @@ export class PlayerService {
 
 		return userPlayer;
 	}
+
 
 }

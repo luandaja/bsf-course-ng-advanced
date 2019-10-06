@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { GameState, getIsLoading, setVotesVisibility, avaiableCardsLoaded, currentStorySetted, getVotesVisibility, updatePlayerScore } from '../../../store/game';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -22,6 +22,10 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 	constructor(private gameStore: Store<GameState>,
 		private stateService: StatusBoardFirebaseService) { }
 
+	// @HostListener('window:beforeunload') goToPage() {
+	// 	console.log("before refresh");
+	// 	//	this.gameStore.dispatch(saveUser());
+	// }
 	ngOnInit() {
 		this.onGameStart();
 		this.isLoading$ = this.gameStore.select(getIsLoading);

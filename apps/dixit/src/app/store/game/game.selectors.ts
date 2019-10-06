@@ -106,3 +106,11 @@ export const getIsStoryTellerTurn = createSelector(
 	gameFeature,
 	(state: GameState) => state.userPlayer.isStoryTeller && state.currentStory === null
 );
+
+export const getUserPlayerState = createSelector(
+	gameFeature,
+	(state: GameState) => {
+		const { userPlayer, isFirstRound, currentHand, isLogged, isGuessingTime } = state;
+		return { userPlayer, isFirstRound, currentHand, isLogged, isGuessingTime }
+	}
+);

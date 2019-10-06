@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, startGame, getHasGameStarted, getPlayers, updateHasGameStarted, fetchPlayers, playersLoaded } from '../../../store/game';
+import { GameState, startGame, getHasGameStarted, getPlayers, updateHasGameStarted, fetchPlayers, playersLoaded, saveUser } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
@@ -28,7 +28,9 @@ export class StartGameComponent implements OnInit, OnDestroy {
 		private playerService: PlayerService,
 		private stateService: StatusBoardFirebaseService,
 		private snackbarService: SnackbarService,
-		private router: Router) { }
+		private router: Router) {
+
+	}
 
 	ngOnInit() {
 
@@ -48,6 +50,7 @@ export class StartGameComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.players$.unsubscribe();
 		this.gameRedirection$.unsubscribe();
+
 	}
 
 	startGame() {

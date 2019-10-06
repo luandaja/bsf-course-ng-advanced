@@ -31,6 +31,24 @@ export class GameEffects {
 			}
 			)));
 
+	recoverPlayerState$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.recoverPlayerState),
+			switchMap(async action => {
+				const { userPlayer, isFirstRound, currentHand, isLogged, isGuessingTime } = this.playerService.recoverPlayerState();
+				return actions.playerStateRecovered({ player: userPlayer, isFirstRound, currentHand, isLogged, isGuessingTime });
+			}
+			)));
+
+	saveUser$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.saveUser),
+			switchMap(async action => {
+				await this.playerService.savePlayerState().toPromise();
+				return actions.nothing();
+			}
+			)));
+
 	startGame$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.startGame),
