@@ -1,5 +1,5 @@
 import { Injectable, Inject, InjectionToken } from '@angular/core';
-import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { StorageService } from 'ngx-webstorage-service';
 
 export const DIXIT_STORAGE =
 	new InjectionToken<StorageService>('dixit-storage');
@@ -9,9 +9,7 @@ export const DIXIT_STORAGE =
 })
 export class LocalStorageService {
 
-	constructor(@Inject(DIXIT_STORAGE) private storage: StorageService) {
-
-	}
+	constructor(@Inject(DIXIT_STORAGE) private storage: StorageService) { }
 
 	set<T>(key: StorageKey, value: T) {
 		this.storage.set(key, value);
@@ -21,6 +19,14 @@ export class LocalStorageService {
 		return this.storage.get(key);
 	}
 
+	clear() {
+		this.storage.remove(StorageKey.userPlayer);
+		this.storage.remove(StorageKey.currentHand);
+		this.storage.remove(StorageKey.isLogged);
+		this.storage.remove(StorageKey.isGuessingTime);
+		this.storage.remove(StorageKey.isRoundFirst);
+	}
+
 }
 
 export enum StorageKey {
@@ -28,6 +34,6 @@ export enum StorageKey {
 	currentHand = 'currentHand',
 	isLogged = 'isLogged',
 	isGuessingTime = 'isGuessingTime',
-	isFirstRound = 'isFirstRound'
+	isRoundFirst = 'isRoundFirst'
 }
 

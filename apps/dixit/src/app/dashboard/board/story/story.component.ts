@@ -21,10 +21,7 @@ export class StoryComponent implements OnInit {
 
 	ngOnInit() {
 		this.currentStory$ = this.gameStore.pipe(select(getCurrentStory));
-		this.isStoryTeller$ = this.gameStore.pipe(select(getUserPlayer), map(user => {
-			this.userTurn = user.id;
-			return user.isStoryTeller;
-		}));
+		this.isStoryTeller$ = this.gameStore.pipe(select(getUserPlayer), map(user => user.isStoryTeller));
 		this.areVotesVisible$ = this.gameStore.pipe(select(getVotesVisibility));
 	}
 
@@ -33,6 +30,6 @@ export class StoryComponent implements OnInit {
 	}
 
 	nextRound(): void {
-		this.gameStore.dispatch(nextRound({ nextTurn: this.userTurn + 1 }));
+		this.gameStore.dispatch(nextRound());
 	}
 }

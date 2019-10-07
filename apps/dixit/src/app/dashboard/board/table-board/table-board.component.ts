@@ -22,10 +22,6 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 	constructor(private gameStore: Store<GameState>,
 		private stateService: StatusBoardFirebaseService) { }
 
-	// @HostListener('window:beforeunload') goToPage() {
-	// 	console.log("before refresh");
-	// 	//	this.gameStore.dispatch(saveUser());
-	// }
 	ngOnInit() {
 		this.onGameStart();
 		this.isLoading$ = this.gameStore.select(getIsLoading);

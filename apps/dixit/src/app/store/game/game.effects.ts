@@ -30,13 +30,21 @@ export class GameEffects {
 				return actions.signInSuccess({ userPlayer: { ...user } })
 			}
 			)));
+	signOut$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.signOut),
+			switchMap(async action => {
+				this.playerService.logout();
+				return actions.nothing();
+			}
+			)));
 
 	recoverPlayerState$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.recoverPlayerState),
 			switchMap(async action => {
-				const { userPlayer, isFirstRound, currentHand, isLogged, isGuessingTime } = this.playerService.recoverPlayerState();
-				return actions.playerStateRecovered({ player: userPlayer, isFirstRound, currentHand, isLogged, isGuessingTime });
+				const { userPlayer, isRoundFirst, currentHand, isLogged, isGuessingTime } = this.playerService.recoverPlayerState();
+				return actions.playerStateRecovered({ player: userPlayer, isRoundFirst, currentHand, isLogged, isGuessingTime });
 			}
 			)));
 
@@ -55,8 +63,11 @@ export class GameEffects {
 			switchMap(async action => {
 				await this.stateService.update(StatusBoard.GameState, { hasGameStarted: true });
 				await this.cardsService.insertBatch(this.generateCardIndexes());
+				const firstPlayer = await this.playerService.getFirstPlayer().toPromise();
+
 				this.snackbarService.showSuccess("Let's start playing!", 'Dixit');
-				return actions.gameStarted();
+				this.snackbarService.showInfo(`${firstPlayer.username} is the story teller`, 'Dixit');
+				return actions.gameStarted({ playerInTurn: firstPlayer.id });
 			}
 			)
 		)
@@ -82,6 +93,7 @@ export class GameEffects {
 				await this.stateService.update(StatusBoard.CurrentStory, { currentStory: action.currentStory });
 				const boardCard: BoardCard = { id: action.currentStory.cardIndex, cardIndex: action.currentStory.cardIndex, owner: action.currentStory.storyTeller, votes: [] };
 				await this.boardCardsService.create(boardCard).toPromise();
+				await this.playerService.playerThrowCard().toPromise();
 				this.snackbarService.showSuccess("Story setted!", 'Dixit');
 				return actions.currentStorySetted({ currentStory: action.currentStory });
 			}
@@ -121,8 +133,8 @@ export class GameEffects {
 			ofType(actions.setUserHand),
 			switchMap(async action => {
 				const result = await this.playerService.getUserHand(action.cardsCount).toPromise();
-				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: result.currentTurn + 1 });
 				await this.cardsService.deleteQueryBatch(result.cards.map(card => card.toString())).toPromise();
+				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentPlayerTurn: result.nextPlayerTurn });
 				return actions.userHandSetted({ cards: result.cards });
 			}
 			)
@@ -143,7 +155,8 @@ export class GameEffects {
 	updatePlayerScore$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.updatePlayerScore),
-			switchMap(action => this.playerService.updateScore().pipe(take(1), map(userPlayer => actions.playerScoreUpdated({ userPlayer }))))
+			switchMap(action => this.playerService.updateScore().pipe(take(1),
+				map(userPlayer => actions.playerScoreUpdated({ userPlayer }))))
 		)
 	);
 
@@ -152,11 +165,25 @@ export class GameEffects {
 		this.actions$.pipe(
 			ofType(actions.nextRound),
 			switchMap(async action => {
+				await this.playerService.setNextStoryTeller().toPromise();
+				const firstPlayer = await this.playerService.getFirstPlayer().toPromise();
+				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentPlayerTurn: firstPlayer.id });
+
 				await this.stateService.update(StatusBoard.CurrentStory, { currentStory: null });
-				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentTurn: action.nextTurn });
+				await this.stateService.update(StatusBoard.shouldRefreshPlayer, { shouldRefreshPlayer: true });
+				await this.stateService.update(StatusBoard.shouldDragCards, { shouldDragCards: true });
+
+				//const firstPlayer = await this.playerService.getFirstPlayer().toPromise();
+				//update next storyteller
+				//updating the turn starting from order 1 to last one, so all can pick a card
+				//update al user en reducer
+				//update shouldDragCard a true yala
+
+				//shouldRefreshPlayer true
+
 				await this.boardCardsService.deleteCollection().toPromise();
 				this.snackbarService.showSuccess("Go to your hand to get your next card!", 'Dixit');
-				return actions.nextRoundSetted();
+				return actions.nextRoundSetted({ nextPlayerTurn: firstPlayerId });
 			}
 			)
 		)

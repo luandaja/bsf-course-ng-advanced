@@ -21,7 +21,7 @@ export class HandComponent implements OnInit, OnDestroy {
 
 	private avaiableCardsChanges$: Subscription;
 	private playerHand$: Subscription;
-	private currentTurn$: Subscription;
+	private currentTurnChanges$: Subscription;
 	boardCard: BoardCard;
 	selectedCardIndex: number;
 
@@ -42,13 +42,16 @@ export class HandComponent implements OnInit, OnDestroy {
 		});
 		this.isStoryTellerTurn$ = this.gameStore.pipe(select(getIsStoryTellerTurn));
 		this.isPlayersTurn$ = this.gameStore.pipe(select(getIsPlayersTurn));
-		this.currentTurn$ = this.stateService.doc$(StatusBoard.CurrentPlayerTurn).subscribe(state => {
-			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: state.currentTurn }));
+		this.currentTurnChanges$ = this.stateService.doc$(StatusBoard.CurrentPlayerTurn).subscribe(state => {
+			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: state.currentPlayerTurn }));
+		});
+		this.currentTurnChanges$ = this.stateService.doc$(StatusBoard.shouldDragCards).subscribe(state => {
+			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: state.shouldDragCards }));
 		});
 	}
 
 	ngOnDestroy() {
-		this.currentTurn$.unsubscribe();
+		this.currentTurnChanges$.unsubscribe();
 		this.playerHand$.unsubscribe();
 		this.avaiableCardsChanges$.unsubscribe();
 	}

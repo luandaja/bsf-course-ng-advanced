@@ -12,13 +12,15 @@ export interface GameState {
 	avaiableCards: number[];
 	isLoading: boolean;
 	isGuessingTime?: boolean;
-	currentTurn?: number;
+	playerInTurn?: string;
 	areVotesVisible?: boolean;
 	hasGameStarted?: boolean;
 	currentStory?: StoryCard;
-	isFirstRound?: boolean;
+	isRoundFirst?: boolean;
+	shouldDragCards?: boolean;
+	shouldRefreshPlayer?: boolean;
 }
-const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 3, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
+const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const walter = { id: 3, username: 'Walter', photoUrl: 'https://bit.ly/2lQfYBH', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
 const myriam = { id: 4, username: 'Myriam', photoUrl: 'https://bit.ly/2lOjrAQ', score: 0, isStoryTeller: false, hasVoted: false, hasThrowCard: true };
@@ -27,8 +29,8 @@ const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', scor
 
 export const initalState: GameState = {
 	players: [],// [pao, walter, myriam, brenda, vico, ale],
-	userPlayer: null,//{ ...pao }
-	currentTurn: 0,
+	userPlayer: null,//{ ...pao },
+	playerInTurn: null,
 	areVotesVisible: false,
 	hasGameStarted: false,
 	currentStory: null,
@@ -37,7 +39,7 @@ export const initalState: GameState = {
 	currentHand: [],//[4, 67, 23, 12, 34],
 	avaiableCards: [],//
 	isLoading: false,
-	isFirstRound: true,//false
+	isRoundFirst: true,
 	boardCards: [
 		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
 		// { cardIndex: 6, owner: walter, votes: [] },

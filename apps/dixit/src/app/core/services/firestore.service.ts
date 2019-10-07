@@ -22,6 +22,9 @@ export abstract class FirestoreService<T> {
 		return this.collection.doc(value.id + '').set(Object.assign({}, { id: '' + value.id }, value), { merge: true });
 	}
 
+	generateId() {
+		return this.firebase.createId();
+	}
 	create(value: any) {
 		return from(this.collection.doc(value.id + '').set(Object.assign({}, { id: '' + value.id }, value)));
 	}

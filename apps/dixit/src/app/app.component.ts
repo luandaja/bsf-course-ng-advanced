@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { GameState, getIsLogged, getHasGameStarted, saveUser, recoverPlayerState } from './store/game';
+import { GameState, getIsLogged, saveUser, recoverPlayerState } from './store/game';
 
 @Component({
 	selector: 'gt-root',
@@ -15,7 +15,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	@HostListener('window:beforeunload')
 	goToPage() {
-		console.log("page is refreshing...time to store data");
 		this.gameStore.dispatch(saveUser());
 	}
 	constructor(private gameStore: Store<GameState>,

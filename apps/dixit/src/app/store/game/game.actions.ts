@@ -16,10 +16,10 @@ export const playersLoaded = createAction('[Board Cards] Loaded players',
 	props<{ players: Player[] }>()
 );
 
-export const nextRound = createAction('[Board Cards] Set next round',
-	props<{ nextTurn: number }>()
+export const nextRound = createAction('[Board Cards] Set next round');
+export const nextRoundSetted = createAction('[Board Cards] next riund setted',
+	props<{ nextPlayerTurn: string }>()
 );
-export const nextRoundSetted = createAction('[Board Cards] next riund setted');
 
 export const setBoardCard = createAction(
 	'[Board Cards] Set single board card',
@@ -50,7 +50,7 @@ export const setGuessingTime = createAction(
 
 export const updateCurrentTurn = createAction(
 	'[Player Hand] Update current turn',
-	props<{ currentTurn: number }>()
+	props<{ currentTurn: string }>()
 );
 export const setNextTurn = createAction('[Board Cards] Set next turn');
 
@@ -108,13 +108,21 @@ export const updateHasGameStarted = createAction(
 	props<{ hasGameStarted: boolean }>()
 );
 
+export const updateShouldDragCard = createAction(
+	'[Game] Update should hd',
+	props<{ hasGameStarted: boolean }>()
+);
+
+
 export const playerStateRecovered = createAction(
 	'[AppState] Player state recovered',
-	props<{ player: Player, isLogged: boolean, currentHand: number[], isFirstRound: boolean, isGuessingTime: boolean }>()
+	props<{ player: Player, isLogged: boolean, currentHand: number[], isRoundFirst: boolean, isGuessingTime: boolean }>()
 );
 
 export const recoverPlayerState = createAction('[AppState] recover player state');
 export const startGame = createAction('[Game] start game');
-export const gameStarted = createAction('[Game] game started');
+export const gameStarted = createAction('[Game] game started',
+	props<{ playerInTurn: string }>()
+);
 export const signOut = createAction('[Auth] Sign out');
 export const nothing = createAction('Nothing');

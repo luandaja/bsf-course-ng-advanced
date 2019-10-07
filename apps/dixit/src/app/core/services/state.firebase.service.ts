@@ -6,7 +6,15 @@ import { StoryCard } from '../../models/StoryCard';
 	providedIn: 'root'
 })
 
-export class StatusBoardFirebaseService extends FirestoreService<{ hasGameStarted?: boolean, areVotesVisible?: boolean, currentTurn?: number, currentStory?: StoryCard }> {
+export class StatusBoardFirebaseService extends FirestoreService<
+{
+	hasGameStarted?: boolean,
+	areVotesVisible?: boolean,
+	shouldRefreshPlayer?: boolean,
+	shouldDragCards?: boolean,
+	currentPlayerTurn?: string,
+	currentStory?: StoryCard
+}> {
 
 	protected basePath = 'status-board';
 
@@ -15,6 +23,8 @@ export class StatusBoardFirebaseService extends FirestoreService<{ hasGameStarte
 export enum StatusBoard {
 	GameState = "game-state",
 	VotesVisibility = "votes-visibility",
-	CurrentPlayerTurn = "current-turn",
-	CurrentStory = "current-story"
+	CurrentPlayerTurn = "current-turn-upd",
+	CurrentStory = "current-story",
+	shouldRefreshPlayer = "should-refresh-player",
+	shouldDragCards = "shouldDragCards"
 }

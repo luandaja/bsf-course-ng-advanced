@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Player } from '../../models';
 import { Store, select } from '@ngrx/store';
-import { GameState, getPlayers, getUserPlayer, getBoardCards, getCurrentStory, getAvaiableCards, getScoreInput, getUserPlayerState } from '../../store/game';
-import { map, exhaustMap, switchMap, tap, switchMapTo, take } from 'rxjs/operators';
+import { GameState, getPlayers, getUserPlayer, getAvaiableCards, getScoreInput, getUserPlayerState, getNextPlayerId, getFirstPlayerId, getNextPlayer } from '../../store/game';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import { PlayerFirebaseService } from './player.firebase.service';
 import { StoryCard } from '../../models/StoryCard';
 import { BoardCard } from '../../models/BoardCard';
-import { combineLatest, of } from 'rxjs';
 import { LocalStorageService, StorageKey } from './local-storage.service';
 
 @Injectable({
@@ -23,20 +22,21 @@ export class PlayerService {
 		return this.firestore.collection$();
 	}
 
-	create(value: any) {
-		return this.firestore.create(value);
-	}
-
 	add(username: string, photoUrl: string) {
 		return this.gameStore.select(getPlayers).pipe(
 			take(1),
 			map(players => players.length),
 			switchMap(async (playersCount) => {
 				const user = new Player(username, photoUrl, playersCount + 1);
+				user.id = this.firestore.generateId();
 				await this.firestore.create(user);
 				return user;
 			})
 		);
+	}
+
+	getFirstPlayer() {
+		return this.gameStore.select(getFirstPlayerId).pipe(take(1));
 	}
 
 	playerThrowCard() {
@@ -44,7 +44,7 @@ export class PlayerService {
 			take(1),
 			switchMap(async userPlayer => {
 				const player = { ...userPlayer, hasThrowCard: true };
-				await this.firestore.update(player.id.toString(), player);
+				await this.firestore.update(player.id, player);
 				return player;
 			})
 		);
@@ -63,9 +63,23 @@ export class PlayerService {
 
 	getUserHand(cardsCount: number) {
 		return this.gameStore.select(getAvaiableCards).pipe(take(1),
-			map((info) => ({ cards: info.avaiableCards.slice(0, cardsCount), currentTurn: info.currentTurn }))
+			map((info) => ({ cards: info.avaiableCards.slice(0, cardsCount), nextPlayerTurn: info.nextPlayerTurn }))
 		);
 	}
+
+	getNextPlayerId() {
+		return this.gameStore.pipe(select(getNextPlayerId), take(1));
+	}
+
+	setNextStoryTeller() {
+		return this.gameStore.pipe(select(getNextPlayer), take(1), map(async player => {
+			player.isStoryTeller = true;
+			await this.firestore.update(player.id, player);
+			return player;
+		}));
+
+	}
+
 
 	updateScore() {
 		return this.gameStore.pipe(select(getScoreInput),
@@ -73,26 +87,30 @@ export class PlayerService {
 				{
 					const { userPlayer, boardCards, currentStory, players } = input;
 					const updatedPlayer = this.calculateScore({ ...userPlayer }, boardCards, currentStory, players);
-					await this.firestore.update(updatedPlayer.id.toString(), updatedPlayer);
+					await this.firestore.update(updatedPlayer.id, updatedPlayer);
 					return updatedPlayer;
 				}
 			}))
 	}
 
+	logout() {
+		this.localStorage.clear();
+	}
+
 	recoverPlayerState() {
 		return {
-			currentHand: this.localStorage.get(StorageKey.currentHand),
-			userPlayer: this.localStorage.get(StorageKey.userPlayer),
-			isLogged: this.localStorage.get(StorageKey.isLogged),
-			isGuessingTime: this.localStorage.get(StorageKey.isGuessingTime),
-			isFirstRound: this.localStorage.get(StorageKey.isFirstRound)
+			currentHand: this.localStorage.get(StorageKey.currentHand) || [],
+			userPlayer: this.localStorage.get(StorageKey.userPlayer) || null,
+			isLogged: this.localStorage.get(StorageKey.isLogged) || false,
+			isGuessingTime: this.localStorage.get(StorageKey.isGuessingTime) || false,
+			isRoundFirst: this.localStorage.get(StorageKey.isRoundFirst) || true
 		}
 	}
 
 	savePlayerState() {
 		return this.gameStore.pipe(select(getUserPlayerState), take(1), map(userPlayerState => {
 			this.localStorage.set(StorageKey.currentHand, userPlayerState.currentHand);
-			this.localStorage.set(StorageKey.isFirstRound, userPlayerState.isFirstRound);
+			this.localStorage.set(StorageKey.isRoundFirst, userPlayerState.isRoundFirst);
 			this.localStorage.set(StorageKey.isGuessingTime, userPlayerState.isGuessingTime);
 			this.localStorage.set(StorageKey.isLogged, userPlayerState.isLogged);
 			this.localStorage.set(StorageKey.userPlayer, userPlayerState.userPlayer);
