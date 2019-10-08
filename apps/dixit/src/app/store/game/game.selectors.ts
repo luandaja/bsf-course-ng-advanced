@@ -112,6 +112,15 @@ export const getNextPlayer = createSelector(
 	}
 );
 
+export const getNextTurnInfo = createSelector(
+	gameFeature,
+	(state: GameState) => {
+		const { userPlayer, players } = state;
+		const nextStoryTeller = getNextPlayerInTurn(userPlayer, players);
+		return { userPlayerId: userPlayer.id, nextStoryTellerId: nextStoryTeller.id, firstPlayer: players.find(player => player.order === 1) };
+	}
+);
+
 function getNextPlayerInTurn(userPlayer: Player, players: Player[]) {
 	const isLastPlayer = userPlayer.order === players.length;
 	const nextOrder = (isLastPlayer ? 1 : userPlayer.order + 1);

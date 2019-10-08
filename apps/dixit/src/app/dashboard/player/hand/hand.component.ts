@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getTurnInfo, setUserHand, avaiableCardsLoaded, getIsPlayersTurn, getIsStoryTellerTurn } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getTurnInfo, setUserHand, avaiableCardsLoaded, getIsPlayersTurn, getIsStoryTellerTurn, nextRound } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
 import { Player } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
@@ -40,6 +40,10 @@ export class HandComponent implements OnInit, OnDestroy {
 			if (turnInfo.isUserTurn)
 				this.gameStore.dispatch(setUserHand({ cardsCount: turnInfo.cardsCount }));
 		});
+	}
+
+	test() {
+		this.gameStore.dispatch(nextRound());
 	}
 
 	ngOnDestroy() {

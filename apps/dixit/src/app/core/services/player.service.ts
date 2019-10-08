@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Player } from '../../models';
 import { Store, select } from '@ngrx/store';
-import { GameState, getPlayers, getUserPlayer, getHandInfo, getScoreInput, getUserPlayerState, getFirstPlayerId, getNextPlayer } from '../../store/game';
+import { GameState, getPlayers, getUserPlayer, getHandInfo, getScoreInput, getUserPlayerState, getFirstPlayerId, getNextPlayer, getNextTurnInfo } from '../../store/game';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { PlayerFirebaseService } from './player.firebase.service';
 import { StoryCard } from '../../models/StoryCard';
@@ -70,6 +70,7 @@ export class PlayerService {
 		return this.gameStore.pipe(select(getNextPlayer), take(1), map(player => player.id));
 	}
 
+
 	setNextStoryTeller() {
 		return this.gameStore.pipe(select(getNextPlayer), take(1), map(async userPlayer => {
 			const player = { ...userPlayer, isStoryTeller: true };
@@ -98,6 +99,16 @@ export class PlayerService {
 				}
 			}))
 	}
+
+	setNextRound() {
+		return this.gameStore.pipe(select(getNextTurnInfo),
+			take(1),
+			switchMap(async turnInfo => {
+				await this.firestore.updateNextRounPlayer(turnInfo.userPlayerId, turnInfo.nextStoryTellerId);
+				return turnInfo.firstPlayer;
+			}));
+	}
+
 
 	logout() {
 		this.localStorage.clear();

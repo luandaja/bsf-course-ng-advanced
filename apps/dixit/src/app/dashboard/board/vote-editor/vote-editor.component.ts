@@ -18,6 +18,7 @@ export class VoteEditorComponent implements OnChanges {
 	constructor(private gameStore: Store<GameState>,
 		private snackbarService: SnackbarService) { }
 
+
 	ngOnChanges() { }
 
 	get message() {
@@ -26,7 +27,11 @@ export class VoteEditorComponent implements OnChanges {
 
 	vote(): void {
 		if (!this.selectedCard) {
-			this.snackbarService.showWarning("You have to select a card to vote for!", 'Dixit');
+			this.snackbarService.showWarning('You have to select a card to vote for!', 'Dixit');
+			return;
+		}
+		if (this.userPlayer.id === this.selectedCard.owner.id) {
+			this.snackbarService.showWarning('You can not vot for your own card!', 'Dixit');
 			return;
 		}
 		this.gameStore.dispatch(setVote({ boardCard: this.selectedCard, userPlayer: this.userPlayer }));

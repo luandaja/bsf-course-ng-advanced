@@ -76,7 +76,23 @@ export class GameEffects {
 			)
 		)
 	);
-
+	nextRound$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.nextRound),
+			switchMap(async action => {
+				await this.boardCardsService.deleteCollection().toPromise();
+				const firstPlayer = await this.playerService.setNextRound().toPromise();
+				await this.stateService.update(StatusBoard.status, {
+					playerInTurn: firstPlayer.id,
+					currentStory: null,
+					shouldDragCards: true
+				});
+				this.snackbarService.showSuccess("Go to your hand to get your next card!", 'Dixit');
+				return actions.nothing();
+			}
+			)
+		)
+	);
 
 	setUserHand$ = createEffect(() =>
 		this.actions$.pipe(
@@ -155,26 +171,6 @@ export class GameEffects {
 	);
 
 
-	nextRound$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(actions.nextRound),
-			switchMap(async action => {
-				await this.playerService.updatePlayer();
-				await this.playerService.setNextStoryTeller().toPromise();
-				const firstPlayer = await this.playerService.getFirstPlayer().toPromise();
-				await this.stateService.update(StatusBoard.status, {
-					playerInTurn: firstPlayer.id,
-					currentStory: null,
-					//shouldRefreshPlayer: true,
-					shouldDragCards: true
-				});
-				await this.boardCardsService.deleteCollection().toPromise();
-				this.snackbarService.showSuccess("Go to your hand to get your next card!", 'Dixit');
-				return actions.nothing();
-			}
-			)
-		)
-	);
 
 	private generateCardIndexes(): number[] {
 		const cardIndexes: number[] = [];
