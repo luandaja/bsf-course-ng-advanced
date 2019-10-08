@@ -1,8 +1,7 @@
 import { BoardCardsFirestoreService } from '../../core/services/board-cards.firestore.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, from, of, combineLatest, forkJoin, pipe } from 'rxjs';
-import { map, mergeMap, catchError, exhaustMap, switchMap, take, tap, mergeAll, delay } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import * as actions from './game.actions';
 import { PlayerService } from '../../core/services/player.service';
 import { BoardCard } from '../../models/BoardCard';
@@ -99,7 +98,6 @@ export class GameEffects {
 			ofType(actions.setUserHand),
 			switchMap(async action => {
 				const handInfo = await this.playerService.getUserHand().toPromise();
-				console.log('handInfo', handInfo);
 				const cards = handInfo.avaiableCards.slice(0, action.cardsCount);
 				await this.cardsService.deleteQueryBatch(cards.map(card => card.toString())).toPromise();
 				await this.stateService.update(StatusBoard.status, { playerInTurn: handInfo.nextPlayerTurn, shouldDragCards: !handInfo.isPickUpCompleted });

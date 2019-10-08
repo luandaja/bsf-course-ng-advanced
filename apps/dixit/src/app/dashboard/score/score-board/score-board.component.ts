@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Avatar } from '@glotrix/ui/avatar';
 import { Store, select } from '@ngrx/store';
-import { GameState, playersLoaded, getPlayersState, getPlayers, boardCardSetted } from '../../../store/game';
+import { GameState, playersLoaded, getPlayers } from '../../../store/game';
 import { PlayerService } from '../../../core/services/player.service';
-import { map, switchMapTo, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Player } from '../../../models';
 
 @Component({

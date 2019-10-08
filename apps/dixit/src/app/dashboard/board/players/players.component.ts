@@ -40,7 +40,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
 	}
 
 	private getPlayers(hasGameStarted: boolean, isGuessingTime: boolean, players: Player[]) {
-		this.title = !hasGameStarted ? 'Players' : (isGuessingTime ? 'Cards thrown by' : 'Votes setted by');
+		this.title = !hasGameStarted ? 'Players' : (isGuessingTime ? 'Votes setted by' : 'Cards thrown by');
 		return (!hasGameStarted) ? players : shuffle(players.filter(player => isGuessingTime ? player.hasVoted : player.hasThrowCard));
 	}
 }

@@ -34,11 +34,6 @@ export const getCurrentHand = createSelector(
 	(state: GameState) => state.currentHand
 );
 
-export const getTurn = createSelector(
-	gameFeature,
-	(state: GameState) => state.boardStatus.playerInTurn
-);
-
 export const getIsLogged = createSelector(
 	gameFeature,
 	state => state.isLogged
@@ -99,7 +94,6 @@ export const getHandInfo = createSelector(
 		const nextPlayerId = getNextPlayerInTurn(state.userPlayer, state.players).id;
 		const lastIndex = state.players.length - 1;
 		const isPickUpCompleted = userPlayer.id === state.players[lastIndex].id;
-		console.log(userPlayer.id + '|||' + state.players[lastIndex].id + '||| isPickUpCompleted:' + isPickUpCompleted);
 		return { nextPlayerTurn: nextPlayerId, avaiableCards, isPickUpCompleted }
 	}
 );

@@ -62,29 +62,11 @@ export class PlayerService {
 	}
 
 	getUserHand() {
-		//this.gameStore.select(getHandInfo).pipe(take(1));
 		return this.gameStore.pipe(take(1), select(getHandInfo));
 	}
 
 	getNextPlayerId() {
 		return this.gameStore.pipe(select(getNextPlayer), take(1), map(player => player.id));
-	}
-
-
-	setNextStoryTeller() {
-		return this.gameStore.pipe(select(getNextPlayer), take(1), map(async userPlayer => {
-			const player = { ...userPlayer, isStoryTeller: true };
-			await this.firestore.update(player.id, player);
-			return player;
-		}));
-	}
-
-	updatePlayer() {
-		return this.gameStore.pipe(select(getUserPlayer), take(1), map(async player => {
-			player.isStoryTeller = false;
-			await this.firestore.update(player.id, player);
-			return player;
-		}));
 	}
 
 	updateScore() {
