@@ -1,4 +1,4 @@
-import { Player } from '../../models';
+import { Player, BoardStatus } from '../../models';
 import { BoardCard } from '../../models/BoardCard';
 import { StoryCard } from '../../models/StoryCard';
 
@@ -12,13 +12,8 @@ export interface GameState {
 	avaiableCards: number[];
 	isLoading: boolean;
 	isGuessingTime?: boolean;
-	playerInTurn?: string;
-	areVotesVisible?: boolean;
-	hasGameStarted?: boolean;
-	currentStory?: StoryCard;
+	boardStatus?: BoardStatus;
 	isRoundFirst?: boolean;
-	shouldDragCards?: boolean;
-	shouldRefreshPlayer?: boolean;
 }
 const ale = { id: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const pao = { id: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
@@ -30,16 +25,20 @@ const vico = { id: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', scor
 export const initalState: GameState = {
 	players: [],// [pao, walter, myriam, brenda, vico, ale],
 	userPlayer: null,//{ ...pao },
-	playerInTurn: null,
-	areVotesVisible: false,
-	hasGameStarted: false,
-	currentStory: null,
 	isLogged: false,
 	isGuessingTime: false,
+	isRoundFirst: true,
+	boardStatus: {
+		playerInTurn: null,
+		currentStory: null,
+		shouldRefreshPlayer: false,
+		shouldDragCards: false,
+		areVotesVisible: false,
+		hasGameStarted: false
+	},
 	currentHand: [],//[4, 67, 23, 12, 34],
 	avaiableCards: [],//
 	isLoading: false,
-	isRoundFirst: true,
 	boardCards: [
 		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
 		// { cardIndex: 6, owner: walter, votes: [] },

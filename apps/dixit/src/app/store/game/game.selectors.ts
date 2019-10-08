@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { GameState } from './game.state';
+import { Player } from '../../models';
 
 const gameFeature = createFeatureSelector<GameState>('game');
 
@@ -10,7 +11,7 @@ export const getBoardCards = createSelector(
 
 export const getCurrentStory = createSelector(
 	gameFeature,
-	(state: GameState) => state.currentStory
+	(state: GameState) => state.boardStatus.currentStory
 );
 
 export const getPlayers = createSelector(
@@ -25,7 +26,7 @@ export const getIsGuessingTime = createSelector(
 
 export const getVotesVisibility = createSelector(
 	gameFeature,
-	(state: GameState) => state.areVotesVisible
+	(state: GameState) => state.boardStatus.areVotesVisible
 );
 
 export const getCurrentHand = createSelector(
@@ -35,7 +36,7 @@ export const getCurrentHand = createSelector(
 
 export const getTurn = createSelector(
 	gameFeature,
-	(state: GameState) => state.playerInTurn
+	(state: GameState) => state.boardStatus.playerInTurn
 );
 
 export const getIsLogged = createSelector(
@@ -50,7 +51,7 @@ export const getUserPlayer = createSelector(
 
 export const getHasGameStarted = createSelector(
 	gameFeature,
-	state => state.hasGameStarted
+	state => state.boardStatus.hasGameStarted
 );
 
 export const getIsLoading = createSelector(
@@ -61,8 +62,9 @@ export const getIsLoading = createSelector(
 export const getTurnInfo = createSelector(
 	gameFeature,
 	state => {
-		const { playerInTurn: currentTurn, userPlayer, isRoundFirst, hasGameStarted, shouldDragCards } = state;
-		const isUserTurn = currentTurn === userPlayer.id && hasGameStarted && shouldDragCards;
+		const { userPlayer, isRoundFirst, boardStatus } = state;
+		const isUserTurn = boardStatus.playerInTurn === userPlayer.id && boardStatus.hasGameStarted &&
+			boardStatus.shouldDragCards && state.avaiableCards.length > 0;
 		const cardsCount = isRoundFirst ? 5 : 1;
 		return { isUserTurn, cardsCount }
 	}
@@ -71,8 +73,8 @@ export const getTurnInfo = createSelector(
 export const getPlayersState = createSelector(
 	gameFeature,
 	state => {
-		const { hasGameStarted, isGuessingTime, players } = state;
-		return { hasGameStarted: hasGameStarted, isGuessingTime, players }
+		const { isGuessingTime, players, boardStatus } = state;
+		return { hasGameStarted: boardStatus.hasGameStarted, isGuessingTime, players }
 	}
 );
 export const getFirstPlayerId = createSelector(
@@ -85,52 +87,50 @@ export const getFirstPlayerId = createSelector(
 export const getScoreInput = createSelector(
 	gameFeature,
 	state => {
-		const { userPlayer, boardCards, currentStory, players } = state;
-		return { userPlayer, boardCards, currentStory, players }
+		const { userPlayer, boardCards, boardStatus, players } = state;
+		return { userPlayer, boardCards, currentStory: boardStatus.currentStory, players }
 	}
 );
 
-export const getAvaiableCards = createSelector(
+export const getHandInfo = createSelector(
 	gameFeature,
 	(state: GameState) => {
-		const { avaiableCards } = state;
-		return { nextPlayerTurn: getNextPlayerId(state), avaiableCards }
+		const { avaiableCards, userPlayer } = state;
+		const nextPlayerId = getNextPlayerInTurn(state.userPlayer, state.players).id;
+		const lastIndex = state.players.length - 1;
+		const isPickUpCompleted = userPlayer.id === state.players[lastIndex].id;
+		console.log(userPlayer.id + '|||' + state.players[lastIndex].id + '||| isPickUpCompleted:' + isPickUpCompleted);
+		return { nextPlayerTurn: nextPlayerId, avaiableCards, isPickUpCompleted }
 	}
 );
-
-export const getNextPlayerId = createSelector(
-	gameFeature,
-	(state: GameState) => {
-		const nextPlayer = getNextPlayer(state);
-		return nextPlayer.id;//TODO: remove ths one and call getNextPlayer
-	}
-);
-
 
 export const getNextPlayer = createSelector(
 	gameFeature,
 	(state: GameState) => {
 		const { userPlayer, players } = state;
-		const isLastPlayer = userPlayer.order === players.length;
-		const nextOrder = (isLastPlayer ? 1 : userPlayer.order + 1);
-		const nextPlayer = players.find(player => player.order === nextOrder);
-		return nextPlayer;
+		return getNextPlayerInTurn(userPlayer, players);
 	}
 );
 
+function getNextPlayerInTurn(userPlayer: Player, players: Player[]) {
+	const isLastPlayer = userPlayer.order === players.length;
+	const nextOrder = (isLastPlayer ? 1 : userPlayer.order + 1);
+	return players.find(player => player.order === nextOrder);
+}
+
 export const getPlayerCanVote = createSelector(
 	gameFeature,
-	(state: GameState) => !state.userPlayer.isStoryTeller && state.currentStory !== null && !state.userPlayer.hasVoted
+	(state: GameState) => !state.userPlayer.isStoryTeller && state.boardStatus.currentStory !== null && !state.userPlayer.hasVoted && !state.isLoading
 );
 
 export const getIsPlayersTurn = createSelector(
 	gameFeature,
-	(state: GameState) => !state.userPlayer.isStoryTeller && state.currentStory !== null && !state.userPlayer.hasThrowCard
+	(state: GameState) => !state.userPlayer.isStoryTeller && state.boardStatus.currentStory !== null && !state.userPlayer.hasThrowCard && !state.isLoading
 );
 
 export const getIsStoryTellerTurn = createSelector(
 	gameFeature,
-	(state: GameState) => state.userPlayer.isStoryTeller && state.currentStory === null
+	(state: GameState) => state.userPlayer.isStoryTeller && state.boardStatus.currentStory === null
 );
 
 export const getUserPlayerState = createSelector(

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Player } from '../../models';
 import { Store, select } from '@ngrx/store';
-import { GameState, getPlayers, getUserPlayer, getAvaiableCards, getScoreInput, getUserPlayerState, getNextPlayerId, getFirstPlayerId, getNextPlayer } from '../../store/game';
+import { GameState, getPlayers, getUserPlayer, getHandInfo, getScoreInput, getUserPlayerState, getFirstPlayerId, getNextPlayer } from '../../store/game';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { PlayerFirebaseService } from './player.firebase.service';
 import { StoryCard } from '../../models/StoryCard';
@@ -55,34 +55,40 @@ export class PlayerService {
 			take(1),
 			switchMap(async userPlayer => {
 				const player = { ...userPlayer, hasVoted: true };
-				await this.firestore.update(player.id.toString(), player);
+				await this.firestore.update(player.id, player);
 				return player;
 			})
 		);
 	}
 
-	getUserHand(cardsCount: number) {
-		return this.gameStore.select(getAvaiableCards).pipe(take(1),
-			map((info) => ({ cards: info.avaiableCards.slice(0, cardsCount), nextPlayerTurn: info.nextPlayerTurn }))
-		);
+	getUserHand() {
+		//this.gameStore.select(getHandInfo).pipe(take(1));
+		return this.gameStore.pipe(take(1), select(getHandInfo));
 	}
 
 	getNextPlayerId() {
-		return this.gameStore.pipe(select(getNextPlayerId), take(1));
+		return this.gameStore.pipe(select(getNextPlayer), take(1), map(player => player.id));
 	}
 
 	setNextStoryTeller() {
-		return this.gameStore.pipe(select(getNextPlayer), take(1), map(async player => {
-			player.isStoryTeller = true;
+		return this.gameStore.pipe(select(getNextPlayer), take(1), map(async userPlayer => {
+			const player = { ...userPlayer, isStoryTeller: true };
 			await this.firestore.update(player.id, player);
 			return player;
 		}));
-
 	}
 
+	updatePlayer() {
+		return this.gameStore.pipe(select(getUserPlayer), take(1), map(async player => {
+			player.isStoryTeller = false;
+			await this.firestore.update(player.id, player);
+			return player;
+		}));
+	}
 
 	updateScore() {
 		return this.gameStore.pipe(select(getScoreInput),
+			take(1),
 			switchMap(async input => {
 				{
 					const { userPlayer, boardCards, currentStory, players } = input;
@@ -101,7 +107,6 @@ export class PlayerService {
 		return {
 			currentHand: this.localStorage.get(StorageKey.currentHand) || [],
 			userPlayer: this.localStorage.get(StorageKey.userPlayer) || null,
-			isLogged: this.localStorage.get(StorageKey.isLogged) || false,
 			isGuessingTime: this.localStorage.get(StorageKey.isGuessingTime) || false,
 			isRoundFirst: this.localStorage.get(StorageKey.isRoundFirst) || true
 		}
@@ -112,7 +117,6 @@ export class PlayerService {
 			this.localStorage.set(StorageKey.currentHand, userPlayerState.currentHand);
 			this.localStorage.set(StorageKey.isRoundFirst, userPlayerState.isRoundFirst);
 			this.localStorage.set(StorageKey.isGuessingTime, userPlayerState.isGuessingTime);
-			this.localStorage.set(StorageKey.isLogged, userPlayerState.isLogged);
 			this.localStorage.set(StorageKey.userPlayer, userPlayerState.userPlayer);
 		}))
 	}

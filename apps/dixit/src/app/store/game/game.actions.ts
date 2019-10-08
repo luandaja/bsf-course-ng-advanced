@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { BoardCard } from '../../models/BoardCard';
 import { StoryCard } from '../../models/StoryCard';
-import { Player } from '../../models';
+import { Player, BoardStatus } from '../../models';
 
 export const boardCardsLoaded = createAction('[Board Cards] Loaded board cards',
 	props<{ boardCards: BoardCard[] }>()
@@ -116,7 +116,7 @@ export const updateShouldDragCard = createAction(
 
 export const playerStateRecovered = createAction(
 	'[AppState] Player state recovered',
-	props<{ player: Player, isLogged: boolean, currentHand: number[], isRoundFirst: boolean, isGuessingTime: boolean }>()
+	props<{ player: Player, currentHand: number[], isRoundFirst: boolean, isGuessingTime: boolean }>()
 );
 
 export const recoverPlayerState = createAction('[AppState] recover player state');
@@ -126,3 +126,8 @@ export const gameStarted = createAction('[Game] game started',
 );
 export const signOut = createAction('[Auth] Sign out');
 export const nothing = createAction('Nothing');
+
+export const updateBoardStatus = createAction('[Update Status]',
+	props<{ boardStatus: BoardStatus }>());
+export const updateLoading = createAction('[Loading] update loading',
+	props<{ isLoading: boolean }>());

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, startGame, getHasGameStarted, getPlayers, updateHasGameStarted, fetchPlayers, playersLoaded, saveUser } from '../../../store/game';
+import { GameState, startGame, getHasGameStarted, getPlayers, updateHasGameStarted, fetchPlayers, playersLoaded, saveUser, updateLoading } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
@@ -41,10 +41,8 @@ export class StartGameComponent implements OnInit, OnDestroy {
 			});
 
 		this.players$ = this.playerService.collection$()
-			.subscribe(players => this.gameStore.dispatch(playersLoaded({ players: Object.assign([], players) })));
-		this.hasGameStarted$ = this.stateService.doc$(StatusBoard.GameState)
-			.subscribe(state => this.gameStore.dispatch(updateHasGameStarted({ hasGameStarted: state.hasGameStarted })));
-		this.unableStartGame$ = this.gameStore.pipe(select(getPlayers), map(players => players.length < 3 || players.length > 6));
+			.subscribe(players => this.gameStore.dispatch(playersLoaded({ players })));
+		this.unableStartGame$ = this.gameStore.pipe(select(getPlayers), map(players => players.length < 2 || players.length > 6));
 	}
 
 	ngOnDestroy() {

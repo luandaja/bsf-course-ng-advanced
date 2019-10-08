@@ -22,7 +22,6 @@ export class LocalStorageService {
 	clear() {
 		this.storage.remove(StorageKey.userPlayer);
 		this.storage.remove(StorageKey.currentHand);
-		this.storage.remove(StorageKey.isLogged);
 		this.storage.remove(StorageKey.isGuessingTime);
 		this.storage.remove(StorageKey.isRoundFirst);
 	}
@@ -32,7 +31,6 @@ export class LocalStorageService {
 export enum StorageKey {
 	userPlayer = 'userPlayer',
 	currentHand = 'currentHand',
-	isLogged = 'isLogged',
 	isGuessingTime = 'isGuessingTime',
 	isRoundFirst = 'isRoundFirst'
 }

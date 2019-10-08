@@ -16,6 +16,7 @@
 		</div>
 	</ng-container>
 	<div class="row col-sm-12 justify-content-center">
+		<gt-spinner [isLoading]="isLoading"></gt-spinner>
 		<div
 			class="card shadow"
 			*ngFor="let card of handCards$ | async"

@@ -15,12 +15,9 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 export class TableBoardComponent implements OnInit, OnDestroy {
 
 	isLoading$: Observable<boolean>;
-	private updateScore$: Subscription;
-	private areVotesVisible$: Subscription;
-	private currentStory$: Subscription;
+	private playerScoreChanges$: Subscription;
 
-	constructor(private gameStore: Store<GameState>,
-		private stateService: StatusBoardFirebaseService) { }
+	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
 		this.onGameStart();
@@ -28,28 +25,14 @@ export class TableBoardComponent implements OnInit, OnDestroy {
 	}
 
 	private onGameStart() {
-
-		this.updateScore$ = this.gameStore.select(getVotesVisibility).subscribe(areVotesVisible => {
+		this.playerScoreChanges$ = this.gameStore.select(getVotesVisibility).subscribe(areVotesVisible => {
 			if (areVotesVisible) {
 				this.gameStore.dispatch(updatePlayerScore());
 			}
-		})
-
-		this.areVotesVisible$ = this.stateService.doc$(StatusBoard.VotesVisibility).pipe(distinctUntilChanged((x, y) => x.areVotesVisible === y.areVotesVisible))
-			.subscribe(state => {
-				this.gameStore.dispatch(setVotesVisibility({ areVotesVisible: state.areVotesVisible }));
-			});
-
-		this.currentStory$ = this.stateService.doc$(StatusBoard.CurrentStory).pipe(distinctUntilChanged((x, y) => x.currentStory === y.currentStory))
-			.subscribe(state => {
-				if (state.currentStory)
-					this.gameStore.dispatch(currentStorySetted({ currentStory: state.currentStory }));
-			});
+		});
 	}
 
 	ngOnDestroy(): void {
-		this.updateScore$.unsubscribe();
-		this.areVotesVisible$.unsubscribe();
-		this.currentStory$.unsubscribe();
+		this.playerScoreChanges$.unsubscribe();
 	}
 }

@@ -2,7 +2,7 @@ import { BoardCardsFirestoreService } from '../../core/services/board-cards.fire
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, from, of, combineLatest, forkJoin, pipe } from 'rxjs';
-import { map, mergeMap, catchError, exhaustMap, switchMap, take, tap, mergeAll } from 'rxjs/operators';
+import { map, mergeMap, catchError, exhaustMap, switchMap, take, tap, mergeAll, delay } from 'rxjs/operators';
 import * as actions from './game.actions';
 import { PlayerService } from '../../core/services/player.service';
 import { BoardCard } from '../../models/BoardCard';
@@ -39,12 +39,13 @@ export class GameEffects {
 			}
 			)));
 
+
 	recoverPlayerState$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.recoverPlayerState),
 			switchMap(async action => {
-				const { userPlayer, isRoundFirst, currentHand, isLogged, isGuessingTime } = this.playerService.recoverPlayerState();
-				return actions.playerStateRecovered({ player: userPlayer, isRoundFirst, currentHand, isLogged, isGuessingTime });
+				const { userPlayer, isRoundFirst, currentHand, isGuessingTime } = this.playerService.recoverPlayerState();
+				return actions.playerStateRecovered({ player: userPlayer, isRoundFirst, currentHand, isGuessingTime });
 			}
 			)));
 
@@ -56,18 +57,37 @@ export class GameEffects {
 				return actions.nothing();
 			}
 			)));
-
+	//delay(700),
 	startGame$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.startGame),
 			switchMap(async action => {
-				await this.stateService.update(StatusBoard.GameState, { hasGameStarted: true });
 				await this.cardsService.insertBatch(this.generateCardIndexes());
 				const firstPlayer = await this.playerService.getFirstPlayer().toPromise();
-
+				await this.stateService.update(StatusBoard.status, {
+					hasGameStarted: true,
+					shouldDragCards: true,
+					playerInTurn: firstPlayer.id
+				});
 				this.snackbarService.showSuccess("Let's start playing!", 'Dixit');
 				this.snackbarService.showInfo(`${firstPlayer.username} is the story teller`, 'Dixit');
-				return actions.gameStarted({ playerInTurn: firstPlayer.id });
+				return actions.nothing();
+			}
+			)
+		)
+	);
+
+
+	setUserHand$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.setUserHand),
+			switchMap(async action => {
+				const handInfo = await this.playerService.getUserHand().toPromise();
+				console.log('handInfo', handInfo);
+				const cards = handInfo.avaiableCards.slice(0, action.cardsCount);
+				await this.cardsService.deleteQueryBatch(cards.map(card => card.toString())).toPromise();
+				await this.stateService.update(StatusBoard.status, { playerInTurn: handInfo.nextPlayerTurn, shouldDragCards: !handInfo.isPickUpCompleted });
+				return actions.userHandSetted({ cards });
 			}
 			)
 		)
@@ -90,7 +110,7 @@ export class GameEffects {
 		this.actions$.pipe(
 			ofType(actions.setCurrentStory),
 			switchMap(async action => {
-				await this.stateService.update(StatusBoard.CurrentStory, { currentStory: action.currentStory });
+				await this.stateService.update(StatusBoard.status, { currentStory: action.currentStory });
 				const boardCard: BoardCard = { id: action.currentStory.cardIndex, cardIndex: action.currentStory.cardIndex, owner: action.currentStory.storyTeller, votes: [] };
 				await this.boardCardsService.create(boardCard).toPromise();
 				await this.playerService.playerThrowCard().toPromise();
@@ -128,24 +148,11 @@ export class GameEffects {
 		)
 	);
 
-	setUserHand$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(actions.setUserHand),
-			switchMap(async action => {
-				const result = await this.playerService.getUserHand(action.cardsCount).toPromise();
-				await this.cardsService.deleteQueryBatch(result.cards.map(card => card.toString())).toPromise();
-				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentPlayerTurn: result.nextPlayerTurn });
-				return actions.userHandSetted({ cards: result.cards });
-			}
-			)
-		)
-	);
-
 	showVotes$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.showVotes),
 			switchMap(async action => {
-				await this.stateService.update(StatusBoard.VotesVisibility, { areVotesVisible: true });
+				await this.stateService.update(StatusBoard.status, { areVotesVisible: true });
 				return actions.nothing();
 			}
 			)
@@ -165,25 +172,18 @@ export class GameEffects {
 		this.actions$.pipe(
 			ofType(actions.nextRound),
 			switchMap(async action => {
+				await this.playerService.updatePlayer();
 				await this.playerService.setNextStoryTeller().toPromise();
 				const firstPlayer = await this.playerService.getFirstPlayer().toPromise();
-				await this.stateService.update(StatusBoard.CurrentPlayerTurn, { currentPlayerTurn: firstPlayer.id });
-
-				await this.stateService.update(StatusBoard.CurrentStory, { currentStory: null });
-				await this.stateService.update(StatusBoard.shouldRefreshPlayer, { shouldRefreshPlayer: true });
-				await this.stateService.update(StatusBoard.shouldDragCards, { shouldDragCards: true });
-
-				//const firstPlayer = await this.playerService.getFirstPlayer().toPromise();
-				//update next storyteller
-				//updating the turn starting from order 1 to last one, so all can pick a card
-				//update al user en reducer
-				//update shouldDragCard a true yala
-
-				//shouldRefreshPlayer true
-
+				await this.stateService.update(StatusBoard.status, {
+					playerInTurn: firstPlayer.id,
+					currentStory: null,
+					//shouldRefreshPlayer: true,
+					shouldDragCards: true
+				});
 				await this.boardCardsService.deleteCollection().toPromise();
 				this.snackbarService.showSuccess("Go to your hand to get your next card!", 'Dixit');
-				return actions.nextRoundSetted({ nextPlayerTurn: firstPlayerId });
+				return actions.nothing();
 			}
 			)
 		)
