@@ -1,10 +1,7 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { GameState, getIsLoading, setVotesVisibility, avaiableCardsLoaded, currentStorySetted, getVotesVisibility, updatePlayerScore } from '../../../store/game';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { GameState, getIsLoading, getVotesVisibility, updatePlayerScore } from '../../../store/game';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
-import { AvaiableCardsService } from '../../../core/services/avaiable-cards.firebase.service';
-import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
 	selector: 'gt-table-board',

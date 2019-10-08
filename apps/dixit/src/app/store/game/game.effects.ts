@@ -93,19 +93,6 @@ export class GameEffects {
 		)
 	);
 
-	fetchPlayers$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(actions.fetchPlayers),
-			exhaustMap(() =>
-				this.playerService.collection$()
-					.pipe(
-						take(1),
-						map((players) => actions.playersLoaded({ players }))
-					)
-			)
-		)
-	);
-
 	setCurrentStory$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.setCurrentStory),

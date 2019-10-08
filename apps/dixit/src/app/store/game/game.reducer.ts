@@ -2,8 +2,8 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
 	setBoardCard, setCurrentStory,
 	showVotes, nextRound, signIn, signInSuccess, boardCardsLoaded, boardCardSetted,
-	updateUserPlayer, setVote, currentStorySetted, nextRoundSetted, userHandSetted,
-	updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted, setVotesVisibility, playerScoreUpdated, voteSetted, recoverPlayerState, playerStateRecovered, gameStarted, updateBoardStatus, startGame, updateLoading
+	setVote, currentStorySetted, userHandSetted,
+	avaiableCardsLoaded, playersLoaded, playerScoreUpdated, voteSetted, playerStateRecovered, updateBoardStatus, updateLoading
 } from './game.actions';
 import { GameState, initalState } from './game.state';
 import { add, concat, shuffle, update } from '../../models/Utils';
@@ -36,8 +36,6 @@ const reducer = createReducer(
 	on(setVote, (state, { }) => ({ ...state, isLoading: true })),
 	on(voteSetted, (state, { boardCard }) => ({ ...state, isLoading: false, boardCards: update(state.boardCards, boardCard), userPlayer: { ...state.userPlayer, hasVoted: true } })),
 
-	on(updateUserPlayer, (state, { userPlayer }) => ({ ...state, userPlayer, players: update(state.players, state.userPlayer) })),
-
 	on(setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
 	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false, userPlayer: { ...state.userPlayer, hasThrowCard: true }, currentHand: state.currentHand.filter(x => x !== currentStory.cardIndex) })),
 
@@ -48,7 +46,6 @@ const reducer = createReducer(
 
 	on(userHandSetted, (state, { cards }) => ({ ...state, isRoundFirst: false, currentHand: concat(state.currentHand, cards), avaiableCards: state.avaiableCards.filter(x => !cards.includes(x)) })),
 
-	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, playerInTurn: currentTurn })),
 );
 
 function addBoardCard(list: any[], item: any) {

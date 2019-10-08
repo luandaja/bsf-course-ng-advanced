@@ -11,7 +11,6 @@ export const avaiableCardsLoaded = createAction('[Board Cards] Loaded avaiable c
 	props<{ cards: number[] }>()
 );
 
-export const fetchPlayers = createAction('[Board Card] Fetch players');
 export const playersLoaded = createAction('[Board Cards] Loaded players',
 	props<{ players: Player[] }>()
 );
@@ -43,17 +42,6 @@ export const voteSetted = createAction(
 	props<{ boardCard: BoardCard }>()
 );
 
-export const setGuessingTime = createAction(
-	'[Board Cards] Set guessing time',
-	props<{ isGuessingTime: boolean }>()
-);
-
-export const updateCurrentTurn = createAction(
-	'[Player Hand] Update current turn',
-	props<{ currentTurn: string }>()
-);
-export const setNextTurn = createAction('[Board Cards] Set next turn');
-
 export const showVotes = createAction('[Board Cards] Show votes');
 
 export const setCurrentStory = createAction(
@@ -68,11 +56,6 @@ export const currentStorySetted = createAction(
 export const setUserHand = createAction(
 	'[Player Hand] Set hands card',
 	props<{ cardsCount: number }>()
-);
-
-export const setVotesVisibility = createAction(
-	'[Player Hand] Set votes visibility',
-	props<{ areVotesVisible: boolean }>()
 );
 
 export const updatePlayerScore = createAction(
@@ -98,11 +81,6 @@ export const signInSuccess = createAction(
 	'[Auth] Sign in success',
 	props<{ userPlayer: Player }>());
 
-export const updateUserPlayer = createAction(
-	'[Auth] Update user player',
-	props<{ userPlayer: Player }>()
-);
-
 export const updateHasGameStarted = createAction(
 	'[Game] Update has game started',
 	props<{ hasGameStarted: boolean }>()
@@ -112,7 +90,6 @@ export const updateShouldDragCard = createAction(
 	'[Game] Update should hd',
 	props<{ hasGameStarted: boolean }>()
 );
-
 
 export const playerStateRecovered = createAction(
 	'[AppState] Player state recovered',

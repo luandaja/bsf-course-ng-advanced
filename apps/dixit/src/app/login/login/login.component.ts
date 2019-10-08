@@ -2,9 +2,8 @@ import { Banner } from '@glotrix/ui/login';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { loginEntries } from './form-fields';
 import { Store } from '@ngrx/store';
-import { GameState, signIn, getIsLoading, fetchPlayers, playersLoaded } from '../../store/game';
+import { GameState, signIn, getIsLoading, playersLoaded } from '../../store/game';
 import { Observable, Subscription } from 'rxjs';
-import { SnackbarService } from '@glotrix/ui/snackbar';
 import { PlayerService } from '../../core/services/player.service';
 
 export const banner: Banner = {

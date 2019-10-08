@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, updateCurrentTurn, getTurnInfo, setUserHand, avaiableCardsLoaded, getIsPlayersTurn, getIsStoryTellerTurn, getIsLoading } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getTurnInfo, setUserHand, avaiableCardsLoaded, getIsPlayersTurn, getIsStoryTellerTurn } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
 import { Player } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
-import { map, switchMap, distinctUntilChanged, tap } from 'rxjs/operators';
-import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { AvaiableCardsService } from '../../../core/services/avaiable-cards.firebase.service';
 
 @Component({
