@@ -34,6 +34,5 @@ export class DashboardLayoutComponent {
 
 	onLogOut() {
 		this.store.dispatch(signOut());
-		this.router.navigateByUrl('login');
 	}
 }

@@ -1,5 +1,5 @@
 <div class="float-left card ">
-	<ng-container *ngIf="areVotesVisible$ | async">
+	<ng-container *ngIf="areVotesVisible">
 		<gt-avatar
 			class="pb-1"
 			[width]="80"
@@ -12,9 +12,9 @@
 		[cardIndex]="boardCard.cardIndex"
 		[isSelected]="isSelected"
 		[isRevealed]="isRevealed"
-		[isJumping]="isJumping && (areVotesVisible$ | async)"
+		[isJumping]="isJumping && areVotesVisible"
 	></gt-card>
-	<ng-container *ngIf="areVotesVisible$ | async">
+	<ng-container *ngIf="areVotesVisible">
 		<gt-avatar
 			class="pt-1"
 			*ngFor="let vote of boardCard.votes"

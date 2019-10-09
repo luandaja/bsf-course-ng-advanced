@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { StoryCard } from '../../../models/StoryCard';
 import { Store, select } from '@ngrx/store';
 import { GameState, getCurrentStory, showVotes, getUserPlayer, getVotesVisibility, nextRound } from '../../../store/game';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'gt-story',
@@ -15,7 +15,6 @@ export class StoryComponent implements OnInit {
 	currentStory$: Observable<StoryCard>;
 	isStoryTeller$: Observable<boolean>;
 	areVotesVisible$: Observable<boolean>;
-	userTurn: number;
 
 	constructor(private gameStore: Store<GameState>) { }
 

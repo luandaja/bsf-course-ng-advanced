@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getTurnInfo, setUserHand, avaiableCardsLoaded, getIsPlayersTurn, getIsStoryTellerTurn, nextRound } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getTurnInfo, setUserHand, avaiableCardsLoaded, getCurrentStory, getIsLoading } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
-import { Player } from '../../../models';
+import { Player, StoryCard } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { AvaiableCardsService } from '../../../core/services/avaiable-cards.firebase.service';
@@ -14,13 +14,12 @@ import { AvaiableCardsService } from '../../../core/services/avaiable-cards.fire
 })
 export class HandComponent implements OnInit, OnDestroy {
 	handCards$: Observable<number[]>;
-	isPlayersTurn$: Observable<boolean>;
-	isStoryTellerTurn$: Observable<boolean>;
+	isLoading$: Observable<boolean>;
 	userPlayer$: Observable<Player>;
+	currentStory$: Observable<StoryCard>;
+	private playerTurnChanges$: Subscription;
 
 	private avaiableCardsChanges$: Subscription;
-	private playerTurnChanges$: Subscription;
-	isLoading = true;
 	boardCard: BoardCard;
 	selectedCardIndex: number;
 
@@ -28,10 +27,10 @@ export class HandComponent implements OnInit, OnDestroy {
 		private cardsService: AvaiableCardsService) { }
 
 	ngOnInit() {
-		this.handCards$ = this.gameStore.pipe(select(getCurrentHand), tap(x => this.isLoading = x.length === 0));
+		this.currentStory$ = this.gameStore.pipe(select(getCurrentStory));
+		this.handCards$ = this.gameStore.pipe(select(getCurrentHand));
 		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
-		this.isStoryTellerTurn$ = this.gameStore.pipe(select(getIsStoryTellerTurn));
-		this.isPlayersTurn$ = this.gameStore.pipe(select(getIsPlayersTurn));
+		this.isLoading$ = this.gameStore.select(getIsLoading);
 
 		this.avaiableCardsChanges$ = this.cardsService.collection$(ref => ref.orderBy('order'))
 			.subscribe((results: any[]) => this.gameStore.dispatch(avaiableCardsLoaded({ cards: results.map(result => result.cardIndex) })));
@@ -40,10 +39,6 @@ export class HandComponent implements OnInit, OnDestroy {
 			if (turnInfo.isUserTurn)
 				this.gameStore.dispatch(setUserHand({ cardsCount: turnInfo.cardsCount }));
 		});
-	}
-
-	test() {
-		this.gameStore.dispatch(nextRound());
 	}
 
 	ngOnDestroy() {

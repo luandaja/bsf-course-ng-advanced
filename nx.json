@@ -73,6 +73,9 @@
     },
     "ui-snackbar": {
       "tags": ["ui"]
+    },
+    "ui-quote": {
+      "tags": ["ui"]
     }
   }
 }

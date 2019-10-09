@@ -1,10 +1,9 @@
 import { Banner } from '@glotrix/ui/login';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { loginEntries } from './form-fields';
 import { Store } from '@ngrx/store';
-import { GameState, signIn, getIsLoading, playersLoaded } from '../../store/game';
-import { Observable, Subscription } from 'rxjs';
-import { PlayerService } from '../../core/services/player.service';
+import { GameState, signIn, getIsLoading } from '../../store/game';
+import { Observable } from 'rxjs';
 
 export const banner: Banner = {
 	upperText: 'ONLINE BOARD GAMES',
@@ -18,23 +17,16 @@ export const banner: Banner = {
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
 	entries = loginEntries;
 	banner = banner;
 	isLoading$: Observable<boolean>;
-	playersChanges$: Subscription;
 
-	constructor(private gameStore: Store<GameState>, private playerService: PlayerService) { }
+	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
 		this.isLoading$ = this.gameStore.select(getIsLoading);
-		this.playersChanges$ = this.playerService.collection$()
-			.subscribe((players) => this.gameStore.dispatch(playersLoaded({ players })));
-	}
-
-	ngOnDestroy() {
-		this.playersChanges$.unsubscribe();
 	}
 
 	onSubmitted(formData: any) {

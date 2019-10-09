@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { GameState, playersLoaded, getPlayers } from '../../../store/game';
-import { PlayerService } from '../../../core/services/player.service';
+import { GameState, getPlayers } from '../../../store/game';
 import { map } from 'rxjs/operators';
 import { Player } from '../../../models';
 
@@ -11,27 +10,18 @@ import { Player } from '../../../models';
 	templateUrl: './score-board.component.html',
 	styleUrls: ['./score-board.component.scss']
 })
-export class ScoreBoardComponent implements OnInit, OnDestroy {
+export class ScoreBoardComponent implements OnInit {
 
 	players$: Observable<Player[]>;
-	playersChanges$: Subscription;
 
-	constructor(private gameStore: Store<GameState>,
-		private playerService: PlayerService) { }
+	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
-		this.playersChanges$ = this.playerService.collection$()
-			.subscribe((players) => this.gameStore.dispatch(playersLoaded({ players })));
-
 		this.players$ = this.gameStore.pipe(select(getPlayers), map(players => {
 			const newPlayers = Object.assign([], players) as Player[];
 			newPlayers.sort((a, b) => b.score - a.score);
 			return newPlayers;
 		}));
-	}
-
-	ngOnDestroy() {
-		this.playersChanges$.unsubscribe();
 	}
 
 }

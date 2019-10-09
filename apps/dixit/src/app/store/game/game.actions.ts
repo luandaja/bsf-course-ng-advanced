@@ -32,7 +32,7 @@ export const boardCardSetted = createAction(
 
 export const setVote = createAction(
 	'[Board Cards] Set vote',
-	props<{ boardCard: BoardCard, userPlayer: Player }>()
+	props<{ boardCard: BoardCard }>()
 );
 
 export const saveUser = createAction('[App State] Save user');
@@ -101,6 +101,7 @@ export const startGame = createAction('[Game] start game');
 export const gameStarted = createAction('[Game] game started',
 	props<{ playerInTurn: string }>()
 );
+export const signOutSuccess = createAction('[Auth] Sign out success');
 export const signOut = createAction('[Auth] Sign out');
 export const nothing = createAction('Nothing');
 

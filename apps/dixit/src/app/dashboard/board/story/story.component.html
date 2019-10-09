@@ -2,18 +2,12 @@
 	class="row col-sm-11 m-2 orange-border"
 	*ngIf="currentStory$ | async as currentStory"
 >
-	<div class="col-sm-1">
-		<gt-avatar
-			[width]="100"
-			[height]="100"
-			[source]="currentStory?.storyTeller?.photoUrl"
-		>
-		</gt-avatar>
-	</div>
-	<div class="col-sm-6">
-		<span class="align-middle story-title">{{ currentStory?.title }}</span>
-	</div>
-	<div class="row col-sm-11 pt-2" *ngIf="isStoryTeller$ | async">
+	<gt-quote
+		class="col-sm-12"
+		[photoUrl]="currentStory?.storyTeller?.photoUrl"
+		[quoteText]="currentStory?.title"
+	></gt-quote>
+	<div class="col-sm-1 pt-2" *ngIf="isStoryTeller$ | async">
 		<button
 			class="btn btn-info"
 			(click)="showVotes()"

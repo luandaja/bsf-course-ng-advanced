@@ -2,11 +2,13 @@ import { Action, createReducer, on } from '@ngrx/store';
 
 import * as action from './game.actions';
 import { GameState, initalState } from './game.state';
-import { add, concat, shuffle, update } from '../../models/Utils';
+import { concat, update } from '../../models/Utils';
 import { Player } from '../../models';
 
 const reducer = createReducer(
 	initalState,
+	on(action.signOut, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.signOutSuccess, (state, { }) => ({ ...state, isLoading: false, userPlayer: null, players: [], isLogged: false, isGuessingTime: false, isRoundFirst: true, currentHand: [], avaiableCards: [], boardCards: [], boardStatus: null })),
 	on(action.signIn, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.signInSuccess, (state, { userPlayer }) => ({ ...state, isLogged: true, isLoading: false, userPlayer })),
 
@@ -22,10 +24,7 @@ const reducer = createReducer(
 	on(action.avaiableCardsLoaded, (state, { cards }) => ({ ...state, avaiableCards: cards })),
 
 	on(action.setBoardCard, (state, { }) => ({ ...state, isLoading: true })),
-	on(action.boardCardSetted, (state, { boardCard }) => ({
-		...state, isLoading: false, boardCards: addBoardCard(state.boardCards, boardCard), currentHand: state.currentHand.filter(card => card !== boardCard.cardIndex),
-		userPlayer: { ...state.userPlayer, hasThrowCard: true }
-	})),
+	on(action.boardCardSetted, (state, { boardCard }) => ({ ...state, isLoading: false, currentHand: state.currentHand.filter(card => card !== boardCard.cardIndex) })),
 
 	on(action.setVote, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.voteSetted, (state, { boardCard }) => ({ ...state, isLoading: false, boardCards: update(state.boardCards, boardCard), userPlayer: { ...state.userPlayer, hasVoted: true } })),
@@ -33,10 +32,10 @@ const reducer = createReducer(
 	on(action.setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false, userPlayer: { ...state.userPlayer, hasThrowCard: true }, currentHand: state.currentHand.filter(x => x !== currentStory.cardIndex) })),
 
-	on(action.showVotes, (state, { }) => ({ ...state, isLoading: true })),
-	on(action.playerScoreUpdated, (state, { userPlayer }) => ({ ...state, isLoading: false, userPlayer, players: update(state.players, userPlayer) })),
+	// on(action.showVotes, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.playerScoreUpdated, (state, { userPlayer }) => ({ ...state, userPlayer, players: update(state.players, userPlayer) })),
 
-	on(action.nextRound, (state, { }) => ({ ...state, isLoading: true })),
+	// on(action.nextRound, (state, { }) => ({ ...state, })),
 
 	on(action.userHandSetted, (state, { cards }) => ({ ...state, isRoundFirst: false, currentHand: concat(state.currentHand, cards), avaiableCards: state.avaiableCards.filter(x => !cards.includes(x)) })),
 
@@ -44,11 +43,6 @@ const reducer = createReducer(
 
 function getUserPlayer(players: Player[], userPlayer: Player) {
 	return userPlayer === null ? null : { ...players.find(player => player.id === userPlayer.id) };
-}
-
-function addBoardCard(list: any[], item: any) {
-	const newList = add(list, item);
-	return shuffle(newList);
 }
 
 export function gameReducer(state: GameState | undefined, actionTriggered: Action) {

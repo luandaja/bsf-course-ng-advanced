@@ -1,8 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { GameState, getVotesVisibility } from '../../../store/game';
-import { BoardCard } from '../../../models/BoardCard';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
 	selector: 'gt-card',

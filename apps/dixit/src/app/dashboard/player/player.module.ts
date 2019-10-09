@@ -8,6 +8,7 @@ import { StoryEditorComponent } from './story-editor/story-editor.component';
 import { UiFormsModule } from '@glotrix/ui/forms';
 import { CardSelectorComponent } from './card-selector/card-selector.component';
 import { UiSpinnerModule } from '@glotrix/ui/spinner';
+import { UiQuoteModule } from '@glotrix/ui/quote';
 
 @NgModule({
 	declarations: [HandComponent, StoryEditorComponent, CardSelectorComponent],
@@ -16,7 +17,8 @@ import { UiSpinnerModule } from '@glotrix/ui/spinner';
 		PlayerRoutingModule,
 		UiFormsModule,
 		UiSpinnerModule,
-		UiCardModule
+		UiCardModule,
+		UiQuoteModule
 	]
 })
 export class PlayerModule { }

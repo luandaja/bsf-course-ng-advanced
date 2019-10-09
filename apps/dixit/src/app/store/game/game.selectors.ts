@@ -121,14 +121,10 @@ function getNextPlayerInTurn(userPlayer: Player, players: Player[]) {
 	return players.find(player => player.order === nextOrder);
 }
 
-export const getPlayerCanVote = createSelector(
-	gameFeature,
-	(state: GameState) => !state.userPlayer.isStoryTeller && state.boardStatus.currentStory !== null && !state.userPlayer.hasVoted && !state.isLoading
-);
-
 export const getIsPlayersTurn = createSelector(
 	gameFeature,
-	(state: GameState) => !state.userPlayer.isStoryTeller && state.boardStatus.currentStory !== null && !state.userPlayer.hasThrowCard && !state.isLoading
+	(state: GameState) => !state.userPlayer.isStoryTeller && state.boardStatus.currentStory !== null && !state.userPlayer.hasThrowCard &&
+		!state.isLoading && !state.isGuessingTime && !state.boardStatus.areVotesVisible
 );
 
 export const getIsStoryTellerTurn = createSelector(
@@ -143,3 +139,13 @@ export const getUserPlayerState = createSelector(
 		return { userPlayer, isRoundFirst, currentHand, isLogged, isGuessingTime }
 	}
 );
+
+export const getPlayerVoteInfo = createSelector(
+	gameFeature,
+	(state: GameState) => {
+		const playerCanVote = !state.userPlayer.isStoryTeller && state.boardStatus.currentStory !== null &&
+			!state.userPlayer.hasVoted && !state.isLoading && state.isGuessingTime && !state.boardStatus.areVotesVisible;
+		return { playerCanVote, userPlayerId: state.userPlayer.id }
+	}
+);
+

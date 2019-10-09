@@ -1,9 +1,10 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Player } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
-import { Store } from '@ngrx/store';
-import { GameState, setBoardCard } from '../../../store/game';
+import { Store, select } from '@ngrx/store';
+import { GameState, setBoardCard, getIsPlayersTurn } from '../../../store/game';
 import { SnackbarService } from '@glotrix/ui/snackbar';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'gt-card-selector',
@@ -11,14 +12,16 @@ import { SnackbarService } from '@glotrix/ui/snackbar';
 	styleUrls: ['./card-selector.component.scss']
 })
 export class CardSelectorComponent implements OnChanges {
-
 	@Input() cardIndex: number;
 	@Input() userPlayer: Player;
+	isPlayersTurn$: Observable<boolean>;
 
 	constructor(private gameStore: Store<GameState>,
 		private snackbarService: SnackbarService) { }
 
-	ngOnChanges() { }
+	ngOnChanges() {
+		this.isPlayersTurn$ = this.gameStore.pipe(select(getIsPlayersTurn));
+	}
 
 	get message() {
 		return this.cardIndex ? 'Do you want to throw this card?' : 'Select a card to throw';

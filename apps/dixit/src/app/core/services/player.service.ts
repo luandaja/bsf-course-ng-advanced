@@ -54,7 +54,7 @@ export class PlayerService {
 		return this.gameStore.select(getUserPlayer).pipe(
 			take(1),
 			switchMap(async userPlayer => {
-				const player = { ...userPlayer, hasVoted: true };
+				const player = { ...userPlayer, hasVoted: true } as Player;
 				await this.firestore.update(player.id, player);
 				return player;
 			})

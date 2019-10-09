@@ -34,7 +34,7 @@ export class GameEffects {
 			ofType(actions.signOut),
 			switchMap(async action => {
 				this.playerService.logout();
-				return actions.nothing();
+				return actions.signOutSuccess();
 			}
 			)));
 
@@ -139,8 +139,8 @@ export class GameEffects {
 		this.actions$.pipe(
 			ofType(actions.setVote),
 			switchMap(async action => {
-				await this.playerService.playerVote().toPromise();
-				const boardCard: BoardCard = { ...action.boardCard, votes: add(action.boardCard.votes, action.userPlayer) };
+				const userPlayer = await this.playerService.playerVote().toPromise();
+				const boardCard: BoardCard = { ...action.boardCard, votes: add(action.boardCard.votes, userPlayer) };
 				await this.boardCardsService.update(action.boardCard.cardIndex.toString(), boardCard);
 				this.snackbarService.showSuccess("Your vote was saved!", 'Dixit');
 				return actions.voteSetted({ boardCard: boardCard });

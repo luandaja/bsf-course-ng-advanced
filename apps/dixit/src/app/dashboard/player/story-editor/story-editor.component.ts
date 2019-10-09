@@ -1,11 +1,9 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Observable, pipe } from 'rxjs';
-import { FieldType } from '@glotrix/ui/forms';
-import { map } from 'rxjs/operators';
+import { Component, Input, OnChanges } from '@angular/core';
+import { Observable } from 'rxjs';
 import { storyFormFields } from './form-fields';
 import { Player } from '../../../models';
-import { Store } from '@ngrx/store';
-import { GameState, setCurrentStory } from '../../../store/game';
+import { Store, select } from '@ngrx/store';
+import { GameState, setCurrentStory, getIsStoryTellerTurn } from '../../../store/game';
 import { StoryCard } from '../../../models/StoryCard';
 import { SnackbarService } from '@glotrix/ui/snackbar';
 
@@ -15,6 +13,7 @@ import { SnackbarService } from '@glotrix/ui/snackbar';
 	styleUrls: ['./story-editor.component.scss']
 })
 export class StoryEditorComponent implements OnChanges {
+	isStoryTellerTurn$: Observable<boolean>;
 
 	entries = storyFormFields;
 	@Input() cardIndex: number;
@@ -23,7 +22,9 @@ export class StoryEditorComponent implements OnChanges {
 	constructor(private gameStore: Store<GameState>,
 		private snackbarService: SnackbarService) { }
 
-	ngOnChanges() { }
+	ngOnChanges() {
+		this.isStoryTellerTurn$ = this.gameStore.pipe(select(getIsStoryTellerTurn));
+	}
 
 	onSubmitted(formData: any) {
 		if (!this.cardIndex) {
