@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { GameState, getPlayers } from '../../../store/game';
 import { map } from 'rxjs/operators';
-import { Player } from '../../../models';
+import { Poster } from '@glotrix/ui/poster-card';
 
 @Component({
 	selector: 'gt-score-board',
@@ -12,15 +12,17 @@ import { Player } from '../../../models';
 })
 export class ScoreBoardComponent implements OnInit {
 
-	players$: Observable<Player[]>;
+	players$: Observable<Poster[]>;
 
 	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
 		this.players$ = this.gameStore.pipe(select(getPlayers), map(players => {
-			const newPlayers = Object.assign([], players) as Player[];
-			newPlayers.sort((a, b) => b.score - a.score);
-			return newPlayers;
+			return players.map(player => (
+				{
+					hint: player.score.toString(), title: player.username, imageUrl: player.photoUrl
+				} as Poster))
+				.sort((a, b) => parseInt(b.hint, 10) - parseInt(a.hint, 10))
 		}));
 	}
 

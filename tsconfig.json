@@ -33,7 +33,8 @@
       "@glotrix/ui/card": ["libs/ui/card/src/index.ts"],
       "@glotrix/ui/spinner": ["libs/ui/spinner/src/index.ts"],
       "@glotrix/ui/snackbar": ["libs/ui/snackbar/src/index.ts"],
-      "@glotrix/ui/quote": ["libs/ui/quote/src/index.ts"]
+      "@glotrix/ui/quote": ["libs/ui/quote/src/index.ts"],
+      "@glotrix/ui/poster-card": ["libs/ui/poster-card/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

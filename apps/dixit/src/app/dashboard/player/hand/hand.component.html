@@ -26,6 +26,7 @@
 		<gt-spinner [isLoading]="isLoading$ | async"></gt-spinner>
 		<ng-container *ngIf="handCards$ | async as handCards; else loading">
 			<ng-template #loading> <gt-spinner [isLoading]="true"></gt-spinner></ng-template>
+			<ng-template #noItems><span>No cards on hand yet!</span></ng-template>
 			<ng-container *ngIf="handCards.length; else noItems">
 				<div
 					*ngFor="let card of handCards"
@@ -35,7 +36,6 @@
 				>
 					<img [src]="getCardImage(card)" width="200" height="320" />
 				</div>
-				<ng-template #noItems><span>No cards on hand yet!</span></ng-template>
 			</ng-container>
 		</ng-container>
 	</div>

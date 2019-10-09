@@ -855,6 +855,37 @@
           "styleext": "scss"
         }
       }
+    },
+    "ui-poster-card": {
+      "projectType": "library",
+      "root": "libs/ui/poster-card",
+      "sourceRoot": "libs/ui/poster-card/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/poster-card/tsconfig.lib.json",
+              "libs/ui/poster-card/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/poster-card/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/poster-card/jest.config.js",
+            "tsConfig": "libs/ui/poster-card/tsconfig.spec.json",
+            "setupFile": "libs/ui/poster-card/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

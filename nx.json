@@ -76,6 +76,9 @@
     },
     "ui-quote": {
       "tags": ["ui"]
+    },
+    "ui-poster-card": {
+      "tags": ["ui"]
     }
   }
 }
