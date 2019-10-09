@@ -1,21 +1,8 @@
 <div class="row col-sm-12 pt-2">
-	<div class="col-sm-9 col-7 orange-border">
-		<div class="row align-items-center pl-3 pr-2">
-			<h1>{{ welcomeInfo.title }}</h1>
-			<span>{{ welcomeInfo.description }}</span>
-		</div>
-		<div class="col-sm-10 ml-sm-auto">
-			<img
-				class="img-fluid"
-				src="http://www.edgeent.com/sisimg/public/images/dixit_web_h_n_sp_002.png"
-			/>
-		</div>
-	</div>
+	<gt-welcome-card class="col-sm-9 col-7" [message]="message"> </gt-welcome-card>
 	<div class="col-sm-2 col-4  ml-auto orange-border pl-3  pt-2">
-		<div class="col-sm-9">
-			<gt-players class="pull-right"></gt-players>
-		</div>
-		<div class="col-sm-12 offset-md-3">
+		<gt-players></gt-players>
+		<div class="center">
 			<button
 				class="btn btn-info"
 				(click)="startGame()"

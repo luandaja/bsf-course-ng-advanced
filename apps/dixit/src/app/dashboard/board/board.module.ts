@@ -17,6 +17,7 @@ import { VoteEditorComponent } from './vote-editor/vote-editor.component';
 import { StartGameComponent } from './start-game/start-game.component';
 import { CoreModule } from '../../core/core.module';
 import { UiSpinnerModule } from '@glotrix/ui/spinner';
+import { UiLoginModule } from '@glotrix/ui/login';
 
 @NgModule({
 	declarations: [TableBoardComponent, StoryComponent, BoardCardsComponent, CardComponent, BoardCardComponent, PlayersComponent, VoteEditorComponent, StartGameComponent],
@@ -27,7 +28,8 @@ import { UiSpinnerModule } from '@glotrix/ui/spinner';
 		GameStoreModule,
 		UiAvatarModule,
 		UiSpinnerModule,
-		UiQuoteModule
+		UiQuoteModule,
+		UiLoginModule
 	]
 })
 export class BoardModule { }
