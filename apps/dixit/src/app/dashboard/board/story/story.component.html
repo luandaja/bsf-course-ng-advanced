@@ -7,7 +7,7 @@
 		[photoUrl]="currentStory?.storyTeller?.photoUrl"
 		[quoteText]="currentStory?.title"
 	></gt-quote>
-	<div class="col-sm-1 pt-2" *ngIf="isStoryTeller$ | async">
+	<div class="col-sm-12 pt-2" *ngIf="isStoryTeller$ | async">
 		<button
 			class="btn btn-info"
 			(click)="showVotes()"

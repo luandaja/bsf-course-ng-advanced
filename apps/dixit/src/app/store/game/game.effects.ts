@@ -1,7 +1,7 @@
 import { BoardCardsFirestoreService } from '../../core/services/board-cards.firestore.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take, delay } from 'rxjs/operators';
 import * as actions from './game.actions';
 import { PlayerService } from '../../core/services/player.service';
 import { BoardCard } from '../../models/BoardCard';
@@ -95,6 +95,7 @@ export class GameEffects {
 
 	setUserHand$ = createEffect(() =>
 		this.actions$.pipe(
+			delay(900),
 			ofType(actions.setUserHand),
 			switchMap(async action => {
 				const handInfo = await this.playerService.getUserHand().toPromise();

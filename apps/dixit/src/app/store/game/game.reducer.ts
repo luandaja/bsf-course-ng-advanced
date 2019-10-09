@@ -30,12 +30,9 @@ const reducer = createReducer(
 	on(action.voteSetted, (state, { boardCard }) => ({ ...state, isLoading: false, boardCards: update(state.boardCards, boardCard), userPlayer: { ...state.userPlayer, hasVoted: true } })),
 
 	on(action.setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
-	on(action.currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false, userPlayer: { ...state.userPlayer, hasThrowCard: true }, currentHand: state.currentHand.filter(x => x !== currentStory.cardIndex) })),
+	on(action.currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false, currentHand: state.currentHand.filter(x => x !== currentStory.cardIndex) })),
 
-	// on(action.showVotes, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.playerScoreUpdated, (state, { userPlayer }) => ({ ...state, userPlayer, players: update(state.players, userPlayer) })),
-
-	// on(action.nextRound, (state, { }) => ({ ...state, })),
 
 	on(action.userHandSetted, (state, { cards }) => ({ ...state, isRoundFirst: false, currentHand: concat(state.currentHand, cards), avaiableCards: state.avaiableCards.filter(x => !cards.includes(x)) })),
 

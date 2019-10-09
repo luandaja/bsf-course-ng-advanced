@@ -31,7 +31,6 @@ export const initalState: GameState = {
 	boardStatus: {
 		playerInTurn: null,
 		currentStory: null,//{ cardIndex: 78, title: 'test story', storyTeller: pao },
-		shouldRefreshPlayer: false,
 		shouldDragCards: false,
 		areVotesVisible: false,
 		hasGameStarted: false
