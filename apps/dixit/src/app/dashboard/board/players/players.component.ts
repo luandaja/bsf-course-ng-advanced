@@ -5,7 +5,6 @@ import { Player } from '../../../models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { shuffle } from '../../../models/Utils';
-import { PlayerService } from '../../../core/services/player.service';
 import { Avatar } from '@glotrix/ui/avatar';
 @Component({
 	selector: 'gt-players',

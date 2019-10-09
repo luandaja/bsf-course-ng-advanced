@@ -11,7 +11,9 @@ body {
   transition: all 0.2s cubic-bezier(0.3, 0.6, 0.2, 1.8);
 }
 .card {
-  //padding: 20px;
   border-style: none;
   background: transparent;
+}
+.center-text {
+  text-align: center;
 }
