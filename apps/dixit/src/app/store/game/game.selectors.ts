@@ -124,7 +124,7 @@ function getNextPlayerInTurn(userPlayer: Player, players: Player[]) {
 export const getIsPlayersTurn = createSelector(
 	gameFeature,
 	(state: GameState) => (state.userPlayer !== null && !state.userPlayer.isStoryTeller) && state.boardStatus.currentStory !== null && !state.userPlayer.hasThrowCard &&
-		!state.isLoading && !state.isGuessingTime && !state.boardStatus.areVotesVisible
+		!state.isLoading && !state.isGuessingTime && !state.boardStatus.areVotesVisible && state.currentHand.length > 0
 );
 
 export const getIsStoryTellerTurn = createSelector(

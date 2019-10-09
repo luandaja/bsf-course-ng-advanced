@@ -23,10 +23,15 @@
 		</div>
 	</ng-container>
 	<div class="row col-sm-12 justify-content-center">
-		<gt-spinner [isLoading]="isLoading$ | async"></gt-spinner>
-		<ng-container *ngIf="handCards$ | async as handCards; else loading">
-			<ng-template #loading> <gt-spinner [isLoading]="true"></gt-spinner></ng-template>
-			<ng-template #noItems><span>No cards on hand yet!</span></ng-template>
+		<gt-spinner
+			[isLoading]="isLoading$ | async"
+			class="col-sm-12 col-12 center-text"
+		></gt-spinner>
+		<ng-container *ngIf="handCards$ | async as handCards">
+			<ng-template #noItems>
+				<span class="col-sm-12 col-12">No cards on hand yet!</span
+				><gt-spinner [isLoading]="true"></gt-spinner
+			></ng-template>
 			<ng-container *ngIf="handCards.length; else noItems">
 				<div
 					*ngFor="let card of handCards"
