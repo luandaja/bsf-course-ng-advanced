@@ -29,6 +29,7 @@ export class GameEffects {
 				return actions.signInSuccess({ userPlayer: { ...user } })
 			}
 			)));
+
 	signOut$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.signOut),
@@ -37,7 +38,6 @@ export class GameEffects {
 				return actions.signOutSuccess();
 			}
 			)));
-
 
 	recoverPlayerState$ = createEffect(() =>
 		this.actions$.pipe(

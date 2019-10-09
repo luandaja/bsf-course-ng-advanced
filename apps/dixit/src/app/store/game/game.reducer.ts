@@ -3,12 +3,12 @@ import { Action, createReducer, on } from '@ngrx/store';
 import * as action from './game.actions';
 import { GameState, initalState } from './game.state';
 import { concat, update } from '../../models/Utils';
-import { Player } from '../../models';
+import { Player, BoardStatus } from '../../models';
 
 const reducer = createReducer(
 	initalState,
 	on(action.signOut, (state, { }) => ({ ...state, isLoading: true })),
-	on(action.signOutSuccess, (state, { }) => ({ ...state, isLoading: false, userPlayer: null, players: [], isLogged: false, isGuessingTime: false, isRoundFirst: true, currentHand: [], avaiableCards: [], boardCards: [], boardStatus: null })),
+	on(action.signOutSuccess, (state, { }) => ({ ...state, isLoading: false, userPlayer: null, players: [], isLogged: false, isGuessingTime: false, isRoundFirst: true, currentHand: [], avaiableCards: [], boardCards: [], boardStatus: defaultStatus() })),
 	on(action.signIn, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.signInSuccess, (state, { userPlayer }) => ({ ...state, isLogged: true, isLoading: false, userPlayer })),
 
@@ -40,6 +40,16 @@ const reducer = createReducer(
 	on(action.userHandSetted, (state, { cards }) => ({ ...state, isRoundFirst: false, currentHand: concat(state.currentHand, cards), avaiableCards: state.avaiableCards.filter(x => !cards.includes(x)) })),
 
 );
+
+function defaultStatus() {
+	return {
+		areVotesVisible: false,
+		currentStory: null,
+		hasGameStarted: false,
+		playerInTurn: null,
+		shouldDragCards: true
+	} as BoardStatus;
+}
 
 function getUserPlayer(players: Player[], userPlayer: Player) {
 	return userPlayer === null ? null : { ...players.find(player => player.id === userPlayer.id) };

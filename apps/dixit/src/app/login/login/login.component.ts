@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 export const banner: Banner = {
 	upperText: 'ONLINE BOARD GAMES',
 	title: 'Bienvenido a los sábados de juegos online',
-	imageUrl: 'l',
 	contentText: 'Te esperábamos, sigamos jugando!.'
 };
 
