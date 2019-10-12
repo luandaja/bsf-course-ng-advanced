@@ -1,38 +1,29 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { Avatar } from '@glotrix/ui/avatar';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { GameState, playersLoaded, getPlayersState, getPlayers, boardCardSetted } from '../../../store/game';
-import { PlayerService } from '../../../core/services/player.service';
-import { map, switchMapTo, switchMap } from 'rxjs/operators';
-import { Player } from '../../../models';
+import { GameState, getPlayers } from '../../../store/game';
+import { map } from 'rxjs/operators';
+import { Poster } from '@glotrix/ui/poster-card';
 
 @Component({
 	selector: 'gt-score-board',
 	templateUrl: './score-board.component.html',
 	styleUrls: ['./score-board.component.scss']
 })
-export class ScoreBoardComponent implements OnInit, OnDestroy {
+export class ScoreBoardComponent implements OnInit {
 
-	players$: Observable<Player[]>;
-	playersChanges$: Subscription;
+	players$: Observable<Poster[]>;
 
-	constructor(private gameStore: Store<GameState>,
-		private playerService: PlayerService) { }
+	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
-		this.playersChanges$ = this.playerService.collection$()
-			.subscribe((players) => this.gameStore.dispatch(playersLoaded({ players })));
-
 		this.players$ = this.gameStore.pipe(select(getPlayers), map(players => {
-			const newPlayers = Object.assign([], players) as Player[];
-			newPlayers.sort((a, b) => b.score - a.score);
-			return newPlayers;
+			return players.map(player => (
+				{
+					hint: player.score.toString(), title: player.username, imageUrl: player.photoUrl
+				} as Poster))
+				.sort((a, b) => parseInt(b.hint, 10) - parseInt(a.hint, 10))
 		}));
-	}
-
-	ngOnDestroy() {
-		this.playersChanges$.unsubscribe();
 	}
 
 }

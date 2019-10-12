@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { GameState, setVote } from '../../../store/game';
-import { Player } from '../../../models';
+import { Component, Input, OnChanges } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { GameState, setVote, getPlayerVoteInfo } from '../../../store/game';
 import { BoardCard } from '../../../models/BoardCard';
 import { SnackbarService } from '@glotrix/ui/snackbar';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'gt-vote-editor',
@@ -11,14 +12,20 @@ import { SnackbarService } from '@glotrix/ui/snackbar';
 	styleUrls: ['./vote-editor.component.scss']
 })
 export class VoteEditorComponent implements OnChanges {
-
-	@Input() selectedCard: BoardCard;
-	@Input() userPlayer: Player;
+	isVisible$: Observable<boolean>;
+	@Input() selectedCard: BoardCard = null;
 
 	constructor(private gameStore: Store<GameState>,
 		private snackbarService: SnackbarService) { }
 
-	ngOnChanges() { }
+
+	ngOnChanges() {
+		this.isVisible$ = this.gameStore.pipe(select(getPlayerVoteInfo),
+			map(voteInfo => {
+				return this.selectedCard === null ? false : (voteInfo.playerCanVote && voteInfo.userPlayerId !== this.selectedCard.owner.id);
+			})
+		);
+	}
 
 	get message() {
 		return this.selectedCard ? 'Do you want to vote for this card?' : 'Select the card you want to vote for';
@@ -26,9 +33,9 @@ export class VoteEditorComponent implements OnChanges {
 
 	vote(): void {
 		if (!this.selectedCard) {
-			this.snackbarService.showWarning("You have to select a card to vote for!", 'Dixit');
+			this.snackbarService.showWarning('You have to select a card to vote for!', 'Dixit');
 			return;
 		}
-		this.gameStore.dispatch(setVote({ boardCard: this.selectedCard, userPlayer: this.userPlayer }));
+		this.gameStore.dispatch(setVote({ boardCard: this.selectedCard }));
 	}
 }

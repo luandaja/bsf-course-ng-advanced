@@ -1,10 +1,10 @@
-<nav class="navbar navbar-dark orange-background">
-  <button class="navbar-toggler" type="button" (click)="toggleSideBar()">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="float-right">
-    <ng-content></ng-content>
-    <a class="right-padding" (click)="onLogOut()">Log out</a>
-    <gt-avatar class="right-padding" [source]="userData?.photoUrl"></gt-avatar>
-  </div>
+<nav class="navbar navbar-dark mb-2 orange-background">
+	<button class="navbar-toggler" type="button" (click)="toggleSideBar()">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="float-right">
+		<ng-content></ng-content>
+		<a class="right-padding" (click)="onLogOut()">Log out</a>
+		<gt-avatar class="right-padding" [source]="userData?.photoUrl"></gt-avatar>
+	</div>
 </nav>

@@ -22,6 +22,9 @@ export abstract class FirestoreService<T> {
 		return this.collection.doc(value.id + '').set(Object.assign({}, { id: '' + value.id }, value), { merge: true });
 	}
 
+	generateId() {
+		return this.firebase.createId();
+	}
 	create(value: any) {
 		return from(this.collection.doc(value.id + '').set(Object.assign({}, { id: '' + value.id }, value)));
 	}
@@ -30,13 +33,6 @@ export abstract class FirestoreService<T> {
 		return from(this.collection.doc(id).delete())
 	}
 
-	doc$(id: string): Observable<T> {
-		return this.firebase.collection(`${this.basePath}`).doc<T>(id).valueChanges();
-	}
-
-	collection$(queryFn?: QueryFn): Observable<T[]> {
-		return this.firebase.collection<T>(`${this.basePath}`, queryFn).valueChanges();
-	}
 
 	update(id: string, value: T) {
 		return this.firebase.collection<T>(`${this.basePath}`).doc(id).update(value);
@@ -76,6 +72,13 @@ export abstract class FirestoreService<T> {
 		return batch.commit();
 	}
 
+	doc$(id: string): Observable<T> {
+		return this.firebase.collection(`${this.basePath}`).doc<T>(id).valueChanges();
+	}
+
+	collection$(queryFn?: QueryFn): Observable<T[]> {
+		return this.firebase.collection<T>(`${this.basePath}`, queryFn).valueChanges();
+	}
 
 	initBoardCards(boardCards: BoardCard[]) {
 		const batch = this.firebase.firestore.batch();
@@ -83,6 +86,17 @@ export abstract class FirestoreService<T> {
 			const docReference = this.firebase.collection(`${this.basePath}`).doc(boardCard.cardIndex.toString()).ref;
 			batch.set(docReference, { ...boardCard, id: boardCard.cardIndex });
 		});
+		return batch.commit();
+	}
+
+	updateNextRounPlayer(userPlayerId: string, nextPlayerId: string) {
+		const batch = this.firebase.firestore.batch();
+		const nextPlayerReference = this.firebase.collection(`${this.basePath}`).doc(nextPlayerId).ref;
+		const userPlayerReference = this.firebase.collection(`${this.basePath}`).doc(userPlayerId).ref;
+
+		batch.update(nextPlayerReference, { isStoryTeller: true });
+		batch.update(userPlayerReference, { isStoryTeller: false });
+
 		return batch.commit();
 	}
 

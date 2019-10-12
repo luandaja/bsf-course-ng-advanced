@@ -12,7 +12,8 @@ const routes: Routes = [
 	{
 		path: '',
 		component: TableBoardComponent,
-		canLoad: [GameGuard]
+		canLoad: [GameGuard],
+		canActivate: [GameGuard]
 	}
 ];
 

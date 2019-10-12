@@ -141,8 +141,8 @@
             "styles": [
               "apps/dixit/src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"node_modules/font-awesome/css/font-awesome.css",
-							"libs/ui/snackbar/src/lib/snackbar.scss"
+              "node_modules/font-awesome/css/font-awesome.css",
+              "libs/ui/snackbar/src/lib/snackbar.scss"
             ],
             "scripts": []
           },
@@ -816,6 +816,68 @@
             "jestConfig": "libs/ui/snackbar/jest.config.js",
             "tsConfig": "libs/ui/snackbar/tsconfig.spec.json",
             "setupFile": "libs/ui/snackbar/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-quote": {
+      "projectType": "library",
+      "root": "libs/ui/quote",
+      "sourceRoot": "libs/ui/quote/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/quote/tsconfig.lib.json",
+              "libs/ui/quote/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/quote/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/quote/jest.config.js",
+            "tsConfig": "libs/ui/quote/tsconfig.spec.json",
+            "setupFile": "libs/ui/quote/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-poster-card": {
+      "projectType": "library",
+      "root": "libs/ui/poster-card",
+      "sourceRoot": "libs/ui/poster-card/src",
+      "prefix": "gt",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/poster-card/tsconfig.lib.json",
+              "libs/ui/poster-card/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/poster-card/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/poster-card/jest.config.js",
+            "tsConfig": "libs/ui/poster-card/tsconfig.spec.json",
+            "setupFile": "libs/ui/poster-card/src/test-setup.ts"
           }
         }
       },

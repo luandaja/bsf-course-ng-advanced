@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GameState, getCurrentHand, getUserPlayer, getCurrentStory, updateCurrentTurn, getTurnInfo, setUserHand, avaiableCardsLoaded, getIsPlayersTurn, getIsStoryTellerTurn } from '../../../store/game';
+import { GameState, getCurrentHand, getUserPlayer, getTurnInfo, setUserHand, avaiableCardsLoaded, getCurrentStory, getIsLoading } from '../../../store/game';
 import { Observable, Subscription } from 'rxjs';
-import { Player } from '../../../models';
+import { Player, StoryCard } from '../../../models';
 import { BoardCard } from '../../../models/BoardCard';
-import { map, switchMap, distinctUntilChanged } from 'rxjs/operators';
-import { StatusBoardFirebaseService, StatusBoard } from '../../../core/services/state.firebase.service';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { AvaiableCardsService } from '../../../core/services/avaiable-cards.firebase.service';
 
 @Component({
@@ -15,41 +14,35 @@ import { AvaiableCardsService } from '../../../core/services/avaiable-cards.fire
 })
 export class HandComponent implements OnInit, OnDestroy {
 	handCards$: Observable<number[]>;
-	isPlayersTurn$: Observable<boolean>;
-	isStoryTellerTurn$: Observable<boolean>;
+	isLoading$: Observable<boolean>;
 	userPlayer$: Observable<Player>;
+	currentStory$: Observable<StoryCard>;
+	private playerTurnChanges$: Subscription;
 
 	private avaiableCardsChanges$: Subscription;
-	private playerHand$: Subscription;
-	private currentTurn$: Subscription;
 	boardCard: BoardCard;
 	selectedCardIndex: number;
 
 	constructor(private gameStore: Store<GameState>,
-		private stateService: StatusBoardFirebaseService,
 		private cardsService: AvaiableCardsService) { }
 
 	ngOnInit() {
+		this.currentStory$ = this.gameStore.pipe(select(getCurrentStory));
 		this.handCards$ = this.gameStore.pipe(select(getCurrentHand));
 		this.userPlayer$ = this.gameStore.pipe(select(getUserPlayer));
+		this.isLoading$ = this.gameStore.select(getIsLoading);
 
 		this.avaiableCardsChanges$ = this.cardsService.collection$(ref => ref.orderBy('order'))
 			.subscribe((results: any[]) => this.gameStore.dispatch(avaiableCardsLoaded({ cards: results.map(result => result.cardIndex) })));
 
-		this.playerHand$ = this.gameStore.pipe(select(getTurnInfo), distinctUntilChanged((x, y) => x.isUserTurn === y.isUserTurn)).subscribe((turnInfo) => {
+		this.playerTurnChanges$ = this.gameStore.pipe(select(getTurnInfo), distinctUntilChanged((x, y) => x.isUserTurn === y.isUserTurn)).subscribe((turnInfo) => {
 			if (turnInfo.isUserTurn)
 				this.gameStore.dispatch(setUserHand({ cardsCount: turnInfo.cardsCount }));
-		});
-		this.isStoryTellerTurn$ = this.gameStore.pipe(select(getIsStoryTellerTurn));
-		this.isPlayersTurn$ = this.gameStore.pipe(select(getIsPlayersTurn));
-		this.currentTurn$ = this.stateService.doc$(StatusBoard.CurrentPlayerTurn).subscribe(state => {
-			this.gameStore.dispatch(updateCurrentTurn({ currentTurn: state.currentTurn }));
 		});
 	}
 
 	ngOnDestroy() {
-		this.currentTurn$.unsubscribe();
-		this.playerHand$.unsubscribe();
+		this.playerTurnChanges$.unsubscribe();
 		this.avaiableCardsChanges$.unsubscribe();
 	}
 

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LinkOption } from '@glotrix/ui/navigation';
 import startCase from 'lodash.startcase';
 import { AuthGuard } from '../../core/services/auth.guard';
+import { GameGuard } from '../../core/services/game.guard';
 
 export const appModules: Routes = [
 
@@ -15,7 +16,8 @@ export const appModules: Routes = [
 	},
 	{
 		path: 'hand',
-		canActivate: [AuthGuard],
+		canActivate: [AuthGuard, GameGuard],
+		canLoad: [GameGuard],
 		loadChildren: () =>
 			import('../player/player.module').then(
 				mod => mod.PlayerModule
@@ -23,7 +25,8 @@ export const appModules: Routes = [
 	},
 	{
 		path: 'score',
-		canActivate: [AuthGuard],
+		canActivate: [AuthGuard, GameGuard],
+		canLoad: [GameGuard],
 		loadChildren: () =>
 			import('../score/score.module').then(
 				mod => mod.ScoreModule

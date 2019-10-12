@@ -1,59 +1,59 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import {
-	setBoardCard, setCurrentStory,
-	showVotes, nextRound, signIn, signInSuccess, boardCardsLoaded, boardCardSetted,
-	updateUserPlayer, setVote, currentStorySetted, nextRoundSetted, userHandSetted,
-	updateCurrentTurn, avaiableCardsLoaded, playersLoaded, updateHasGameStarted, setVotesVisibility, playerScoreUpdated, voteSetted
-} from './game.actions';
+
+import * as action from './game.actions';
 import { GameState, initalState } from './game.state';
-import { add, concat, shuffle, update } from '../../models/Utils';
+import { concat, update } from '../../models/Utils';
+import { Player, BoardStatus } from '../../models';
 
 const reducer = createReducer(
 	initalState,
-	on(signIn, (state, { }) => ({ ...state, isLoading: true })),
-	on(signInSuccess, (state, { userPlayer }) => ({ ...state, isLogged: true, userPlayer })),
+	on(action.restart, (state, { }) => ({ ...state, isRestarting: true })),
+	on(action.restartSuccess, (state, { }) => ({ ...state, isRestarting: false })),
+	on(action.signOut, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.signOutSuccess, (state, { }) => ({ ...state, isLoading: false, userPlayer: null, players: [], isLogged: false, isGuessingTime: false, isRoundFirst: true, currentHand: [], avaiableCards: [], boardCards: [], boardStatus: defaultStatus() })),
+	on(action.signIn, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.signInSuccess, (state, { userPlayer }) => ({ ...state, isLogged: true, isLoading: false, userPlayer })),
 
-	on(playersLoaded, (state, { players }) => ({ ...state, players })),
+	on(action.updateLoading, (state, { isLoading }) => ({ ...state, isLoading })),
+	on(action.updateBoardStatus, (state, { boardStatus }) => ({ ...state, boardStatus })),
 
-	on(boardCardsLoaded, (state, { boardCards }) => ({ ...state, boardCards })),
+	on(action.playerStateRecovered, (state, { player, isRoundFirst, currentHand, isGuessingTime }) => ({ ...state, isLogged: player !== null, userPlayer: player, isRoundFirst, currentHand, isGuessingTime })),
 
-	on(avaiableCardsLoaded, (state, { cards }) => ({ ...state, avaiableCards: cards })),
+	on(action.playersLoaded, (state, { players }) => ({ ...state, players: (Object.assign([], players) as Player[]).sort((a, b) => a.order - b.order), userPlayer: getUserPlayer(players, state.userPlayer) })),
 
-	on(setBoardCard, (state, { }) => ({ ...state, isLoading: true })),
-	on(boardCardSetted, (state, { boardCard }) => ({
-		...state, isLoading: false, boardCards: addBoardCard(state.boardCards, boardCard), currentHand: state.currentHand.filter(card => card !== boardCard.cardIndex),
-		userPlayer: { ...state.userPlayer, hasThrowCard: true },
-		isGuessingTime: state.players.length === state.boardCards.length + 1
-	})),
+	on(action.boardCardsLoaded, (state, { boardCards }) => ({ ...state, boardCards: Object.assign([], boardCards), isGuessingTime: state.players.length === boardCards.length })),
 
-	on(setVote, (state, { }) => ({ ...state, isLoading: true })),
-	on(voteSetted, (state, { boardCard }) => ({ ...state, isLoading: false, boardCards: update(state.boardCards, boardCard), userPlayer: { ...state.userPlayer, hasVoted: true } })),
+	on(action.avaiableCardsLoaded, (state, { cards }) => ({ ...state, avaiableCards: cards })),
 
-	on(updateUserPlayer, (state, { userPlayer }) => ({ ...state, userPlayer, players: update(state.players, state.userPlayer) })),
+	on(action.setBoardCard, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.boardCardSetted, (state, { boardCard }) => ({ ...state, isLoading: false, currentHand: state.currentHand.filter(card => card !== boardCard.cardIndex) })),
 
-	on(updateHasGameStarted, (state, { hasGameStarted }) => ({ ...state, hasGameStarted })),
+	on(action.setVote, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.voteSetted, (state, { boardCard }) => ({ ...state, isLoading: false, boardCards: update(state.boardCards, boardCard), userPlayer: { ...state.userPlayer, hasVoted: true } })),
 
-	on(setVotesVisibility, (state, { areVotesVisible }) => ({ ...state, areVotesVisible })),
+	on(action.setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false, currentHand: state.currentHand.filter(x => x !== currentStory.cardIndex) })),
 
-	on(setCurrentStory, (state, { }) => ({ ...state, isLoading: true })),
-	on(currentStorySetted, (state, { currentStory }) => ({ ...state, currentStory, isLoading: false, currentHand: state.currentHand.filter(x => x !== currentStory.cardIndex) })),
+	on(action.playerScoreUpdated, (state, { userPlayer }) => ({ ...state, userPlayer, players: update(state.players, userPlayer) })),
 
-	on(showVotes, (state, { }) => ({ ...state, isLoading: true })),
-	on(playerScoreUpdated, (state, { userPlayer }) => ({ ...state, isLoading: false, userPlayer, players: update(state.players, userPlayer) })),
+	on(action.userHandSetted, (state, { cards }) => ({ ...state, isRoundFirst: false, currentHand: concat(state.currentHand, cards), avaiableCards: state.avaiableCards.filter(x => !cards.includes(x)) })),
 
-	on(nextRound, (state, { }) => ({ ...state, isLoading: true })),
-	on(nextRoundSetted, (state, { }) => ({ ...state, isLoading: false, boardCards: [], currentTurn: state.userPlayer.id + 1, currentStory: null })),
-
-	on(userHandSetted, (state, { cards }) => ({ ...state, isLoading: false, isFirstRound: false, currentHand: concat(state.currentHand, cards), avaiableCards: state.avaiableCards.filter(x => !cards.includes(x)) })),
-
-	on(updateCurrentTurn, (state, { currentTurn }) => ({ ...state, currentTurn })),
 );
 
-function addBoardCard(list: any[], item: any) {
-	const newList = add(list, item);
-	return shuffle(newList);
+function defaultStatus() {
+	return {
+		areVotesVisible: false,
+		currentStory: null,
+		hasGameStarted: false,
+		playerInTurn: null,
+		shouldDragCards: true
+	} as BoardStatus;
 }
 
-export function gameReducer(state: GameState | undefined, action: Action) {
-	return reducer(state, action);
+function getUserPlayer(players: Player[], userPlayer: Player) {
+	return userPlayer === null ? null : { ...players.find(player => player.id === userPlayer.id) };
+}
+
+export function gameReducer(state: GameState | undefined, actionTriggered: Action) {
+	return reducer(state, actionTriggered);
 }

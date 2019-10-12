@@ -15,6 +15,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiSnackbarModule } from '@glotrix/ui/snackbar';
+import { DIXIT_STORAGE, LocalStorageService } from './core/services/local-storage.service';
+import { SESSION_STORAGE } from 'ngx-webstorage-service';
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
@@ -30,7 +32,10 @@ import { UiSnackbarModule } from '@glotrix/ui/snackbar';
 		AngularFireDatabaseModule,
 		EffectsModule.forRoot([GameEffects])
 	],
-	providers: [AngularFirestore],
+	providers: [
+		AngularFirestore,
+		{ provide: DIXIT_STORAGE, useExisting: SESSION_STORAGE }, LocalStorageService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

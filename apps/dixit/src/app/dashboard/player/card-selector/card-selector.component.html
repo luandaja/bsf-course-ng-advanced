@@ -1,3 +1,7 @@
-<button class="btn btn-info" (click)="throwCard(userPlayer)">
+<button
+	class="btn btn-info"
+	(click)="throwCard(userPlayer)"
+	*ngIf="isPlayersTurn$ | async"
+>
 	{{ message }}
 </button>

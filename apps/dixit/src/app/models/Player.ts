@@ -1,16 +1,17 @@
 export class Player {
-	id: number;
+	id: string;
 	username: string;
 	photoUrl: string;
+	order: number;
 	score = 0;
 	isStoryTeller?= false;
 	hasVoted?= false;
 	hasThrowCard?= false;
 
-	constructor(userName: string, photoUrl: string, id: number) {
+	constructor(userName: string, photoUrl: string, order: number) {
 		this.username = userName;
 		this.photoUrl = photoUrl;
-		this.id = id;
-		this.isStoryTeller = id === 1;
+		this.order = order;
+		this.isStoryTeller = order === 1;
 	}
 }

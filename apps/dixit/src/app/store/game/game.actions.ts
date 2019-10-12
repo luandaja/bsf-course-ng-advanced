@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { BoardCard } from '../../models/BoardCard';
 import { StoryCard } from '../../models/StoryCard';
-import { Player } from '../../models';
+import { Player, BoardStatus } from '../../models';
 
 export const boardCardsLoaded = createAction('[Board Cards] Loaded board cards',
 	props<{ boardCards: BoardCard[] }>()
@@ -11,15 +11,14 @@ export const avaiableCardsLoaded = createAction('[Board Cards] Loaded avaiable c
 	props<{ cards: number[] }>()
 );
 
-export const fetchPlayers = createAction('[Board Card] Fetch players');
 export const playersLoaded = createAction('[Board Cards] Loaded players',
 	props<{ players: Player[] }>()
 );
 
-export const nextRound = createAction('[Board Cards] Set next round',
-	props<{ nextTurn: number }>()
+export const nextRound = createAction('[Board Cards] Set next round');
+export const nextRoundSetted = createAction('[Board Cards] next riund setted',
+	props<{ nextPlayerTurn: string }>()
 );
-export const nextRoundSetted = createAction('[Board Cards] next riund setted');
 
 export const setBoardCard = createAction(
 	'[Board Cards] Set single board card',
@@ -33,24 +32,15 @@ export const boardCardSetted = createAction(
 
 export const setVote = createAction(
 	'[Board Cards] Set vote',
-	props<{ boardCard: BoardCard, userPlayer: Player }>()
+	props<{ boardCard: BoardCard }>()
 );
+
+export const saveUser = createAction('[App State] Save user');
 
 export const voteSetted = createAction(
 	'[Board Cards] vote setted',
 	props<{ boardCard: BoardCard }>()
 );
-
-export const setGuessingTime = createAction(
-	'[Board Cards] Set guessing time',
-	props<{ isGuessingTime: boolean }>()
-);
-
-export const updateCurrentTurn = createAction(
-	'[Player Hand] Update current turn',
-	props<{ currentTurn: number }>()
-);
-export const setNextTurn = createAction('[Board Cards] Set next turn');
 
 export const showVotes = createAction('[Board Cards] Show votes');
 
@@ -66,11 +56,6 @@ export const currentStorySetted = createAction(
 export const setUserHand = createAction(
 	'[Player Hand] Set hands card',
 	props<{ cardsCount: number }>()
-);
-
-export const setVotesVisibility = createAction(
-	'[Player Hand] Set votes visibility',
-	props<{ areVotesVisible: boolean }>()
 );
 
 export const updatePlayerScore = createAction(
@@ -96,21 +81,35 @@ export const signInSuccess = createAction(
 	'[Auth] Sign in success',
 	props<{ userPlayer: Player }>());
 
-export const updateUserPlayer = createAction(
-	'[Auth] Update user player',
-	props<{ userPlayer: Player }>()
-);
-
 export const updateHasGameStarted = createAction(
 	'[Game] Update has game started',
 	props<{ hasGameStarted: boolean }>()
 );
 
+export const updateShouldDragCard = createAction(
+	'[Game] Update should hd',
+	props<{ hasGameStarted: boolean }>()
+);
+
+export const playerStateRecovered = createAction(
+	'[AppState] Player state recovered',
+	props<{ player: Player, currentHand: number[], isRoundFirst: boolean, isGuessingTime: boolean }>()
+);
+
+export const recoverPlayerState = createAction('[AppState] recover player state');
 export const startGame = createAction('[Game] start game');
-export const gameStarted = createAction('[Game] game started');
+export const gameStarted = createAction('[Game] game started',
+	props<{ playerInTurn: string }>()
+);
+
+export const restartSuccess = createAction('[Game] Restart Success');
+export const restart = createAction('[Game] Restart');
+
+export const signOutSuccess = createAction('[Auth] Sign out success');
 export const signOut = createAction('[Auth] Sign out');
 export const nothing = createAction('Nothing');
 
-
-
-
+export const updateBoardStatus = createAction('[Update Status]',
+	props<{ boardStatus: BoardStatus }>());
+export const updateLoading = createAction('[Loading] update loading',
+	props<{ isLoading: boolean }>());

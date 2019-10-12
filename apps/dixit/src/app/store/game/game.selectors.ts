@@ -1,7 +1,18 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { GameState } from './game.state';
+import { Player } from '../../models';
 
 const gameFeature = createFeatureSelector<GameState>('game');
+
+export const getIsRestarting = createSelector(
+	gameFeature,
+	(state: GameState) => state.isRestarting
+);
+
+export const getAvatars = createSelector(
+	gameFeature,
+	(state: GameState) => state.avatars
+);
 
 export const getBoardCards = createSelector(
 	gameFeature,
@@ -10,7 +21,7 @@ export const getBoardCards = createSelector(
 
 export const getCurrentStory = createSelector(
 	gameFeature,
-	(state: GameState) => state.currentStory
+	(state: GameState) => state.boardStatus.currentStory
 );
 
 export const getPlayers = createSelector(
@@ -25,17 +36,12 @@ export const getIsGuessingTime = createSelector(
 
 export const getVotesVisibility = createSelector(
 	gameFeature,
-	(state: GameState) => state.areVotesVisible
+	(state: GameState) => state.boardStatus.areVotesVisible
 );
 
 export const getCurrentHand = createSelector(
 	gameFeature,
 	(state: GameState) => state.currentHand
-);
-
-export const getTurn = createSelector(
-	gameFeature,
-	(state: GameState) => state.currentTurn
 );
 
 export const getIsLogged = createSelector(
@@ -50,7 +56,7 @@ export const getUserPlayer = createSelector(
 
 export const getHasGameStarted = createSelector(
 	gameFeature,
-	state => state.hasGameStarted
+	state => state.boardStatus.hasGameStarted
 );
 
 export const getIsLoading = createSelector(
@@ -58,12 +64,23 @@ export const getIsLoading = createSelector(
 	state => state.isLoading
 );
 
+export const getAbleToLogin = createSelector(
+	gameFeature,
+	state => !state.boardStatus.hasGameStarted && !state.isRestarting && !state.isLogged
+);
+
+export const getAbleToRestart = createSelector(
+	gameFeature,
+	state => state.boardStatus.hasGameStarted && !state.isRestarting
+);
+
 export const getTurnInfo = createSelector(
 	gameFeature,
 	state => {
-		const { currentTurn, userPlayer, isFirstRound } = state;
-		const isUserTurn = currentTurn === userPlayer.id;
-		const cardsCount = isFirstRound ? 5 : 1;
+		const { userPlayer, isRoundFirst, boardStatus } = state;
+		const isUserTurn = boardStatus.playerInTurn === userPlayer.id && boardStatus.hasGameStarted &&
+			boardStatus.shouldDragCards && state.avaiableCards.length > 0;
+		const cardsCount = isRoundFirst ? 5 : 1;
 		return { isUserTurn, cardsCount }
 	}
 );
@@ -71,38 +88,84 @@ export const getTurnInfo = createSelector(
 export const getPlayersState = createSelector(
 	gameFeature,
 	state => {
-		const { hasGameStarted, isGuessingTime, players } = state;
-		return { hasGameStarted: hasGameStarted, isGuessingTime, players }
+		const { isGuessingTime, players, boardStatus } = state;
+		return { hasGameStarted: boardStatus.hasGameStarted, isGuessingTime, players }
 	}
 );
-
+export const getFirstPlayerId = createSelector(
+	gameFeature,
+	state => {
+		const firstPlayer = state.players.find(player => player.order === 1);
+		return firstPlayer;
+	}
+);
 export const getScoreInput = createSelector(
 	gameFeature,
 	state => {
-		const { userPlayer, boardCards, currentStory, players } = state;
-		return { userPlayer, boardCards, currentStory, players }
+		const { userPlayer, boardCards, boardStatus, players } = state;
+		return { userPlayer, boardCards, currentStory: boardStatus.currentStory, players }
 	}
 );
 
-export const getAvaiableCards = createSelector(
+export const getHandInfo = createSelector(
 	gameFeature,
 	(state: GameState) => {
-		const { userPlayer, avaiableCards } = state;
-		return { currentTurn: userPlayer.id, avaiableCards }
+		const { avaiableCards, userPlayer } = state;
+		const nextPlayerId = getNextPlayerInTurn(state.userPlayer, state.players).id;
+		const lastIndex = state.players.length - 1;
+		const isPickUpCompleted = userPlayer.id === state.players[lastIndex].id;
+		return { nextPlayerTurn: nextPlayerId, avaiableCards, isPickUpCompleted }
 	}
 );
 
-export const getPlayerCanVote = createSelector(
+export const getNextPlayer = createSelector(
 	gameFeature,
-	(state: GameState) => !state.userPlayer.isStoryTeller && state.currentStory !== null && !state.userPlayer.hasVoted
+	(state: GameState) => {
+		const { userPlayer, players } = state;
+		return getNextPlayerInTurn(userPlayer, players);
+	}
 );
+
+export const getNextTurnInfo = createSelector(
+	gameFeature,
+	(state: GameState) => {
+		const { userPlayer, players } = state;
+		const nextStoryTeller = getNextPlayerInTurn(userPlayer, players);
+		return { userPlayerId: userPlayer.id, nextStoryTellerId: nextStoryTeller.id, firstPlayer: players.find(player => player.order === 1) };
+	}
+);
+
+function getNextPlayerInTurn(userPlayer: Player, players: Player[]) {
+	const isLastPlayer = userPlayer.order === players.length;
+	const nextOrder = (isLastPlayer ? 1 : userPlayer.order + 1);
+	return players.find(player => player.order === nextOrder);
+}
 
 export const getIsPlayersTurn = createSelector(
 	gameFeature,
-	(state: GameState) => !state.userPlayer.isStoryTeller && state.currentStory !== null && !state.userPlayer.hasThrowCard
+	(state: GameState) => (state.userPlayer !== null && !state.userPlayer.isStoryTeller) && state.boardStatus.currentStory !== null && !state.userPlayer.hasThrowCard &&
+		!state.isLoading && !state.isGuessingTime && !state.boardStatus.areVotesVisible && state.currentHand.length > 0
 );
 
 export const getIsStoryTellerTurn = createSelector(
 	gameFeature,
-	(state: GameState) => state.userPlayer.isStoryTeller && state.currentStory === null
+	(state: GameState) => (state.userPlayer !== null && state.userPlayer.isStoryTeller) && state.boardStatus.currentStory === null
 );
+
+export const getUserPlayerState = createSelector(
+	gameFeature,
+	(state: GameState) => {
+		const { userPlayer, isRoundFirst, currentHand, isLogged, isGuessingTime } = state;
+		return { userPlayer, isRoundFirst, currentHand, isLogged, isGuessingTime }
+	}
+);
+
+export const getPlayerVoteInfo = createSelector(
+	gameFeature,
+	(state: GameState) => {
+		const playerCanVote = !state.userPlayer.isStoryTeller && state.boardStatus.currentStory !== null &&
+			!state.userPlayer.hasVoted && !state.isLoading && state.isGuessingTime && !state.boardStatus.areVotesVisible;
+		return { playerCanVote, userPlayerId: state.userPlayer.id }
+	}
+);
+

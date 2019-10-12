@@ -1,14 +1,21 @@
 <div
-	class="row col-sm-10 orange-border m-2 col-sm-11  justify-content-center ml-sm-auto mr-sm-auto"
+	class="row orange-border m-auto col-sm-11  justify-content-center ml-sm-auto mr-sm-auto"
 >
+	<gt-quote
+		class="col-sm-12"
+		*ngIf="currentStory$ | async as currentStory"
+		[photoUrl]="currentStory?.storyTeller?.photoUrl"
+		[quoteText]="currentStory?.title"
+	></gt-quote>
+
 	<ng-container *ngIf="userPlayer$ | async as userPlayer">
-		<div class="col-sm-6 pb-2" *ngIf="isStoryTellerTurn$ | async">
+		<div class="col-sm-6 pb-2">
 			<gt-story-editor
 				[cardIndex]="selectedCardIndex"
 				[userPlayer]="userPlayer"
 			></gt-story-editor>
 		</div>
-		<div class="row col-sm-9 pt-3" *ngIf="isPlayersTurn$ | async">
+		<div class="col-sm-9 pt-3">
 			<gt-card-selector
 				[cardIndex]="selectedCardIndex"
 				[userPlayer]="userPlayer"
@@ -16,13 +23,25 @@
 		</div>
 	</ng-container>
 	<div class="row col-sm-12 justify-content-center">
-		<div
-			class="card shadow"
-			*ngFor="let card of handCards$ | async"
-			(click)="selectCard(card)"
-			[ngClass]="{ selected: selectedCardIndex === card }"
-		>
-			<img [src]="getCardImage(card)" width="200" height="320" />
-		</div>
+		<gt-spinner
+			[isLoading]="isLoading$ | async"
+			class="col-sm-12 col-12 center-text"
+		></gt-spinner>
+		<ng-container *ngIf="handCards$ | async as handCards">
+			<ng-template #noItems>
+				<span class="col-sm-12 col-12">No cards on hand yet!</span
+				><gt-spinner [isLoading]="true"></gt-spinner
+			></ng-template>
+			<ng-container *ngIf="handCards.length; else noItems">
+				<div
+					*ngFor="let card of handCards"
+					class="card shadow"
+					(click)="selectCard(card)"
+					[ngClass]="{ selected: selectedCardIndex === card }"
+				>
+					<img [src]="getCardImage(card)" width="200" height="320" />
+				</div>
+			</ng-container>
+		</ng-container>
 	</div>
 </div>

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { StoryCard } from '../../../models/StoryCard';
 import { Store, select } from '@ngrx/store';
 import { GameState, getCurrentStory, showVotes, getUserPlayer, getVotesVisibility, nextRound } from '../../../store/game';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'gt-story',
@@ -15,16 +15,12 @@ export class StoryComponent implements OnInit {
 	currentStory$: Observable<StoryCard>;
 	isStoryTeller$: Observable<boolean>;
 	areVotesVisible$: Observable<boolean>;
-	userTurn: number;
 
 	constructor(private gameStore: Store<GameState>) { }
 
 	ngOnInit() {
 		this.currentStory$ = this.gameStore.pipe(select(getCurrentStory));
-		this.isStoryTeller$ = this.gameStore.pipe(select(getUserPlayer), map(user => {
-			this.userTurn = user.id;
-			return user.isStoryTeller;
-		}));
+		this.isStoryTeller$ = this.gameStore.pipe(select(getUserPlayer), map(user => user.isStoryTeller));
 		this.areVotesVisible$ = this.gameStore.pipe(select(getVotesVisibility));
 	}
 
@@ -33,6 +29,6 @@ export class StoryComponent implements OnInit {
 	}
 
 	nextRound(): void {
-		this.gameStore.dispatch(nextRound({ nextTurn: this.userTurn + 1 }));
+		this.gameStore.dispatch(nextRound());
 	}
 }

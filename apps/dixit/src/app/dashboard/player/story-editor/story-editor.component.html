@@ -1,4 +1,4 @@
-<section class="orange-border">
+<section class="orange-border" *ngIf="isStoryTellerTurn$ | async">
 	<h5>You are the story teller. Select a card and assign it a title!</h5>
 	<gt-form-builder
 		class="m-4"
