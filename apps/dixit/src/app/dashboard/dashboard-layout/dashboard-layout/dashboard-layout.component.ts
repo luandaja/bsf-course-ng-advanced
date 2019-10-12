@@ -22,11 +22,12 @@ export class DashboardLayoutComponent {
 	constructor(private store: Store<GameState>, private router: Router) {
 		this.user$ = this.store.pipe(
 			select(getUserPlayer),
-			map(user =>
-				({
-					fullName: user.username || null,
-					photoUrl: user.photoUrl || null
-				} as NavigationUser)
+			map(user => {
+				return user === null ? null : {
+					fullName: user.username,
+					photoUrl: user.photoUrl
+				} as NavigationUser
+			}
 			)
 		);
 	}

@@ -7,6 +7,8 @@ import { Player, BoardStatus } from '../../models';
 
 const reducer = createReducer(
 	initalState,
+	on(action.restart, (state, { }) => ({ ...state, isRestarting: true })),
+	on(action.restartSuccess, (state, { }) => ({ ...state, isRestarting: false })),
 	on(action.signOut, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.signOutSuccess, (state, { }) => ({ ...state, isLoading: false, userPlayer: null, players: [], isLogged: false, isGuessingTime: false, isRoundFirst: true, currentHand: [], avaiableCards: [], boardCards: [], boardStatus: defaultStatus() })),
 	on(action.signIn, (state, { }) => ({ ...state, isLoading: true })),

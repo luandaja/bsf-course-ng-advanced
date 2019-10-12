@@ -22,6 +22,10 @@ export class PlayerService {
 		return this.firestore.collection$();
 	}
 
+	deletePlayers() {
+		return this.firestore.deleteCollection();
+	}
+
 	add(username: string, photoUrl: string) {
 		return this.gameStore.select(getPlayers).pipe(
 			take(1),

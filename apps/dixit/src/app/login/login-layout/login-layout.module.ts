@@ -6,6 +6,7 @@ import { LoginComponent } from '../login/login.component';
 import { UiLoginModule } from '@glotrix/ui/login';
 import { UiFormsModule } from '@glotrix/ui/forms';
 import { UiSpinnerModule } from '@glotrix/ui/spinner';
+import { UiAvatarModule } from '@glotrix/ui/avatar';
 
 @NgModule({
 	declarations: [LoginComponent],
@@ -14,7 +15,8 @@ import { UiSpinnerModule } from '@glotrix/ui/spinner';
 		LoginLayoutRoutingModule,
 		UiLoginModule,
 		UiFormsModule,
-		UiSpinnerModule
+		UiSpinnerModule,
+		UiAvatarModule
 	]
 })
 export class LoginLayoutModule { }

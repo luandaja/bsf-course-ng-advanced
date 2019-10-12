@@ -1,4 +1,9 @@
-<div *ngIf="boardCards$ | async as boardCards; else loading">
+<div class="row col-sm-12">
+	<div class="col-sm-6 pt-2">
+		<gt-vote-editor [selectedCard]="selectedCard"> </gt-vote-editor>
+	</div>
+</div>
+<ng-container *ngIf="boardCards$ | async as boardCards; else loading">
 	<ng-container *ngIf="boardCards.length; else noItems">
 		<gt-board-card
 			*ngFor="let boardCard of boardCards"
@@ -13,9 +18,4 @@
 	</ng-container>
 	<ng-template #noItems><span>No cards on the board yet!</span></ng-template>
 	<ng-template #loading> <gt-spinner [isLoading]="true"></gt-spinner></ng-template>
-</div>
-<div class="row col-sm-12">
-	<div class="col-sm-6 pt-2">
-		<gt-vote-editor [selectedCard]="selectedCard"> </gt-vote-editor>
-	</div>
-</div>
+</ng-container>

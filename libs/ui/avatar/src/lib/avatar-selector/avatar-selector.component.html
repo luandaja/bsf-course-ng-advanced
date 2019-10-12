@@ -1,0 +1,12 @@
+<ul>
+	<li *ngFor="let avatar of avatars" class="inline col p-1">
+		<gt-avatar
+			[width]="100"
+			[height]="100"
+			[source]="avatar"
+			[isSelected]="avatar === selected"
+			(click)="select(avatar)"
+		>
+		</gt-avatar>
+	</li>
+</ul>

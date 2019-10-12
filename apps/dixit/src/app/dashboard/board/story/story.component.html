@@ -1,7 +1,4 @@
-<div
-	class="row col-sm-11 m-2 orange-border"
-	*ngIf="currentStory$ | async as currentStory"
->
+<div class="row m-auto orange-border" *ngIf="currentStory$ | async as currentStory">
 	<gt-quote
 		class="col-sm-12"
 		[photoUrl]="currentStory?.storyTeller?.photoUrl"

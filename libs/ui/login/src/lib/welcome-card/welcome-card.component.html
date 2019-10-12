@@ -3,16 +3,7 @@
 		<h1>{{ message.title }}</h1>
 		<span>{{ message.description }}</span>
 	</div>
-	<div class="col-sm-10 ml-sm-auto">
-		<img class="img-fluid" [src]="message.largeImage" />
-	</div>
-</div>
-<div class="d-block d-sm-none orange-border">
-	<div class="col-12">
-		<h1>{{ message.title }}</h1>
-		<span>{{ message.shortDescription }}</span>
-	</div>
-	<div class="col-12">
-		<img class="img-fluid" [src]="message.shortImage" />
+	<div class="col-sm-10 m-sm-auto">
+		<img class="img-fluid" [src]="message.image" />
 	</div>
 </div>

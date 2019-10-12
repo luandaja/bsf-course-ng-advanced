@@ -1,6 +1,4 @@
 import { Component, OnChanges, Input } from '@angular/core';
-import { Avatar } from '../../models';
-
 @Component({
 	selector: 'gt-avatars',
 	templateUrl: './avatars.component.html',
@@ -8,7 +6,8 @@ import { Avatar } from '../../models';
 })
 export class AvatarsComponent implements OnChanges {
 
-	@Input() avatars: Avatar[];
+	@Input() isInLine = false;
+	@Input() avatars: string[];
 
 	constructor() { }
 

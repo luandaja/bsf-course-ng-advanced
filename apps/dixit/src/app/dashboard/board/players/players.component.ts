@@ -5,7 +5,6 @@ import { Player } from '../../../models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { shuffle } from '../../../models/Utils';
-import { Avatar } from '@glotrix/ui/avatar';
 @Component({
 	selector: 'gt-players',
 	templateUrl: './players.component.html',
@@ -13,7 +12,7 @@ import { Avatar } from '@glotrix/ui/avatar';
 })
 export class PlayersComponent implements OnInit {
 
-	players$: Observable<Avatar[]>;
+	players$: Observable<string[]>;
 	title: string;
 
 	constructor(private gameStore: Store<GameState>) { }
@@ -22,11 +21,7 @@ export class PlayersComponent implements OnInit {
 		this.players$ = this.gameStore.pipe(select(getPlayersState), map(result => {
 			const { hasGameStarted, isGuessingTime, players } = result;
 			return this.getPlayers(hasGameStarted, isGuessingTime, players);
-		}), map(players => this.mapToAvatars(players)));
-	}
-
-	private mapToAvatars(players: Player[]) {
-		return players.map(player => ({ imageUrl: player.photoUrl } as Avatar))
+		}), map(players => players.map(player => player.photoUrl)));
 	}
 
 	private getPlayers(hasGameStarted: boolean, isGuessingTime: boolean, players: Player[]) {

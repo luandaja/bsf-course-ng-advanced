@@ -1,6 +1,5 @@
 import { Player, BoardStatus } from '../../models';
 import { BoardCard } from '../../models/BoardCard';
-import { StoryCard } from '../../models/StoryCard';
 
 export const gameFeatureName = 'game';
 export interface GameState {
@@ -14,7 +13,10 @@ export interface GameState {
 	isGuessingTime?: boolean;
 	boardStatus?: BoardStatus;
 	isRoundFirst?: boolean;
+	avatars?: string[];
+	isRestarting?: boolean;
 }
+
 const ale = { id: '1', order: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const pao = { id: '2', order: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', score: 0, isStoryTeller: true, hasVoted: false, hasThrowCard: false };
 const walter = { id: '3', order: 3, username: 'Walter', photoUrl: 'https://bit.ly/2lQfYBH', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
@@ -35,9 +37,11 @@ export const initalState: GameState = {
 		areVotesVisible: false,
 		hasGameStarted: false
 	},
+	avatars: ['assets/ale.jpg', 'assets/vico.jpg', 'assets/myriam.jpg', 'assets/brenda.jpg', 'assets/pao.jpg', 'assets/walter.jpg', 'assets/user1.jpg', 'assets/user2.jpg', 'assets/user3.jpg', 'assets/user4.jpg'],
 	currentHand: [],//[4, 67, 23, 12, 34],
 	avaiableCards: [],//
 	isLoading: false,
+	isRestarting: false,
 	boardCards: [
 		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
 		// { cardIndex: 6, owner: walter, votes: [] },

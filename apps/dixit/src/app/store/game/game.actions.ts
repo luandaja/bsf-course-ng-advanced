@@ -101,6 +101,10 @@ export const startGame = createAction('[Game] start game');
 export const gameStarted = createAction('[Game] game started',
 	props<{ playerInTurn: string }>()
 );
+
+export const restartSuccess = createAction('[Game] Restart Success');
+export const restart = createAction('[Game] Restart');
+
 export const signOutSuccess = createAction('[Auth] Sign out success');
 export const signOut = createAction('[Auth] Sign out');
 export const nothing = createAction('Nothing');

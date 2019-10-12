@@ -21,6 +21,25 @@ export class GameEffects {
 		private boardCardsService: BoardCardsFirestoreService,
 		private snackbarService: SnackbarService) { }
 
+	restart$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.restart),
+			switchMap(async action => {
+				await this.boardCardsService.deleteCollection().toPromise();
+				await this.cardsService.deleteCollection().toPromise();
+				await this.playerService.deletePlayers().toPromise();
+				await this.stateService.update(StatusBoard.status, {
+					playerInTurn: null,
+					currentStory: null,
+					shouldDragCards: false,
+					hasGameStarted: false,
+					areVotesVisible: false
+				});
+
+				return actions.restartSuccess();
+			}
+			)));
+
 	signIn$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.signIn),

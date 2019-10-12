@@ -9,9 +9,7 @@ import { WelcomeMessage } from '@glotrix/ui/login';
 
 export const welcomeMessage: WelcomeMessage = {
 	title: 'Welcome to Dixit!',
-	largeImage: 'assets/dixit_cards.png',
-	shortImage: 'assets/dixit_card_mini.jpg',
-	shortDescription: 'We need between 3 to 6 player to start the game. Let’s wait for them.',
+	image: 'assets/dixit_cards.png',
 	description: 'Dixit is a charades-like game where each player attempts to guess another player’s. Let’s wait for other players. You need to be between 3 to 6 in order to start the game.'
 };
 

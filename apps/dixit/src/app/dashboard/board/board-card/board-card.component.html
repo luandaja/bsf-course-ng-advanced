@@ -1,27 +1,22 @@
-<div class="float-left card ">
-	<ng-container *ngIf="areVotesVisible">
-		<gt-avatar
-			class="pb-1"
-			[width]="80"
-			[height]="80"
-			[source]="boardCard.owner.photoUrl"
-		>
-		</gt-avatar>
-	</ng-container>
-	<gt-card
-		[cardIndex]="boardCard.cardIndex"
-		[isSelected]="isSelected"
-		[isRevealed]="isRevealed"
-		[isJumping]="isJumping && areVotesVisible"
-	></gt-card>
-	<ng-container *ngIf="areVotesVisible">
-		<gt-avatar
-			class="pt-1"
-			*ngFor="let vote of boardCard.votes"
-			[width]="80"
-			[height]="80"
-			[source]="vote.photoUrl"
-		>
-		</gt-avatar>
-	</ng-container>
-</div>
+<ng-container *ngIf="areVotesVisible">
+	<!-- <gt-avatar class="pb-1" [width]="80" [height]="80" [source]="boardCard.owner.photoUrl">
+	</gt-avatar> -->
+	<span>from: {{ boardCard.owner.username }}</span>
+</ng-container>
+<gt-card
+	[cardIndex]="boardCard.cardIndex"
+	[isSelected]="isSelected"
+	[isRevealed]="isRevealed"
+	[isJumping]="isJumping && areVotesVisible"
+></gt-card>
+<ng-container *ngIf="areVotesVisible">
+	<gt-avatar
+		class="pt-1"
+		*ngFor="let vote of boardCard.votes"
+		[width]="80"
+		[height]="80"
+		[source]="vote.photoUrl"
+	>
+	</gt-avatar>
+	<hr />
+</ng-container>

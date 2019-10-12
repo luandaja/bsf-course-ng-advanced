@@ -1,8 +1,18 @@
-<div class="row col-sm-12 pt-2">
-	<gt-welcome-card class="col-sm-9 col-7" [message]="message"> </gt-welcome-card>
-	<div class="col-sm-2 col-4  ml-auto orange-border pl-3  pt-2">
-		<gt-players></gt-players>
-		<div class="center-text">
+<div class="row pt-2">
+	<gt-welcome-card class="col-sm-9 " [message]="message"> </gt-welcome-card>
+	<div class="col-sm-2 col-11  m-auto orange-border  pt-2">
+		<gt-players>
+			<div class="d-block d-sm-none center-text">
+				<button
+					class="btn btn-info"
+					(click)="startGame()"
+					[disabled]="unableStartGame$ | async"
+				>
+					Start Game
+				</button>
+			</div>
+		</gt-players>
+		<div class="d-none d-sm-block center-text">
 			<button
 				class="btn btn-info"
 				(click)="startGame()"

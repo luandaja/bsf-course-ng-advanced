@@ -4,6 +4,16 @@ import { Player } from '../../models';
 
 const gameFeature = createFeatureSelector<GameState>('game');
 
+export const getIsRestarting = createSelector(
+	gameFeature,
+	(state: GameState) => state.isRestarting
+);
+
+export const getAvatars = createSelector(
+	gameFeature,
+	(state: GameState) => state.avatars
+);
+
 export const getBoardCards = createSelector(
 	gameFeature,
 	(state: GameState) => state.boardCards
@@ -52,6 +62,16 @@ export const getHasGameStarted = createSelector(
 export const getIsLoading = createSelector(
 	gameFeature,
 	state => state.isLoading
+);
+
+export const getAbleToLogin = createSelector(
+	gameFeature,
+	state => !state.boardStatus.hasGameStarted && !state.isRestarting && !state.isLogged
+);
+
+export const getAbleToRestart = createSelector(
+	gameFeature,
+	state => state.boardStatus.hasGameStarted && !state.isRestarting
 );
 
 export const getTurnInfo = createSelector(
