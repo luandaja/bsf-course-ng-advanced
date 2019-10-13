@@ -77,7 +77,7 @@ export const getIsPickingUpCard = createSelector(
 
 export const getAbleToRevealSpies = createSelector(
 	gameFeature,
-	state => !state.board.wereSpiesRevealed
+	state => !state.board.wereSpiesRevealed && !state.board.shouldDragCards
 );
 
 export const getTurnInfo = createSelector(
