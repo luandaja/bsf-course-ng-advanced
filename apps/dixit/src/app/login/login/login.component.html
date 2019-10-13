@@ -24,19 +24,10 @@
 			</ng-container>
 			<ng-container *ngIf="isLoginVisible$ | async">
 				<h4>Welcome to Dixit online!</h4>
-				<gt-form-builder
-					[entries]="entries"
-					[isCancelButtonVisible]="false"
-					[submitButtonText]="'Login'"
-					(submitted)="onSubmitted($event)"
-				>
-					<div class="row-fluid pt-5">
-						<gt-avatar-selector
-							[avatars]="avatars$ | async"
-							(avatarChange)="onAvatarSelected($event)"
-						></gt-avatar-selector>
-					</div>
-				</gt-form-builder>
+				<gt-player-login
+					[avatars]="avatars$ | async"
+					(playerChange)="onPlayerChange($event)"
+				></gt-player-login>
 				<gt-spinner [isLoading]="isLoading$ | async"></gt-spinner>
 			</ng-container>
 		</div>

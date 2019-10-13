@@ -1,5 +1,4 @@
-import { Player, BoardStatus } from '../../models';
-import { BoardCard } from '../../models/BoardCard';
+import { Player, BoardStatus, BoardCard } from '../../models';
 
 export const gameFeatureName = 'game';
 export interface GameState {
@@ -25,29 +24,22 @@ const brenda = { id: '5', order: 5, username: 'Brenda', photoUrl: 'https://bit.l
 const vico = { id: '6', order: 6, username: 'Vico', photoUrl: 'https://bit.ly/2nmE0ov', score: 0, isStoryTeller: false, hasVoted: true, hasThrowCard: true };
 
 export const initalState: GameState = {
-	players: [],// [pao, walter, myriam, brenda, vico, ale],
-	userPlayer: null,//{ ...pao },
+	players: [],
+	userPlayer: null,
 	isLogged: false,
 	isGuessingTime: false,
 	isRoundFirst: false,
 	boardStatus: {
 		playerInTurn: null,
-		currentStory: null,//{ cardIndex: 78, title: 'test story', storyTeller: pao },
+		currentStory: null,
 		shouldDragCards: false,
 		areVotesVisible: false,
 		hasGameStarted: false
 	},
 	avatars: ['assets/ale.jpg', 'assets/vico.jpg', 'assets/myriam.jpg', 'assets/brenda.jpg', 'assets/pao.jpg', 'assets/walter.jpg', 'assets/user1.jpg', 'assets/user2.jpg', 'assets/user3.jpg', 'assets/user4.jpg'],
-	currentHand: [],//[4, 67, 23, 12, 34],
-	avaiableCards: [],//
+	currentHand: [],
+	avaiableCards: [],
 	isLoading: false,
 	isRestarting: false,
-	boardCards: [
-		// { cardIndex: 2, owner: pao, votes: [walter, brenda] },
-		// { cardIndex: 6, owner: walter, votes: [] },
-		// { cardIndex: 12, owner: myriam, votes: [vico] },
-		// { cardIndex: 34, owner: brenda, votes: [] },
-		// { cardIndex: 27, owner: vico, votes: [] },
-		// { cardIndex: 78, owner: ale, votes: [] }
-	]
+	boardCards: []
 };

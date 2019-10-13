@@ -1,0 +1,23 @@
+<div
+	class="row orange-border m-auto col-sm-11  justify-content-center ml-sm-auto mr-sm-auto"
+>
+	<div class="row col-sm-12 justify-content-center">
+		<ng-container *ngIf="isPickingUpCards$ | async as isPickingUpCards; else complete">
+			<gt-spinner
+				[isLoading]="isPickingUpCards"
+				class="col-sm-12 col-12 center-text"
+			></gt-spinner>
+		</ng-container>
+		<ng-template #complete>
+			<div class="col-sm-12" *ngIf="ableToRevealSpies$ | async">
+				<button class="btn btn-warning" (click)="showSpies()">
+					Show Spies
+				</button>
+			</div>
+			<div class="col-sm-12" *ngIf="areSpiesVisible">
+				<gt-avatars [avatars]="spies" [isInLine]="true"></gt-avatars>
+			</div>
+			<gt-card [isSpy]="isSpy$ | async"></gt-card>
+		</ng-template>
+	</div>
+</div>

@@ -79,6 +79,12 @@
     },
     "ui-poster-card": {
       "tags": ["ui"]
+    },
+    "ressistance-e2e": {
+      "tags": []
+    },
+    "ressistance": {
+      "tags": []
     }
   }
 }

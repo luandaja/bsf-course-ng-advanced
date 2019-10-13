@@ -11,6 +11,9 @@ export class AvatarsComponent implements OnChanges {
 
 	constructor() { }
 
-	ngOnChanges() { }
+	ngOnChanges() {
+
+		console.log('avatars component:', this.avatars);
+	}
 
 }

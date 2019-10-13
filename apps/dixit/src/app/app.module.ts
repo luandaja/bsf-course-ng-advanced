@@ -25,7 +25,6 @@ import { SESSION_STORAGE } from 'ngx-webstorage-service';
 		CoreModule,
 		RouterStoreModule,
 		GameStoreModule,
-		CoreModule,
 		UiSnackbarModule,
 		BrowserAnimationsModule,
 		AngularFireModule.initializeApp(environment.firebaseConfig),

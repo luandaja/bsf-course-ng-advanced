@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
-import { Observable, from, combineLatest, of } from 'rxjs';
+import { Observable, from, combineLatest } from 'rxjs';
 import { map, exhaustMap, take } from 'rxjs/operators';
 import { BoardCard } from '../../models/BoardCard';
-import { StoryCard } from '../../models/StoryCard';
 
 @Injectable({
 	providedIn: 'root'
