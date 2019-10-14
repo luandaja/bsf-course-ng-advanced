@@ -1,5 +1,15 @@
-import { User } from '.';
+import { User } from './User';
+export class Player implements User {
+	id: string;
+	username: string;
+	photoUrl: string;
 
-export interface Player extends User {
-	isLeader: boolean;
+	order: number;
+	isSpy: boolean;
+
+	constructor(userName: string, photoUrl: string, order: number) {
+		this.username = userName;
+		this.photoUrl = photoUrl;
+		this.order = order;
+	}
 }

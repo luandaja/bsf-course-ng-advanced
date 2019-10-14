@@ -3,8 +3,8 @@ import { Store, select } from '@ngrx/store';
 import { GameState, getUsers, getFirstPlayerId, getUserPlayer } from '../../store/game';
 import { map, take, switchMap } from 'rxjs/operators';
 import { shuffle } from '../../../../../shared/Util';
-import { User } from '../../models';
-import { UserFirebaseService } from './user.firebase.service';
+import { Player } from '../../models';
+import { PlayerFirebaseService as PlayerFirebaseService } from './player.firebase.service';
 @Injectable({
 	providedIn: 'root'
 })
@@ -20,7 +20,7 @@ export class PlayerService {
 	];
 
 	constructor(private gameStore: Store<GameState>,
-		private firestore: UserFirebaseService) { }
+		private firestore: PlayerFirebaseService) { }
 
 	collection$() {
 		return this.firestore.collection$();
@@ -31,7 +31,7 @@ export class PlayerService {
 			take(1),
 			map(players => players.length),
 			switchMap(async (playersCount) => {
-				const user = new User(username, photoUrl, playersCount + 1);
+				const user = new Player(username, photoUrl, playersCount + 1);
 				user.id = this.firestore.generateId();
 				await this.firestore.create(user);
 				return user;

@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { GameState } from './game.state';
-import { User } from '../../models';
+import { Player } from '../../models';
 
 const gameFeature = createFeatureSelector<GameState>('game');
+
 export const getIsLogged = createSelector(
 	gameFeature,
 	state => state.isLogged
@@ -23,11 +24,24 @@ export const getUsers = createSelector(
 	state => state.users
 );
 
+export const getUserAvatars = createSelector(
+	gameFeature,
+	state => state.users.map(user => user.photoUrl)
+);
+
+export const getIsTeamSelectable = createSelector(
+	gameFeature,
+	state => {
+		const currentMission = state.missions.find(mission => mission.id === state.board.missionNumber.toString());
+		return currentMission === undefined || !currentMission.hasBeenProposed && !currentMission.isApproved;
+	}
+);
+
 export const getMissionInfo = createSelector(
 	gameFeature,
 	state => {
-		const { board, users } = state;
-		return { playersCount: users.length, missionNumber: board.missionNumber };
+		const { board, users, userPlayer } = state;
+		return { playersCount: users.length, missionNumber: board.missionNumber, userPlayer };
 	}
 );
 
@@ -98,7 +112,6 @@ export const getTurnInfo = createSelector(
 	}
 );
 
-
 export const getHandInfo = createSelector(
 	gameFeature,
 	(state: GameState) => {
@@ -110,7 +123,7 @@ export const getHandInfo = createSelector(
 	}
 );
 
-function getNextPlayerInTurn(userPlayer: User, users: User[]) {
+function getNextPlayerInTurn(userPlayer: Player, users: Player[]) {
 	const isLastPlayer = userPlayer.order === users.length;
 	const nextOrder = (isLastPlayer ? 1 : userPlayer.order + 1);
 	return users.find(player => player.order === nextOrder);

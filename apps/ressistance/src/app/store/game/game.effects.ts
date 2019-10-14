@@ -7,8 +7,9 @@ import { PlayerService } from '../../core/services/player.service';
 import { StatusBoardFirebaseService, StatusBoard } from '../../core/services/state-firebase.service';
 import { Store, select } from '@ngrx/store';
 import { GameState } from '.';
-import { getCards, getHandInfo } from './game.selectors';
-
+import { getCards, getHandInfo, getMissionInfo } from './game.selectors';
+import { MissionFirebaseService } from '../../core/services/mission.firebase.service';
+import { Mission, User, Player } from '../../models';
 
 @Injectable()
 export class GameEffects {
@@ -18,6 +19,7 @@ export class GameEffects {
 	constructor(private actions$: Actions,
 		private snackbarService: SnackbarService,
 		private statusService: StatusBoardFirebaseService,
+		private missionService: MissionFirebaseService,
 		private gameStore: Store<GameState>,
 		private playerService: PlayerService) { }
 
@@ -75,6 +77,7 @@ export class GameEffects {
 			)
 		)
 	);
+
 	revealSpies$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(actions.revealSpies),
@@ -88,5 +91,18 @@ export class GameEffects {
 		)
 	);
 
+	setMission$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.setMission),
+			switchMap(async action => {
+				const info = await this.gameStore.pipe(select(getMissionInfo), take(1)).toPromise();
+				const mission = new Mission(info.missionNumber, info.userPlayer, action.users);
+				await this.missionService.create(mission);
+				this.snackbarService.showSuccess('The mission was propposed', this.gameTitle);
+				return actions.setMissionSuccess();
+			}
+			)
+		)
+	);
 
 }

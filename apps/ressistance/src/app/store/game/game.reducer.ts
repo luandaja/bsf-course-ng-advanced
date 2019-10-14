@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as action from './game.actions';
 import { GameState, initalState } from './game.state';
-import { User } from '../../models';
+import { Player, Mission } from '../../models';
 
 const reducer = createReducer(
 	initalState,
@@ -12,13 +12,14 @@ const reducer = createReducer(
 	on(action.revealSpiesSuccess, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.revealSpies, (state, { }) => ({ ...state, isLoading: false })),
 	on(action.updateBoardStatus, (state, { board }) => ({ ...state, board })),
-	on(action.usersLoaded, (state, { users }) => ({ ...state, users: (Object.assign([], users) as User[]).sort((a, b) => a.order - b.order), userPlayer: getUserPlayer(users, state.userPlayer) })),
+	on(action.usersLoaded, (state, { users }) => ({ ...state, users: (Object.assign([], users) as Player[]).sort((a, b) => a.order - b.order), userPlayer: getUserPlayer(users, state.userPlayer) })),
+	on(action.missionsLoaded, (state, { missions }) => ({ ...state, missions: (Object.assign([], missions) as Mission[]).sort((a, b) => parseInt(a.id, 2) - parseInt(b.id, 2)) })),
 	on(action.pickUpCardSuccess, (state, { card }) => ({ ...state, userPlayer: { ...state.userPlayer, isSpy: card } })),
 	on(action.startGame, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.gameStarted, (state, { }) => ({ ...state, isLoading: false })),
 );
 
-function getUserPlayer(players: User[], userPlayer: User) {
+function getUserPlayer(players: Player[], userPlayer: Player) {
 	return userPlayer === null ? null : { ...players.find(player => player.id === userPlayer.id) };
 }
 

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '../../models';
+import { User, Player, Mission } from '../../models';
 import { BoardStatus } from '../../models/BoardStatus';
 
 export const signIn = createAction(
@@ -8,7 +8,7 @@ export const signIn = createAction(
 );
 export const signInSuccess = createAction(
 	'[Auth] Sign in success',
-	props<{ userPlayer: User }>()
+	props<{ userPlayer: Player }>()
 );
 
 export const signOutSuccess = createAction('[Auth] Sign out success');
@@ -25,14 +25,17 @@ export const updateBoardStatus = createAction('[Update Status]',
 	props<{ board: BoardStatus }>()
 );
 export const usersLoaded = createAction('[Board Cards] Loaded users',
-	props<{ users: User[] }>()
+	props<{ users: Player[] }>()
 );
 
-export const setMembers = createAction('[Board Cards] Select team members',
-	props<{ users: User[] }>()
+export const setMission = createAction('[Missions] Set mission',
+	props<{ users: Player[] }>()
 );
-export const setMembersSuccess = createAction('[Board Cards] Select team members success',
-	props<{ users: User[] }>()
-);
+export const setMissionSuccess = createAction('[Missions] Select team members success');
+
 export const revealSpies = createAction('[Game] reveal spies');
 export const revealSpiesSuccess = createAction('[Game] reveal spies success');
+
+export const missionsLoaded = createAction('[Missions] missions loaded',
+	props<{ missions: Mission[] }>()
+);

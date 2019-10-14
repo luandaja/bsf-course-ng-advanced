@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { GameState, getUsers, getMissionInfo, setMembersSuccess } from '../../../store/game';
+import { GameState, getUsers, getMissionInfo, getUserAvatars, setMission, getIsTeamSelectable } from '../../../store/game';
 import { map, take } from 'rxjs/operators';
 import { SnackbarService } from '@glotrix/ui/snackbar';
 import { User } from '../../../models';
@@ -22,37 +22,34 @@ const missionsConfig: { players: number, missions: number[] }[] = [
 })
 export class SelectTeamComponent implements OnInit {
 	members: string[];
-	avatars: string[];
-	players: User[];
-	missionChanges$: Subscription;
-	membersRequired: number;
-	title: string;
+	avatars$: Observable<string[]>;
+	membersRequired$: Observable<number>;
+	isTeamSelectable$: Observable<boolean>;
 
 	constructor(private gameStore: Store<GameState>,
 		private snackBarService: SnackbarService) { }
 
-	async ngOnInit() {
-		this.players = await this.gameStore.pipe(select(getUsers), take(1)).toPromise();
-		this.avatars = this.players.map(player => player.photoUrl);
-		await this.GetMembersRequired();
-		this.title = `Select ${this.membersRequired} players for the mission!`;
+	ngOnInit() {
+		this.avatars$ = this.gameStore.select(getUserAvatars);
+		this.isTeamSelectable$ = this.gameStore.select(getIsTeamSelectable);
+		this.membersRequired$ = this.gameStore.pipe(select(getMissionInfo),
+			map(info => info.playersCount === 0 ? 0 : missionsConfig.find(x => x.players === info.playersCount).missions[info.missionNumber])
+		);
 	}
 
 	onSelectionChanged(players: string[]) {
 		this.members = players;
 	}
 
-	setMembers() {
-		if (this.members.length !== this.membersRequired) {
-			this.snackBarService.showWarning(`You need to select ${this.membersRequired} players for the mission!`, 'The Resistance');
+	async setMembers() {
+		const membersRequired = await this.membersRequired$.pipe(take(1)).toPromise();
+		if (this.members.length !== membersRequired) {
+			this.snackBarService.showWarning(`You need to select ${membersRequired} players for the mission!`, 'The Resistance');
 			return;
 		}
-		const selectedMembers = this.players.filter(player => this.members.includes(player.photoUrl));
-		this.gameStore.dispatch(setMembersSuccess({ users: selectedMembers }));
+		const users = await this.gameStore.pipe(select(getUsers), take(1)).toPromise();
+		const selectedMembers = users.filter(user => this.members.includes(user.photoUrl));
+		this.gameStore.dispatch(setMission({ users: selectedMembers }));
 	}
 
-	private async GetMembersRequired() {
-		const missionInfo = await this.gameStore.pipe(select(getMissionInfo), take(1)).toPromise();
-		this.membersRequired = missionsConfig.find(x => x.players === missionInfo.playersCount).missions[missionInfo.missionNumber];
-	}
 }
