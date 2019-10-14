@@ -23,6 +23,14 @@ export const getUsers = createSelector(
 	state => state.users
 );
 
+export const getMissionInfo = createSelector(
+	gameFeature,
+	state => {
+		const { board, users } = state;
+		return { playersCount: users.length, missionNumber: board.missionNumber };
+	}
+);
+
 export const getIsLoading = createSelector(
 	gameFeature,
 	state => state.isLoading

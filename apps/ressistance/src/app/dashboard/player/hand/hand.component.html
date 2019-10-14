@@ -1,5 +1,6 @@
 <div class="row orange-border m-auto col-sm-11 ml-sm-auto mr-sm-auto">
 	<gt-view-spies></gt-view-spies>
+	<gt-select-team class="orange-border"></gt-select-team>
 	<div class="row col-sm-12 justify-content-center">
 		<ng-container *ngIf="isPickingUpCards$ | async; else pickUpComplete">
 			<gt-spinner [isLoading]="true" class="col-sm-12 col-12 center-text"></gt-spinner>

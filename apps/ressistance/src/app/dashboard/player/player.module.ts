@@ -7,10 +7,11 @@ import { CardComponent } from './card/card.component';
 import { UiSpinnerModule } from '@glotrix/ui/spinner';
 import { UiAvatarModule } from '@glotrix/ui/avatar';
 import { ViewSpiesComponent } from './view-spies/view-spies.component';
+import { SelectTeamComponent } from './select-team/select-team.component';
 
 
 @NgModule({
-	declarations: [HandComponent, CardComponent, ViewSpiesComponent],
+	declarations: [HandComponent, CardComponent, ViewSpiesComponent, SelectTeamComponent],
 	imports: [
 		CommonModule,
 		PlayerRoutingModule,

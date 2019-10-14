@@ -28,5 +28,11 @@ export const usersLoaded = createAction('[Board Cards] Loaded users',
 	props<{ users: User[] }>()
 );
 
+export const setMembers = createAction('[Board Cards] Select team members',
+	props<{ users: User[] }>()
+);
+export const setMembersSuccess = createAction('[Board Cards] Select team members success',
+	props<{ users: User[] }>()
+);
 export const revealSpies = createAction('[Game] reveal spies');
 export const revealSpiesSuccess = createAction('[Game] reveal spies success');

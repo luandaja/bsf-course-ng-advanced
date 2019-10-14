@@ -1,0 +1,8 @@
+<div class="col-sm-12 pt-5">
+	<h5>{{ title }}</h5>
+	<gt-avatars-selector
+		[avatars]="avatars"
+		(selectionChange)="onSelectionChanged($event)"
+	></gt-avatars-selector>
+	<button class="btn btn-warning" (click)="setMembers()">Select team members</button>
+</div>
