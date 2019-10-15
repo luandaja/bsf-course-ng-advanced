@@ -8,10 +8,14 @@ import { GameStoreModule } from '../../store/game';
 import { UiAvatarModule } from '@glotrix/ui/avatar';
 import { UiSpinnerModule } from '@glotrix/ui/spinner';
 import { UiLoginModule } from '@glotrix/ui/login';
+import { TableBoardComponent } from './table-board/table-board.component';
+import { MissionComponent } from './mission/mission.component';
+import { AssignmentVoteComponent } from './assignment-vote/assignment-vote.component';
+import { MissionVoteComponent } from './mission-vote/mission-vote.component';
 
 
 @NgModule({
-	declarations: [PlayersComponent, StartGameComponent],
+	declarations: [PlayersComponent, StartGameComponent, TableBoardComponent, MissionComponent, AssignmentVoteComponent, MissionVoteComponent],
 	imports: [
 		CommonModule,
 		BoardRoutingModule,

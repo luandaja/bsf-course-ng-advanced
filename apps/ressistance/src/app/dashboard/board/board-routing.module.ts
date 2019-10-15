@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StartGameComponent } from './start-game/start-game.component';
+import { TableBoardComponent } from './table-board/table-board.component';
 
 
 const routes: Routes = [
@@ -8,12 +9,12 @@ const routes: Routes = [
 		path: 'start',
 		component: StartGameComponent
 	},
-	// {
-	// 	path: '',
-	// 	component: TableBoardComponent,
-	// 	// canLoad: [GameGuard],
-	// 	// canActivate: [GameGuard]
-	// }
+	{
+		path: '',
+		component: TableBoardComponent,
+		// canLoad: [GameGuard],
+		// canActivate: [GameGuard]
+	}
 ];
 
 @NgModule({

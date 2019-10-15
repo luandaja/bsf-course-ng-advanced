@@ -1,29 +1,24 @@
-import { User } from '.';
 import { Player } from './Player';
 
 export class Mission {
 	id: string;
-	members: User[];
-	supportingAssignment: User[];
-	rejectingAssignment: User[];
+	members: string[];
+	supportingAssignment: string[];
+	rejectingAssignment: string[];
 	votes: boolean[];
 	hasBeenProposed: boolean;
 	isApproved?: boolean;
-	leader: User;
+	leader: string;
 
 	constructor(currentMission: number, leader: Player, members: Player[]) {
 		this.id = currentMission.toString();
-		this.leader = this.getUser(leader);
-		this.members = members.map(member => this.getUser(member))
+		this.leader = leader.photoUrl;
+		this.members = members.map(member => member.photoUrl);
 		this.supportingAssignment = [];
 		this.rejectingAssignment = [];
 		this.votes = [];
 		this.isApproved = false;
 		this.hasBeenProposed = true;
-	}
-
-	private getUser(player: Player) {
-		return { id: player.id, photoUrl: player.photoUrl, username: player.username } as User;
 	}
 
 }

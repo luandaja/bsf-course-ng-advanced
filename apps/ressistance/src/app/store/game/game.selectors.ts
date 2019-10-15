@@ -75,6 +75,11 @@ export const getCards = createSelector(
 	state => state.board.cards
 );
 
+export const getCurrentMission = createSelector(
+	gameFeature,
+	state => state.missions.find(mission => mission.id === state.board.missionNumber.toString())
+);
+
 export const getSpiesInfo = createSelector(
 	gameFeature,
 	state => {
