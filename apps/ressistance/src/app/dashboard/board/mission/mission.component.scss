@@ -1,4 +1,5 @@
-span {
+span,
+p {
   font-style: italic;
   font-size: x-large;
   color: #002e50;
@@ -18,4 +19,25 @@ hr {
 }
 .leader {
   line-height: 80px;
+}
+@media (max-width: 400px) {
+  span {
+    font-size: large;
+  }
+  .mission {
+    line-height: 15px;
+  }
+  .leader {
+    line-height: 15px;
+  }
+  .lateral-borders {
+    border-width: 2px;
+  }
+  p {
+    font-size: large;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 95px;
+  }
 }

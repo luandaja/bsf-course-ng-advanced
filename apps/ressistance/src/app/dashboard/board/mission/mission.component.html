@@ -1,25 +1,25 @@
 <ng-container *ngIf="mission$ | async as mission">
 	<div class="row justify-content-between">
-		<div class="col-sm-4 leader">
+		<div class="col-sm-4 col-6 leader">
 			<span>Current leader</span>
 			<gt-avatar [width]="60" [height]="60" [source]="mission.leader"> </gt-avatar>
 		</div>
-		<div class="col-sm-2 mission">
+		<div class="col-sm-2 col-6 mission">
 			<span>Mission #{{ mission.id }}</span>
 		</div>
 	</div>
 	<hr />
-	<div class="row col-sm-12">
-		<div class="col-sm-4">
-			<span>Members proposed:</span>
+	<div class="row">
+		<div class="col-sm-4 col-4">
+			<p class="trim">Proposed members:</p>
 			<gt-avatars [isInLine]="true" [avatars]="mission.members"></gt-avatars>
 		</div>
-		<div class="col-sm-4 lateral-borders">
-			<span>Supporting current assignment:</span>
+		<div class="col-sm-4 col-4 lateral-borders">
+			<p class="trim">Supporting assignment:</p>
 			<gt-avatars [isInLine]="true" [avatars]="mission.supportingAssignment"></gt-avatars>
 		</div>
-		<div class="col-sm-4">
-			<span>Rejecting current assignment:</span>
+		<div class="col-sm-4 col-4">
+			<p class="trim">Rejecting assignment:</p>
 			<gt-avatars [isInLine]="true" [avatars]="mission.rejectingAssignment"></gt-avatars>
 		</div>
 	</div>
