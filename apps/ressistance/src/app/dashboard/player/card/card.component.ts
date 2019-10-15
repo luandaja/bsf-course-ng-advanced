@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { cardImages, reverseCardImages } from './card.info'
+import { Card } from '../../../models';
 @Component({
 	selector: 'gt-card',
 	templateUrl: './card.component.html',
@@ -7,16 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-	isRevealed = false;
-	@Input() isSpy: boolean;
+	@Input() isRevealed = false;
+	@Input() card: Card;
 
 	constructor() { }
 
 	ngOnInit() { }
 
 	get cardImage() {
-		const character = this.isSpy ? 'assets/cards/axis-1-en.jpg' : 'assets/cards/ally-1-en.jpg';//`${this.basePath}` : `${this.basePath}`;
-		return this.isRevealed ? character : 'assets/cards/back-character-a.jpg';
+		const card = cardImages[this.card];
+		return this.isRevealed ? card.image : reverseCardImages[card.cardType];
 	}
 
 	toggle() {
@@ -24,3 +25,5 @@ export class CardComponent implements OnInit {
 	}
 
 }
+
+

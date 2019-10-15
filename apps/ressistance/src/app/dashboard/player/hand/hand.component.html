@@ -2,11 +2,7 @@
 	<gt-view-spies></gt-view-spies>
 	<gt-select-team></gt-select-team>
 	<div class="row col-sm-12 justify-content-center">
-		<ng-container *ngIf="isPickingUpCards$ | async; else pickUpComplete">
-			<gt-spinner [isLoading]="true" class="col-sm-12 col-12 center-text"></gt-spinner>
-		</ng-container>
-		<ng-template #pickUpComplete>
-			<gt-card [isSpy]="isSpy$ | async"></gt-card>
-		</ng-template>
+		<gt-assignment-vote class="col-sm-6"></gt-assignment-vote>
+		<gt-character-card class="col-sm-4"></gt-character-card>
 	</div>
 </div>

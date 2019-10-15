@@ -10,12 +10,12 @@ import { UiSpinnerModule } from '@glotrix/ui/spinner';
 import { UiLoginModule } from '@glotrix/ui/login';
 import { TableBoardComponent } from './table-board/table-board.component';
 import { MissionComponent } from './mission/mission.component';
-import { AssignmentVoteComponent } from './assignment-vote/assignment-vote.component';
 import { MissionVoteComponent } from './mission-vote/mission-vote.component';
+import { CharacterCardComponent } from './character-card/character-card.component';
 
 
 @NgModule({
-	declarations: [PlayersComponent, StartGameComponent, TableBoardComponent, MissionComponent, AssignmentVoteComponent, MissionVoteComponent],
+	declarations: [PlayersComponent, StartGameComponent, TableBoardComponent, MissionComponent, MissionVoteComponent, CharacterCardComponent],
 	imports: [
 		CommonModule,
 		BoardRoutingModule,
