@@ -6,6 +6,8 @@ export class Player implements User {
 
 	order: number;
 	isSpy: boolean;
+	hasVoteForAssignment: boolean;
+	hasVoteForMission: boolean;
 
 	constructor(userName: string, photoUrl: string, order: number) {
 		this.username = userName;

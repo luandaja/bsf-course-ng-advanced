@@ -1,14 +1,14 @@
 import { Player } from './Player';
 
 export class Mission {
-	id: string;
-	members: string[];
-	supportingAssignment: string[];
-	rejectingAssignment: string[];
-	votes: boolean[];
-	hasBeenProposed: boolean;
+	id?: string;
+	members?: string[];
+	supportingAssignment?: string[];
+	rejectingAssignment?: string[];
+	votes?: boolean[];
+	hasBeenProposed?: boolean;
 	isApproved?: boolean;
-	leader: string;
+	leader?: string;
 
 	constructor(currentMission: number, leader: Player, members: Player[]) {
 		this.id = currentMission.toString();
@@ -17,7 +17,7 @@ export class Mission {
 		this.supportingAssignment = [];
 		this.rejectingAssignment = [];
 		this.votes = [];
-		this.isApproved = false;
+		this.isApproved = null;
 		this.hasBeenProposed = true;
 	}
 

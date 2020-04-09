@@ -13,7 +13,7 @@ export interface GameState {
 }
 
 const ale = { id: '2VS6a3CnoPvnpji1lzfH', order: 1, username: 'Ale', photoUrl: 'https://bit.ly/2ngbfJT', isSpy: false };
-const pao = { id: 'BAlXkteUzf33XR0bzdHH', order: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', isSpy: true };
+const pao = { id: 'BAlXkteUzf33XR0bzdHH', order: 2, username: 'Pao', photoUrl: 'https://bit.ly/2mLcpgt', isSpy: true, hasVoteForAssignment: false, hasVoteForMission: false };
 const walter = { id: 'dgzHm76SRm9g2oxeSVO1', order: 3, username: 'Walter', photoUrl: 'https://bit.ly/2lQfYBH', isSpy: true };
 const myriam = { id: '4', order: 4, username: 'Myriam', photoUrl: 'https://bit.ly/2lOjrAQ', isSpy: false };
 const brenda = { id: '5', order: 5, username: 'Brenda', photoUrl: 'https://bit.ly/2leFz7h', isSpy: false };

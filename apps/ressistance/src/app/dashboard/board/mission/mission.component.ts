@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Mission } from '../../../models';
 import { Store } from '@ngrx/store';
-import { GameState, getCurrentMission } from '../../../store/game';
+import { GameState, getCurrentMission, endDiscussion } from '../../../store/game';
 
 @Component({
 	selector: 'gt-mission',
@@ -18,4 +18,7 @@ export class MissionComponent implements OnInit {
 		this.mission$ = this.gameStore.select(getCurrentMission);
 	}
 
+	endDiscussion() {
+		this.gameStore.dispatch(endDiscussion());
+	}
 }

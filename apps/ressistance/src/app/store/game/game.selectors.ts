@@ -4,6 +4,14 @@ import { Player } from '../../models';
 
 const gameFeature = createFeatureSelector<GameState>('game');
 
+export const getCanVoteForAssignment = createSelector(
+	gameFeature,
+	state => {
+		const currentMission = state.missions.find(mission => mission.id === state.board.missionNumber.toString());
+		return currentMission === undefined ? false : !state.userPlayer.hasVoteForAssignment && !currentMission.isApproved;
+	}
+);
+
 export const getIsLogged = createSelector(
 	gameFeature,
 	state => state.isLogged
@@ -77,7 +85,10 @@ export const getCards = createSelector(
 
 export const getCurrentMission = createSelector(
 	gameFeature,
-	state => state.missions.find(mission => mission.id === state.board.missionNumber.toString())
+	state => {
+		const index = state.board.missionNumber.toString();
+		return { ...state.missions[index] };
+	}
 );
 
 export const getSpiesInfo = createSelector(
@@ -126,6 +137,11 @@ export const getHandInfo = createSelector(
 		const isPickUpCompleted = userPlayer.id === state.users[lastIndex].id;
 		return { nextPlayerTurn: nextPlayerId, cards: board.cards, isPickUpCompleted }
 	}
+);
+
+export const getNextPlayer = createSelector(
+	gameFeature,
+	(state: GameState) => getNextPlayerInTurn(state.userPlayer, state.users)
 );
 
 function getNextPlayerInTurn(userPlayer: Player, users: Player[]) {

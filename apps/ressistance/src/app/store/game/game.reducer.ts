@@ -17,6 +17,10 @@ const reducer = createReducer(
 	on(action.pickUpCardSuccess, (state, { card }) => ({ ...state, userPlayer: { ...state.userPlayer, isSpy: card } })),
 	on(action.startGame, (state, { }) => ({ ...state, isLoading: true })),
 	on(action.gameStarted, (state, { }) => ({ ...state, isLoading: false })),
+	on(action.endDiscussion, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.endDiscussionSuccess, (state, { }) => ({ ...state, isLoading: false })),
+	on(action.supportAssingment, (state, { }) => ({ ...state, isLoading: true })),
+	on(action.voteForAssingmentSuccess, (state, { }) => ({ ...state, isLoading: false, userPlayer: { ...state.userPlayer, hasVoteForAssignment: true } })),
 );
 
 function getUserPlayer(players: Player[], userPlayer: Player) {

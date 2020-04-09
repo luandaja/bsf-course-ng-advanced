@@ -36,6 +36,13 @@ export const setMissionSuccess = createAction('[Missions] Select team members su
 export const revealSpies = createAction('[Game] reveal spies');
 export const revealSpiesSuccess = createAction('[Game] reveal spies success');
 
+export const endDiscussion = createAction('[Assignment] end discussion');
+export const endDiscussionSuccess = createAction('[Assignment] end discussion success');
+
+export const supportAssingment = createAction('[Assignment] support assignment');
+export const voteForAssingmentSuccess = createAction('[Assignment] support assignment success');
+export const rejectAssingment = createAction('[Assignment] reject assignment');
+
 export const missionsLoaded = createAction('[Missions] missions loaded',
 	props<{ missions: Mission[] }>()
 );

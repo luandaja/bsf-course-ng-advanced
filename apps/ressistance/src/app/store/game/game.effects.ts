@@ -7,9 +7,10 @@ import { PlayerService } from '../../core/services/player.service';
 import { StatusBoardFirebaseService, StatusBoard } from '../../core/services/state-firebase.service';
 import { Store, select } from '@ngrx/store';
 import { GameState } from '.';
-import { getCards, getHandInfo, getMissionInfo } from './game.selectors';
+import { getCards, getHandInfo, getMissionInfo, getUserPlayer, getCurrentMission, getUsers, getNextPlayer } from './game.selectors';
 import { MissionFirebaseService } from '../../core/services/mission.firebase.service';
 import { Mission, User, Player } from '../../models';
+import { add } from 'apps/shared/Util';
 
 @Injectable()
 export class GameEffects {
@@ -100,6 +101,59 @@ export class GameEffects {
 				await this.missionService.create(mission);
 				this.snackbarService.showSuccess('The mission was propposed', this.gameTitle);
 				return actions.setMissionSuccess();
+			}
+			)
+		)
+	);
+
+	supportAssingment$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.supportAssingment),
+			switchMap(async action => {
+				const userPlayer = await this.gameStore.pipe(select(getUserPlayer), take(1)).toPromise();
+				const mission = await this.gameStore.pipe(select(getCurrentMission), take(1)).toPromise();
+				await this.missionService.update(mission.id, {
+					supportingAssignment: add(mission.supportingAssignment, userPlayer.photoUrl)
+				});
+				this.snackbarService.showSuccess('Your vote was set', this.gameTitle);
+				return actions.voteForAssingmentSuccess();
+			}
+			)
+		)
+	);
+
+	rejectAssingment$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.rejectAssingment),
+			switchMap(async action => {
+				const userPlayer = await this.gameStore.pipe(select(getUserPlayer), take(1)).toPromise();
+				const mission = await this.gameStore.pipe(select(getCurrentMission), take(1)).toPromise();
+				await this.missionService.update(mission.id, {
+					rejectingAssignment: add(mission.rejectingAssignment, userPlayer.photoUrl)
+				});
+				this.snackbarService.showSuccess('Your vote was set', this.gameTitle);
+				return actions.voteForAssingmentSuccess();
+			}
+			)
+		)
+	);
+
+	endDiscussion$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(actions.endDiscussion),
+			switchMap(async action => {
+				const mission = await this.gameStore.pipe(select(getCurrentMission), take(1)).toPromise();
+				mission.isApproved = mission.supportingAssignment.length > mission.rejectingAssignment.length;
+				if (!mission.isApproved) {
+					mission.leader = await this.gameStore.pipe(select(getNextPlayer), take(1), map(player => player.photoUrl)).toPromise();
+					mission.hasBeenProposed = false;
+					mission.rejectingAssignment = [];
+					mission.supportingAssignment = [];
+				}
+				await this.missionService.update(mission.id, mission);
+				const mesage = `The mission ${mission.isApproved ? 'has been' : 'has not been'} approved!.`;
+				this.snackbarService.showSuccess(mesage, this.gameTitle);
+				return actions.endDiscussionSuccess();
 			}
 			)
 		)
