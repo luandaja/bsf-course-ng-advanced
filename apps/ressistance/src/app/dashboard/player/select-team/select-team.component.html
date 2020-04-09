@@ -1,0 +1,8 @@
+<div class="col-sm-12 orange-border" *ngIf="isTeamSelectable$ | async">
+	<h5>Select {{ membersRequired$ | async }} players for the mission!</h5>
+	<gt-avatars-selector
+		[avatars]="avatars$ | async"
+		(selectionChange)="onSelectionChanged($event)"
+	></gt-avatars-selector>
+	<button class="btn btn-warning" (click)="setMembers()">Select team members</button>
+</div>

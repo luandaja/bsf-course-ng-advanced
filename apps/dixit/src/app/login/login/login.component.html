@@ -1,0 +1,35 @@
+<div class="container-fluid">
+	<div class="row align-items-center">
+		<gt-welcome-banner
+			[banner]="banner"
+			class="col-sm-6 px-0 d-none d-sm-block"
+		></gt-welcome-banner>
+		<div class="col-sm-4 offset-sm-1 col-11  ml-auto mr-auto login-container">
+			<ng-container *ngIf="isRestarting$ | async">
+				<span>Restarting match</span>
+				<gt-spinner [isLoading]="true"></gt-spinner>
+			</ng-container>
+			<ng-container *ngIf="isRestartVisible$ | async">
+				<span class="row col-sm-12"
+					>The game has already started. You can either restart it or wait for them to
+					finish.</span
+				>
+				<div class="row col-sm-12 justify-content-center">
+					<gt-avatar [width]="120" [height]="120" [source]="'assets/wait.png'">
+					</gt-avatar>
+				</div>
+				<div class="row col-sm-12 justify-content-center pt-3">
+					<button class="btn btn-warning" (click)="restartGame()">Restart</button>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="isLoginVisible$ | async">
+				<h4>Welcome to Dixit online!</h4>
+				<gt-player-login
+					[avatars]="avatars$ | async"
+					(playerChange)="onPlayerChange($event)"
+				></gt-player-login>
+				<gt-spinner [isLoading]="isLoading$ | async"></gt-spinner>
+			</ng-container>
+		</div>
+	</div>
+</div>

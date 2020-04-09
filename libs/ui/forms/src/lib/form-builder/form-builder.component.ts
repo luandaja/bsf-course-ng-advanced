@@ -6,35 +6,36 @@ import { EntryControlService } from '../services/entry-control.service';
 import { FieldType } from '../models/Field';
 
 @Component({
-  selector: 'gt-form-builder',
-  templateUrl: './form-builder.component.html',
-  styleUrls: ['./form-builder.component.scss'],
-  providers: [EntryControlService]
+	selector: 'gt-form-builder',
+	templateUrl: './form-builder.component.html',
+	styleUrls: ['./form-builder.component.scss'],
+	providers: [EntryControlService]
 })
 export class FormBuilderComponent implements OnInit {
-  @Input() entries: FieldType[] = [];
-  @Input() isCancelButtonVisible = true;
-  @Input() submitButtonText = 'Save';
-  @Output() submitted = new EventEmitter<any>();
+	@Input() entries: FieldType[] = [];
+	@Input() isCancelButtonVisible = true;
+	@Input() submitButtonText = 'Save';
+	@Output() submitted = new EventEmitter<any>();
 
-  form: FormGroup;
-  isSubmitted = false;
+	form: FormGroup;
+	isSubmitted = false;
 
-  constructor(
-    private entryControlService: EntryControlService,
-    private communication: CommunicationService
-  ) { }
+	constructor(
+		private entryControlService: EntryControlService,
+		private communication: CommunicationService
+	) { }
 
-  ngOnInit() {
-    this.entries = this.entries.sort((a, b) => a.order - b.order);
-    this.form = this.entryControlService.toFormGroup(this.entries);
-    this.communication.setFormState({ form: this.form, isSubmitted: this.isSubmitted });
-  }
+	ngOnInit() {
+		this.entries = this.entries.sort((a, b) => a.order - b.order);
+		this.form = this.entryControlService.toFormGroup(this.entries);
+		this.communication.setFormState({ form: this.form, isSubmitted: this.isSubmitted });
+	}
 
-  onSubmit() {
-    this.isSubmitted = true;
-    this.communication.setFormState({ form: this.form, isSubmitted: this.isSubmitted });
-    if (this.form.invalid) return;
-    this.submitted.emit(this.form.value);
-  }
+	onSubmit() {
+		this.isSubmitted = true;
+		this.communication.setFormState({ form: this.form, isSubmitted: this.isSubmitted });
+		if (this.form.invalid) return;
+		this.submitted.emit(this.form.value);
+		//this.form.reset();
+	}
 }

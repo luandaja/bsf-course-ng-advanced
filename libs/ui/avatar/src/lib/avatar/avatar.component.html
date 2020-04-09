@@ -2,5 +2,6 @@
 	[src]="source"
 	[width]="width"
 	[height]="height"
-	class="rounded-circle border-grey img-fluid"
+	[ngClass]="{ selected: isSelected }"
+	class="rounded-circle border-grey img-fluid pb-2"
 />

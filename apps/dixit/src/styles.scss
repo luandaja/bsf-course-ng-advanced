@@ -1,0 +1,30 @@
+body {
+  background-color: #f5f5f5 !important;
+}
+.orange-border {
+  border-radius: 25px;
+  border: 2px solid #f89937;
+  height: 100%;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s cubic-bezier(0.3, 0.6, 0.2, 1.8);
+}
+.card {
+  border-style: none;
+  background: transparent;
+}
+.center-text {
+  text-align: center;
+}
+
+.btn {
+  color: #fff;
+}
+.btn-warning {
+  background-color: #f89937;
+  border-color: #f89937;
+}
+.btn-warning:hover {
+  background-color: #ffc08b;
+}

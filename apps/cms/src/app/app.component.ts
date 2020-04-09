@@ -5,32 +5,32 @@ import { Subscription } from 'rxjs';
 import { AuthState, getIsLogged } from './store/auth';
 
 @Component({
-  selector: 'gt-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'gt-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  isLoggedIn$: Subscription;
+	isLoggedIn$: Subscription;
 
-  constructor(private store: Store<AuthState>, private router: Router) {}
+	constructor(private store: Store<AuthState>, private router: Router) { }
 
-  ngOnInit(): void {
-    this.isLoggedIn$ = this.store
-      .pipe(select(getIsLogged))
-      .subscribe((isLogged: boolean) => this.redirect(isLogged));
-  }
+	ngOnInit(): void {
+		this.isLoggedIn$ = this.store
+			.pipe(select(getIsLogged))
+			.subscribe((isLogged: boolean) => this.redirect(isLogged));
+	}
 
-  private redirect(isLogged: boolean) {
-    if (isLogged) {
-      console.log('loggeado');
-      // this.router.navigate(['/dashboard']);
-    } else {
-      console.log('no loggeado');
-      this.router.navigate(['/login']);
-    }
-  }
+	private redirect(isLogged: boolean) {
+		if (isLogged) {
+			console.log('loggeado');
+			this.router.navigate(['/dashboard']);
+		} else {
+			console.log('no loggeado');
+			this.router.navigate(['/login']);
+		}
+	}
 
-  ngOnDestroy(): void {
-    this.isLoggedIn$.unsubscribe();
-  }
+	ngOnDestroy(): void {
+		this.isLoggedIn$.unsubscribe();
+	}
 }

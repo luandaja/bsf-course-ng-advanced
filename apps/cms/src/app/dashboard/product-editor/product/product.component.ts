@@ -20,12 +20,12 @@ export class ProductComponent implements OnInit {
 	constructor(
 		private routesStore: Store<RouterState>,
 		private productsStore: Store<ProductsState>
-	) {}
+	) { }
 
 	ngOnInit() {
 		const loadFieldsWithProduct = pipe(
 			map(id => Number(id)),
-			switchMap(id => this.productsStore.pipe(select(getProduct(id), tap(console.log)))),
+			switchMap(id => this.productsStore.pipe(select(getProduct(id)))),
 			filter(product => product !== undefined),
 			map(this.updateEntriesWithProduct)
 		);

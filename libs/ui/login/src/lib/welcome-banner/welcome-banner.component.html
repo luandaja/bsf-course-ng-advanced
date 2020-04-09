@@ -3,10 +3,10 @@
 		<div class="p-2 mb-auto">
 			<span class="brand-name">{{ banner.upperText }}</span>
 		</div>
-		<div class="p-2 align-self-center">
+		<div class="p-2 align-self-center" *ngIf="banner.imageUrl">
 			<gt-avatar [width]="500" [source]="banner.imageUrl"></gt-avatar>
 		</div>
-		<div class="p-2 mt-auto w-50">
+		<div class="message mt-auto">
 			<h2>{{ banner.title }}</h2>
 			<span>{{ banner.contentText }}</span>
 		</div>

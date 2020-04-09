@@ -1,0 +1,20 @@
+.card {
+  padding: 20px;
+  border-style: none;
+  background: transparent;
+}
+span {
+  font-style: italic;
+  font-size: x-large;
+  color: #002e50;
+}
+hr {
+  height: 0px;
+  border: none;
+  border-top: 2px solid #f89937;
+}
+@media (min-width: 400px) {
+  hr {
+    display: none;
+  }
+}
