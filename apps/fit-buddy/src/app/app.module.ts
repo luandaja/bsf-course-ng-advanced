@@ -1,14 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login/login.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
+import { RouterStoreModule } from './store/router';
+import { AuthStoreModule } from './store/auth/auth-store.module';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
-  imports: [BrowserModule, RouterModule.forRoot([], { initialNavigation: 'enabled' })],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [AppComponent],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		CoreModule,
+		RouterStoreModule,
+		AuthStoreModule
+	],
+	bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

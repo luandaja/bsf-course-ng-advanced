@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="container-fluid">
+	<div class="row align-items-center">
+		<gt-welcome-banner [banner]="banner" class="col-sm-7 px-0"></gt-welcome-banner>
+		<div class="col-sm-3 offset-sm-1 login-container">
+			<gt-form-builder
+				[entries]="entries"
+				[isCancelButtonVisible]="false"
+				[submitButtonText]="'Login'"
+				(submitted)="onSubmitted($event)"
+			>
+			</gt-form-builder>
+			<div class="form-fluid">
+				<ui-social-button
+					(signedIn)="onGooglePlusSignIn()"
+					[socialNetwork]="socialNetwork.GooglePlus"
+					[text]="'Log in with Google'"
+				></ui-social-button>
+				<ui-social-button
+					(signedIn)="onInstagramSignIn()"
+					[socialNetwork]="socialNetwork.Instagram"
+					[text]="'Log in with Instagram'"
+				></ui-social-button>
+			</div>
+		</div>
+	</div>
+</div>

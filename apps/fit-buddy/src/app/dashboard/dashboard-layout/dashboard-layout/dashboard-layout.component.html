@@ -1,0 +1,20 @@
+<section class="d-flex">
+	<gt-side-bar
+		[userData]="user$ | async"
+		[linkOptions]="options"
+		[isSidebarActive]="isSidebarActive"
+		(logOut)="onLogOut($event)"
+	></gt-side-bar>
+
+	<section id="#page-content-wrapper" class="flex-fill">
+		<gt-top-bar
+			[userData]="user$ | async"
+			[(isSidebarActive)]="isSidebarActive"
+			(logOut)="onLogOut($event)"
+		>
+		</gt-top-bar>
+		<div class="container-fluid">
+			<router-outlet></router-outlet>
+		</div>
+	</section>
+</section>
