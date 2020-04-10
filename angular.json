@@ -909,11 +909,11 @@
             "aot": false,
             "assets": ["apps/ressistance/src/favicon.ico", "apps/ressistance/src/assets"],
             "styles": [
-								"apps/ressistance/src/styles.scss",
-								"node_modules/bootstrap/dist/css/bootstrap.min.css",
-								"node_modules/font-awesome/css/font-awesome.css",
-								"libs/ui/snackbar/src/lib/snackbar.scss"
-						],
+              "apps/ressistance/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "libs/ui/snackbar/src/lib/snackbar.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -1003,6 +1003,119 @@
           "options": {
             "tsConfig": ["apps/ressistance-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/ressistance-e2e/**"]
+          }
+        }
+      }
+    },
+    "fit-buddy": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/fit-buddy",
+      "sourceRoot": "apps/fit-buddy/src",
+      "prefix": "gt",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/fit-buddy",
+            "index": "apps/fit-buddy/src/index.html",
+            "main": "apps/fit-buddy/src/main.ts",
+            "polyfills": "apps/fit-buddy/src/polyfills.ts",
+            "tsConfig": "apps/fit-buddy/tsconfig.app.json",
+            "aot": false,
+            "assets": ["apps/fit-buddy/src/favicon.ico", "apps/fit-buddy/src/assets"],
+            "styles": ["apps/fit-buddy/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/fit-buddy/src/environments/environment.ts",
+                  "with": "apps/fit-buddy/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fit-buddy:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fit-buddy:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fit-buddy:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/fit-buddy/tsconfig.app.json",
+              "apps/fit-buddy/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/fit-buddy/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/fit-buddy/jest.config.js",
+            "tsConfig": "apps/fit-buddy/tsconfig.spec.json",
+            "setupFile": "apps/fit-buddy/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "fit-buddy-e2e": {
+      "root": "apps/fit-buddy-e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/fit-buddy-e2e/protractor.conf.js",
+            "devServerTarget": "fit-buddy:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "fit-buddy:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/fit-buddy-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/fit-buddy-e2e/**"]
           }
         }
       }

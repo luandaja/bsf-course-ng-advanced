@@ -85,6 +85,12 @@
     },
     "ressistance": {
       "tags": []
+    },
+    "fit-buddy": {
+      "tags": []
+    },
+    "fit-buddy-e2e": {
+      "tags": []
     }
   }
 }
