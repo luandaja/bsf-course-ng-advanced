@@ -1,34 +1,34 @@
 .welcome-container {
-  background-color: #f89937;
-  color: white;
-  min-height: 211px;
-  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 49%, 0% 0%);
-  padding: 20px;
-  height: 100vh;
-  padding-right: 25%;
-  background-image: url("/assets/cover.jpg");
-  background-size: 93% 101%;
+	background-color: #e4c70f;
+	color: white;
+	min-height: 211px;
+	clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 49%, 0% 0%);
+	padding: 20px;
+	height: 100vh;
+	padding-right: 25%;
+	background-image: url("/assets/cover.jpg");
+	background-size: 93% 101%;
 }
 
 .brand-name {
-  font-weight: 400;
-  font-style: italic;
+	font-weight: 400;
+	font-style: italic;
 }
 .message {
-  background-color: #212f3d;
-  opacity: 0.8;
-  border-radius: 19px;
-  width: w-50;
-  padding: 3rem;
+	background-color: #212f3d;
+	opacity: 0.8;
+	border-radius: 19px;
+	width: w-50;
+	padding: 3rem;
 }
 @media only screen and (max-width: 600px) {
-  .welcome-container {
-    height: 40vh;
-    margin-bottom: 15px;
-    background-size: 91% 72%;
-  }
-  .message {
-    padding: 0.25rem;
-    width: w-100;
-  }
+	.welcome-container {
+		height: 40vh;
+		margin-bottom: 15px;
+		background-size: 91% 72%;
+	}
+	.message {
+		padding: 0.25rem;
+		width: w-100;
+	}
 }
