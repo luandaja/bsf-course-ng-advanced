@@ -4,4 +4,5 @@ export interface Recipe {
 	persons?: number;
 	shortDescription?: string;
 	image?: string;
+	category?: string;
 }

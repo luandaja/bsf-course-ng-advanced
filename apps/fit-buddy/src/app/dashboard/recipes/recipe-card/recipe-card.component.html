@@ -1,0 +1,16 @@
+<div class="card">
+	<div class="header">
+		<img [src]="recipe.coverImage" *ngIf="recipe.coverImage" />
+	</div>
+	<div class="text">
+		<h1 class="food">
+			{{ recipe.name }}
+		</h1>
+		<i class="fa fa-users"> Para {{ recipe.persons }}</i>
+		<i class="fa fa-firefox"> {{ recipe.calories }} cal</i>
+		<p class="info">
+			{{ recipe.description }}
+		</p>
+	</div>
+	<a class="btn" [routerLink]="['detail', recipe.id]">Cocinemos!</a>
+</div>

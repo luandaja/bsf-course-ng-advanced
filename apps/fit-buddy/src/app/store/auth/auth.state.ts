@@ -9,8 +9,8 @@ export interface AuthState {
 export const initalState: AuthState = {
 	isLogged: true,
 	user: {
-		firstName: 'Belatrix user',
-		lastName: 'From Store',
+		firstName: 'Tommy',
+		lastName: 'Pickles',
 		age: 30,
 		heigth: 160,
 		weight: 73,

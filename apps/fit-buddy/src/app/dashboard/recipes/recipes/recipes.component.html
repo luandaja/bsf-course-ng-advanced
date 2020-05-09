@@ -1,8 +1,29 @@
-<div class="row justify-content-center" *ngIf="recipes$ | async as recipes; else loading">
-	<div class="col-4" *ngFor="let recipe of recipes">
-		<gt-recipe-card [recipe]="recipe"></gt-recipe-card>
-	</div>
-	<ng-template #loading>
-		<gt-spinner [isLoading]="true"></gt-spinner>
-	</ng-template>
+<div class="justify-content-center">
+	<section class="row pt-3">
+		<gt-search-bar
+			placeholder="Search for a recipe name"
+			class="col-12 col-sm-8"
+			(keywordChange)="updateSeachKeyword($event)"
+		></gt-search-bar>
+	</section>
+
+	<section class="row" *ngIf="recipes$ | async as recipes; else loading">
+		<div class="col-12 col-sm-4" *ngFor="let recipe of recipes">
+			<gt-recipe-card [recipe]="recipe"></gt-recipe-card>
+		</div>
+
+		<ng-template #loading>
+			<gt-spinner [isLoading]="true"></gt-spinner>
+		</ng-template>
+	</section>
+
+	<section class="row" *ngIf="pagination$ | async as pagination">
+		<gt-pagination
+			class="col-sm-12"
+			[total]="total$ | async"
+			[page]="pagination.page"
+			[pageSize]="pagination.size"
+			(pageChange)="updatePagination($event)"
+		></gt-pagination>
+	</section>
 </div>

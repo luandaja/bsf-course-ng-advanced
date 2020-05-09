@@ -1,118 +1,119 @@
 .carousel {
-  margin-left: 2%;
-  margin-right: 2%;
+	margin-left: 2%;
+	margin-right: 2%;
 }
 
 ul.slides {
-  display: block;
-  position: relative;
-  height: 600px;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  list-style: none;
+	display: block;
+	position: relative;
+	height: 600px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	list-style: none;
 }
 
 .slides * {
-  user-select: none;
-  -ms-user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 
 ul.slides input {
-  display: none;
+	display: none;
 }
 
 .slide-container {
-  display: block;
+	display: block;
 }
 
 .slide-image {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  opacity: 0;
-  transition: all 0.7s ease-in-out;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	opacity: 0;
+	transition: all 0.7s ease-in-out;
 }
 
 .slide-image img {
-  width: auto;
-  min-width: 100%;
-  height: 100%;
+	width: auto;
+	min-width: 100%;
+	height: 100%;
+	object-fit: scale-down;
 }
 
 .carousel-controls {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  font-size: 100px;
-  line-height: 600px;
-  color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	font-size: 100px;
+	line-height: 600px;
+	color: #fff;
 }
 
 .carousel-controls label {
-  display: none;
-  position: absolute;
-  padding: 0 20px;
-  opacity: 0;
-  transition: opacity 0.2s;
-  cursor: pointer;
+	display: none;
+	position: absolute;
+	padding: 0 20px;
+	opacity: 0;
+	transition: opacity 0.2s;
+	cursor: pointer;
 }
 
 .slide-image:hover + .carousel-controls label {
-  opacity: 0.5;
+	opacity: 0.5;
 }
 
 .carousel-controls label:hover {
-  opacity: 1;
+	opacity: 1;
 }
 
 .carousel-controls .prev-slide {
-  width: 49%;
-  text-align: left;
-  left: 0;
+	width: 49%;
+	text-align: left;
+	left: 0;
 }
 
 .carousel-controls .next-slide {
-  width: 49%;
-  text-align: right;
-  right: 0;
+	width: 49%;
+	text-align: right;
+	right: 0;
 }
 
 .carousel-dots {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 20px;
-  z-index: 999;
-  text-align: center;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 20px;
+	z-index: 999;
+	text-align: center;
 }
 
 .carousel-dots .carousel-dot {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #fff;
-  opacity: 0.5;
-  margin: 10px;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #fff;
+	opacity: 0.5;
+	margin: 10px;
 }
 
 input:checked + .slide-container .slide-image {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 1s ease-in-out;
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 1s ease-in-out;
 }
 
 input:checked + .slide-container .carousel-controls label {
-  display: block;
+	display: block;
 }
 
 input#img-0:checked ~ .carousel-dots label#img-dot-0,
@@ -139,9 +140,9 @@ input#img-17:checked ~ .carousel-dots label#img-dot-17,
 input#img-18:checked ~ .carousel-dots label#img-dot-18,
 input#img-19:checked ~ .carousel-dots label#img-dot-19,
 input#img-20:checked ~ .carousel-dots label#img-dot-20 {
-  opacity: 1;
+	opacity: 1;
 }
 
 input:checked + .slide-container .nav label {
-  display: block;
+	display: block;
 }

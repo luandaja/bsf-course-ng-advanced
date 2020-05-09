@@ -1,0 +1,16 @@
+<div class="row col-12 pt-3" *ngIf="recipe$ | async as recipe">
+	<div class="col-sm-4">
+		<gt-carousel [images]="recipe.images"></gt-carousel>
+	</div>
+	<div class="col-12 col-sm-8 info">
+		<div class="row col-12 pt-3 ">
+			<h2 class="recipe-name">{{ recipe.name }}</h2>
+			<p class="justify pt-3">{{ recipe.description }}</p>
+		</div>
+		<div class="row col-12">
+			<i class="fa fa-users"> Para {{ recipe.persons }}</i>
+			<i class="fa fa-firefox"> {{ recipe.calories }} cal</i>
+		</div>
+		<gt-recipe-content [recipe]="recipe"></gt-recipe-content>
+	</div>
+</div>

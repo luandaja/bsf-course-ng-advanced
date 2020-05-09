@@ -91,6 +91,9 @@
     },
     "fit-buddy-e2e": {
       "tags": []
+    },
+    "ui-tabs": {
+      "tags": ["ui"]
     }
   }
 }
