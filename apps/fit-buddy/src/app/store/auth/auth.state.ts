@@ -15,6 +15,7 @@ export const initalState: AuthState = {
 		heigth: 160,
 		weight: 73,
 		targetWeight: 60,
+		birthday: '12/05/1989',
 		photoUrl:
 			'https://m.media-amazon.com/images/S/aplus-media/mg/dbf4301f-af40-46f2-9a87-a99deddcd9a2._SL300__.jpg'
 	}

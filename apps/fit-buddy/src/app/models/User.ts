@@ -6,4 +6,5 @@ export interface User {
 	weight?: number;
 	age?: number;
 	targetWeight?: number;
+	birthday?: string;
 }
