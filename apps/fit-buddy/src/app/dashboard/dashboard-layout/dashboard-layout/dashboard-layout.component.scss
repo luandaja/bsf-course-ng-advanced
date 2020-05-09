@@ -1,14 +1,16 @@
 .toggled {
-  margin-left: 0;
+	margin-left: 0;
 }
-
+i {
+	color: #fff;
+}
 @media (min-width: 768px) {
-  .toggled {
-    margin-left: -15rem;
-  }
+	.toggled {
+		margin-left: -15rem;
+	}
 
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
+	#page-content-wrapper {
+		min-width: 0;
+		width: 100%;
+	}
 }

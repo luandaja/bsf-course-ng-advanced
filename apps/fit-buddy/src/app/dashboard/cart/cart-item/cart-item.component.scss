@@ -1,0 +1,28 @@
+.text-muted {
+	font-size: 22px;
+}
+.card-img {
+	height: 100%;
+	border-radius: 25px 0px 0px 25px;
+}
+
+.card {
+	border-radius: 25px;
+	border: 1px solid #e4c70f;
+	//box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.card-body {
+	border-left: 1px solid #e4c70f;
+	height: 100%;
+}
+
+.btn {
+	color: #e4c70f;
+}
+
+i {
+	padding: 10px;
+}
+.pointer {
+	cursor: pointer;
+}

@@ -25,12 +25,17 @@ export const appModules: Routes = [
 			import('../recipes/recipes.module').then(mod => mod.RecipesModule)
 	},
 	{
-		path: 'shop',
+		path: 'products',
 		canActivate: [AuthGuard],
 		loadChildren: () =>
 			import('../eshop/eshop.module').then(
 				m => m.EshopModule
 			)
+	},
+	{
+		path: 'cart',
+		loadChildren: () =>
+			import('../cart/cart.module').then(mod => mod.CartModule)
 	},
 	{
 		path: 'profile',

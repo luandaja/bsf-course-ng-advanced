@@ -1,0 +1,11 @@
+<div class="row col-sm-12 pt-2">
+	<div class="col-sm-8">
+		<gt-cart-item
+			*ngFor="let cartItem of cartItems$ | async"
+			[cartItem]="cartItem"
+		></gt-cart-item>
+	</div>
+	<div class="col-sm-4">
+		<gt-order-sumary [cartItems]="cartItemOrders | async"></gt-order-sumary>
+	</div>
+</div>
