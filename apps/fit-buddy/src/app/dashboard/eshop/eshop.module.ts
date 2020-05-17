@@ -10,6 +10,7 @@ import { UiCarouselModule } from '@glotrix/ui/carousel';
 import { UiTablesModule } from '@glotrix/ui/tables';
 import { ProductsStoreModule } from '../../store/products/product-store.module';
 import { ProductFilterStoreModule } from '../../store/product-filter';
+import { UiCardModule } from '@glotrix/ui/card';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ProductFilterStoreModule } from '../../store/product-filter';
 		EshopRoutingModule,
 		UiSearchBarModule,
 		UiCarouselModule,
+		UiCardModule,
 		UiTablesModule,
 		ProductsStoreModule,
 		ProductFilterStoreModule
