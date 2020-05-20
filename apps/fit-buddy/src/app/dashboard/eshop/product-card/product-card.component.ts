@@ -11,12 +11,17 @@ import { CartState, addCartItem } from '../../../store/cart';
 export class ProductCardComponent {
 
 	@Input() product: Product;
+	isClicked = false;
 
 	constructor(private store: Store<CartState>) { }
 
 	addToCart() {
+		this.isClicked = true;
 		this.store.dispatch(addCartItem({ product: this.product }));
 		console.log("Toaster: Añadido al carrito!")
 	}
 
+	removeFromCart() {
+		this.isClicked = false;
+	}
 }

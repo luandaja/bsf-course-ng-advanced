@@ -6,8 +6,12 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 	styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
+	isClicked = false;
 
-
-
-
+	addToCart() {
+		this.isClicked = true;
+	}
+	removeFromCart() {
+		this.isClicked = false;
+	}
 }

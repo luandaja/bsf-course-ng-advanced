@@ -5,13 +5,15 @@
 				src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg"
 			/>
 		</div>
-		<div class="bottom">
+		<div class="bottom" [ngClass]="{ clicked: isClicked }">
 			<div class="left">
 				<div class="details">
 					<h1>Chair</h1>
 					<p>£250</p>
 				</div>
-				<div class="buy"><i class="fa fa-cart-plus"></i></div>
+				<div class="buy" (click)="addToCart()">
+					<i class="fa fa-cart-plus"></i>
+				</div>
 			</div>
 			<div class="right">
 				<div class="done"><i class="fa fa-check"></i></div>
@@ -19,47 +21,18 @@
 					<h1>Chair</h1>
 					<p>Added to your cart</p>
 				</div>
-				<div class="remove"><i class="fa fa-remove"></i></div>
+				<div class="remove" (click)="removeFromCart()">
+					<i class="fa fa-remove"></i>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="inside">
 		<div class="icon"><i class="fa fa-info"></i></div>
 		<div class="contents">
-			<table>
-				<tr>
-					<th>Width</th>
-					<th>Height</th>
-				</tr>
-				<tr>
-					<td>3000mm</td>
-					<td>4000mm</td>
-				</tr>
-				<tr>
-					<th>Something</th>
-					<th>Something</th>
-				</tr>
-				<tr>
-					<td>200mm</td>
-					<td>200mm</td>
-				</tr>
-				<tr>
-					<th>Something</th>
-					<th>Something</th>
-				</tr>
-				<tr>
-					<td>200mm</td>
-					<td>200mm</td>
-				</tr>
-				<tr>
-					<th>Something</th>
-					<th>Something</th>
-				</tr>
-				<tr>
-					<td>200mm</td>
-					<td>200mm</td>
-				</tr>
-			</table>
+			here are many variations of passages of Lorem Ipsum available, but the majority have
+			suffered alteration in some form, by injected humour, or randomised words which
+			don't look even.
 		</div>
 	</div>
 </div>
