@@ -1,0 +1,120 @@
+$container-size-h: 135px;
+$container-size-w: 1000px;
+$block-size: 100px;
+$xlt-gray: #efefef;
+$hoverTranslate: 12px;
+$ease: cubic-bezier(0.4, 0, 0, 1);
+$ease-in: cubic-bezier(0, 0, 0.2, 1);
+
+.block-col {
+	/* display: flex; */
+	/* float: left; */
+	/* height: 100%; */
+	margin: 0 6px;
+	width: 100px;
+	/* flex-shrink: 0;*/
+}
+
+.block {
+	height: $block-size;
+	width: 100%;
+	border-radius: 8px;
+	position: relative;
+	will-change: transform;
+	&:not(.block--active) {
+		cursor: pointer;
+		&:hover,
+		&.fake-hover {
+			transform: translateY(-$hoverTranslate);
+			&:after {
+				// prevents awkard jittering on hover
+				content: "";
+				display: block;
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				transform: scale(1.1) translateY($hoverTranslate);
+			}
+		}
+		&:active {
+			transform: scale(0.9) translateY(-$hoverTranslate);
+		}
+	}
+	&--active {
+		position: absolute;
+		left: 0;
+		z-index: 1;
+		height: 100%;
+		width: 100%;
+	}
+
+	&--transition {
+		transition: transform 0.185s $ease;
+	}
+	h5 {
+		color: white;
+		height: 100%;
+		font-size: medium;
+		padding-top: 38%;
+		text-align: center;
+		text-transform: uppercase;
+		font-family: "Open Sans", sans-serif;
+	}
+}
+
+@mixin colored($color) {
+	background: $color;
+	color: darken($color, 45%);
+	border-top: 2px solid lighten($color, 10%);
+
+	&:not(.block--active) {
+		border-bottom: 2px solid darken($color, 10%);
+		box-shadow: 0 8px 8px -8px darken($color, 15%), 0 12px 12px -8px rgba($color, 0.4);
+	}
+
+	&.block--active {
+		background: desaturate(lighten($color, 37.5%), 40%);
+	}
+}
+
+.block-active {
+	opacity: 50%;
+	transform: scale(0.85);
+}
+
+.monday {
+	@include colored(#76e08c);
+}
+.tuesday {
+	@include colored(#6e93c9);
+}
+.wednesday {
+	@include colored(#f24b4d);
+}
+.thursday {
+	@include colored(#ac81e8);
+}
+.friday {
+	@include colored(#ef9bcb);
+}
+.saturday {
+	@include colored(#1bb790);
+}
+.sunday {
+	@include colored(#71b6f2);
+}
+// @media only screen and (max-width: 600px) {
+// 	.block-active {
+// 		transform: scale(0.55);
+// 	}
+// 	.block {
+// 		transform: scale(0.65);
+// 	}
+// 	.block:hover,
+// 	:after {
+// 		background-color: yellow;
+// 		transform: scale(0.4);
+// 	}
+// }

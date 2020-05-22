@@ -1,0 +1,9 @@
+<div class="block-col pt-2 pb-2" *ngFor="let day of days">
+	<div
+		class="block block--transition"
+		[ngClass]="getClass(day.className)"
+		(click)="onSelected(day.className)"
+	>
+		<h5>{{ day.label }}</h5>
+	</div>
+</div>

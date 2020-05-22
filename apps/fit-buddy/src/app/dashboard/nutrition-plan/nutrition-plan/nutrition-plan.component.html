@@ -1,85 +1,10 @@
-<div class="block-wrap">
-	<div class="block-col">
-		<div class="block block--transition r"><h5>Lunes</h5></div>
-	</div>
-	<div class="block-col">
-		<div class="block block--transition  b block-active"><h5>Martes</h5></div>
-	</div>
-	<div class="block-col">
-		<div class="block block--transition y"><h5>Miércoles</h5></div>
-	</div>
-
-	<div class="block-col">
-		<div class="block block--transition r"><h5>Jueves</h5></div>
-	</div>
-
-	<div class="block-col">
-		<div class="block block--transition b"><h5>Viernes</h5></div>
-	</div>
-
-	<div class="block-col">
-		<div class="block block--transition y"><h5>Sábado</h5></div>
-	</div>
-
-	<div class="block-col">
-		<div class="block block--transition r"><h5>Domingo</h5></div>
-	</div>
-</div>
-
-<div class="planner">
-	<div class="schedule">
-		<div class="tab-pane">
-			<div class="schedule-list">
-				<div class="schedule-item">
-					<div class="time">
-						<span>9</span>
-						<span>am</span>
-					</div>
-					<div class="description free">
-						<div class="description-header">Desayuno</div>
-						<div class="description-content">
-							<p>Tortilla de 4 huevos y 1 vaso de leche de almendras</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="schedule-item">
-					<div class="time">
-						<span>10</span>
-						<span>am</span>
-					</div>
-					<div class="description">
-						<div class="description-header">Media meñana</div>
-						<div class="description-content">
-							<p>6 fresas y media palta</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="schedule-item">
-					<div class="time">
-						<span>11</span>
-						<span>am</span>
-					</div>
-					<div class="description">
-						<div class="description-header">Almuerzo</div>
-						<div class="description-content">
-							<p>200g de pollo y ensalada verde</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="schedule-item">
-					<div class="time">
-						<span>10</span>
-						<span>am</span>
-					</div>
-					<div class="description">
-						<div class="description-header">No Schedule</div>
-						<!--<div class="description-content">&nbsp;</div>-->
-					</div>
-				</div>
-			</div>
+<div class="row justify-content-center">
+	<div class="col-4 col-sm-2">
+		<div class="block-wrap">
+			<gt-week-days (selected)="onDaySelected($event)"></gt-week-days>
 		</div>
+	</div>
+	<div class="col-8 col-sm-8">
+		<gt-day-info [day]="day"></gt-day-info>
 	</div>
 </div>
