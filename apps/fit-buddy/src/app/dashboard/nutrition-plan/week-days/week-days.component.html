@@ -1,9 +1,31 @@
-<div class="block-col pt-2 pb-2" *ngFor="let day of days">
+<!-- <div class="block-col pt-2 pb-2" *ngFor="let day of days">
 	<div
 		class="block block--transition"
 		[ngClass]="getClass(day.className)"
 		(click)="onSelected(day.className)"
 	>
 		<h5>{{ day.label }}</h5>
+	</div>
+</div> -->
+
+<div class="calendar">
+	<div class="base bottom">
+		<div class="days">
+			<div class="weekday">SUN</div>
+			<div class="weekday">MON</div>
+			<div class="weekday">TUE</div>
+			<div class="weekday">WED</div>
+			<div class="weekday">THU</div>
+			<div class="weekday">FRI</div>
+			<div class="weekday">SAT</div>
+		</div>
+		<div class="holes">
+			<div class="hole"></div>
+			<div class="hole"></div>
+			<div class="hole"></div>
+			<div class="hole"></div>
+			<div class="hole"></div>
+			<div class="hole"></div>
+		</div>
 	</div>
 </div>
