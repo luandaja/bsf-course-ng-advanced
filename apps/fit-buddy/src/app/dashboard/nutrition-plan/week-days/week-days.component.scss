@@ -1,70 +1,20 @@
-.calendar {
-	position: relative;
-	margin: auto;
-	width: 70vw;
-	height: 70vw;
+li:hover {
+	background-color: #fafafa;
 }
-
-.base {
-	width: 70%;
-	height: 45%;
-	border-radius: 2vw;
-	box-shadow: 0.2vw 0.2vw 1vw 0 rgba(0, 0, 0, 0.27);
-	overflow: hidden;
-}
-.base.bottom {
-	position: absolute;
-	background-color: #fff;
-}
-.base.bottom .holes {
-	position: absolute;
-	top: 4%;
-	left: 4%;
-}
-.base.bottom::before {
-	content: " ";
-	display: block;
-	width: 100%;
-	height: 28%;
-	background-color: #29335c;
-}
-
-.holes {
-	width: 128.5714285714%;
-	height: 200%;
-}
-.holes .hole {
-	background-color: #669bbc;
-	width: 4%;
-	height: 4%;
-	border-radius: 50%;
-	display: inline-block;
-	margin-left: 3.8vw;
-	box-shadow: inset 0.2vw 0.2vw 1vw 0 rgba(0, 0, 0, 0.27);
-}
-
-.days {
-	width: 90%;
-	height: 75%;
-	position: absolute;
-	top: 15%;
-	left: 5%;
-	display: grid;
-	grid-template: repeat(6, 1fr) / repeat(7, 1fr);
-	grid-gap: 0.2vw;
-}
-.days > div {
-	text-align: center;
-	padding-top: 20%;
-	font-family: Roboto, sans-serif;
-	font-size: 1.8vw;
-	color: #29335c;
-}
-.days > div.old {
-	color: #999;
-}
-.days > div.weekday {
+li {
+	display: inline;
+	padding: 22px;
+	background-color: #efefef;
+	border-radius: 16px;
 	font-weight: bold;
-	color: #f3a712;
-	cursor: pointer;
+	color: #ec9044;
+	margin: 15px;
+	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+}
+ul {
+	list-style: none;
+	padding: 20px;
+}
+.active {
+	background-color: #d4e0dc;
 }

@@ -1,10 +1,10 @@
 <div class="row justify-content-center">
 	<div class="col-12 col-sm-10">
 		<div>
-			<gt-week-days (selected)="onDaySelected($event)"></gt-week-days>
+			<gt-week-days (selectionChange)="onDaySelected($event)"></gt-week-days>
 		</div>
 	</div>
 	<div class="col-8 col-sm-8">
-		<gt-day-info [day]="day"></gt-day-info>
+		<gt-day-info [weekDay]="day"></gt-day-info>
 	</div>
 </div>

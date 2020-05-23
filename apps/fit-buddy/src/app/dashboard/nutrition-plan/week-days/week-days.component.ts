@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { WeekDay } from '@angular/common';
 
 @Component({
 	selector: 'gt-week-days',
@@ -7,31 +8,25 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class WeekDayComponent implements OnInit {
 
-	@Output() selected = new EventEmitter<string>();
-	selectedClassName: string;
-
-	private selectedClass = 'block-active';
-	days: { label: string, className: string }[] = [
-		{ label: "Monday", className: "monday" },
-		{ label: "Tuesday", className: "tuesday" },
-		{ label: "Wednesday", className: "wednesday" },
-		{ label: "Thursday", className: "thursday" },
-		{ label: "Friday", className: "friday" },
-		{ label: "Saturday", className: "saturday" },
-		{ label: "Sunday", className: "sunday" }
+	@Output() selectionChange = new EventEmitter<WeekDay>();
+	selectedDay: WeekDay;
+	days: { label: string, id: WeekDay }[] = [
+		{ label: "Mon", id: WeekDay.Monday },
+		{ label: "Tue", id: WeekDay.Tuesday },
+		{ label: "Wed", id: WeekDay.Wednesday },
+		{ label: "Thurs", id: WeekDay.Thursday },
+		{ label: "Fri", id: WeekDay.Friday },
+		{ label: "Sat", id: WeekDay.Saturday },
+		{ label: "Su", id: WeekDay.Sunday }
 	]
 
 	constructor() { }
 
 	ngOnInit() { }
 
-	onSelected(className: string) {
-		this.selectedClassName = className;
-		this.selected.emit(className);
-	}
-
-	getClass(className: string) {
-		return this.selectedClassName == className ? `${className} ${this.selectedClass}` : className;
+	onSelected(selected: WeekDay) {
+		this.selectedDay = selected;
+		this.selectionChange.emit(selected);
 	}
 
 }

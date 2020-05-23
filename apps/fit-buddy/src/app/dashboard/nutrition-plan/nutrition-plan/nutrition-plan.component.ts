@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Meal } from '../../../models/Meal';
+import { WeekDay } from '@angular/common';
 
 @Component({
 	selector: 'gt-nutrition-plan',
@@ -7,13 +7,13 @@ import { Meal } from '../../../models/Meal';
 	styleUrls: ['./nutrition-plan.component.scss']
 })
 export class NutritionPlanComponent implements OnInit {
-	day: string;
+	day: WeekDay;
 	constructor() { }
 
 	ngOnInit() { }
 
 
-	onDaySelected(daySelected: string) {
+	onDaySelected(daySelected: WeekDay) {
 		this.day = daySelected;
 	}
 }

@@ -1,4 +1,5 @@
 import { MealPlan } from '../../models/MealPlan';
+import { WeekDay } from '@angular/common';
 
 export interface MealPlansState {
 	mealPlans: MealPlan[];
@@ -8,7 +9,7 @@ export interface MealPlansState {
 export const initalState: MealPlansState = {
 	mealPlans: [
 		{
-			id: "monday",
+			id: WeekDay.Monday,
 			dayName: "Monday",
 			notes: "2Lts de agua pura 1 Lt Cola de caballo",
 			meals: [
@@ -45,7 +46,7 @@ export const initalState: MealPlansState = {
 			]
 		},
 		{
-			id: "tuesday",
+			id: WeekDay.Tuesday,
 			dayName: "Tuesday",
 			notes: "2Lts de agua pura 1 Lt Cola de caballo",
 			meals: [
