@@ -4,8 +4,8 @@ import { CommunicationService } from '../../services/communication.service';
 import { InputComponent } from '../input';
 
 @Component({
-  selector: 'gt-textblock',
-  template: `
+	selector: 'gt-textblock',
+	template: `
     <ng-container *ngIf="formState$ | async as state">
       <section [formGroup]="state.form">
         <label [attr.for]="entry.key">{{ entry.label }}</label>
@@ -21,20 +21,20 @@ import { InputComponent } from '../input';
         >
         </textarea>
         <small *ngIf="validations.maxlength"
-          >{{ control.value.length }} / {{ validations.maxlength.value }}</small
+          >{{ control.value?.length }} / {{ validations.maxlength?.value }}</small
         >
       </section>
     </ng-container>
   `,
-  styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+	styles: [],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextblockComponent extends InputComponent implements OnInit {
-  @Input() entry: TextblockField;
-  constructor(protected communication: CommunicationService) {
-    super(communication);
-  }
-  ngOnInit(): void {
-    this.initInput();
-  }
+	@Input() entry: TextblockField;
+	constructor(protected communication: CommunicationService) {
+		super(communication);
+	}
+	ngOnInit(): void {
+		this.initInput();
+	}
 }

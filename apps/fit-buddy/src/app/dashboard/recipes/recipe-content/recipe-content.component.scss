@@ -1,0 +1,97 @@
+.check-list {
+	margin: 0;
+	padding-left: 1.2rem;
+}
+
+.check-list li {
+	position: relative;
+	list-style-type: none;
+	padding-left: 2.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.check-list li:before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	top: -2px;
+	width: 5px;
+	height: 11px;
+	border-width: 0 2px 2px 0;
+	border-style: solid;
+	border-color: #00a8a8;
+	transform-origin: bottom left;
+	transform: rotate(45deg);
+}
+
+/* Boilerplate stuff */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+$black: #1d1f20;
+$white: #fafafa;
+
+/* box-shadow */
+%boxshadow {
+	box-shadow: 0.25rem 0.25rem 0.6rem rgba(0, 0, 0, 0.05), 0 0.5rem 1.125rem rgba(75, 0, 0, 0.05);
+}
+
+ol.gradient-list {
+	counter-reset: gradient-counter;
+	list-style: none;
+	margin: 1.75rem 0;
+	padding-left: 1rem;
+	> li {
+		background: white;
+		border-radius: 0 0.5rem 0.5rem 0.5rem;
+		@extend %boxshadow;
+		counter-increment: gradient-counter;
+		margin-top: 1rem;
+		min-height: 3rem;
+		padding: 1rem 1rem 1rem 3rem;
+		position: relative;
+		&::before,
+		&::after {
+			background: #83e4e2;
+			color: white;
+			border-radius: 1rem 1rem 0 1rem;
+			content: "";
+			height: 3rem;
+			left: -1rem;
+			overflow: hidden;
+			position: absolute;
+			top: -1rem;
+			width: 3rem;
+		}
+		&::before {
+			align-items: flex-end;
+			@extend %boxshadow;
+			content: counter(gradient-counter);
+			color: $black;
+			display: flex;
+			font: 900 1.5em/1 "Montserrat";
+			justify-content: flex-end;
+			padding: 0.125em 0.25em;
+			z-index: 1;
+		}
+		+ li {
+			margin-top: 2rem;
+		}
+	}
+}
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+	border-color: transparent;
+	border-bottom-color: #61a5a5;
+}
+.tabActive {
+	border-bottom-color: #0e9393;
+	border-width: medium;
+}
+.nav-tabs {
+	border-bottom: 0px;
+}

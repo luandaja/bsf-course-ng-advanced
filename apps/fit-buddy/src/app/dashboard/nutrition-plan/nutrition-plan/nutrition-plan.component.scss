@@ -1,0 +1,15 @@
+$xlt-gray: #efefef;
+.block-wrap {
+	// width: $container-size-w;
+	// height: $container-size-h;
+	background: #efefef;
+	border-bottom: 2px solid #c9c9c9;
+	box-shadow: inset 0 1px 0 #fcfcfc, 0 8px 8px -8px #c9c9c9, 0 12px 12px -8px #e2e2e2;
+	display: flex;
+	/* position: relative; */
+	overflow: hidden;
+	justify-content: center;
+	border-radius: 8px;
+	/* margin-left: 38px; */
+	/* margin: auto;*/
+}

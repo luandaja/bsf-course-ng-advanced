@@ -1,0 +1,22 @@
+<div class="row col-12 pt-3" *ngIf="product$ | async as product">
+  <div class="col-4">
+    <gt-carousel [images]="product.images"></gt-carousel>
+  </div>
+  <div class="col-8 info">
+    <div class="row col-12 pt-3">
+      <h2>{{ product.name }}</h2>
+    </div>
+    <hr />
+    <div class="row col-12">
+      <h6>{{ product.category }}</h6>
+    </div>
+    <hr />
+    <div class="row col-12 price">
+      <span>{{ product.price | currency }}</span>
+    </div>
+    <hr />
+    <div class="row col-12">
+      <p class="justify">{{ product.description }}</p>
+    </div>
+  </div>
+</div>

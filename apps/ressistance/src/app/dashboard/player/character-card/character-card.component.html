@@ -1,0 +1,8 @@
+<div class="row col-sm-12">
+	<ng-container *ngIf="isPickingUpCards$ | async; else pickUpComplete">
+		<gt-spinner [isLoading]="true" class="col-sm-12 col-12 center-text"></gt-spinner>
+	</ng-container>
+	<ng-template #pickUpComplete>
+		<gt-card [card]="card$ | async"></gt-card>
+	</ng-template>
+</div>

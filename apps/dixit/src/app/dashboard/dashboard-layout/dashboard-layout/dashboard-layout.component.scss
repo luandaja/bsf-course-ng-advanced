@@ -1,0 +1,14 @@
+.toggled {
+	margin-left: 0;
+}
+
+@media (min-width: 768px) {
+	.toggled {
+		margin-left: -15rem;
+	}
+
+	#page-content-wrapper {
+		min-width: 0;
+		width: 100%;
+	}
+}

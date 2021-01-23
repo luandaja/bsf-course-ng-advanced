@@ -1,0 +1,50 @@
+<!-- <div class="card">
+  <img [src]="product.images[0]" class="card-img-top" [alt]="product.name" />
+  <div class="card-body">
+    <h5 class="card-title text-center">{{ product.name }}</h5>
+    <div class="price text-center">{{ product.price | currency }}</div>
+    <div class="card-text block-with-text pr-2 pl-2">
+      {{ product.description }}
+    </div>
+    <div class="pull-right pr-2">
+      <a [routerLink]="['detail', product.id]">See more</a>
+    </div>
+    <button (click)="addToCart()">Add to Cart</button>
+  </div>
+</div> -->
+<div class="wrapper">
+	<div class="container">
+		<div class="top">
+			<img [src]="product.images[0]" />
+		</div>
+		<div class="bottom" [ngClass]="{ clicked: isClicked }">
+			<div class="left">
+				<div class="details">
+					<h2 [routerLink]="['detail', product.id]">
+						{{ product.name }}
+					</h2>
+					<p>{{ product.price | currency }}</p>
+				</div>
+				<div class="buy" (click)="addToCart()">
+					<i class="fa fa-cart-plus"></i>
+				</div>
+			</div>
+			<div class="right">
+				<div class="done"><i class="fa fa-check"></i></div>
+				<div class="details">
+					<h2>{{ product.name }}</h2>
+					<p>Added to your cart</p>
+				</div>
+				<div class="remove" (click)="removeFromCart()">
+					<i class="fa fa-remove"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="inside">
+		<div class="icon"><i class="fa fa-info"></i></div>
+		<div class="contents">
+			{{ product.description }}
+		</div>
+	</div>
+</div>

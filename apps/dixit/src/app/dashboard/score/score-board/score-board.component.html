@@ -1,0 +1,8 @@
+<div class="row justify-content-center" *ngIf="players$ | async as players; else loading">
+	<div class="col-6 col-sm-2" *ngFor="let player of players">
+		<gt-poster-card [poster]="player"></gt-poster-card>
+	</div>
+	<ng-template #loading>
+		<gt-spinner [isLoading]="true"></gt-spinner>
+	</ng-template>
+</div>

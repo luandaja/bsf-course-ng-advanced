@@ -1,0 +1,32 @@
+<div class="row col-12 nav-tabs">
+	<div class="nav-item">
+		<h2
+			class="nav-link"
+			[ngClass]="{ tabActive: isTabOneActive }"
+			(click)="selectTabOne()"
+		>
+			Ingredients
+		</h2>
+	</div>
+	<div class="nav-item">
+		<h2
+			class="nav-link"
+			[ngClass]="{ tabActive: isTabTwoActive }"
+			(click)="selectTabTwo()"
+		>
+			Steps
+		</h2>
+	</div>
+</div>
+<div class="row col-12">
+	<ul class="check-list pt-3" *ngIf="isTabOneActive">
+		<li *ngFor="let ingredient of recipe.ingredients">
+			{{ ingredient.units }} {{ ingredient.name }}
+		</li>
+	</ul>
+	<ol class="gradient-list" *ngIf="isTabTwoActive">
+		<li *ngFor="let step of recipe.steps">
+			{{ step }}
+		</li>
+	</ol>
+</div>

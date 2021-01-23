@@ -1,0 +1,21 @@
+<div class="row col-sm-12">
+	<div class="col-sm-6 pt-2">
+		<gt-vote-editor [selectedCard]="selectedCard"> </gt-vote-editor>
+	</div>
+</div>
+<ng-container *ngIf="boardCards$ | async as boardCards; else loading">
+	<ng-container *ngIf="boardCards.length; else noItems">
+		<gt-board-card
+			*ngFor="let boardCard of boardCards"
+			[boardCard]="boardCard"
+			[isRevealed]="isGuessingTime$ | async"
+			[isSelected]="boardCard.cardIndex === selectedCard?.cardIndex"
+			(click)="selectCard(boardCard)"
+			[areVotesVisible]="areVotesVisible$ | async"
+			[isJumping]="isJumping(boardCard.cardIndex) | async"
+		>
+		</gt-board-card>
+	</ng-container>
+	<ng-template #noItems><span>No cards on the board yet!</span></ng-template>
+	<ng-template #loading> <gt-spinner [isLoading]="true"></gt-spinner></ng-template>
+</ng-container>

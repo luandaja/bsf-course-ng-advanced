@@ -1,0 +1,13 @@
+<gt-form-builder
+	[entries]="entries"
+	[isCancelButtonVisible]="false"
+	[submitButtonText]="'Login'"
+	(submitted)="onSubmitted($event)"
+>
+	<div class="row-fluid pt-5">
+		<gt-avatar-selector
+			[avatars]="avatars"
+			(avatarChange)="onAvatarSelected($event)"
+		></gt-avatar-selector>
+	</div>
+</gt-form-builder>

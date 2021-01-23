@@ -1,0 +1,8 @@
+<div class="col-sm-12" *ngIf="ableToRevealSpies$ | async">
+	<button class="btn btn-warning" (click)="showSpies()">
+		Show Spies
+	</button>
+</div>
+<div class="col-sm-12" *ngIf="areSpiesVisible">
+	<gt-avatars [avatars]="spies" [isInLine]="true"></gt-avatars>
+</div>

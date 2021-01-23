@@ -1,0 +1,16 @@
+<div class="card">
+	<div class="header">
+		<img [src]="recipe.image" *ngIf="recipe.image" />
+	</div>
+	<div class="text">
+		<h1 class="food">
+			{{ recipe.name }}
+		</h1>
+		<i class="fa fa-users"> Para {{ recipe.persons }}</i>
+		<i class="fa fa-firefox"> {{ recipe.calories }} cal</i>
+		<p class="info">
+			{{ recipe.shortDescription }}
+		</p>
+	</div>
+	<a href="#" class="btn">Cocinemos!</a>
+</div>

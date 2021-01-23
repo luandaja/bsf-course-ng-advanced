@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400, 400i, 700, 700i");
+$gray: #9b9b9b;
+.fa-clock-o {
+	color: $gray;
+	margin: 0 30px;
+}
+.fa-users {
+	color: $gray;
+	margin: 0 30px;
+}
+.fa-firefox {
+	color: $gray;
+}
+.recipe-name {
+	border-bottom: 1px solid #61a5a5;
+	border-width: medium;
+	padding-bottom: 8px;
+}

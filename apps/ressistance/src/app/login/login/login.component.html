@@ -1,0 +1,18 @@
+<div class="container-fluid">
+	<div class="row align-items-center">
+		<gt-welcome-banner
+			[banner]="banner"
+			class="col-sm-6 px-0 d-none d-sm-block"
+		></gt-welcome-banner>
+		<div class="col-sm-4 offset-sm-1 col-11  ml-auto mr-auto login-container">
+			<ng-container *ngIf="isLoginVisible$ | async">
+				<h4>Welcome to The Resistance online!</h4>
+				<gt-player-login
+					[avatars]="avatars$ | async"
+					(playerChange)="onPlayerChange($event)"
+				></gt-player-login>
+				<gt-spinner [isLoading]="isLoading$ | async"></gt-spinner>
+			</ng-container>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+<div class="wrapper">
+	<div class="container">
+		<div class="top">
+			<img
+				src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg"
+			/>
+		</div>
+		<div class="bottom" [ngClass]="{ clicked: isClicked }">
+			<div class="left">
+				<div class="details">
+					<h1>Chair</h1>
+					<p>£250</p>
+				</div>
+				<div class="buy" (click)="addToCart()">
+					<i class="fa fa-cart-plus"></i>
+				</div>
+			</div>
+			<div class="right">
+				<div class="done"><i class="fa fa-check"></i></div>
+				<div class="details">
+					<h1>Chair</h1>
+					<p>Added to your cart</p>
+				</div>
+				<div class="remove" (click)="removeFromCart()">
+					<i class="fa fa-remove"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="inside">
+		<div class="icon"><i class="fa fa-info"></i></div>
+		<div class="contents">
+			here are many variations of passages of Lorem Ipsum available, but the majority have
+			suffered alteration in some form, by injected humour, or randomised words which
+			don't look even.
+		</div>
+	</div>
+</div>

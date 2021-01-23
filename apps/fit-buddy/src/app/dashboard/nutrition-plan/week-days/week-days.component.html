@@ -1,0 +1,15 @@
+<!-- <li class="block-col pt-2 pb-2" *ngFor="let day of days">
+	<li
+		class="block block--transition"
+		[ngClass]="getClass(day.className)"
+		(click)="onSelected(day.className)"
+	>
+		<h5>{{ day.label }}</h5>
+	</li>
+</li> -->
+
+<ul>
+	<li *ngFor="let day of days" [ngClass]="{'active': selectedDay == day.id}" (click)="onSelected(day.id)">
+		{{ day.label }}
+	</li>
+</ul>

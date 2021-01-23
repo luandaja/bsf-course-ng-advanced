@@ -1,0 +1,19 @@
+<div class="planner" *ngIf="mealPlan$ | async as mealPlan">
+	<div class="schedule">
+		<div class="tab-pane">
+			<div class="schedule-list">
+				<div class="schedule-item" *ngFor="let meal of mealPlan.meals">
+					<div class="time">
+						<span>{{ meal.time }}</span>
+					</div>
+					<div class="description free">
+						<div class="description-header">{{ meal.name }}</div>
+						<div class="description-content">
+							<p *ngFor="let item of meal.items">{{ item }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

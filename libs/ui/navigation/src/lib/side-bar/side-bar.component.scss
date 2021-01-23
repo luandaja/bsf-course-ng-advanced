@@ -1,35 +1,43 @@
 :host {
-  background: #343a40;
+	background: #343a40;
 }
 #sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  transition: margin 0.25s ease-out;
-  background: #002e50;
-  color: #fff;
-  .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.2rem;
-  }
-  .list-group {
-    width: 15rem;
-  }
-  .list-group-item {
-    background: transparent;
-    color: white;
-  }
+	min-height: 100vh;
+	margin-left: -15rem;
+	transition: margin 0.25s ease-out;
+	background: #092437;
+	color: #fff;
+	.sidebar-heading {
+		padding: 0.875rem 1.25rem;
+		font-size: 1.2rem;
+	}
+	.list-group {
+		width: 15rem;
+	}
+	.list-group-item {
+		background: transparent;
+		color: white;
+	}
 }
 
 #sidebar-wrapper.toggled {
-  margin-left: 0;
+	margin-left: 0;
 }
 
 @media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
+	#sidebar-wrapper {
+		margin-left: 0;
+	}
 
-  #sidebar-wrapper.toggled {
-    margin-left: -15rem;
-  }
+	#sidebar-wrapper.toggled {
+		margin-left: -15rem;
+	}
+}
+@media (max-width: 768px) {
+	#sidebar-wrapper {
+		width: 100px;
+	}
+	.list-group-item-action {
+		width: 100px;
+	}
 }
